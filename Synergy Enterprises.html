@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <!--
 	Synergy Enterprises — Enterprise HR Transformation & HRIS Modernization Strategy
+-->
 <html>
 	<head>
 		<title>Synergy Enterprises — HR Transformation | Doris Frank</title>
@@ -19,32 +20,33 @@
 			}
 			nav.toc strong {
 				display: block;
-				margin-bottom: 0.5em;
+				margin-bottom: 0.6em;
 			}
 			nav.toc ul {
 				list-style: none;
 				margin: 0;
 				padding: 0;
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 0.4em 1.5em;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5em 1em;
 			}
-			nav.toc ul li { margin: 0; }
+			nav.toc ul li {
+				margin: 0;
+				white-space: nowrap;
+			}
+			nav.toc ul li:not(:last-child)::after {
+				content: "\00a0\00b7";
+				margin-left: 1em;
+				color: #999;
+			}
 			nav.toc a { text-decoration: none; }
 			nav.toc a:hover { text-decoration: underline; }
-			@media (max-width: 736px) {
-				nav.toc ul { grid-template-columns: 1fr; }
-			}
 		</style>
 	</head>
 	<body class="is-preload">
 
 		<!-- Wrapper -->
 			<div id="wrapper">
-
-				<!-- Header -->
-					<header id="header">
-					</nav>
 
 				<!-- Main -->
 					<div id="main">
@@ -58,7 +60,7 @@
 									Prepared by Doris Frank, Business Analyst (Lead)</p>
 								</header>
 
-								<span class="image main"><img src="images/synergy-cover.jpg" alt="Synergy Enterprises HR transformation case study" /></span>
+								<span class="image main"><img src="synergy-cover.jpg" alt="Synergy Enterprises HR transformation case study" /></span>
 
 								<p><strong>Domain:</strong> Manufacturing / FMCG; HR Technology Transformation<br />
 								<strong>Methodology:</strong> Business Case Development; Stakeholder Analysis; Process Design; Cost&ndash;Benefit Analysis<br />
@@ -160,12 +162,16 @@
 											<tr><td>Regional HR Managers</td><td>Business Users</td><td>Medium</td><td>Medium</td></tr>
 											<tr><td>Employees</td><td>End Users</td><td>Medium</td><td>Low</td></tr>
 											<tr><td>HRIS Vendor</td><td>Solution Provider</td><td>Medium</td><td>Medium</td></tr>
+											<tr><td>Regional Works Councils / Employee Representatives</td><td>Labor &amp; Regulatory Liaison</td><td>High</td><td>Medium</td></tr>
+											<tr><td>Data Privacy &amp; Legal Compliance Officer</td><td>Cross-Border Data Governance</td><td>High</td><td>Medium</td></tr>
 										</tbody>
 									</table>
 								</div>
 
+								<p><em>Note: rows above represent stakeholder categories, not individual employees. Given Synergy's scale (75,000+ employees across five continents), each row reflects a functional or regional group rather than a single point of contact &mdash; consistent with standard practice for an enterprise-level stakeholder register.</em></p>
+
 								<h3>Stakeholder map</h3>
-								<span class="image fit"><img src="images/synergy-stakeholder-map.svg" alt="Stakeholder map showing reporting lines from executive sponsor through to employees" /></span>
+								<span class="image fit"><img src="synergy-stakeholder-map.svg" alt="Stakeholder map showing reporting lines from executive sponsor through to employees" /></span>
 
 								<h3>Stakeholder power&ndash;interest matrix</h3>
 								<div class="table-wrapper">
@@ -239,10 +245,10 @@
 								<h2 id="architecture">Current-state vs Future-state architecture</h2>
 								<p>The recommended HRIS would centralize and standardize the full employee lifecycle: recruitment, onboarding, payroll, performance management, workforce analytics, compliance monitoring, employee self-service, and workforce planning.</p>
 
-								<span class="image fit"><img src="images/synergy-current-vs-future-state.svg" alt=" Current state versus future state HR architecture diagram" /></span>
+								<span class="image fit"><img src="synergy-current-vs-future-state.svg" alt="Current state versus future state HR architecture diagram" /></span>
 
 								<h3>Future-state process flow</h3>
-								<span class="image fit"><img src="images/synergy-process-flow.svg" alt=" Future state HR process flow from recruitment through compliance reporting" /></span>
+								<span class="image fit"><img src="synergy-process-flow.svg" alt="Future state HR process flow from recruitment through compliance reporting" /></span>
 
 								<hr class="major" />
 
@@ -428,7 +434,7 @@
 								<ul>
 									<li><strong>Regional complexity demands iteration.</strong> Synergy operates across five continents with varying local labor laws and HR practices. Agile sprints allow the solution to be configured and validated region by region, rather than committing to a single rigid design upfront that may not fit every market.</li>
 									<li><strong>The pilot-then-scale rollout structure is inherently iterative.</strong> The implementation plan above deploys to one region first, then expands; this mirrors Agile's incremental delivery model far more naturally than Waterfall's sequential, all-at-once delivery.</li>
-									<li><strong>Stakeholder feedback loops matter.</strong> With nine distinct stakeholder groups (per the stakeholder analysis above) and a workforce of 75,000+, early and continuous feedback from HR Operations, Regional HR Managers, and Employees reduces the risk of a poor-fit system reaching full-scale deployment.</li>
+									<li><strong>Stakeholder feedback loops matter.</strong> With eleven distinct stakeholder groups (per the stakeholder analysis above) and a workforce of 75,000+, early and continuous feedback from HR Operations, Regional HR Managers, and Employees reduces the risk of a poor-fit system reaching full-scale deployment.</li>
 									<li><strong>Risk containment.</strong> Because data migration and change resistance are top-rated risks (per the Risk Assessment above), Agile's shorter feedback cycles allow issues to surface and be corrected within a single sprint, rather than only being discovered at a single, high-stakes go-live event.</li>
 								</ul>
 								<p>A pure Waterfall approach was considered but not recommended: while it offers more predictable upfront budgeting, its rigid, sequential structure is poorly suited to a project where regional requirements vary and the vendor-selection and configuration phases are expected to evolve based on early pilot learnings.</p>
@@ -445,12 +451,12 @@
 								<h2 id="deliverables">Core deliverables</h2>
 								<p>This engagement produced six core business analysis artifacts, supported by an implementation roadmap and SDLC methodology recommendation:</p>
 								<ol>
-									<li><strong>Executive Business Case</strong> &mdash; problem statement, options analysis, financial justification, and recommendation</li>
-									<li><strong>Stakeholder Analysis Package</strong> &mdash; Stakeholder Register, Stakeholder Map, and Power&ndash;Interest Matrix</li>
-									<li><strong>Current-State vs. Future-State Architecture</strong> &mdash; system landscape diagrams showing the transformation path</li>
-									<li><strong>Process Flow Design</strong> &mdash; future-state HR process flow from recruitment through compliance reporting</li>
-									<li><strong>RACI Matrix</strong> &mdash; accountability framework across the full implementation lifecycle</li>
-									<li><strong>Risk &amp; Benefits Framework</strong> &mdash; Risk Assessment and Mitigation Plan paired with the Benefits Realization Framework</li>
+									<li><strong>Executive Business Case:</strong> problem statement, options analysis, financial justification, and recommendation</li>
+									<li><strong>Stakeholder Analysis Package:</strong> Stakeholder Register, Stakeholder Map, and Power&ndash;Interest Matrix</li>
+									<li><strong>Current-State vs. Future-State Architecture:</strong> system landscape diagrams showing the transformation path</li>
+									<li><strong>Process Flow Design:</strong> future-state HR process flow from recruitment through compliance reporting</li>
+									<li><strong>RACI Matrix:</strong> accountability framework across the full implementation lifecycle</li>
+									<li><strong>Risk &amp; Benefits Framework:</strong> Risk Assessment and Mitigation Plan paired with the Benefits Realization Framework</li>
 								</ol>
 								<p>Additional supporting deliverables: <strong>Implementation Plan</strong> (phased rollout roadmap) and <strong>SDLC Methodology Recommendation</strong> (Agile delivery approach with rationale).</p>
 
@@ -471,4 +477,16 @@
 							<li><a href="https://github.com/Dorisfrank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
 							<li><a href="#" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
 						</ul>
-						
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
