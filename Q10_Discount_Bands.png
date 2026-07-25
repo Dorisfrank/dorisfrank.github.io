@@ -1,0 +1,13 @@
+-- QUERY 11: Monthly confirmed revenue trend
+SELECT
+    TO_CHAR(s.order_date, 'YYYY-MM')               AS month,
+    COUNT(s.subscription_id)                       AS confirmed_orders,
+    SUM(s.total_value)                             AS confirmed_revenue,
+    ROUND(AVG(s.total_value), 0)                   AS avg_order_value
+FROM subscriptions s
+JOIN payments p ON s.subscription_id = p.subscription_id
+WHERE p.is_successful = TRUE
+  AND s.order_date >= '2024-08-01'
+  AND s.order_date <= '2025-05-31'
+GROUP BY TO_CHAR(s.order_date, 'YYYY-MM')
+ORDER BY month;

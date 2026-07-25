@@ -1,0 +1,19 @@
+-- QUERY 4: Average spend per loyalty tier
+SELECT
+    c.loyalty_tier,
+    COUNT(s.subscription_id)                       AS confirmed_orders,
+    COUNT(DISTINCT s.customer_id)                  AS unique_customers,
+    SUM(s.total_value)                             AS confirmed_revenue,
+    ROUND(AVG(s.total_value), 0)                   AS avg_order_value,
+    ROUND(
+        SUM(s.total_value) /
+        COUNT(DISTINCT s.customer_id), 0
+    )                                              AS avg_revenue_per_customer
+FROM subscriptions s
+JOIN customers c ON s.customer_id = c.customer_id
+JOIN payments p  ON s.subscription_id = p.subscription_id
+WHERE p.is_successful = TRUE
+  AND s.order_date >= '2024-08-01'
+  AND s.order_date <= '2025-05-31'
+GROUP BY c.loyalty_tier
+ORDER BY avg_order_value DESC;

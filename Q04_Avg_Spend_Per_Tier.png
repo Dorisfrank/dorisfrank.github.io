@@ -1,0 +1,20 @@
+-- QUERY 5: Issue types with lowest ratings
+SELECT
+    t.issue_type,
+    COUNT(t.ticket_id)                             AS total_tickets,
+    ROUND(AVG(t.rating), 2)                        AS avg_rating,
+    MIN(t.rating)                                  AS min_rating,
+    SUM(CASE WHEN t.resolution_status = 'Escalated'
+             THEN 1 ELSE 0 END)                    AS escalated_count,
+    ROUND(
+        SUM(CASE WHEN t.resolution_status = 'Escalated'
+                 THEN 1 ELSE 0 END) * 100.0 /
+        COUNT(t.ticket_id), 1
+    )                                              AS escalation_rate_pct,
+    SUM(CASE WHEN t.resolution_status = 'Resolved'
+             THEN 1 ELSE 0 END)                    AS resolved_count,
+    SUM(CASE WHEN t.resolution_status = 'Pending'
+             THEN 1 ELSE 0 END)                    AS pending_count
+FROM support_tickets t
+GROUP BY t.issue_type
+ORDER BY avg_rating ASC;

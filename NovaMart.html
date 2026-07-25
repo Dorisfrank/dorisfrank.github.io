@@ -1,0 +1,1604 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>NovaMart: Customer and Product Insight Optimization</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="main.css" />
+<noscript><link rel="stylesheet" href="noscript.css" /></noscript>
+<style>
+/* ── GLOBAL OVERRIDES ───────────────────────────────────────── */
+:root {
+  --nova-teal:   #00b4c6;
+  --nova-amber:  #f5a623;
+  --nova-coral:  #e85d75;
+  --nova-dark:   #0d1b2a;
+  --nova-mid:    #1a2f45;
+  --nova-card:   #162030;
+  --nova-border: rgba(0,180,198,0.18);
+  --nova-text:   #d4e1ec;
+  --nova-muted:  #8aa6bf;
+}
+
+/* Sticky side nav */
+.nova-sidenav {
+  position: fixed;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.nova-sidenav a {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--nova-muted);
+  opacity: 0.5;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+.nova-sidenav a:hover,
+.nova-sidenav a.active {
+  background: var(--nova-teal);
+  opacity: 1;
+  transform: scale(1.4);
+}
+
+/* Cover */
+.nova-cover {
+  background: linear-gradient(135deg, #0d1b2a 0%, #0a2540 60%, #0d3355 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5rem 6rem;
+  position: relative;
+  overflow: hidden;
+}
+.nova-cover::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,180,198,0.12) 0%, transparent 70%);
+}
+.nova-cover::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: 40%;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,166,35,0.08) 0%, transparent 70%);
+}
+.nova-cover-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--nova-teal);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.nova-cover h1 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.18;
+  margin: 0 0 0.5rem 0;
+  max-width: 780px;
+}
+.nova-cover h2 {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 400;
+  color: var(--nova-teal);
+  margin: 0 0 2.5rem 0;
+  border: none;
+  padding: 0;
+}
+.nova-cover-divider {
+  width: 60px;
+  height: 3px;
+  background: var(--nova-amber);
+  margin-bottom: 2.5rem;
+  border-radius: 2px;
+}
+.nova-cover-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+  max-width: 750px;
+  margin-bottom: 3rem;
+}
+.nova-meta-item label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--nova-muted);
+  margin-bottom: 0.3rem;
+}
+.nova-meta-item span {
+  font-size: 0.92rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+.nova-cover-badges {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.nova-badge {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.nova-badge-teal   { background: rgba(0,180,198,0.15); color: var(--nova-teal); border: 1px solid rgba(0,180,198,0.3); }
+.nova-badge-amber  { background: rgba(245,166,35,0.15); color: var(--nova-amber); border: 1px solid rgba(245,166,35,0.3); }
+.nova-badge-coral  { background: rgba(232,93,117,0.15); color: var(--nova-coral); border: 1px solid rgba(232,93,117,0.3); }
+
+/* Layout wrapper */
+.nova-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem 6rem;
+  color: var(--nova-text);
+  font-family: "Georgia", serif;
+  font-size: 1.02rem;
+  line-height: 1.85;
+}
+
+/* Sections */
+.nova-section {
+  padding: 4rem 0 2rem;
+  border-top: 1px solid var(--nova-border);
+}
+.nova-section:first-child { border-top: none; }
+
+.nova-section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--nova-teal);
+  margin-bottom: 0.6rem;
+}
+.nova-section h2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1.8rem 0;
+  line-height: 1.25;
+  font-family: "Georgia", serif;
+}
+.nova-section h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--nova-teal);
+  margin: 2rem 0 0.8rem;
+  font-family: "Georgia", serif;
+}
+.nova-section h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--nova-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 1.8rem 0 0.6rem;
+}
+.nova-section p {
+  margin: 0 0 1.2rem;
+  color: var(--nova-text);
+}
+
+/* TOC */
+.nova-toc {
+  background: var(--nova-card);
+  border: 1px solid var(--nova-border);
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  margin: 2rem 0 0;
+}
+.nova-toc h3 {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--nova-muted);
+  margin: 0 0 1.2rem;
+}
+.nova-toc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem 2rem;
+}
+.nova-toc a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--nova-text);
+  text-decoration: none;
+  padding: 0.35rem 0;
+  border-bottom: none;
+  transition: color 0.2s;
+}
+.nova-toc a:hover { color: var(--nova-teal); }
+.nova-toc-num {
+  font-size: 0.72rem;
+  color: var(--nova-muted);
+  min-width: 22px;
+  font-family: monospace;
+}
+
+/* Engagement summary cards */
+.nova-eng-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+}
+.nova-eng-card {
+  background: var(--nova-card);
+  border: 1px solid var(--nova-border);
+  border-radius: 10px;
+  padding: 1.4rem 1.6rem;
+}
+.nova-eng-card h4 {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nova-teal);
+  margin: 0 0 0.8rem;
+}
+.nova-eng-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nova-eng-card ul li {
+  font-size: 0.88rem;
+  color: var(--nova-text);
+  padding: 0.2rem 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.nova-eng-card ul li::before {
+  content: '›';
+  color: var(--nova-teal);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Impact chips */
+.nova-impact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+.nova-impact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  background: rgba(0,180,198,0.06);
+  border-left: 3px solid var(--nova-teal);
+  border-radius: 0 8px 8px 0;
+  padding: 0.75rem 1.2rem;
+  font-size: 0.92rem;
+}
+.nova-impact-item.amber { border-left-color: var(--nova-amber); background: rgba(245,166,35,0.06); }
+.nova-impact-item.coral { border-left-color: var(--nova-coral); background: rgba(232,93,117,0.06); }
+.nova-impact-val {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--nova-teal);
+  white-space: nowrap;
+  min-width: 90px;
+}
+.nova-impact-item.amber .nova-impact-val { color: var(--nova-amber); }
+.nova-impact-item.coral .nova-impact-val { color: var(--nova-coral); }
+
+/* Methodology steps */
+.nova-method {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 1.5rem 0;
+}
+.nova-method-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+.nova-method-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+.nova-method-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--nova-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--nova-dark);
+  flex-shrink: 0;
+}
+.nova-method-connector {
+  width: 2px;
+  height: 28px;
+  background: linear-gradient(to bottom, var(--nova-teal), rgba(0,180,198,0.2));
+  margin: 2px 0;
+}
+.nova-method-content {
+  padding: 0.15rem 0 1.2rem;
+}
+.nova-method-content strong {
+  display: block;
+  color: #ffffff;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+.nova-method-content span {
+  font-size: 0.86rem;
+  color: var(--nova-muted);
+}
+
+/* KPI cards row */
+.nova-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.nova-kpi {
+  background: var(--nova-card);
+  border: 1px solid var(--nova-border);
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  text-align: center;
+}
+.nova-kpi.teal  { border-top: 3px solid var(--nova-teal); }
+.nova-kpi.amber { border-top: 3px solid var(--nova-amber); }
+.nova-kpi.coral { border-top: 3px solid var(--nova-coral); }
+.nova-kpi-val {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+  line-height: 1;
+}
+.nova-kpi.teal .nova-kpi-val  { color: var(--nova-teal); }
+.nova-kpi.amber .nova-kpi-val { color: var(--nova-amber); }
+.nova-kpi.coral .nova-kpi-val { color: var(--nova-coral); }
+.nova-kpi-label {
+  font-size: 0.76rem;
+  color: var(--nova-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Tables */
+.nova-table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+.nova-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.nova-table th {
+  background: var(--nova-mid);
+  color: var(--nova-teal);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--nova-border);
+  white-space: nowrap;
+}
+.nova-table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: var(--nova-text);
+  vertical-align: top;
+}
+.nova-table tr:hover td { background: rgba(0,180,198,0.04); }
+.nova-table .hi-teal  { color: var(--nova-teal);  font-weight: 700; }
+.nova-table .hi-amber { color: var(--nova-amber); font-weight: 700; }
+.nova-table .hi-coral { color: var(--nova-coral); font-weight: 700; }
+
+/* Callout boxes */
+.nova-callout {
+  border-radius: 10px;
+  padding: 1.2rem 1.6rem;
+  margin: 1.5rem 0;
+  font-size: 0.93rem;
+}
+.nova-callout.teal  { background: rgba(0,180,198,0.08);  border-left: 3px solid var(--nova-teal); }
+.nova-callout.amber { background: rgba(245,166,35,0.08); border-left: 3px solid var(--nova-amber); }
+.nova-callout.coral { background: rgba(232,93,117,0.08); border-left: 3px solid var(--nova-coral); }
+.nova-callout strong { color: #ffffff; display: block; margin-bottom: 0.4rem; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* Assumption box */
+.nova-assumptions {
+  background: var(--nova-card);
+  border: 1px solid var(--nova-border);
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  margin: 1.5rem 0;
+}
+.nova-assumptions h4 {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--nova-amber);
+  margin: 0 0 1rem;
+}
+.nova-assumptions ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 2rem;
+}
+.nova-assumptions li {
+  font-size: 0.88rem;
+  color: var(--nova-text);
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+.nova-assumptions li::before {
+  content: '⚠';
+  color: var(--nova-amber);
+  font-size: 0.75rem;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+/* Recommendation card */
+.nova-rec {
+  background: var(--nova-card);
+  border: 1px solid var(--nova-border);
+  border-radius: 12px;
+  padding: 1.8rem 2rem;
+  margin-bottom: 1.5rem;
+}
+.nova-rec-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.nova-rec-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.nova-rec-num.high   { background: rgba(232,93,117,0.2); color: var(--nova-coral); border: 1px solid var(--nova-coral); }
+.nova-rec-num.medium { background: rgba(245,166,35,0.2); color: var(--nova-amber); border: 1px solid var(--nova-amber); }
+.nova-rec-title { font-size: 1.05rem; font-weight: 700; color: #ffffff; margin: 0; }
+.nova-rec-priority {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+.nova-rec-priority.high   { color: var(--nova-coral); }
+.nova-rec-priority.medium { color: var(--nova-amber); }
+.nova-rec-body p { font-size: 0.9rem; margin: 0 0 1rem; }
+.nova-rec-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--nova-border);
+}
+.nova-rec-meta-item label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--nova-muted);
+  margin-bottom: 0.2rem;
+}
+.nova-rec-meta-item span {
+  font-size: 0.84rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Dashboard screenshots */
+.nova-dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+}
+.nova-dash-card {
+  background: var(--nova-card);
+  border: 1px solid var(--nova-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.nova-dash-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.nova-dash-caption {
+  padding: 0.9rem 1.2rem;
+  font-size: 0.82rem;
+  color: var(--nova-muted);
+}
+.nova-dash-caption strong { display: block; color: var(--nova-text); margin-bottom: 0.2rem; font-size: 0.88rem; }
+
+/* Finding items */
+.nova-findings {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.2rem 0;
+}
+.nova-finding {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  background: var(--nova-card);
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  border: 1px solid var(--nova-border);
+}
+.nova-finding-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.nova-finding-body strong {
+  display: block;
+  color: #ffffff;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+.nova-finding-body p {
+  font-size: 0.88rem;
+  color: var(--nova-muted);
+  margin: 0;
+}
+
+/* Action plan timeline */
+.nova-timeline {
+  margin: 1.5rem 0;
+}
+.nova-timeline-phase {
+  margin-bottom: 2rem;
+}
+.nova-phase-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--nova-mid);
+  border: 1px solid var(--nova-border);
+  border-radius: 20px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--nova-teal);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+.nova-phase-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--nova-border);
+}
+.nova-action-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem;
+  align-items: start;
+  background: var(--nova-card);
+  border-radius: 8px;
+  padding: 0.9rem 1.2rem;
+  font-size: 0.88rem;
+}
+.nova-action-row span { color: var(--nova-text); }
+.nova-action-owner { color: var(--nova-teal); font-weight: 600; white-space: nowrap; font-size: 0.82rem; }
+.nova-action-outcome { color: var(--nova-muted); font-size: 0.8rem; white-space: nowrap; }
+
+/* Bottom actions */
+.nova-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--nova-border);
+}
+.nova-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+.nova-btn-primary { background: var(--nova-teal); color: var(--nova-dark); }
+.nova-btn-primary:hover { background: #00cfe3; }
+.nova-btn-outline { background: transparent; color: var(--nova-teal); border: 1px solid var(--nova-teal); }
+.nova-btn-outline:hover { background: rgba(0,180,198,0.1); }
+
+/* Appendix */
+.nova-appendix {
+  background: var(--nova-card);
+  border: 1px solid var(--nova-border);
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+}
+.nova-appendix h4 {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nova-teal);
+  margin: 0 0 1rem;
+}
+
+/* DAX block */
+.nova-dax {
+  background: #0a1520;
+  border-radius: 8px;
+  padding: 1rem 1.4rem;
+  margin: 0.6rem 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+}
+.nova-dax-name { color: var(--nova-amber); font-weight: 700; }
+.nova-dax-desc { color: var(--nova-muted); font-size: 0.78rem; display: block; margin-bottom: 0.3rem; }
+.nova-dax-code { color: var(--nova-teal); display: block; }
+
+@media (max-width: 768px) {
+  .nova-cover { padding: 3rem 1.8rem; }
+  .nova-body { padding: 0 1.2rem 4rem; }
+  .nova-toc-grid { grid-template-columns: 1fr; }
+  .nova-eng-grid { grid-template-columns: 1fr; }
+  .nova-kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .nova-assumptions ul { grid-template-columns: 1fr; }
+  .nova-rec-meta { grid-template-columns: 1fr; }
+  .nova-action-row { grid-template-columns: 1fr; }
+  .nova-sidenav { display: none; }
+}
+</style>
+</head>
+<body style="background:#0d1b2a; margin:0; padding:0;">
+
+<!-- Sticky side navigation dots -->
+<nav class="nova-sidenav" id="sidenav">
+  <a href="#cover" title="Cover"></a>
+  <a href="#s-summary" title="Engagement Summary"></a>
+  <a href="#s-toc" title="Contents"></a>
+  <a href="#s-exec" title="Executive Summary"></a>
+  <a href="#s-context" title="Business Context"></a>
+  <a href="#s-rationale" title="Business Rationale"></a>
+  <a href="#s-overview" title="Project Overview"></a>
+  <a href="#s-methodology" title="Methodology"></a>
+  <a href="#s-objectives" title="Objectives"></a>
+  <a href="#s-assumptions" title="Assumptions"></a>
+  <a href="#s-qa" title="Business Questions"></a>
+  <a href="#s-dq" title="Data Quality"></a>
+  <a href="#s-dashboard" title="Dashboard Summary"></a>
+  <a href="#s-snapshot" title="Impact Snapshot"></a>
+  <a href="#s-revenue" title="Revenue"></a>
+  <a href="#s-product" title="Product"></a>
+  <a href="#s-customer" title="Customer"></a>
+  <a href="#s-payment" title="Payment Risk"></a>
+  <a href="#s-support" title="Support"></a>
+  <a href="#s-kpi" title="KPI Framework"></a>
+  <a href="#s-recs" title="Recommendations"></a>
+  <a href="#s-plan" title="Action Plan"></a>
+  <a href="#s-recsummary" title="Rec Summary"></a>
+  <a href="#s-findings" title="Key Findings"></a>
+  <a href="#s-value" title="Business Value"></a>
+  <a href="#s-conclusion" title="Conclusion"></a>
+  <a href="#s-appendix" title="Appendix"></a>
+</nav>
+
+<!-- COVER PAGE -->
+<section class="nova-cover" id="cover">
+  <div style="width:100%;display:flex;justify-content:center;margin-bottom:2.5rem;">
+    <img src="novamart-logo.jpg" alt="NovaMart Logo" style="height:110px;width:auto;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.45);" />
+  </div>
+  <div class="nova-cover-label">Business Intelligence Consulting</div>
+  <h1>NovaMart: Customer and Product Insight Optimization</h1>
+  <h2>Executive Business Intelligence Report</h2>
+  <div class="nova-cover-divider"></div>
+  <div class="nova-cover-meta">
+    <div class="nova-meta-item"><label>Client</label><span>NovaMart</span></div>
+    <div class="nova-meta-item"><label>Delivered by</label><span>Doris Frank</span></div>
+    <div class="nova-meta-item"><label>Type</label><span>Business Intelligence Consulting</span></div>
+    <div class="nova-meta-item"><label>Tools</label><span>PostgreSQL &amp; Microsoft Power BI</span></div>
+    <div class="nova-meta-item"><label>Data Period</label><span>August 2024 to May 2025</span></div>
+    <div class="nova-meta-item"><label>Dataset</label><span>15,000 subscriptions | 1,200 customers</span></div>
+  </div>
+  <div class="nova-cover-badges">
+    <span class="nova-badge nova-badge-teal">N161.46M Confirmed Revenue</span>
+    <span class="nova-badge nova-badge-amber">N18.6M Recovery Opportunity</span>
+    <span class="nova-badge nova-badge-coral">7 Executive Recommendations</span>
+  </div>
+</section>
+
+<!-- MAIN BODY -->
+<div class="nova-body">
+
+<!-- ENGAGEMENT SUMMARY -->
+<section class="nova-section" id="s-summary">
+  <div class="nova-section-label">At a Glance</div>
+  <h2>Executive Engagement Summary</h2>
+  <div class="nova-eng-grid">
+    <div class="nova-eng-card">
+      <h4>Business Challenge</h4>
+      <p style="font-size:0.9rem;margin:0;color:var(--nova-text);">NovaMart lacked an integrated Business Intelligence framework capable of transforming operational data into executive decision-making. Despite tracking all transactions digitally, leadership had no structured way to monitor performance, identify risks, or prioritise growth opportunities.</p>
+    </div>
+    <div class="nova-eng-card">
+      <h4>My Role</h4>
+      <p style="font-size:0.9rem;margin:0 0 0.8rem;color:var(--nova-text);">Business Intelligence Consultant</p>
+      <h4 style="margin-top:0.8rem;">Engagement Scope</h4>
+      <ul>
+        <li>Data validation and quality assessment</li>
+        <li>SQL analysis across six analytical themes</li>
+        <li>KPI framework design</li>
+        <li>Power BI dashboard development</li>
+        <li>Strategic recommendations</li>
+      </ul>
+    </div>
+    <div class="nova-eng-card">
+      <h4>Deliverables</h4>
+      <ul>
+        <li>Executive BI Report</li>
+        <li>SQL Insight Library (11 queries)</li>
+        <li>DAX Measure Library</li>
+        <li>Executive KPI Framework</li>
+        <li>Five-page Power BI Dashboard</li>
+        <li>Strategic Recommendations</li>
+        <li>90-Day Action Plan</li>
+        <li>Opportunity and Risk Register</li>
+      </ul>
+    </div>
+    <div class="nova-eng-card">
+      <h4>Business Domains</h4>
+      <ul>
+        <li>Revenue Performance</li>
+        <li>Products and Bundles</li>
+        <li>Customers and Loyalty</li>
+        <li>Payments and Risk</li>
+        <li>Customer Support and Experience</li>
+      </ul>
+    </div>
+  </div>
+  <h3>Business Impact</h3>
+  <div class="nova-impact-list">
+    <div class="nova-impact-item"><span class="nova-impact-val">N18.6M</span><span>revenue recovery opportunity identified through pending payment analysis — recoverable with no new customer acquisition required.</span></div>
+    <div class="nova-impact-item amber"><span class="nova-impact-val">N9.1M</span><span>in revenue leakage quantified from failed payments across all three payment methods, exceeding the industry benchmark of 2 to 3 percent.</span></div>
+    <div class="nova-impact-item coral"><span class="nova-impact-val">N19.7M</span><span>generated by Bundle G, a product officially marked as inactive in the catalogue — a data integrity and product management anomaly requiring immediate resolution.</span></div>
+    <div class="nova-impact-item"><span class="nova-impact-val">7 Recs</span><span>strategic recommendations delivered with named owners, timelines, measurable success criteria, and expected business impact at each stage.</span></div>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<section class="nova-section" id="s-toc">
+  <div class="nova-toc">
+    <h3>Contents — Click to Navigate</h3>
+    <div class="nova-toc-grid">
+      <a href="#s-exec"><span class="nova-toc-num">01</span> Executive Summary</a>
+      <a href="#s-context"><span class="nova-toc-num">02</span> Business Context</a>
+      <a href="#s-rationale"><span class="nova-toc-num">03</span> Business Rationale</a>
+      <a href="#s-overview"><span class="nova-toc-num">04</span> Project Overview</a>
+      <a href="#s-methodology"><span class="nova-toc-num">05</span> Project Methodology</a>
+      <a href="#s-objectives"><span class="nova-toc-num">06</span> Business Objectives</a>
+      <a href="#s-success"><span class="nova-toc-num">07</span> Success Criteria</a>
+      <a href="#s-assumptions"><span class="nova-toc-num">08</span> Assumptions and Limitations</a>
+      <a href="#s-qa"><span class="nova-toc-num">09</span> Business Questions and Answers</a>
+      <a href="#s-dq"><span class="nova-toc-num">10</span> Data Quality</a>
+      <a href="#s-dashboard"><span class="nova-toc-num">11</span> Dashboard Summary</a>
+      <a href="#s-snapshot"><span class="nova-toc-num">12</span> Executive Impact Snapshot</a>
+      <a href="#s-revenue"><span class="nova-toc-num">13</span> Revenue Performance</a>
+      <a href="#s-product"><span class="nova-toc-num">14</span> Product and Bundle Performance</a>
+      <a href="#s-customer"><span class="nova-toc-num">15</span> Customer Intelligence</a>
+      <a href="#s-payment"><span class="nova-toc-num">16</span> Payment Risk</a>
+      <a href="#s-support"><span class="nova-toc-num">17</span> Customer Support and Experience</a>
+      <a href="#s-kpi"><span class="nova-toc-num">18</span> Executive KPI Framework</a>
+      <a href="#s-recs"><span class="nova-toc-num">19</span> Strategic Recommendations</a>
+      <a href="#s-plan"><span class="nova-toc-num">20</span> Executive Action Plan</a>
+      <a href="#s-recsummary"><span class="nova-toc-num">21</span> Recommendation Summary</a>
+      <a href="#s-findings"><span class="nova-toc-num">22</span> Key Findings Summary</a>
+      <a href="#s-value"><span class="nova-toc-num">23</span> Business Value Delivered</a>
+      <a href="#s-conclusion"><span class="nova-toc-num">24</span> Conclusion</a>
+      <a href="#s-appendix"><span class="nova-toc-num">25</span> Appendix</a>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTIVE SUMMARY -->
+<section class="nova-section" id="s-exec">
+  <div class="nova-section-label">Section 01</div>
+  <h2>Executive Summary</h2>
+  <p>In this project, I analysed NovaMart's customer, subscription, payment, and support data to establish an executive KPI framework, identify growth opportunities, quantify operational risks, and develop strategic recommendations to support leadership decision-making.</p>
+  <div class="nova-kpi-row">
+    <div class="nova-kpi teal"><div class="nova-kpi-val">N161.46M</div><div class="nova-kpi-label">Confirmed Revenue</div></div>
+    <div class="nova-kpi teal"><div class="nova-kpi-val">10,639</div><div class="nova-kpi-label">Confirmed Orders</div></div>
+    <div class="nova-kpi amber"><div class="nova-kpi-val">N18.6M</div><div class="nova-kpi-label">Pending Revenue</div></div>
+    <div class="nova-kpi coral"><div class="nova-kpi-val">N9.1M</div><div class="nova-kpi-label">Failed Revenue</div></div>
+    <div class="nova-kpi teal"><div class="nova-kpi-val">N15,177</div><div class="nova-kpi-label">Avg Order Value</div></div>
+    <div class="nova-kpi coral"><div class="nova-kpi-val">3.60</div><div class="nova-kpi-label">Avg Support Rating</div></div>
+  </div>
+  <h3>Major Findings</h3>
+  <div class="nova-findings">
+    <div class="nova-finding"><div class="nova-finding-icon">💰</div><div class="nova-finding-body"><strong>N18.6M in pending payments is recoverable</strong><p>NovaMart has already captured these orders. The barrier to collection is operational, not commercial — payment retry infrastructure can recover a significant portion immediately.</p></div></div>
+    <div class="nova-finding"><div class="nova-finding-icon">⚠️</div><div class="nova-finding-body"><strong>Bundle G anomaly: N19.7M from an inactive product</strong><p>A product marked inactive in the catalogue generated N19.7M in confirmed paid revenue during the reporting period. This data integrity issue requires immediate resolution.</p></div></div>
+    <div class="nova-finding"><div class="nova-finding-icon">📉</div><div class="nova-finding-body"><strong>Payment failure rates exceed industry benchmarks across all methods</strong><p>All three payment methods exceed the 2 to 3 percent digital commerce benchmark, resulting in N9.1M in lost revenue during the reporting period.</p></div></div>
+    <div class="nova-finding"><div class="nova-finding-icon">🏷️</div><div class="nova-finding-body"><strong>Loyalty tiers do not reflect spending behaviour</strong><p>Average order value differs by less than N258 across Silver, Gold, and Platinum customers. The programme cannot identify or protect NovaMart's most valuable relationships.</p></div></div>
+    <div class="nova-finding"><div class="nova-finding-icon">🎧</div><div class="nova-finding-body"><strong>Support quality is systemically poor across all issue types</strong><p>No issue type achieves above 3.71 on a 5-point scale. Product Quality has both the lowest rating (3.55) and the highest escalation rate (10.2%).</p></div></div>
+    <div class="nova-finding"><div class="nova-finding-icon">📍</div><div class="nova-finding-body"><strong>Abuja is the weakest market across every metric</strong><p>Lowest volume, lowest revenue (N23.3M), lowest revenue share (14.5%). A N6.9M gap vs Port Harcourt requires a dedicated investigation before targeted investment.</p></div></div>
+  </div>
+</section>
+
+<!-- BUSINESS CONTEXT -->
+<section class="nova-section" id="s-context">
+  <div class="nova-section-label">Section 02</div>
+  <h2>Business Context</h2>
+  <p>NovaMart is a digital-first Nigerian company offering curated lifestyle product bundles through a monthly subscription model. Customers subscribe to receive wellness kits, tech accessories, snacks, and home essentials. Orders are personalised based on user profiles and delivered across six major Nigerian cities: Lagos, Abuja, Port Harcourt, Enugu, Ibadan, and Kano.</p>
+  <p>NovaMart operates 100% online and tracks all transactions, feedback, and customer interactions digitally. Despite this infrastructure, leadership faced a challenge common to fast-growing subscription businesses. Large volumes of operational data existed across multiple systems, but no unified analytical framework had been established to monitor performance, identify risks, or support strategic decisions.</p>
+  <p>The organisation was growing but operating without clear visibility in key areas. Leadership could not easily answer questions about which products were most profitable, whether discounting was helping or hurting margins, which customer segments drove long-term value, or what was driving low satisfaction scores in customer support. This project was commissioned to close that gap.</p>
+</section>
+
+<!-- BUSINESS RATIONALE -->
+<section class="nova-section" id="s-rationale">
+  <div class="nova-section-label">Section 03</div>
+  <h2>Business Rationale</h2>
+  <p>This project was undertaken to transform operational data into actionable business intelligence, establishing executive KPIs, uncovering performance drivers, and providing recommendations that support revenue growth, customer retention, and operational efficiency.</p>
+  <div class="nova-eng-grid">
+    <div class="nova-eng-card"><h4>Product Intelligence</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);">Identify top-performing bundles, underperforming products, and product anomalies requiring business attention, so that product investment decisions are grounded in confirmed commercial evidence rather than assumption.</p></div>
+    <div class="nova-eng-card"><h4>Customer Intelligence</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);">Understand customer behaviour across locations, loyalty tiers, and subscription patterns to identify retention risks and uncover opportunities to increase customer lifetime value.</p></div>
+    <div class="nova-eng-card"><h4>Financial Intelligence</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);">Monitor revenue performance, payment trends, and revenue leakage to improve financial outcomes and reduce the gap between orders placed and revenue collected.</p></div>
+    <div class="nova-eng-card"><h4>Executive Enablement</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);">Provide leadership with a structured KPI framework and interactive dashboards to support data-driven decision-making consistently across all business dimensions on an ongoing basis.</p></div>
+  </div>
+</section>
+
+<!-- PROJECT OVERVIEW -->
+<section class="nova-section" id="s-overview">
+  <div class="nova-section-label">Section 04</div>
+  <h2>Project Overview</h2>
+  <p>Engaged as the Business Intelligence Consultant supporting NovaMart's analytics function, I led the full data exploration, SQL analysis, KPI framework design, and dashboard build for this subscription commerce project. The work covered five analytical dimensions: revenue performance, product and bundle analysis, customer intelligence, payment risk, and customer support.</p>
+  <p>My responsibilities included validating the PostgreSQL database and documenting data quality conditions, developing the SQL Insight Library to answer 11 business questions across six analytical themes, designing and building the Power BI dashboard across five pages with a fully documented DAX measure library, and translating analytical findings into executive-ready strategic recommendations with measurable success criteria.</p>
+  <p>The project covered the full available dataset across August 2024 to May 2025, representing 10 complete months of NovaMart's subscription commerce operations.</p>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="nova-section" id="s-methodology">
+  <div class="nova-section-label">Section 05</div>
+  <h2>Project Methodology</h2>
+  <p>The following structured approach was applied throughout this project, ensuring that every analytical output was grounded in validated data and connected to a business decision.</p>
+  <div class="nova-method">
+    <div class="nova-method-step"><div class="nova-method-line"><div class="nova-method-dot">01</div><div class="nova-method-connector"></div></div><div class="nova-method-content"><strong>Business Understanding</strong><span>Reviewed the project brief, identified the business questions leadership needed answered, and established scope and objectives before any data was touched.</span></div></div>
+    <div class="nova-method-step"><div class="nova-method-line"><div class="nova-method-dot">02</div><div class="nova-method-connector"></div></div><div class="nova-method-content"><strong>Data Validation</strong><span>Assessed all five tables for completeness, referential integrity, and data quality. Three conditions were identified and documented: payment filter, reporting period, and Bundle G anomaly.</span></div></div>
+    <div class="nova-method-step"><div class="nova-method-line"><div class="nova-method-dot">03</div><div class="nova-method-connector"></div></div><div class="nova-method-content"><strong>SQL Analysis</strong><span>Developed 11 PostgreSQL queries across six analytical themes, applying consistent filters to ensure all outputs reconcile with the Power BI dashboard.</span></div></div>
+    <div class="nova-method-step"><div class="nova-method-line"><div class="nova-method-dot">04</div><div class="nova-method-connector"></div></div><div class="nova-method-content"><strong>KPI Design</strong><span>Designed an executive KPI framework to enable leadership to monitor performance consistently across revenue, customer, payment, product, and support operations.</span></div></div>
+    <div class="nova-method-step"><div class="nova-method-line"><div class="nova-method-dot">05</div><div class="nova-method-connector"></div></div><div class="nova-method-content"><strong>Dashboard Development</strong><span>Designed and specified a five-page Power BI dashboard using DAX measures that mirror the SQL filter logic exactly, ensuring one source of truth across all deliverables.</span></div></div>
+    <div class="nova-method-step"><div class="nova-method-line"><div class="nova-method-dot">06</div><div class="nova-method-connector"></div></div><div class="nova-method-content"><strong>Executive Insight Generation</strong><span>Translated each analytical finding into a business insight statement explaining not just what the data showed, but what it means for NovaMart's operations and strategy.</span></div></div>
+    <div class="nova-method-step"><div class="nova-method-line"><div class="nova-method-dot">07</div><div class="nova-method-connector"></div></div><div class="nova-method-content"><strong>Strategic Recommendations</strong><span>Developed seven recommendations, each with a named owner, priority level, implementation timeline, measurable success criteria, and expected business impact.</span></div></div>
+    <div class="nova-method-step"><div class="nova-method-line"><div class="nova-method-dot">08</div></div><div class="nova-method-content"><strong>Executive Action Plan</strong><span>Sequenced all recommendations into a 30 to 90 day roadmap, prioritising recoverable revenue and risk mitigation before growth initiatives.</span></div></div>
+  </div>
+</section>
+
+<!-- OBJECTIVES -->
+<section class="nova-section" id="s-objectives">
+  <div class="nova-section-label">Section 06</div>
+  <h2>Business Objectives</h2>
+  <div class="nova-eng-grid">
+    <div class="nova-eng-card"><h4>Objective 1</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);"><strong style="color:#fff;display:block;margin-bottom:0.3rem;">Bundle performance KPIs</strong>Establish KPIs that distinguish top-performing bundles from underperformers and identify products requiring business decisions.</p></div>
+    <div class="nova-eng-card"><h4>Objective 2</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);"><strong style="color:#fff;display:block;margin-bottom:0.3rem;">Retention and loyalty KPIs</strong>Design a KPI framework that gives leadership clear signals on customer health, loyalty programme effectiveness, and support quality.</p></div>
+    <div class="nova-eng-card"><h4>Objective 3</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);"><strong style="color:#fff;display:block;margin-bottom:0.3rem;">Executive monitoring dashboard</strong>Build a dashboard that makes the most important performance indicators immediately visible without requiring manual data extraction.</p></div>
+    <div class="nova-eng-card"><h4>Objective 4</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);"><strong style="color:#fff;display:block;margin-bottom:0.3rem;">Decision framework, not just a report</strong>Ensure every analytical section drives toward a recommendation and an expected business outcome, so the work produces executive decisions.</p></div>
+  </div>
+</section>
+
+<!-- SUCCESS CRITERIA -->
+<section class="nova-section" id="s-success">
+  <div class="nova-section-label">Section 07</div>
+  <h2>Success Criteria</h2>
+  <p>This project was considered successful upon delivery of the following outcomes.</p>
+  <ul style="margin:0;padding-left:1.2rem;">
+    <li style="margin-bottom:0.6rem;color:var(--nova-text);">An executive KPI framework established and documented, covering revenue, product, customer, payment, and support dimensions.</li>
+    <li style="margin-bottom:0.6rem;color:var(--nova-text);">Confirmed revenue, pending revenue, and failed revenue quantified and clearly distinguished across all analyses.</li>
+    <li style="margin-bottom:0.6rem;color:var(--nova-text);">Revenue leakage sources identified and quantified with recovery estimates and measurable conversion targets.</li>
+    <li style="margin-bottom:0.6rem;color:var(--nova-text);">Product catalogue anomalies surfaced and explained with business implications and recommended actions.</li>
+    <li style="margin-bottom:0.6rem;color:var(--nova-text);">Seven strategic recommendations developed with priority, ownership, timeline, measurable success criteria, and expected impact.</li>
+    <li style="margin-bottom:0.6rem;color:var(--nova-text);">An interactive five-page Power BI dashboard designed and built with a fully documented DAX measure library.</li>
+    <li style="color:var(--nova-text);">A 90-day implementation roadmap delivered, enabling leadership to act on findings immediately.</li>
+  </ul>
+</section>
+
+<!-- ASSUMPTIONS AND LIMITATIONS -->
+<section class="nova-section" id="s-assumptions">
+  <div class="nova-section-label">Section 08</div>
+  <h2>Assumptions and Limitations</h2>
+  <div class="nova-assumptions">
+    <h4>Key Assumptions and Limitations</h4>
+    <ul>
+      <li>Confirmed revenue uses is_successful = TRUE, matching the Power BI DAX logic exactly.</li>
+      <li>Reporting period is August 2024 to May 2025 only — data outside this window is excluded.</li>
+      <li>Cost data is unavailable — profitability and margin analysis are excluded from this report.</li>
+      <li>Profit analysis is excluded — all revenue figures represent gross order value after discount.</li>
+      <li>Dataset covers 10 months only — year-on-year comparisons are not possible from this dataset.</li>
+      <li>Loyalty tier assignment criteria are unknown — assumed frequency or tenure-based, not spend-based.</li>
+      <li>Bundle G status requires business clarification — the analytical finding surfaces the anomaly only.</li>
+      <li>Dashboard figures (N161.46M) differ from full-dataset totals due to the reporting period filter.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- BUSINESS QUESTIONS -->
+<section class="nova-section" id="s-qa">
+  <div class="nova-section-label">Section 09</div>
+  <h2>Business Questions and Answers</h2>
+  <p>All figures reflect the August 2024 to May 2025 reporting period with confirmed payments only (is_successful = TRUE), matching the Power BI DAX filter logic exactly.</p>
+
+  <h3>SQL Exploration Questions</h3>
+
+  <h4>Q1: Which 3 bundles have the highest subscription volume?</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Rank</th><th>Bundle</th><th>Category</th><th>Size</th><th>Active</th><th>Orders</th></tr>
+    <tr><td class="hi-teal">1</td><td>Bundle J</td><td>Wellness</td><td>Large</td><td>Yes</td><td class="hi-teal">1,591</td></tr>
+    <tr><td class="hi-teal">2</td><td>Bundle I</td><td>Wellness</td><td>Medium</td><td>Yes</td><td class="hi-teal">1,515</td></tr>
+    <tr><td class="hi-teal">3</td><td>Bundle H</td><td>Essentials</td><td>Medium</td><td>Yes</td><td class="hi-teal">1,328</td></tr>
+  </table>
+  </div>
+
+  <h4>Q2: Average spend per loyalty tier (confirmed orders only)</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Loyalty Tier</th><th>Avg Order Value</th><th>Confirmed Revenue</th><th>Paid Orders</th></tr>
+    <tr><td>Platinum</td><td class="hi-amber">N15,114</td><td>N15,129,583</td><td>1,001</td></tr>
+    <tr><td>Gold</td><td class="hi-amber">N15,352</td><td>N51,031,644</td><td>3,324</td></tr>
+    <tr><td>Silver</td><td class="hi-amber">N15,094</td><td>N95,302,022</td><td>6,314</td></tr>
+  </table>
+  </div>
+  <div class="nova-callout amber"><strong>Key Insight</strong>The difference between the highest and lowest average order value across all three tiers is only N258. The loyalty programme does not reflect spending behaviour.</div>
+
+  <h4>Q3: Failed payments by method</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Method</th><th>Failed Count</th><th>Failure Rate</th><th>Revenue Lost</th></tr>
+    <tr><td>Bank Transfer</td><td>202</td><td class="hi-coral">5.5%</td><td class="hi-coral">N2,964,372</td></tr>
+    <tr><td>Wallet</td><td>122</td><td class="hi-coral">4.9%</td><td class="hi-coral">N1,905,668</td></tr>
+    <tr><td>Card</td><td>293</td><td class="hi-coral">4.6%</td><td class="hi-coral">N4,239,487</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>617</strong></td><td class="hi-coral"><strong>4.9% avg</strong></td><td class="hi-coral"><strong>N9,109,527</strong></td></tr>
+  </table>
+  </div>
+
+  <h4>Q4: Total revenue by active bundle category</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Category</th><th>Paid Orders</th><th>Confirmed Revenue</th><th>Revenue Share</th><th>Avg Order Value</th></tr>
+    <tr><td>Wellness</td><td>4,141</td><td class="hi-teal">N62,589,140</td><td class="hi-teal">44.1%</td><td>N15,116</td></tr>
+    <tr><td>Essentials</td><td>3,309</td><td class="hi-teal">N50,171,928</td><td class="hi-teal">35.4%</td><td>N15,163</td></tr>
+    <tr><td>Snacks (active only)</td><td>1,149</td><td>N17,360,363</td><td>12.2%</td><td>N15,109</td></tr>
+    <tr><td>Tech</td><td>757</td><td>N11,691,010</td><td>8.2%</td><td class="hi-amber">N15,444</td></tr>
+  </table>
+  </div>
+
+  <h4>Q5: Issue types with lowest ratings</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Issue Type</th><th>Tickets</th><th>Avg Rating</th><th>Escalation Rate</th></tr>
+    <tr><td>Other</td><td>442</td><td class="hi-coral">3.54</td><td>9.0%</td></tr>
+    <tr><td>Product Quality</td><td>460</td><td class="hi-coral">3.55</td><td class="hi-coral">10.2%</td></tr>
+    <tr><td>Billing Issue</td><td>439</td><td>3.61</td><td>9.8%</td></tr>
+    <tr><td>Late Delivery</td><td>459</td><td>3.71</td><td>9.6%</td></tr>
+  </table>
+  </div>
+
+  <h3>Power BI Dashboard Questions</h3>
+  <div class="nova-eng-grid">
+    <div class="nova-eng-card"><h4>PBI Q1: Revenue by category and size</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);">Wellness (Large) is the dominant combination. Displayed as a clustered bar chart with category on the axis, filterable by bundle size.</p></div>
+    <div class="nova-eng-card"><h4>PBI Q2: Monthly trend</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);">Revenue N15.3M to N17.4M per month. October 2024 peaked at N17.4M. Displayed as a line chart across the full reporting period.</p></div>
+    <div class="nova-eng-card"><h4>PBI Q3: Loyalty by city and spend</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);">Port Harcourt leads all cities across all loyalty tiers. Abuja has the lowest total. Displayed as a stacked bar by city segmented by loyalty tier.</p></div>
+    <div class="nova-eng-card"><h4>PBI Q4: Top 5 cities by volume</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);">Port Harcourt 1,977 | Enugu 1,847 | Lagos 1,806 | Ibadan 1,735 | Kano 1,697. Abuja (1,577) does not appear in the top 5.</p></div>
+    <div class="nova-eng-card"><h4>PBI Q5: Ticket rating vs resolution</h4><p style="font-size:0.88rem;margin:0;color:var(--nova-text);">Product Quality lowest at 3.55 with 10.2% escalation rate. Resolution status: 70% Resolved, 20% Pending, 10% Escalated.</p></div>
+  </div>
+</section>
+
+<!-- DATA QUALITY -->
+<section class="nova-section" id="s-dq">
+  <div class="nova-section-label">Section 10</div>
+  <h2>Data Quality and Assumptions</h2>
+  <div class="nova-kpi-row">
+    <div class="nova-kpi teal"><div class="nova-kpi-val">10,639</div><div class="nova-kpi-label">Confirmed Orders</div></div>
+    <div class="nova-kpi amber"><div class="nova-kpi-val">1,226</div><div class="nova-kpi-label">Pending Orders</div></div>
+    <div class="nova-kpi coral"><div class="nova-kpi-val">617</div><div class="nova-kpi-label">Failed Orders</div></div>
+    <div class="nova-kpi teal"><div class="nova-kpi-val">12,482</div><div class="nova-kpi-label">Total Orders</div></div>
+  </div>
+  <div class="nova-callout teal"><strong>Condition 1: Payment Filter</strong>All revenue figures use is_successful = TRUE, matching the Power BI DAX measure logic exactly. Pending and failed values are reported separately as risk and opportunity indicators.</div>
+  <div class="nova-callout amber"><strong>Condition 2: Reporting Period</strong>All analysis covers August 2024 to May 2025. This is why dashboard figures (N161.46M) differ from full-dataset totals — data outside this window is excluded.</div>
+  <div class="nova-callout coral"><strong>Condition 3: Bundle G Anomaly</strong>Bundle G carries is_active = FALSE but generated N19.7M in confirmed revenue from 1,283 paid orders. It is excluded from active-bundle category totals and reported separately.</div>
+</section>
+
+<!-- DASHBOARD SUMMARY -->
+<section class="nova-section" id="s-dashboard">
+  <div class="nova-section-label">Section 11</div>
+  <h2>Executive KPI Dashboard Summary</h2>
+  <p>The Power BI dashboard is structured across five pages, each carrying two persistent filters: is_successful = TRUE and the reporting period August 2024 through May 2025.</p>
+  <div class="nova-dash-grid">
+    <div class="nova-dash-card"><img src="Executive_Overview.png" alt="NovaMart Executive Overview Dashboard" /><div class="nova-dash-caption"><strong>Page 1: Executive Overview</strong>Six KPI cards, monthly revenue trend, Revenue vs Target gauge (N161.46M vs N200M), Payment Health Warning at 85.2%.</div></div>
+    <div class="nova-dash-card"><img src="Revenue_Product_Performance.png" alt="Revenue and Product Performance Dashboard" /><div class="nova-dash-caption"><strong>Page 2: Revenue and Product Performance</strong>Bundle category revenue, discount band analysis (above 20% highlighted), subscription type split (70% / 30%), monthly trend.</div></div>
+    <div class="nova-dash-card"><img src="Customer_Subscription_Intelligence.png" alt="Customer Intelligence Dashboard" /><div class="nova-dash-caption"><strong>Page 3: Customer and Subscription Intelligence</strong>Loyalty tier KPI cards, city distribution, Top 5 cities by volume, subscription type revenue.</div></div>
+    <div class="nova-dash-card"><img src="Payment_Risk_Recovery.png" alt="Payment Risk Dashboard" /><div class="nova-dash-caption"><strong>Page 4: Payment Risk and Revenue Recovery</strong>Payment method matrix with conditional formatting, pending recovery by method, monthly payment status stacked area.</div></div>
+    <div class="nova-dash-card"><img src="Support_Customer_Experience.png" alt="Support Dashboard" /><div class="nova-dash-caption"><strong>Page 5: Support and Customer Experience</strong>Average rating gauge (3.6 vs 4.5 target), tickets by issue type, resolution status donut (70%/20%/10%), monthly trend.</div></div>
+  </div>
+</section>
+
+<!-- IMPACT SNAPSHOT -->
+<section class="nova-section" id="s-snapshot">
+  <div class="nova-section-label">Section 12</div>
+  <h2>Executive Impact Snapshot</h2>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Area</th><th>Finding</th><th>Business Impact</th></tr>
+    <tr><td class="hi-teal">Revenue</td><td>N18.6M in pending payments</td><td>Recovery opportunity through payment retry infrastructure</td></tr>
+    <tr><td class="hi-coral">Payments</td><td>4.9% average failure rate</td><td>N9.1M revenue leakage exceeding industry benchmark</td></tr>
+    <tr><td class="hi-coral">Product</td><td>Bundle G inactive anomaly</td><td>N19.7M generated by a product that officially does not exist</td></tr>
+    <tr><td class="hi-amber">Loyalty</td><td>N258 spend gap across all tiers</td><td>Loyalty programme cannot identify or protect high-value customers</td></tr>
+    <tr><td class="hi-coral">Support</td><td>Product Quality 3.55 avg rating</td><td>Highest escalation rate (10.2%), direct retention risk</td></tr>
+    <tr><td class="hi-amber">Geography</td><td>Abuja trails all cities</td><td>N6.9M gap vs Port Harcourt, lowest revenue share at 14.5%</td></tr>
+    <tr><td class="hi-amber">Recurring</td><td>One-time revenue at 30%</td><td>Revenue base is volatile and must be re-earned every month</td></tr>
+  </table>
+  </div>
+</section>
+
+<!-- REVENUE PERFORMANCE -->
+<section class="nova-section" id="s-revenue">
+  <div class="nova-section-label">Section 13</div>
+  <h2>Revenue Performance</h2>
+  <h3>What I Analysed</h3>
+  <p>I analysed confirmed revenue across all paid transactions between August 2024 and May 2025 to identify NovaMart's revenue baseline, diagnose growth patterns, and quantify revenue risk from payment outcomes and subscription type distribution.</p>
+  <h3>What I Found</h3>
+  <div class="nova-kpi-row">
+    <div class="nova-kpi teal"><div class="nova-kpi-val">N161.46M</div><div class="nova-kpi-label">Confirmed Revenue</div></div>
+    <div class="nova-kpi amber"><div class="nova-kpi-val">N18.56M</div><div class="nova-kpi-label">Pending Revenue</div></div>
+    <div class="nova-kpi coral"><div class="nova-kpi-val">N9.11M</div><div class="nova-kpi-label">Failed Revenue</div></div>
+    <div class="nova-kpi teal"><div class="nova-kpi-val">70%</div><div class="nova-kpi-label">Recurring Share</div></div>
+    <div class="nova-kpi amber"><div class="nova-kpi-val">30%</div><div class="nova-kpi-label">One-time Share</div></div>
+    <div class="nova-kpi teal"><div class="nova-kpi-val">N15,177</div><div class="nova-kpi-label">Avg Order Value</div></div>
+  </div>
+  <h4>Monthly Revenue Trend</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Month</th><th>Confirmed Orders</th><th>Confirmed Revenue</th></tr>
+    <tr><td>August 2024</td><td>1,082</td><td>N16,174,224</td></tr>
+    <tr><td>September 2024</td><td>1,087</td><td>N16,277,553</td></tr>
+    <tr><td>October 2024</td><td>1,125</td><td class="hi-teal">N17,396,931 (peak)</td></tr>
+    <tr><td>November 2024</td><td>1,060</td><td>N16,251,752</td></tr>
+    <tr><td>December 2024</td><td>1,071</td><td>N15,965,088</td></tr>
+    <tr><td>January 2025</td><td>1,093</td><td>N16,725,205</td></tr>
+    <tr><td>February 2025</td><td>988</td><td class="hi-coral">N15,289,210 (low)</td></tr>
+    <tr><td>March 2025</td><td>1,059</td><td>N16,005,560</td></tr>
+    <tr><td>April 2025</td><td>1,049</td><td>N15,939,098</td></tr>
+    <tr><td>May 2025</td><td>1,025</td><td>N15,438,626</td></tr>
+  </table>
+  </div>
+  <h3>Business Insight</h3>
+  <p>NovaMart's revenue has reached a steady state. Monthly confirmed revenue moves narrowly between N15.3M and N17.4M with no sustained growth trajectory. October 2024 was the single strongest month and no subsequent month matched it. This is not a declining business. It is a business that has plateaued, and that plateau will persist without a deliberate intervention.</p>
+  <p>The 30% one-time purchase contribution represents the most important structural risk in this revenue profile. One-time buyers have demonstrated willingness to purchase but have not committed to the recurring model. This revenue must be re-earned every month, unlike recurring subscription revenue which renews automatically.</p>
+  <h3>My Recommendation</h3>
+  <p>I recommend NovaMart implement two immediate revenue interventions. The first is a payment retry infrastructure targeting the 1,226 pending orders, prioritising the N9.6M sitting in card-pending status. The second is a post-purchase conversion campaign targeting one-time buyers with a first-month recurring discount, with the objective of reducing the one-time revenue share from 30% to below 25% within two quarters.</p>
+  <div class="nova-callout teal"><strong>Success Metrics</strong>Pending Revenue Rate below 7% | Payment Failure Rate below 3% | Recurring Revenue Share above 75%</div>
+</section>
+
+<!-- PRODUCT PERFORMANCE -->
+<section class="nova-section" id="s-product">
+  <div class="nova-section-label">Section 14</div>
+  <h2>Product and Bundle Performance</h2>
+  <h3>What I Analysed</h3>
+  <p>I analysed subscription volume, confirmed revenue, and payment outcomes by bundle, category, and size to identify NovaMart's top-performing products, underperformers, and product management issues requiring executive attention.</p>
+  <h3>What I Found</h3>
+  <h4>Revenue by Active Bundle Category</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Category</th><th>Paid Orders</th><th>Confirmed Revenue</th><th>Revenue Share</th><th>Avg Order Value</th></tr>
+    <tr><td>Wellness</td><td>4,141</td><td class="hi-teal">N62,589,140</td><td class="hi-teal">44.1%</td><td>N15,116</td></tr>
+    <tr><td>Essentials</td><td>3,309</td><td class="hi-teal">N50,171,928</td><td class="hi-teal">35.4%</td><td>N15,163</td></tr>
+    <tr><td>Snacks (active only)</td><td>1,149</td><td>N17,360,363</td><td>12.2%</td><td>N15,109</td></tr>
+    <tr><td>Tech</td><td>757</td><td>N11,691,010</td><td>8.2%</td><td class="hi-amber">N15,444 (highest avg)</td></tr>
+  </table>
+  </div>
+  <h4>Discount Impact</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Discount Band</th><th>Paid Orders</th><th>Avg Order Value</th><th>Total Revenue</th></tr>
+    <tr><td>No Discount</td><td>208</td><td class="hi-teal">N16,659</td><td>N3,465,049</td></tr>
+    <tr><td>1% to 10%</td><td>4,284</td><td class="hi-teal">N16,317</td><td>N69,901,159</td></tr>
+    <tr><td>11% to 20%</td><td>4,268</td><td>N14,641</td><td>N62,486,829</td></tr>
+    <tr><td>Above 20%</td><td>1,879</td><td class="hi-coral">N13,630 (lowest)</td><td>N25,610,211</td></tr>
+  </table>
+  </div>
+  <div class="nova-callout coral"><strong>Bundle G Anomaly</strong>Bundle G (Snacks, Large, is_active = FALSE) generated N19.7M in confirmed revenue from 1,283 paid orders during the reporting period. A product that does not officially exist in the active catalogue is being actively purchased and paid for. This requires immediate resolution.</div>
+  <h3>My Recommendation</h3>
+  <p>I recommend NovaMart conduct an immediate product catalogue audit to resolve Bundle G's status. If deactivation was unintentional, restore the product and manage it as an active bundle. If intentional, close the ordering pathway immediately and implement a transition plan for affected customers. On discounting, a structured comparison of conversion rates at different discount levels would provide the data needed to set an evidence-based ceiling.</p>
+  <div class="nova-callout teal"><strong>Success Metrics</strong>Inactive bundle order count equal to zero | Deep discount order share below 12%</div>
+</section>
+
+<!-- CUSTOMER INTELLIGENCE -->
+<section class="nova-section" id="s-customer">
+  <div class="nova-section-label">Section 15</div>
+  <h2>Customer Intelligence</h2>
+  <h3>What I Analysed</h3>
+  <p>I analysed customer behaviour across loyalty tiers, cities, and subscription types to identify retention risks, uncover opportunities to increase customer lifetime value, and surface geographic performance gaps requiring strategic attention.</p>
+  <h3>What I Found</h3>
+  <h4>Loyalty Tier Analysis</h4>
+  <div class="nova-kpi-row">
+    <div class="nova-kpi amber"><div class="nova-kpi-val">N15,114</div><div class="nova-kpi-label">Platinum Avg Order</div></div>
+    <div class="nova-kpi amber"><div class="nova-kpi-val">N15,352</div><div class="nova-kpi-label">Gold Avg Order</div></div>
+    <div class="nova-kpi amber"><div class="nova-kpi-val">N15,094</div><div class="nova-kpi-label">Silver Avg Order</div></div>
+    <div class="nova-kpi coral"><div class="nova-kpi-val">N258</div><div class="nova-kpi-label">Max Tier Difference</div></div>
+  </div>
+  <h4>Revenue by City</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>City</th><th>Confirmed Orders</th><th>Confirmed Revenue</th><th>Revenue Share</th></tr>
+    <tr><td class="hi-teal">Port Harcourt</td><td>1,977</td><td class="hi-teal">N30,229,346</td><td class="hi-teal">18.7%</td></tr>
+    <tr><td>Enugu</td><td>1,847</td><td>N27,931,945</td><td>17.3%</td></tr>
+    <tr><td>Lagos</td><td>1,806</td><td>N27,301,612</td><td>16.9%</td></tr>
+    <tr><td>Ibadan</td><td>1,735</td><td>N26,378,319</td><td>16.3%</td></tr>
+    <tr><td>Kano</td><td>1,697</td><td>N26,272,209</td><td>16.3%</td></tr>
+    <tr><td class="hi-coral">Abuja</td><td class="hi-coral">1,577</td><td class="hi-coral">N23,349,818</td><td class="hi-coral">14.5%</td></tr>
+  </table>
+  </div>
+  <h3>Business Insight</h3>
+  <p>The loyalty tier finding is one of the most strategically significant discoveries in this project. Average order value across all three tiers differs by less than N258. The programme is classifying customers without differentiating them in any commercially meaningful way. NovaMart cannot currently use its loyalty tiers to identify, reward, or protect the customers who are genuinely most valuable to the business.</p>
+  <p>Abuja trails Port Harcourt by N6.9M in confirmed revenue and 400 paid orders. It has the lowest revenue share at 14.5% and the lowest order volume of all six cities. Without a deliberate strategy, this gap will persist as other markets grow.</p>
+  <h3>My Recommendation</h3>
+  <p>I recommend NovaMart redesign its loyalty tier criteria to incorporate spend-based thresholds: Silver below N100K annual confirmed spend, Gold between N100K and N200K, and Platinum above N200K. For Abuja, I recommend a structured market investigation before committing to targeted investment.</p>
+  <div class="nova-callout teal"><strong>Success Metrics</strong>Abuja revenue share above 16% | One-time to recurring conversion increasing by 5% per quarter</div>
+</section>
+
+<!-- PAYMENT RISK -->
+<section class="nova-section" id="s-payment">
+  <div class="nova-section-label">Section 16</div>
+  <h2>Payment Risk</h2>
+  <h3>What I Analysed</h3>
+  <p>I analysed payment outcomes across all 12,482 transactions in the reporting period to identify failure rates by method, quantify revenue lost to failed payments, and assess the recovery opportunity represented by pending payments.</p>
+  <h3>What I Found</h3>
+  <h4>Payment Method Performance</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Method</th><th>Total Transactions</th><th>Failed</th><th>Failure Rate</th><th>Revenue Lost</th></tr>
+    <tr><td>Bank Transfer</td><td>3,689</td><td>202</td><td class="hi-coral">5.5%</td><td class="hi-coral">N2,964,372</td></tr>
+    <tr><td>Wallet</td><td>2,467</td><td>122</td><td class="hi-coral">4.9%</td><td class="hi-coral">N1,905,668</td></tr>
+    <tr><td>Card</td><td>6,326</td><td>293</td><td class="hi-coral">4.6%</td><td class="hi-coral">N4,239,487</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>12,482</strong></td><td><strong>617</strong></td><td class="hi-coral"><strong>4.9% avg</strong></td><td class="hi-coral"><strong>N9,109,527</strong></td></tr>
+  </table>
+  </div>
+  <h4>Pending Payment Recovery Opportunity</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Method</th><th>Pending Count</th><th>Recoverable Revenue</th></tr>
+    <tr><td>Card</td><td>622</td><td class="hi-teal">N9,604,767</td></tr>
+    <tr><td>Bank Transfer</td><td>354</td><td class="hi-teal">N5,178,594</td></tr>
+    <tr><td>Wallet</td><td>250</td><td class="hi-teal">N3,781,334</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>1,226</strong></td><td class="hi-teal"><strong>N18,564,695</strong></td></tr>
+  </table>
+  </div>
+  <div class="nova-callout coral"><strong>Industry Benchmark</strong>The standard for digital commerce payment failure rates is 2 to 3 percent. All three of NovaMart's payment methods exceed this benchmark, making this a systemic issue, not a method-specific one.</div>
+  <h3>My Recommendation</h3>
+  <p>I recommend NovaMart engage its payment processor to review transaction failure logs for Bank Transfer specifically. For pending payments, I recommend implementing an automated retry sequence at 24-hour, 48-hour, and 72-hour intervals immediately. This is the highest-impact, lowest-cost revenue intervention in this project, requiring no new customer acquisition.</p>
+  <div class="nova-callout teal"><strong>Success Metrics</strong>Pending Revenue Rate below 7% | Payment Failure Rate below 3% | Pending Recovery Rate above 40%</div>
+</section>
+
+<!-- SUPPORT -->
+<section class="nova-section" id="s-support">
+  <div class="nova-section-label">Section 17</div>
+  <h2>Customer Support and Experience</h2>
+  <h3>What I Analysed</h3>
+  <p>I analysed 1,800 support tickets covering issue type, resolution status, and customer satisfaction rating to identify which complaint categories generate the worst customer experience and create the greatest retention risk.</p>
+  <h3>What I Found</h3>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Issue Type</th><th>Tickets</th><th>Avg Rating</th><th>Escalated</th><th>Escalation Rate</th><th>Resolved</th><th>Pending</th></tr>
+    <tr><td>Other</td><td>442</td><td class="hi-coral">3.54</td><td>40</td><td>9.0%</td><td>264</td><td>138</td></tr>
+    <tr><td>Product Quality</td><td>460</td><td class="hi-coral">3.55</td><td>47</td><td class="hi-coral">10.2%</td><td>272</td><td>141</td></tr>
+    <tr><td>Billing Issue</td><td>439</td><td>3.61</td><td>43</td><td>9.8%</td><td>266</td><td>130</td></tr>
+    <tr><td>Late Delivery</td><td>459</td><td>3.71</td><td>44</td><td>9.6%</td><td>279</td><td>136</td></tr>
+  </table>
+  </div>
+  <h3>Business Insight</h3>
+  <p>The most important finding in this section is not which issue type rates lowest. It is that no issue type rates above 3.71 on a 5-point scale. NovaMart's customer support function is not generating satisfaction anywhere in its operation. The problem is systemic, not categorical, and it represents a direct retention risk that compounds over time.</p>
+  <p>Product Quality issues are the priority target. They carry the lowest satisfaction rating (3.55), the highest escalation rate (10.2%), and the second highest ticket volume (460). The near 10% escalation rate across all types is double the expected benchmark of 3 to 5 percent for a well-functioning support operation.</p>
+  <h3>My Recommendation</h3>
+  <p>I recommend NovaMart address Product Quality issues at the source through supplier quality checks and bundle curation standards. A frontline support capability review is needed to identify which ticket types could be resolved at first contact with better tooling or decision authority. A satisfaction target of 4.0 or above across all issue types should be set as a 90-day objective with monthly tracking through the Power BI dashboard.</p>
+  <div class="nova-callout teal"><strong>Success Metrics</strong>Average Ticket Rating above 4.0 | Escalation Rate below 5% | Product Quality Rating above 4.0</div>
+</section>
+
+<!-- KPI FRAMEWORK -->
+<section class="nova-section" id="s-kpi">
+  <div class="nova-section-label">Section 18</div>
+  <h2>Executive KPI Framework</h2>
+  <p>I designed the following KPI framework to enable leadership to monitor performance consistently across revenue, customer, payment, product, and support operations.</p>
+  <h4>Revenue KPIs: Monitor Monthly</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>KPI</th><th>Current</th><th>Target</th><th>Alert Level</th></tr>
+    <tr><td>Monthly confirmed revenue</td><td>N15.3M to N17.4M</td><td class="hi-teal">N18M or above</td><td class="hi-coral">Below N15M</td></tr>
+    <tr><td>Pending revenue rate</td><td>11.5%</td><td class="hi-teal">Below 7%</td><td class="hi-coral">Above 12%</td></tr>
+    <tr><td>Payment failure rate</td><td>4.9%</td><td class="hi-teal">Below 3%</td><td class="hi-coral">Above 5%</td></tr>
+    <tr><td>Recurring revenue share</td><td>70%</td><td class="hi-teal">75% or above</td><td class="hi-coral">Below 65%</td></tr>
+  </table>
+  </div>
+  <h4>Product KPIs: Monitor Monthly</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>KPI</th><th>Current</th><th>Target</th><th>Alert Level</th></tr>
+    <tr><td>Top category revenue share</td><td>Wellness and Essentials = 79.5%</td><td class="hi-teal">Maintain</td><td class="hi-amber">Tech share below 7%</td></tr>
+    <tr><td>Deep discount order share</td><td>15.1%</td><td class="hi-teal">Below 12%</td><td class="hi-coral">Above 18%</td></tr>
+    <tr><td>Inactive bundle order count</td><td>Bundle G anomaly active</td><td class="hi-teal">Zero</td><td class="hi-coral">Any count above zero</td></tr>
+  </table>
+  </div>
+  <h4>Customer KPIs: Monitor Monthly</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>KPI</th><th>Current</th><th>Target</th><th>Alert Level</th></tr>
+    <tr><td>One-time to recurring conversion</td><td>Baseline TBD</td><td class="hi-teal">Plus 5% per quarter</td><td class="hi-coral">Flat trend</td></tr>
+    <tr><td>Abuja revenue share</td><td>14.5%</td><td class="hi-teal">16% or above</td><td class="hi-coral">Below 13%</td></tr>
+    <tr><td>Avg revenue per customer</td><td>N134,553</td><td class="hi-teal">Grow QoQ</td><td class="hi-coral">Decline</td></tr>
+  </table>
+  </div>
+  <h4>Support KPIs: Monitor Weekly</h4>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>KPI</th><th>Current</th><th>Target</th><th>Alert Level</th></tr>
+    <tr><td>Average ticket rating</td><td>3.54 to 3.71</td><td class="hi-teal">4.0 or above</td><td class="hi-coral">Below 3.5</td></tr>
+    <tr><td>Escalation rate</td><td>10%</td><td class="hi-teal">Below 5%</td><td class="hi-coral">Above 12%</td></tr>
+    <tr><td>Product Quality avg rating</td><td>3.55</td><td class="hi-teal">4.0 or above</td><td class="hi-coral">Below 3.4</td></tr>
+  </table>
+  </div>
+</section>
+
+<!-- RECOMMENDATIONS -->
+<section class="nova-section" id="s-recs">
+  <div class="nova-section-label">Section 19</div>
+  <h2>Strategic Recommendations</h2>
+
+  <div class="nova-rec">
+    <div class="nova-rec-header"><div class="nova-rec-num high">R1</div><div><div class="nova-rec-title">Implement Payment Retry Infrastructure</div><div class="nova-rec-priority high">High Priority</div></div></div>
+    <div class="nova-rec-body">
+      <p><strong style="color:#fff;">Why it matters:</strong> N18.6M in pending payments represents revenue NovaMart has already earned at the order stage. Without a retry mechanism, this revenue ages and becomes increasingly unrecoverable.</p>
+      <p><strong style="color:#fff;">Expected benefit:</strong> Recovering 40% of pending payments generates approximately N7.4M in near-term cash inflow. Reducing failure rates from 4.9% to below 3% prevents N3M to N4M in annual revenue loss.</p>
+    </div>
+    <div class="nova-rec-meta">
+      <div class="nova-rec-meta-item"><label>Timeline</label><span>30 days</span></div>
+      <div class="nova-rec-meta-item"><label>Owner</label><span>Finance and Operations</span></div>
+      <div class="nova-rec-meta-item"><label>Success Metrics</label><span>Pending below 7% | Failure below 3%</span></div>
+    </div>
+  </div>
+
+  <div class="nova-rec">
+    <div class="nova-rec-header"><div class="nova-rec-num high">R2</div><div><div class="nova-rec-title">Resolve the Bundle G Product Anomaly</div><div class="nova-rec-priority high">High Priority — Immediate</div></div></div>
+    <div class="nova-rec-body">
+      <p><strong style="color:#fff;">Why it matters:</strong> A product marked inactive is receiving active orders and generating confirmed revenue. This is a data integrity issue and a customer trust risk.</p>
+      <p><strong style="color:#fff;">Expected benefit:</strong> Resolves a product management gap, enables deliberate product decision-making, and protects customer trust for all affected customers.</p>
+    </div>
+    <div class="nova-rec-meta">
+      <div class="nova-rec-meta-item"><label>Timeline</label><span>7 days</span></div>
+      <div class="nova-rec-meta-item"><label>Owner</label><span>Product Manager</span></div>
+      <div class="nova-rec-meta-item"><label>Success Metrics</label><span>Inactive bundle orders = zero</span></div>
+    </div>
+  </div>
+
+  <div class="nova-rec">
+    <div class="nova-rec-header"><div class="nova-rec-num high">R3</div><div><div class="nova-rec-title">Reduce Payment Failure Rates</div><div class="nova-rec-priority high">High Priority</div></div></div>
+    <div class="nova-rec-body">
+      <p><strong style="color:#fff;">Why it matters:</strong> All three payment methods exceed the 2 to 3 percent industry benchmark. Bank Transfer's 5.5% rate suggests a processor-level issue costing NovaMart revenue every month.</p>
+      <p><strong style="color:#fff;">Expected benefit:</strong> Reducing failure rates to benchmark levels recovers N3M to N4M annually at current transaction volumes.</p>
+    </div>
+    <div class="nova-rec-meta">
+      <div class="nova-rec-meta-item"><label>Timeline</label><span>60 days</span></div>
+      <div class="nova-rec-meta-item"><label>Owner</label><span>Operations and Finance</span></div>
+      <div class="nova-rec-meta-item"><label>Success Metrics</label><span>Failure rate below 3% all methods</span></div>
+    </div>
+  </div>
+
+  <div class="nova-rec">
+    <div class="nova-rec-header"><div class="nova-rec-num high">R4</div><div><div class="nova-rec-title">Convert One-Time Buyers to Recurring Subscribers</div><div class="nova-rec-priority high">High Priority</div></div></div>
+    <div class="nova-rec-body">
+      <p><strong style="color:#fff;">Why it matters:</strong> 30% of confirmed revenue (N48.5M) comes from one-time purchases. This revenue is volatile and must be re-earned every month.</p>
+      <p><strong style="color:#fff;">Expected benefit:</strong> Converting 10% of current one-time buyers adds approximately N4.9M in annualised recurring revenue and reduces monthly volatility.</p>
+    </div>
+    <div class="nova-rec-meta">
+      <div class="nova-rec-meta-item"><label>Timeline</label><span>60 days</span></div>
+      <div class="nova-rec-meta-item"><label>Owner</label><span>Marketing Manager</span></div>
+      <div class="nova-rec-meta-item"><label>Success Metrics</label><span>Recurring share above 75%</span></div>
+    </div>
+  </div>
+
+  <div class="nova-rec">
+    <div class="nova-rec-header"><div class="nova-rec-num medium">R5</div><div><div class="nova-rec-title">Improve Product Quality and Support Resolution</div><div class="nova-rec-priority medium">Medium Priority</div></div></div>
+    <div class="nova-rec-body">
+      <p><strong style="color:#fff;">Why it matters:</strong> Product Quality has the lowest satisfaction rating (3.55) and the highest escalation rate (10.2%). No issue type achieves above 3.71. This is a systemic retention risk.</p>
+      <p><strong style="color:#fff;">Expected benefit:</strong> Improving average ticket ratings to 4.0 or above reduces churn among dissatisfied customers and decreases escalation handling cost.</p>
+    </div>
+    <div class="nova-rec-meta">
+      <div class="nova-rec-meta-item"><label>Timeline</label><span>60 days</span></div>
+      <div class="nova-rec-meta-item"><label>Owner</label><span>Customer Success Lead</span></div>
+      <div class="nova-rec-meta-item"><label>Success Metrics</label><span>Avg rating above 4.0 | Escalation below 5%</span></div>
+    </div>
+  </div>
+
+  <div class="nova-rec">
+    <div class="nova-rec-header"><div class="nova-rec-num medium">R6</div><div><div class="nova-rec-title">Redesign the Loyalty Programme</div><div class="nova-rec-priority medium">Medium Priority</div></div></div>
+    <div class="nova-rec-body">
+      <p><strong style="color:#fff;">Why it matters:</strong> Average order value is near-identical across all tiers. The programme cannot identify or protect NovaMart's most valuable customer relationships.</p>
+      <p><strong style="color:#fff;">Expected benefit:</strong> Spend-based tier criteria enable targeted rewards for genuinely high-value customers and improve Platinum retention.</p>
+    </div>
+    <div class="nova-rec-meta">
+      <div class="nova-rec-meta-item"><label>Timeline</label><span>90 days</span></div>
+      <div class="nova-rec-meta-item"><label>Owner</label><span>Marketing Manager</span></div>
+      <div class="nova-rec-meta-item"><label>Success Metrics</label><span>Spend-based tiers implemented</span></div>
+    </div>
+  </div>
+
+  <div class="nova-rec">
+    <div class="nova-rec-header"><div class="nova-rec-num medium">R7</div><div><div class="nova-rec-title">Develop an Abuja Market Strategy</div><div class="nova-rec-priority medium">Medium Priority</div></div></div>
+    <div class="nova-rec-body">
+      <p><strong style="color:#fff;">Why it matters:</strong> Abuja is NovaMart's weakest market on every metric. Without a deliberate strategy, this gap will persist and widen as other cities grow.</p>
+      <p><strong style="color:#fff;">Expected benefit:</strong> Closing 50% of the Abuja revenue gap relative to Kano adds approximately N3M in annual revenue.</p>
+    </div>
+    <div class="nova-rec-meta">
+      <div class="nova-rec-meta-item"><label>Timeline</label><span>90 days</span></div>
+      <div class="nova-rec-meta-item"><label>Owner</label><span>Marketing and Operations</span></div>
+      <div class="nova-rec-meta-item"><label>Success Metrics</label><span>Abuja revenue share above 16%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTION PLAN -->
+<section class="nova-section" id="s-plan">
+  <div class="nova-section-label">Section 20</div>
+  <h2>Executive Action Plan: 30 to 90 Days</h2>
+  <div class="nova-timeline">
+    <div class="nova-timeline-phase">
+      <div class="nova-phase-label">Month 1 (Days 1 to 30): Recover and Stabilise</div>
+      <div class="nova-phase-actions">
+        <div class="nova-action-row"><span>Resolve Bundle G — audit ordering system and implement product decision</span><span class="nova-action-owner">Product Manager</span><span class="nova-action-outcome">Catalogue integrity risk eliminated</span></div>
+        <div class="nova-action-row"><span>Implement payment retry sequence for 1,226 pending orders</span><span class="nova-action-owner">Finance and Operations</span><span class="nova-action-outcome">Recover estimated N7.4M</span></div>
+        <div class="nova-action-row"><span>Open Bank Transfer failure investigation with payment processor</span><span class="nova-action-owner">Operations</span><span class="nova-action-outcome">Root cause identified</span></div>
+        <div class="nova-action-row"><span>Establish Power BI payment health monitoring cadence</span><span class="nova-action-owner">BI Analyst</span><span class="nova-action-outcome">Weekly payment risk visibility</span></div>
+      </div>
+    </div>
+    <div class="nova-timeline-phase">
+      <div class="nova-phase-label">Month 2 (Days 31 to 60): Convert and Improve</div>
+      <div class="nova-phase-actions">
+        <div class="nova-action-row"><span>Launch one-time buyer conversion campaign with first-month recurring discount</span><span class="nova-action-owner">Marketing</span><span class="nova-action-outcome">One-time share toward 25%</span></div>
+        <div class="nova-action-row"><span>Conduct payment method failure rate review with payment processor</span><span class="nova-action-owner">Operations</span><span class="nova-action-outcome">Failure rate toward 3%</span></div>
+        <div class="nova-action-row"><span>Initiate Product Quality supplier review and bundle curation audit</span><span class="nova-action-owner">Product and Operations</span><span class="nova-action-outcome">Complaint volume reduction</span></div>
+        <div class="nova-action-row"><span>Set frontline support escalation reduction targets</span><span class="nova-action-owner">Customer Success</span><span class="nova-action-outcome">Escalation toward 5% target</span></div>
+      </div>
+    </div>
+    <div class="nova-timeline-phase">
+      <div class="nova-phase-label">Month 3 (Days 61 to 90): Grow and Retain</div>
+      <div class="nova-phase-actions">
+        <div class="nova-action-row"><span>Launch Abuja market investigation — logistics, product-market fit, awareness</span><span class="nova-action-owner">Marketing and Ops</span><span class="nova-action-outcome">Root cause identified</span></div>
+        <div class="nova-action-row"><span>Redesign loyalty tier criteria with spend-based thresholds</span><span class="nova-action-owner">Marketing</span><span class="nova-action-outcome">Tier system reflects customer value</span></div>
+        <div class="nova-action-row"><span>Review discount strategy — compare conversion at 10%, 15%, 20% levels</span><span class="nova-action-owner">Marketing and Finance</span><span class="nova-action-outcome">Evidence-based discount ceiling</span></div>
+        <div class="nova-action-row"><span>Review and refine Power BI dashboards based on 90-day usage</span><span class="nova-action-owner">BI Analyst</span><span class="nova-action-outcome">Dashboard optimised</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REC SUMMARY -->
+<section class="nova-section" id="s-recsummary">
+  <div class="nova-section-label">Section 21</div>
+  <h2>Recommendation Summary</h2>
+  <div class="nova-table-wrap">
+  <table class="nova-table">
+    <tr><th>Priority</th><th>Recommendation</th><th>Owner</th><th>Timeline</th><th>Success Metrics</th></tr>
+    <tr><td class="hi-coral">High, Immediate</td><td>Resolve Bundle G anomaly</td><td>Product Manager</td><td>7 days</td><td>Inactive orders = zero</td></tr>
+    <tr><td class="hi-coral">High</td><td>Implement payment retry infrastructure</td><td>Finance and Operations</td><td>30 days</td><td>Pending below 7%, recovery above 40%</td></tr>
+    <tr><td class="hi-coral">High</td><td>Reduce payment failure rates</td><td>Operations</td><td>60 days</td><td>Failure rate below 3%</td></tr>
+    <tr><td class="hi-coral">High</td><td>Convert one-time to recurring</td><td>Marketing</td><td>60 days</td><td>Recurring share above 75%</td></tr>
+    <tr><td class="hi-amber">Medium</td><td>Improve Product Quality and support</td><td>Customer Success</td><td>60 days</td><td>Avg rating above 4.0</td></tr>
+    <tr><td class="hi-amber">Medium</td><td>Redesign loyalty programme</td><td>Marketing</td><td>90 days</td><td>Spend-based tiers implemented</td></tr>
+    <tr><td class="hi-amber">Medium</td><td>Develop Abuja market strategy</td><td>Marketing and Ops</td><td>90 days</td><td>Abuja share above 16%</td></tr>
+  </table>
+  </div>
+</section>
+
+<!-- KEY FINDINGS -->
+<section class="nova-section" id="s-findings">
+  <div class="nova-section-label">Section 22</div>
+  <h2>Key Findings Summary</h2>
+  <div class="nova-findings">
+    <div class="nova-finding"><div class="nova-finding-icon">💰</div><div class="nova-finding-body"><strong>N18.6M in pending payments is recoverable</strong><p>NovaMart has already captured the orders. The barrier to collection is operational, not commercial. A payment retry process can recover a significant portion immediately without acquiring a single new customer.</p></div></div>
+    <div class="nova-finding"><div class="nova-finding-icon">⚠️</div><div class="nova-finding-body"><strong>Bundle G generated N19.7M in revenue despite being officially inactive</strong><p>This is the most urgent data integrity issue in the dataset. A product listed as discontinued was actively ordered and paid for throughout the reporting period, creating both a catalogue risk and a customer trust exposure.</p></div></div>
+    <div class="nova-finding"><div class="nova-finding-icon">📉</div><div class="nova-finding-body"><strong>Payment failure rates exceed the industry benchmark across all methods</strong><p>At an average of 4.9%, NovaMart lost N9.1M in revenue to failed payments during the 10-month reporting period, equivalent to approximately N11M annually at current volumes.</p></div></div>
+    <div class="nova-finding"><div class="nova-finding-icon">🏷️</div><div class="nova-finding-body"><strong>Loyalty tiers do not reflect customer value</strong><p>Average order value differs by less than N258 across Silver, Gold, and Platinum tiers. The programme classifies customers without differentiating them commercially, making it impossible to use as a targeted retention tool.</p></div></div>
+    <div class="nova-finding"><div class="nova-finding-icon">📍</div><div class="nova-finding-body"><strong>Abuja is the weakest-performing market across every metric</strong><p>Lowest volume, lowest revenue, and lowest revenue share at 14.5%. A N6.9M gap vs Port Harcourt requires a specific investigation and deliberate strategy.</p></div></div>
+    <div class="nova-finding"><div class="nova-finding-icon">🎧</div><div class="nova-finding-body"><strong>Support quality is systemically poor — no issue type achieves above 3.71</strong><p>Product Quality has the lowest rating (3.55) and the highest escalation rate (10.2%). Escalation rates of approximately 10% are double the expected benchmark. This is a measurable and ongoing retention risk.</p></div></div>
+  </div>
+</section>
+
+<!-- BUSINESS VALUE -->
+<section class="nova-section" id="s-value">
+  <div class="nova-section-label">Section 23</div>
+  <h2>Business Value Delivered</h2>
+  <div class="nova-impact-list">
+    <div class="nova-impact-item"><span class="nova-impact-val">KPI Framework</span><span>An executive KPI framework was designed to enable leadership to monitor performance consistently across revenue, customer, payment, product, and support operations, with defined targets and alert thresholds for every metric.</span></div>
+    <div class="nova-impact-item amber"><span class="nova-impact-val">N18.6M</span><span>Revenue leakage identified and quantified: N18.6M in recoverable pending payments and N9.1M in failed payments reported with clear recovery pathways and measurable success criteria.</span></div>
+    <div class="nova-impact-item coral"><span class="nova-impact-val">Bundle G</span><span>Product catalogue anomaly uncovered: Bundle G generating N19.7M in confirmed revenue despite inactive status, a finding that would not have surfaced without structured SQL analysis.</span></div>
+    <div class="nova-impact-item"><span class="nova-impact-val">Loyalty</span><span>Loyalty programme weaknesses identified and a spend-based redesign recommended to make it a genuine retention and revenue protection tool.</span></div>
+    <div class="nova-impact-item amber"><span class="nova-impact-val">Support</span><span>Product Quality identified as the highest-priority issue type by both rating and escalation rate, with a clear recommendation for supplier-level intervention rather than symptom-level fixes.</span></div>
+    <div class="nova-impact-item"><span class="nova-impact-val">Geography</span><span>Abuja shown to trail all other cities on every revenue metric, with a N6.9M gap and a recommended structured investigation before investment decisions are made.</span></div>
+    <div class="nova-impact-item teal"><span class="nova-impact-val">Dashboard</span><span>An interactive five-page Power BI dashboard was built to translate project findings into an executive reporting environment, enabling leadership to monitor performance, prioritise investments, reduce operational risk, and guide strategic decision-making.</span></div>
+    <div class="nova-impact-item amber"><span class="nova-impact-val">SQL Library</span><span>11 business queries across six analytical themes developed, documented, and delivered ready for PostgreSQL execution, with all queries aligned to the same reporting period and filter logic as the Power BI dashboard.</span></div>
+  </div>
+</section>
+
+<!-- CONCLUSION -->
+<section class="nova-section" id="s-conclusion">
+  <div class="nova-section-label">Section 24</div>
+  <h2>Conclusion</h2>
+  <p>This project set out to answer one question: what should NovaMart's executive team do next?</p>
+  <p>The data told a clear story. NovaMart is a stable subscription business with strong product demand in Wellness and Essentials, a committed recurring subscriber base generating 70% of confirmed revenue, and operational data rich enough to support serious strategic decisions. The business is not in crisis. It is, however, leaving significant value on the table in four specific areas: pending payment recovery, one-time buyer conversion, product catalogue management, and customer support quality.</p>
+  <p>The seven recommendations in this report are grounded in evidence from the data, assigned to specific owners, and sequenced into a 90-day plan that prioritises recoverable revenue and risk mitigation before growth initiatives. Implementing all seven within the 90-day roadmap is estimated to recover or generate approximately N22M to N28M in business value without acquiring a single new customer.</p>
+  <p>The Power BI dashboard ensures that the KPIs driving these decisions remain visible to leadership on a weekly and monthly basis. This project demonstrates how Business Intelligence extends beyond reporting. By combining structured SQL analysis, executive KPI design, interactive dashboards, and strategic recommendations, operational data becomes a practical decision-support framework that enables leaders to act with greater confidence, manage risk proactively, and prioritise growth opportunities.</p>
+</section>
+
+<!-- APPENDIX -->
+<section class="nova-section" id="s-appendix">
+  <div class="nova-section-label">Section 25</div>
+  <h2>Appendix</h2>
+
+  <div class="nova-appendix">
+    <h4>Appendix A: KPI Definitions</h4>
+    <div class="nova-table-wrap">
+    <table class="nova-table">
+      <tr><th>KPI</th><th>Formula</th><th>Data Source</th></tr>
+      <tr><td>Confirmed Revenue</td><td>SUM(total_value) WHERE is_successful = TRUE, Aug 2024 to May 2025</td><td>subscriptions and payments</td></tr>
+      <tr><td>Pending Revenue</td><td>SUM(total_value) WHERE payment_status = Pending</td><td>subscriptions and payments</td></tr>
+      <tr><td>Failed Revenue</td><td>SUM(total_value) WHERE payment_status = Failed</td><td>subscriptions and payments</td></tr>
+      <tr><td>Average Order Value</td><td>Confirmed Revenue divided by Confirmed Orders</td><td>subscriptions and payments</td></tr>
+      <tr><td>Payment Failure Rate</td><td>Failed Count divided by Total Transactions</td><td>payments</td></tr>
+      <tr><td>Recurring Revenue Share</td><td>Recurring Revenue divided by Confirmed Revenue</td><td>subscriptions and payments</td></tr>
+      <tr><td>Escalation Rate</td><td>Escalated Count divided by Total Tickets</td><td>support_tickets</td></tr>
+      <tr><td>Average Ticket Rating</td><td>AVG(rating)</td><td>support_tickets</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="nova-appendix">
+    <h4>Appendix B: Data Model Relationships</h4>
+    <div class="nova-table-wrap">
+    <table class="nova-table">
+      <tr><th>Relationship</th><th>Join Key</th><th>Type</th></tr>
+      <tr><td>customers to subscriptions</td><td>customer_id</td><td>One-to-many</td></tr>
+      <tr><td>bundles to subscriptions</td><td>bundle_id</td><td>One-to-many</td></tr>
+      <tr><td>subscriptions to payments</td><td>subscription_id</td><td>One-to-one</td></tr>
+      <tr><td>customers to support_tickets</td><td>customer_id</td><td>One-to-many</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="nova-appendix">
+    <h4>Appendix C: DAX Measures Library</h4>
+    <p style="font-size:0.88rem;color:var(--nova-muted);margin:0 0 1rem;">All measures use is_successful = TRUE for confirmed revenue, matching the SQL library filter logic exactly.</p>
+    <div class="nova-dax"><span class="nova-dax-name">Confirmed Revenue</span><span class="nova-dax-desc">Total value of all successful transactions within the selected reporting period.</span><span class="nova-dax-code">CALCULATE(SUM(subscriptions[total_value]), payments[is_successful] = TRUE())</span></div>
+    <div class="nova-dax"><span class="nova-dax-name">Pending Revenue</span><span class="nova-dax-desc">Total value of all pending payment transactions.</span><span class="nova-dax-code">CALCULATE(SUM(subscriptions[total_value]), payments[payment_status] = "Pending")</span></div>
+    <div class="nova-dax"><span class="nova-dax-name">Failed Revenue</span><span class="nova-dax-desc">Total value of all failed payment transactions.</span><span class="nova-dax-code">CALCULATE(SUM(subscriptions[total_value]), payments[payment_status] = "Failed")</span></div>
+    <div class="nova-dax"><span class="nova-dax-name">Paid Orders</span><span class="nova-dax-desc">Count of all transactions with Paid status.</span><span class="nova-dax-code">CALCULATE(COUNTROWS(payments), payments[payment_status] = "Paid")</span></div>
+    <div class="nova-dax"><span class="nova-dax-name">Total Orders</span><span class="nova-dax-desc">Total count of all subscription records.</span><span class="nova-dax-code">COUNT(subscriptions[subscription_id])</span></div>
+    <div class="nova-dax"><span class="nova-dax-name">Avg Order Value</span><span class="nova-dax-desc">Average confirmed order value.</span><span class="nova-dax-code">DIVIDE([Confirmed Revenue], [Paid Orders])</span></div>
+    <div class="nova-dax"><span class="nova-dax-name">Payment Failure Rate %</span><span class="nova-dax-desc">Percentage of total transactions that failed.</span><span class="nova-dax-code">DIVIDE([Failed Orders], [Total Orders], 0)</span></div>
+    <div class="nova-dax"><span class="nova-dax-name">Payment Health</span><span class="nova-dax-desc">Traffic-light status based on payment success rate.</span><span class="nova-dax-code">SWITCH(TRUE(), Rate >= 0.90, "Healthy", Rate >= 0.80, "Warning", "Critical")</span></div>
+    <div class="nova-dax"><span class="nova-dax-name">Average Support Rating</span><span class="nova-dax-desc">Mean customer satisfaction score across all tickets.</span><span class="nova-dax-code">AVERAGE(support_tickets[rating])</span></div>
+    <div class="nova-dax"><span class="nova-dax-name">Recurring Revenue</span><span class="nova-dax-desc">Confirmed revenue from recurring subscription orders only.</span><span class="nova-dax-code">CALCULATE([Confirmed Revenue], subscriptions[subscription_type] = "Recurring")</span></div>
+    <div class="nova-dax"><span class="nova-dax-name">Revenue Target</span><span class="nova-dax-desc">Fixed target value used in the Revenue vs Target gauge visual.</span><span class="nova-dax-code">200000000</span></div>
+  </div>
+
+  <div class="nova-appendix">
+    <h4>Appendix D: SQL Methodology</h4>
+    <p style="font-size:0.88rem;color:var(--nova-text);margin:0;">The SQL Insight Library covers 11 business questions across six analytical themes. All queries apply three consistent conditions: is_successful = TRUE, the August 2024 to May 2025 reporting window, and Bundle G separation from active-bundle totals. These match the Power BI DAX filter logic exactly, ensuring all SQL outputs reconcile with dashboard figures. A reconciliation verification query is included to confirm that all three headline figures match the dashboard before any query result is presented to stakeholders.</p>
+  </div>
+
+  <div class="nova-appendix">
+    <h4>Appendix F: SQL Query Screenshots</h4>
+    <p style="font-size:0.88rem;color:var(--nova-muted);margin:0 0 1.5rem;">All 11 analytical queries plus the reconciliation verification query were executed in PostgreSQL (pgAdmin 4) against the novamart_db database. Screenshots confirm actual query execution and results. All figures reconcile with the Power BI dashboard within rounding.</p>
+    <div class="nova-dash-grid">
+      <div class="nova-dash-card"><img src="Q01_Top_3_Bundles_.png" alt="Q1 Top 3 Bundles by Subscription Volume" /><div class="nova-dash-caption"><strong>Q1: Top 3 Bundles by Subscription Volume</strong>Bundle J (1,864), Bundle I (1,764), Bundle H (1,571) — all Wellness and Essentials, all active.</div></div>
+      <div class="nova-dash-card"><img src="Q02_Revenue_By_Bundle_Category_.png" alt="Q2 Revenue by Bundle Category" /><div class="nova-dash-caption"><strong>Q2: Confirmed Revenue by Active Bundle Category</strong>Wellness leads at 44.1% of active-bundle revenue, followed by Essentials at 35.4%.</div></div>
+      <div class="nova-dash-card"><img src="Q03_Bundle_G_Anomaly.png" alt="Q3 Bundle G Anomaly" /><div class="nova-dash-caption"><strong>Q3: Bundle G Inactive Anomaly</strong>Bundle G (is_active = FALSE) generated confirmed revenue during the reporting period — a data integrity issue requiring immediate resolution.</div></div>
+      <div class="nova-dash-card"><img src="Q04_Avg_Spend_Per_Tier.png" alt="Q4 Average Spend Per Loyalty Tier" /><div class="nova-dash-caption"><strong>Q4: Average Spend per Loyalty Tier</strong>Average order value differs by less than N258 across Silver, Gold, and Platinum — confirming the loyalty programme does not reflect spending behaviour.</div></div>
+      <div class="nova-dash-card"><img src="Q05_Issue_Type_Ratings_.png" alt="Q5 Issue Type Ratings" /><div class="nova-dash-caption"><strong>Q5: Issue Types with Lowest Ratings</strong>No issue type achieves above 3.71. Product Quality has the lowest rating (3.55) and highest escalation rate (10.2%).</div></div>
+      <div class="nova-dash-card"><img src="Q06_Recurring_vs_Onetime.png" alt="Q6 Recurring vs One-time Revenue" /><div class="nova-dash-caption"><strong>Q6: Recurring vs One-Time Revenue Split</strong>Recurring 70% (N112.9M) vs One-time 30% (N48.5M) — the one-time share represents a structural retention risk.</div></div>
+      <div class="nova-dash-card"><img src="Q07_Revenue_By_City_.png" alt="Q7 Revenue by City" /><div class="nova-dash-caption"><strong>Q7: Confirmed Revenue by City</strong>Port Harcourt leads at 18.7%. Abuja trails at 14.5% — the weakest market across every metric.</div></div>
+      <div class="nova-dash-card"><img src="Q08_Payment_Failure_Rates.png" alt="Q8 Payment Failure Rates" /><div class="nova-dash-caption"><strong>Q8: Failed Payments by Method</strong>All three methods exceed the 2 to 3 percent industry benchmark. Bank Transfer highest at 5.5%, N9.1M total lost.</div></div>
+      <div class="nova-dash-card"><img src="Q09_Pending_Recovery_.png" alt="Q9 Pending Payment Recovery" /><div class="nova-dash-caption"><strong>Q9: Pending Payment Recovery Opportunity</strong>N18.6M recoverable across 1,226 pending orders. Card carries the largest single opportunity at N9.6M.</div></div>
+      <div class="nova-dash-card"><img src="Q10_Discount_Bands.png" alt="Q10 Discount Band Analysis" /><div class="nova-dash-caption"><strong>Q10: Discount Band Impact Analysis</strong>Orders above 20% discount generate N13,630 avg value — N3,029 lower than non-discounted orders, without compensating volume uplift.</div></div>
+      <div class="nova-dash-card"><img src="Q11_Monthly_Revenue_Trend.png" alt="Q11 Monthly Revenue Trend" /><div class="nova-dash-caption"><strong>Q11: Monthly Confirmed Revenue Trend</strong>Revenue stable at N15.3M to N17.4M per month. October 2024 peak at N17.4M. No growth trend visible in the data.</div></div>
+      <div class="nova-dash-card"><img src="Q12_Reconciliation_Verification.png" alt="Q12 Reconciliation Verification" /><div class="nova-dash-caption"><strong>Q12: Reconciliation Verification</strong>Confirmed N161,463,248 | Pending N18,564,696 | Failed N9,109,526. All figures match the Power BI dashboard within rounding.</div></div>
+    </div>
+  </div>
+
+  <div class="nova-appendix">
+    <h4>Appendix G: References</h4>
+    <p style="font-size:0.88rem;color:var(--nova-text);margin:0;">The payment failure rate benchmark of 2 to 3 percent is an industry standard for digital commerce payment processing, widely cited across payment gateway providers including Stripe and Adyen in their published documentation on payment optimisation. All other figures, totals, and percentages in this report are derived directly from the NovaMart dataset for the August 2024 to May 2025 reporting period. No external financial projections have been used beyond this benchmark.</p>
+  </div>
+</section>
+
+<!-- BOTTOM ACTIONS -->
+<div class="nova-actions">
+  <a href="index.html" class="nova-btn nova-btn-primary">Back to Portfolio</a>
+  <a href="https://github.com/Dorisfrank" class="nova-btn nova-btn-outline" target="_blank">GitHub</a>
+  <a href="https://www.linkedin.com/in/uduakdoris/" class="nova-btn nova-btn-outline" target="_blank">LinkedIn</a>
+</div>
+
+</div><!-- end nova-body -->
+
+<script>
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Highlight active nav dot on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nova-sidenav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => link.classList.remove('active'));
+      const active = document.querySelector(`.nova-sidenav a[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

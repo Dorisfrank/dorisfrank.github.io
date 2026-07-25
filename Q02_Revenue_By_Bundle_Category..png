@@ -1,0 +1,21 @@
+-- QUERY 3: Bundle G anomaly -- inactive bundle revenue audit
+SELECT
+    b.bundle_name,
+    b.category,
+    b.bundle_size,
+    b.is_active,
+    COUNT(s.subscription_id)                       AS total_orders,
+    SUM(CASE WHEN p.is_successful = TRUE
+             THEN s.total_value ELSE 0 END)        AS confirmed_revenue,
+    SUM(CASE WHEN p.payment_status = 'Pending'
+             THEN s.total_value ELSE 0 END)        AS pending_revenue,
+    SUM(CASE WHEN p.payment_status = 'Failed'
+             THEN s.total_value ELSE 0 END)        AS failed_revenue
+FROM subscriptions s
+JOIN bundles b  ON s.bundle_id = b.bundle_id
+JOIN payments p ON s.subscription_id = p.subscription_id
+WHERE b.is_active = FALSE
+  AND s.order_date >= '2024-08-01'
+  AND s.order_date <= '2025-05-31'
+GROUP BY b.bundle_name, b.category, b.bundle_size, b.is_active
+ORDER BY confirmed_revenue DESC;

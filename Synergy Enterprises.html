@@ -41,6 +41,56 @@
 			}
 			nav.toc a { text-decoration: none; }
 			nav.toc a:hover { text-decoration: underline; }
+
+			.at-a-glance {
+				background: #fff;
+				border: 1px solid #e2e2e2;
+				border-left: 3px solid #c9a227;
+				border-radius: 4px;
+				padding: 1.5em 1.75em;
+				margin: 1.5em 0 2em;
+			}
+			.at-a-glance h3 {
+				margin: 0 0 0.75em;
+				font-size: 1em;
+				letter-spacing: 0.03em;
+				text-transform: uppercase;
+				color: #666;
+			}
+			.at-a-glance .stat-grid {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1.25em 2em;
+				margin-bottom: 1em;
+			}
+			.at-a-glance .stat {
+				min-width: 180px;
+			}
+			.at-a-glance .stat .num {
+				display: block;
+				font-size: 1.4em;
+				font-weight: 700;
+				color: #1a1a1a;
+			}
+			.at-a-glance .stat .label {
+				display: block;
+				font-size: 0.85em;
+				color: #777;
+			}
+			.at-a-glance p {
+				margin: 0.5em 0 0;
+			}
+			.takeaway {
+				background: rgba(201,162,39,0.08);
+				border-left: 3px solid #c9a227;
+				padding: 0.85em 1.25em;
+				margin: 1em 0 1.75em;
+				border-radius: 3px;
+				font-size: 0.95em;
+			}
+			.takeaway strong {
+				color: #8a6d1a;
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -63,6 +113,33 @@
 								<p><strong>Domain:</strong> Manufacturing / FMCG; HR Technology Transformation<br />
 								<strong>Methodology:</strong> Business Case Development; Stakeholder Analysis; Process Design; Cost&ndash;Benefit Analysis<br />
 								<strong>Tools:</strong> Business Case Template, RACI Matrix, Stakeholder Power; Interest Matrix, Process Flow Mapping</p>
+
+								<div class="at-a-glance">
+									<h3>At a glance</h3>
+									<div class="stat-grid">
+										<div class="stat">
+											<span class="num">75,000+</span>
+											<span class="label">Employees across 5 continents</span>
+										</div>
+										<div class="stat">
+											<span class="num">~25%</span>
+											<span class="label">Projected HR efficiency gain</span>
+										</div>
+										<div class="stat">
+											<span class="num">$5M</span>
+											<span class="label">Projected annual savings within 3 years</span>
+										</div>
+										<div class="stat">
+											<span class="num">3</span>
+											<span class="label">Strategic options evaluated</span>
+										</div>
+										<div class="stat">
+											<span class="num">4</span>
+											<span class="label">Implementation phases, 15 months</span>
+										</div>
+									</div>
+									<p><strong>The ask:</strong> Board approval to fund a phased, Agile-delivered move to a single, centralized cloud HRIS, replacing a fragmented mix of legacy and regional systems.</p>
+								</div>
 
 								<nav class="toc">
 									<strong>On this page:</strong>
@@ -87,8 +164,17 @@
 
 								<h2 id="overview">Project overview</h2>
 								<p>Synergy Enterprises is a multinational FMCG manufacturer operating across five continents with a workforce exceeding 75,000 employees. As part of an applied business analysis case study, I evaluated Synergy's fragmented HR technology landscape and developed a strategic business case to support enterprise-wide HR transformation.</p>
-								<p>The engagement followed a full consulting lifecycle: problem diagnosis, stakeholder analysis, options evaluation, financial justification, risk assessment, and a phased transformation roadmap; culminating in a board-ready business case and a complete set of supporting business analysis artifacts.</p>
 								<p><strong>Objective:</strong> Assess Synergy's HR technology modernization options and build a financially justified roadmap for migrating to a centralized, cloud-based Human Resource Information System (HRIS).</p>
+								<p>The engagement followed a full consulting lifecycle:</p>
+								<ul>
+									<li>Problem diagnosis</li>
+									<li>Stakeholder analysis</li>
+									<li>Options evaluation</li>
+									<li>Financial justification</li>
+									<li>Risk assessment</li>
+									<li>Phased transformation roadmap</li>
+								</ul>
+								<p>It culminates in a board-ready business case and a complete set of supporting business analysis artifacts, detailed section by section below.</p>
 
 								<hr class="major" />
 
@@ -132,7 +218,9 @@
 									</table>
 								</div>
 
-								<p>These issues directly threatened Synergy&rsquo;s stated strategic priorities: building a consistent global brand, strengthening customer and employee relationships, and attracting and retaining talent at scale.</p>
+								<div class="takeaway">
+									<strong>Takeaway:</strong> Six compounding issues, one root cause; fragmented systems. They threaten Synergy&rsquo;s stated priorities of a consistent global brand, strong employee relationships, and talent retention at scale.
+								</div>
 
 								<hr class="major" />
 
@@ -196,7 +284,9 @@
 									</table>
 								</div>
 
-								<p>This matrix shaped the engagement strategy throughout; executive sponsors received decision-focused briefings, while operational stakeholders were kept informed through change management touchpoints to manage adoption risk.</p>
+								<div class="takeaway">
+									<strong>Takeaway:</strong> Eleven stakeholder groups, mapped to four engagement strategies. Executive sponsors got decision-focused briefings; operational stakeholders were kept informed through change management touchpoints to manage adoption risk.
+								</div>
 
 								<hr class="major" />
 
@@ -236,7 +326,9 @@
 									</table>
 								</div>
 
-								<p><strong>Recommendation:</strong> Option (3); Enterprise HRIS Transformation. While it carries the highest initial cost, it is the only option that resolves the structural root cause (data fragmentation) rather than managing around it, and the only option that scales with Synergy&rsquo;s continued global growth.</p>
+								<div class="takeaway">
+									<strong>Recommendation:</strong> Option 3, Enterprise HRIS Transformation. Highest upfront cost, but the only option that fixes the root cause (data fragmentation) instead of managing around it, and the only one that scales with Synergy&rsquo;s continued growth.
+								</div>
 
 								<hr class="major" />
 
@@ -350,39 +442,6 @@
 
 								<hr class="major" />
 
-								<h2 id="benefits">Benefits realization framework</h2>
-								<p>Translating the transformation into business outcomes and strategic value:</p>
-								<div class="row">
-									<div class="col-6 col-12-small">
-										<h4>Business outcomes</h4>
-										<ul>
-											<li>~25% operational efficiency improvement</li>
-											<li>Projected $5M annual savings</li>
-											<li>Improved workforce visibility</li>
-											<li>Enhanced compliance management</li>
-											<li>Reduced manual processes</li>
-											<li>Better employee experience</li>
-										</ul>
-									</div>
-									<div class="col-6 col-12-small">
-										<h4>Strategic value</h4>
-										<ul>
-											<li>Stronger executive decision-making</li>
-											<li>Stronger governance</li>
-											<li>Scalable HR operations</li>
-											<li>Long-term digital transformation foundation</li>
-										</ul>
-									</div>
-								</div>
-
-								<hr class="major" />
-
-								<h2 id="impact">Business impact</h2>
-								<p>This engagement gave executive leadership a structured decision framework for evaluating enterprise-wide HR transformation. The analysis enabled stakeholders to assess modernization options objectively, understand financial and operational trade-offs, identify transformation risks early, establish a clear modernization roadmap, and align workforce strategy with long-term business objectives.</p>
-								<p>By converting a fragmented HR operating environment into a structured, financially justified transformation roadmap, this business case supports the kind of informed decision-making, governance, and sustainable growth that an HR transformation of this scale requires.</p>
-
-								<hr class="major" />
-
 								<h2 id="implementation">Implementation plan</h2>
 								<p>The transformation is phased across four stages to manage risk, protect business continuity, and build organizational confidence before full global rollout.</p>
 								<div class="table-wrapper">
@@ -428,20 +487,63 @@
 								<hr class="major" />
 
 								<h2 id="sdlc">SDLC methodology recommendation</h2>
-								<p>Given the scale and risk profile of this transformation, an <strong>Agile (iterative, phased) methodology</strong> is recommended over a traditional Waterfall approach, for the following reasons:</p>
+								<p>Given the scale and risk profile of this transformation, an <strong>Agile (iterative, phased) methodology</strong> is recommended over a traditional Waterfall approach, for four reasons:</p>
 								<ul>
-									<li><strong>Regional complexity demands iteration.</strong> Synergy operates across five continents with varying local labor laws and HR practices. Agile sprints allow the solution to be configured and validated region by region, rather than committing to a single rigid design upfront that may not fit every market.</li>
-									<li><strong>The pilot-then-scale rollout structure is inherently iterative.</strong> The implementation plan above deploys to one region first, then expands; this mirrors Agile's incremental delivery model far more naturally than Waterfall's sequential, all-at-once delivery.</li>
-									<li><strong>Stakeholder feedback loops matter.</strong> With eleven distinct stakeholder groups (per the stakeholder analysis above) and a workforce of 75,000+, early and continuous feedback from HR Operations, Regional HR Managers, and Employees reduces the risk of a poor-fit system reaching full-scale deployment.</li>
-									<li><strong>Risk containment.</strong> Because data migration and change resistance are top-rated risks (per the Risk Assessment above), Agile's shorter feedback cycles allow issues to surface and be corrected within a single sprint, rather than only being discovered at a single, high-stakes go-live event.</li>
+									<li><strong>Regional complexity demands iteration.</strong> Synergy operates across five continents with varying local labor laws and HR practices. Agile sprints allow the solution to be configured and validated region by region, rather than committing to a single rigid design upfront.</li>
+									<li><strong>The rollout is already iterative.</strong> The implementation plan above deploys to one region first, then expands; this mirrors Agile's incremental delivery model far more naturally than Waterfall's sequential, all-at-once delivery.</li>
+									<li><strong>Feedback loops matter at this scale.</strong> With eleven distinct stakeholder groups and 75,000+ employees, early and continuous feedback from HR Operations, Regional HR Managers, and Employees reduces the risk of a poor-fit system reaching full-scale deployment.</li>
+									<li><strong>Risk containment.</strong> Data migration and change resistance are top-rated risks. Agile's shorter feedback cycles allow issues to surface and be corrected within a single sprint, rather than only being discovered at one high-stakes go-live event.</li>
 								</ul>
-								<p>A pure Waterfall approach was considered but not recommended: while it offers more predictable upfront budgeting, its rigid, sequential structure is poorly suited to a project where regional requirements vary and the vendor-selection and configuration phases are expected to evolve based on early pilot learnings.</p>
+								<p>A pure Waterfall approach was considered but not recommended: it offers more predictable upfront budgeting, but its rigid, sequential structure is poorly suited to a project where regional requirements vary and the vendor-selection and configuration phases are expected to evolve based on early pilot learnings.</p>
+
+								<hr class="major" />
+
+								<h2 id="benefits">Benefits realization framework</h2>
+								<p>Translating the transformation into business outcomes and strategic value:</p>
+								<div class="row">
+									<div class="col-6 col-12-small">
+										<h4>Business outcomes</h4>
+										<ul>
+											<li>~25% operational efficiency improvement</li>
+											<li>Projected $5M annual savings</li>
+											<li>Improved workforce visibility</li>
+											<li>Enhanced compliance management</li>
+											<li>Reduced manual processes</li>
+											<li>Better employee experience</li>
+										</ul>
+									</div>
+									<div class="col-6 col-12-small">
+										<h4>Strategic value</h4>
+										<ul>
+											<li>Stronger executive decision-making</li>
+											<li>Stronger governance</li>
+											<li>Scalable HR operations</li>
+											<li>Long-term digital transformation foundation</li>
+										</ul>
+									</div>
+								</div>
+
+								<hr class="major" />
+
+								<h2 id="impact">Business impact</h2>
+								<p>This engagement gave executive leadership a structured decision framework for evaluating enterprise-wide HR transformation, enabling stakeholders to:</p>
+								<ul>
+									<li>Assess modernization options objectively</li>
+									<li>Understand financial and operational trade-offs</li>
+									<li>Identify transformation risks early</li>
+									<li>Establish a clear modernization roadmap</li>
+									<li>Align workforce strategy with long-term business objectives</li>
+								</ul>
+								<p>By converting a fragmented HR operating environment into a structured, financially justified transformation roadmap, this business case supports the kind of informed decision-making, governance, and sustainable growth that an HR transformation of this scale requires.</p>
 
 								<hr class="major" />
 
 								<h2 id="conclusion">Conclusion</h2>
 								<p>Synergy Enterprises' fragmented HR technology landscape is no longer a back-office inconvenience; it is a constraint on the company's ability to govern its global workforce, manage compliance risk, and compete for talent at the scale its growth demands. Of the three options assessed, only Enterprise HRIS Transformation resolves the structural root cause rather than managing around it.</p>
-								<p>This business case recommends that the Global Board approve funding for a phased, Agile-delivered Enterprise HRIS Transformation, beginning with the Foundation phase outlined above. The investment is projected to return approximately $5M in annual savings within three years and a 25% improvement in HR operational efficiency, while materially reducing compliance and governance risk across all five continents in which Synergy operates.</p>
+								<p>This business case recommends that the Global Board approve funding for a phased, Agile-delivered Enterprise HRIS Transformation, beginning with the Foundation phase outlined above.</p>
+								<div class="takeaway">
+									<strong>Bottom line:</strong> Projected $5M in annual savings within three years, a 25% improvement in HR operational efficiency, and materially reduced compliance and governance risk across all five continents in which Synergy operates.
+								</div>
 								<p>The recommendation to the Board is to approve the budget and executive sponsorship to proceed to vendor selection and pilot design, with a governance checkpoint at the end of the Foundation phase to confirm readiness before committing to global rollout.</p>
 
 								<hr class="major" />

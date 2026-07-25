@@ -1,0 +1,13 @@
+-- QUERY 9: Pending payment recovery opportunity by method
+SELECT
+    p.payment_method,
+    COUNT(p.payment_id)                            AS pending_count,
+    SUM(s.total_value)                             AS recoverable_revenue,
+    ROUND(AVG(s.total_value), 0)                   AS avg_pending_order_value
+FROM payments p
+JOIN subscriptions s ON p.subscription_id = s.subscription_id
+WHERE p.payment_status = 'Pending'
+  AND s.order_date >= '2024-08-01'
+  AND s.order_date <= '2025-05-31'
+GROUP BY p.payment_method
+ORDER BY recoverable_revenue DESC;

@@ -1,0 +1,19 @@
+-- QUERY 2: Confirmed revenue by active bundle category
+SELECT
+    b.category,
+    COUNT(s.subscription_id)                       AS confirmed_orders,
+    SUM(s.total_value)                             AS confirmed_revenue,
+    ROUND(AVG(s.total_value), 0)                   AS avg_order_value,
+    ROUND(
+        SUM(s.total_value) * 100.0 /
+        SUM(SUM(s.total_value)) OVER (), 1
+    )                                              AS revenue_share_pct
+FROM subscriptions s
+JOIN bundles b  ON s.bundle_id = b.bundle_id
+JOIN payments p ON s.subscription_id = p.subscription_id
+WHERE p.is_successful = TRUE
+  AND b.is_active = TRUE
+  AND s.order_date >= '2024-08-01'
+  AND s.order_date <= '2025-05-31'
+GROUP BY b.category
+ORDER BY confirmed_revenue DESC;

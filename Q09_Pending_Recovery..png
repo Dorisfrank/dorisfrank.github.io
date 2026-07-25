@@ -1,0 +1,19 @@
+-- QUERY 10: Discount bands and effect on average order value
+SELECT
+    CASE
+        WHEN s.discount = 0     THEN 'No Discount'
+        WHEN s.discount <= 0.10 THEN '1% to 10%'
+        WHEN s.discount <= 0.20 THEN '11% to 20%'
+        ELSE                         'Above 20%'
+    END                                            AS discount_band,
+    COUNT(s.subscription_id)                       AS confirmed_orders,
+    ROUND(AVG(s.discount * 100), 1)                AS avg_discount_pct,
+    ROUND(AVG(s.total_value), 0)                   AS avg_order_value,
+    SUM(s.total_value)                             AS total_revenue
+FROM subscriptions s
+JOIN payments p ON s.subscription_id = p.subscription_id
+WHERE p.is_successful = TRUE
+  AND s.order_date >= '2024-08-01'
+  AND s.order_date <= '2025-05-31'
+GROUP BY discount_band
+ORDER BY avg_order_value DESC;

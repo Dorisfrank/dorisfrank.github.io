@@ -1,0 +1,15 @@
+-- RECONCILIATION VERIFICATION
+SELECT
+    SUM(CASE WHEN p.is_successful = TRUE
+             THEN s.total_value ELSE 0 END)        AS confirmed_revenue,
+    SUM(CASE WHEN p.payment_status = 'Pending'
+             THEN s.total_value ELSE 0 END)        AS pending_revenue,
+    SUM(CASE WHEN p.payment_status = 'Failed'
+             THEN s.total_value ELSE 0 END)        AS failed_revenue,
+    COUNT(CASE WHEN p.is_successful = TRUE
+               THEN 1 END)                         AS confirmed_orders,
+    COUNT(s.subscription_id)                       AS total_orders
+FROM subscriptions s
+JOIN payments p ON p.subscription_id = s.subscription_id
+WHERE s.order_date >= '2024-08-01'
+  AND s.order_date <= '2025-05-31';

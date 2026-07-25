@@ -1,0 +1,21 @@
+-- QUERY 8: Failed payments by method -- revenue loss breakdown
+SELECT
+    p.payment_method,
+    COUNT(p.payment_id)                            AS total_transactions,
+    SUM(CASE WHEN p.payment_status = 'Failed'
+             THEN 1 ELSE 0 END)                    AS failed_count,
+    SUM(CASE WHEN p.is_successful = TRUE
+             THEN 1 ELSE 0 END)                    AS confirmed_count,
+    ROUND(
+        SUM(CASE WHEN p.payment_status = 'Failed'
+                 THEN 1 ELSE 0 END) * 100.0 /
+        COUNT(p.payment_id), 1
+    )                                              AS failure_rate_pct,
+    SUM(CASE WHEN p.payment_status = 'Failed'
+             THEN s.total_value ELSE 0 END)        AS revenue_lost
+FROM payments p
+JOIN subscriptions s ON p.subscription_id = s.subscription_id
+WHERE s.order_date >= '2024-08-01'
+  AND s.order_date <= '2025-05-31'
+GROUP BY p.payment_method
+ORDER BY failure_rate_pct DESC;
