@@ -1,6 +1,6 @@
 -- ============================================================
 -- NOVAMART: CUSTOMER AND PRODUCT INSIGHT OPTIMIZATION
--- SQL Insight Library -- Final Version
+-- SQL Insight Library
 -- Tool: PostgreSQL
 -- Reporting Period: August 2024 to May 2025
 -- ============================================================
