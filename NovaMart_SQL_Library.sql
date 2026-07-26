@@ -19,13 +19,17 @@
 --
 --   3. BUNDLE G SEPARATION: Bundle G (is_active = FALSE)
 --      is excluded from active-bundle category totals and
---      reported separately in the anomaly query.
+--      reported separately in the anomaly query (Query 3).
 --
 -- All figures produced by these queries reconcile with:
 --   Confirmed Revenue:  N161,463,248
 --   Pending Revenue:    N18,564,696
 --   Failed Revenue:     N9,109,526
 --   Total Orders:       12,482
+--
+-- Query numbering below matches the order queries were run
+-- and captured in the SQL Insight Library screenshots (Q01
+-- through Q11, plus the reconciliation verification query).
 -- ============================================================
 
 
@@ -133,23 +137,20 @@ COPY support_tickets FROM '/your/path/support_tickets.csv'
 
 -- ============================================================
 -- SECTION 4: SQL INSIGHT LIBRARY
--- 11 Queries across 6 Analytical Themes
+-- 11 Queries, numbered in execution order, plus one
+-- reconciliation verification query
 -- All figures reconcile with the Power BI dashboard
 -- ============================================================
 
 
--- ============================================================
--- THEME 1: BUNDLE AND PRODUCT PERFORMANCE
--- ============================================================
-
-
 -- QUERY 1: Top 3 bundles by subscription volume
+-- Theme: Bundle and Product Performance
 -- Business context: Identifies which products NovaMart
 -- customers order most frequently within the reporting period.
 -- Confirmed result (Aug 2024 to May 2025):
---   Bundle J: 1,591 orders
---   Bundle I: 1,515 orders
---   Bundle H: 1,328 orders
+--   Bundle J: 1,864 orders (14.9%)
+--   Bundle I: 1,764 orders (14.1%)
+--   Bundle H: 1,571 orders (12.6%)
 
 SELECT
     b.bundle_name,
@@ -171,6 +172,7 @@ LIMIT 3;
 
 
 -- QUERY 2: Confirmed revenue by active bundle category
+-- Theme: Bundle and Product Performance
 -- Business context: Reveals which product categories generate
 -- real confirmed revenue within the reporting period.
 -- Excludes inactive bundles (Bundle G) and unconfirmed payments.
@@ -201,12 +203,13 @@ ORDER BY confirmed_revenue DESC;
 
 
 -- QUERY 3: Bundle G anomaly -- inactive bundle revenue audit
+-- Theme: Bundle and Product Performance
 -- Business context: Bundle G is marked inactive but generated
--- N19.7M in confirmed revenue from 1,283 paid orders during
--- the reporting period. This surfaces a product catalogue
--- integrity issue requiring immediate business review.
+-- N19.7M in confirmed revenue during the reporting period.
+-- This surfaces a product catalogue integrity issue requiring
+-- immediate business review.
 -- Confirmed result (Aug 2024 to May 2025):
---   Bundle G: 1,283 confirmed orders | N19,650,808 confirmed revenue
+--   Bundle G: N19,650,808 confirmed revenue
 
 SELECT
     b.bundle_name,
@@ -230,21 +233,16 @@ GROUP BY b.bundle_name, b.category, b.bundle_size, b.is_active
 ORDER BY confirmed_revenue DESC;
 
 
--- ============================================================
--- THEME 2: CUSTOMER INTELLIGENCE AND LOYALTY
--- ============================================================
-
-
 -- QUERY 4: Average spend per loyalty tier (confirmed orders only)
+-- Theme: Customer Intelligence and Loyalty
 -- Business context: Determines whether higher-tier customers
 -- spend more per order. The near-identical average order value
 -- across all three tiers indicates the loyalty programme does
 -- not reflect customer spending behaviour.
 -- Confirmed results (Aug 2024 to May 2025):
---   Platinum avg: N15,114
 --   Gold avg:     N15,352
+--   Platinum avg: N15,114
 --   Silver avg:   N15,094
---   Difference:   N258 across all three tiers
 
 SELECT
     c.loyalty_tier,
@@ -266,13 +264,47 @@ GROUP BY c.loyalty_tier
 ORDER BY avg_order_value DESC;
 
 
--- QUERY 5: Recurring vs one-time revenue split
+-- QUERY 5: Issue types by average rating and escalation rate
+-- Theme: Support and Customer Experience
+-- Business context: Surfaces which complaint categories generate
+-- the worst customer experience and are most likely to escalate.
+-- No issue type achieves above 3.71 on a 5-point scale.
+-- Product Quality has the lowest rating and highest escalation rate.
+-- Confirmed results (all tickets):
+--   Other:          442 tickets  avg 3.54  escalation 9.0%
+--   Product Quality: 460 tickets  avg 3.55  escalation 10.2%
+--   Billing Issue:  439 tickets  avg 3.61  escalation 9.8%
+--   Late Delivery:  459 tickets  avg 3.71  escalation 9.6%
+
+SELECT
+    t.issue_type,
+    COUNT(t.ticket_id)                             AS total_tickets,
+    ROUND(AVG(t.rating), 2)                        AS avg_rating,
+    MIN(t.rating)                                  AS min_rating,
+    SUM(CASE WHEN t.resolution_status = 'Escalated'
+             THEN 1 ELSE 0 END)                    AS escalated_count,
+    ROUND(
+        SUM(CASE WHEN t.resolution_status = 'Escalated'
+                 THEN 1 ELSE 0 END) * 100.0 /
+        COUNT(t.ticket_id), 1
+    )                                              AS escalation_rate_pct,
+    SUM(CASE WHEN t.resolution_status = 'Resolved'
+             THEN 1 ELSE 0 END)                    AS resolved_count,
+    SUM(CASE WHEN t.resolution_status = 'Pending'
+             THEN 1 ELSE 0 END)                    AS pending_count
+FROM support_tickets t
+GROUP BY t.issue_type
+ORDER BY avg_rating ASC;
+
+
+-- QUERY 6: Recurring vs one-time revenue split
+-- Theme: Customer Intelligence and Loyalty
 -- Business context: Determines NovaMart's revenue stability.
 -- A high one-time share signals retention risk and revenue
 -- volatility that must be re-earned every month.
 -- Confirmed results (Aug 2024 to May 2025):
---   Recurring: N112,915,393 (70%)
---   One-time:   N48,547,855 (30%)
+--   Recurring: N112,915,393 (69.9%)
+--   One-time:   N48,547,855 (30.1%)
 
 SELECT
     s.subscription_type,
@@ -292,12 +324,13 @@ GROUP BY s.subscription_type
 ORDER BY confirmed_revenue DESC;
 
 
--- QUERY 6: Confirmed revenue and order volume by city
+-- QUERY 7: Confirmed revenue and order volume by city
+-- Theme: Customer Intelligence and Loyalty
 -- Business context: Identifies NovaMart's strongest geographic
 -- markets and surfaces the Abuja performance gap.
 -- Confirmed results (Aug 2024 to May 2025):
 --   Port Harcourt: N30,229,346 (18.7%) -- leading city
---   Abuja:         N23,349,818 (14.5%) -- weakest market
+--   Abuja:         weakest market
 
 SELECT
     c.city,
@@ -318,15 +351,11 @@ GROUP BY c.city
 ORDER BY confirmed_revenue DESC;
 
 
--- ============================================================
--- THEME 3: PAYMENT AND REVENUE RISK
--- ============================================================
-
-
--- QUERY 7: Failed payments by method -- revenue loss breakdown
+-- QUERY 8: Failed payments by method -- revenue loss breakdown
+-- Theme: Payment and Revenue Risk
 -- Business context: Identifies which payment methods carry the
 -- highest failure risk, enabling targeted recovery and mitigation.
--- All failure rates exceed the 2 to 3 percent industry benchmark.
+-- All failure rates exceed the 2% to 3% industry benchmark.
 -- Confirmed results (Aug 2024 to May 2025):
 --   Bank Transfer: 202 failed (5.5%) N2,964,372 lost
 --   Wallet:        122 failed (4.9%) N1,905,668 lost
@@ -354,7 +383,8 @@ GROUP BY p.payment_method
 ORDER BY failure_rate_pct DESC;
 
 
--- QUERY 8: Pending payment recovery opportunity by method
+-- QUERY 9: Pending payment recovery opportunity by method
+-- Theme: Payment and Revenue Risk
 -- Business context: N18.6M sits in pending status and is
 -- recoverable through payment retry infrastructure.
 -- Card carries the largest single recovery opportunity.
@@ -378,12 +408,8 @@ GROUP BY p.payment_method
 ORDER BY recoverable_revenue DESC;
 
 
--- ============================================================
--- THEME 4: DISCOUNT IMPACT ANALYSIS
--- ============================================================
-
-
--- QUERY 9: Discount bands and effect on average order value
+-- QUERY 10: Discount bands and effect on average order value
+-- Theme: Discount Impact Analysis
 -- Business context: Determines whether NovaMart's discounts
 -- are reducing revenue without proportional volume gain.
 -- Orders above 20% discount generate N13,630 avg order value,
@@ -414,49 +440,8 @@ GROUP BY discount_band
 ORDER BY avg_order_value DESC;
 
 
--- ============================================================
--- THEME 5: SUPPORT AND CUSTOMER EXPERIENCE
--- ============================================================
-
-
--- QUERY 10: Issue types by average rating and escalation rate
--- Business context: Surfaces which complaint categories generate
--- the worst customer experience and are most likely to escalate.
--- No issue type achieves above 3.71 on a 5-point scale.
--- Product Quality has the lowest rating and highest escalation rate.
--- Confirmed results (all 1,800 tickets):
---   Other:          442 tickets  avg 3.54  escalation 9.0%
---   Product Quality: 460 tickets  avg 3.55  escalation 10.2%
---   Billing Issue:  439 tickets  avg 3.61  escalation 9.8%
---   Late Delivery:  459 tickets  avg 3.71  escalation 9.6%
-
-SELECT
-    t.issue_type,
-    COUNT(t.ticket_id)                             AS total_tickets,
-    ROUND(AVG(t.rating), 2)                        AS avg_rating,
-    MIN(t.rating)                                  AS min_rating,
-    SUM(CASE WHEN t.resolution_status = 'Escalated'
-             THEN 1 ELSE 0 END)                    AS escalated_count,
-    ROUND(
-        SUM(CASE WHEN t.resolution_status = 'Escalated'
-                 THEN 1 ELSE 0 END) * 100.0 /
-        COUNT(t.ticket_id), 1
-    )                                              AS escalation_rate_pct,
-    SUM(CASE WHEN t.resolution_status = 'Resolved'
-             THEN 1 ELSE 0 END)                    AS resolved_count,
-    SUM(CASE WHEN t.resolution_status = 'Pending'
-             THEN 1 ELSE 0 END)                    AS pending_count
-FROM support_tickets t
-GROUP BY t.issue_type
-ORDER BY avg_rating ASC;
-
-
--- ============================================================
--- THEME 6: MONTHLY REVENUE TRENDS
--- ============================================================
-
-
 -- QUERY 11: Monthly confirmed revenue trend
+-- Theme: Monthly Revenue Trends
 -- Business context: Tracks NovaMart's revenue performance over
 -- the full reporting period to identify growth, seasonality,
 -- or plateau patterns.
