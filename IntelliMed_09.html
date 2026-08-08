@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Section 09: Final Submission | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f7f9f9; --card: #ffffff; --ink: #00325D; --ink-soft: #3d4a52;
+    --muted: #7a8a90; --navy: #00325D; --navy-deep: #001e38; --teal: #8BC5C9;
+    --teal-deep: #4d9297; --teal-pale: #eaf4f4; --line: #dbe6e6; --amber: #c76b1e;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'IBM Plex Sans',sans-serif; font-weight:600; color: var(--navy); }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  a { color: var(--teal-deep); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background: var(--navy); border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:900px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: #cfe3e6; text-decoration:none; font-size:14px; border:1px solid #2a4a5c; padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--teal); color: var(--teal); }
+  .masthead span.doclabel { font-family:'IBM Plex Mono', monospace; font-size:13px; color:#9fc0c4; }
+  h2 { font-size: 26px; margin-top: 0; }
+  h3 { color: var(--teal-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--navy); color:#fff; font-size: 12.5px; }
+  tr:nth-child(even) td { background: #fafcfc; }
+  blockquote, div.executive-takeaway, div.consultant-observation {
+    background: var(--teal-pale); border-left: 3px solid var(--teal-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0;
+  }
+  div.executive-takeaway p, div.consultant-observation p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'IBM Plex Mono', monospace; background: var(--teal-pale); color: var(--teal-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="IntelliMed.html" class="back">&larr; Back to case study</a>
+<span class="doclabel">IntelliMed / section-09</span>
+</div></header>
+<div class="wrap">
+<h2>09. Final Submission and Presentation</h2>
+<hr />
+<h2>Executive Overview</h2>
+<p><em>What did this engagement actually produce, and what should IntelliMed's leadership do with it?</em></p>
+<p>Eight sections preceded this one. Each built on the section before it, twelve stakeholders identified before their needs were elicited, requirements captured before workflows were mapped against them, gaps analyzed before they were formalized into a BRD, a BRD compiled before platforms were evaluated against it. Nothing in this final section introduces new analysis. It compiles what already exists into the form IntelliMed's leadership actually needs to act on it, and states, plainly, what I found across the whole engagement.</p>
+<hr />
+<h2>Deliverables Submitted</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Deliverable</th>
+<th>Section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Stakeholder Register and Power-Interest Matrix</td>
+<td>01</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Stakeholder Power-Interest Matrix (Excel, live chart)</td>
+<td>01 (supplementary)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Needs Assessment and Problem Statement</td>
+<td>02</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Requirements Catalogue (6 Functional, 5 Non-Functional, 3 Business Rules)</td>
+<td>03</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Current-State Workflow Diagrams and Commentary</td>
+<td>04</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Gap Analysis Report and Capability Assessment</td>
+<td>05</td>
+</tr>
+<tr>
+<td>7</td>
+<td>End-to-End Requirements Traceability Matrix</td>
+<td>06</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Business Requirements Document (Draft)</td>
+<td>07</td>
+</tr>
+<tr>
+<td>9</td>
+<td>ERP Comparison Matrix and Evaluation Summary</td>
+<td>08</td>
+</tr>
+</tbody>
+</table>
+<p>Nine deliverables, each traceable to the one before it. None was built in isolation.</p>
+<hr />
+<h2>Summary of Findings</h2>
+<p>Four findings carried the real weight of this engagement, not incidental observations, but the ones that changed what the final recommendation actually says.</p>
+<p><strong>IntelliMed has one problem, not six.</strong> Six departments each experience fragmented systems differently, delayed finance reporting, incomplete patient records, unverifiable compliance, inconsistent inventory, but Section 02 traced all six back to the same structural cause. That reframing shaped every requirement that followed.</p>
+<p><strong>Four stakeholders, describing the same need in four vocabularies.</strong> The CFO called it financial visibility. The Head Nurse called it a unified patient record. The Compliance Officer called it an auditable data source. Section 03 found these were one requirement, not four, which is the reason the gap analysis in Section 05 found four of six gaps were integration problems wearing other labels.</p>
+<p><strong>Compliance carries real power without budget authority.</strong> Section 01's stakeholder mapping placed the Compliance Officer in the highest power quadrant specifically because HIPAA, GDPR, and NHS Digital obligations mean that role can stop an implementation the CFO already approved. That finding shaped how compliance requirements were prioritized throughout, and it is the reason NFR-01, NFR-02, and NFR-03 were corrected to Must Have once the RTM exercise in Section 06 caught that they had been missed.</p>
+<p><strong>No platform is an obvious winner, and I did not force one.</strong> Section 08 researched four ERP platforms against IntelliMed's actual requirements, not generic market criteria, and found a genuine trade-off between compliance depth and implementation speed. Infor CloudSuite Healthcare and Microsoft Dynamics 365 both merit direct vendor evaluation given IntelliMed's three-location scale. SAP S/4HANA and Oracle Fusion Cloud ERP are strong platforms built for a larger scale than IntelliMed currently operates at.</p>
+<hr />
+<h2>Recommendation to Leadership</h2>
+<p>I recommend IntelliMed proceed in three steps, in this order, not in parallel:</p>
+<ol>
+<li><strong>Approve the BRD</strong> (Section 07), formally, through the CEO, CFO, and Compliance Officer sign-off already named in BRD Section 9. Nothing downstream should move before this happens.</li>
+<li><strong>Commission vendor-led evaluations</strong> with Infor CloudSuite Healthcare and Microsoft Dynamics 365 specifically, using the requirements catalogue in this BRD as the evaluation criteria, not a fresh requirements-gathering exercise.</li>
+<li><strong>Close one honest gap and complete one activity that was always outside discovery's authority.</strong> Section 04 did not map a workflow for FR-05, HR scheduling, when it could have, that is a gap in this discovery phase and should be closed with a follow-up workflow mapping pass, not carried forward silently. Separately, validate NFR-01 through NFR-03 against the shortlisted vendors' actual documentation during procurement, this was never something discovery could complete on its own, it requires a selected vendor that does not yet exist.</li>
+</ol>
+<div class="consultant-observation">
+<strong>Consultant's Observation:</strong> every recommendation above traces to a specific section, not to my general impression of the engagement. That was a deliberate constraint throughout, not just a closing gesture. A recommendation I cannot point back to a section and a finding is not a recommendation IntelliMed's leadership should act on, no matter how confident it sounds.
+</div>
+
+<hr />
+<h2>Executive Presentation Summary</h2>
+<p><em>A five-minute briefing for IntelliMed leadership.</em></p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Key Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Business Problem</td>
+<td>Fragmented systems are creating operational inefficiencies, compliance risk, and limited visibility</td>
+</tr>
+<tr>
+<td>Root Cause</td>
+<td>Four disconnected core systems with no integrated source of truth</td>
+</tr>
+<tr>
+<td>Discovery Outcome</td>
+<td>Requirements, workflows, gaps, governance, and business rules have been documented, prioritized, and traced end to end</td>
+</tr>
+<tr>
+<td>Recommended Next Step</td>
+<td>Approve the BRD, then proceed to structured vendor evaluation with Infor CloudSuite Healthcare and Microsoft Dynamics 365</td>
+</tr>
+<tr>
+<td>Expected Business Value</td>
+<td>Improved operational efficiency, stronger regulatory compliance, and a single trusted source of data visibility</td>
+</tr>
+</tbody>
+</table>
+<h2>Executive Close</h2>
+<p><em>What should leadership remember, above everything else in this engagement?</em></p>
+<div class="executive-takeaway">
+<strong>Executive Takeaway</strong>
+
+<p>This engagement did not conclude that IntelliMed needs an ERP system.</p>
+
+<p><strong>It concluded that IntelliMed needs one trustworthy source of truth, and an ERP is the mechanism, not the goal.</strong></p>
+</div>
+
+<p>I built nine interconnected deliverables across the discovery lifecycle, each one grounded in evidence produced by the section before it.</p>
+<p>Stakeholders were identified before requirements were elicited. Requirements were prioritized before workflows were analysed. Gaps were documented before solutions were evaluated.</p>
+<p>The result is not simply a collection of project artefacts, but a decision-ready body of work that leadership can use to govern vendor selection, implementation planning, and future change with confidence.</p>
+<hr />
+<p><em>IntelliMed Health: ERP Implementation in the Health Sector</em>
+<em>Section 09: Final Submission and Presentation</em></p></div></body></html>

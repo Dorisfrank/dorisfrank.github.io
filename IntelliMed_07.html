@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Section 07: BRD | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f7f9f9; --card: #ffffff; --ink: #00325D; --ink-soft: #3d4a52;
+    --muted: #7a8a90; --navy: #00325D; --navy-deep: #001e38; --teal: #8BC5C9;
+    --teal-deep: #4d9297; --teal-pale: #eaf4f4; --line: #dbe6e6; --amber: #c76b1e;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'IBM Plex Sans',sans-serif; font-weight:600; color: var(--navy); }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  a { color: var(--teal-deep); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background: var(--navy); border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:900px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: #cfe3e6; text-decoration:none; font-size:14px; border:1px solid #2a4a5c; padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--teal); color: var(--teal); }
+  .masthead span.doclabel { font-family:'IBM Plex Mono', monospace; font-size:13px; color:#9fc0c4; }
+  h2 { font-size: 26px; margin-top: 0; }
+  h3 { color: var(--teal-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--navy); color:#fff; font-size: 12.5px; }
+  tr:nth-child(even) td { background: #fafcfc; }
+  blockquote, div.executive-takeaway, div.consultant-observation {
+    background: var(--teal-pale); border-left: 3px solid var(--teal-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0;
+  }
+  div.executive-takeaway p, div.consultant-observation p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'IBM Plex Mono', monospace; background: var(--teal-pale); color: var(--teal-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="IntelliMed.html" class="back">&larr; Back to case study</a>
+<span class="doclabel">IntelliMed / section-07</span>
+</div></header>
+<div class="wrap">
+<h2>07. Draft Business Requirements Document</h2>
+<hr />
+<h2>Executive Overview</h2>
+<p><em>Where does everything discovered so far get formalized into the document leadership actually signs off on?</em></p>
+<p>Every section before this one was analysis. This one is the artefact. What follows is a formal Business Requirements Document, compiled from Sections 01 through 06, not written fresh from assumption. Nothing in this document introduces a new requirement, a new stakeholder, or a new priority that wasn't already established and traced.</p>
+<p>I gave this document its own internal section numbering, BRD Section 1 through 10, separate from this case study's own numbering. That distinction matters: once Section 06's RTM and Section 03's Appendix D reference specific BRD sections, they need real section numbers to point to, not a repeat of "Section 07."</p>
+<hr />
+<h1>IntelliMed Health: Business Requirements Document</h1>
+<h2>BRD Section 1: Introduction and Purpose</h2>
+<p>This document defines the business requirements for an ERP implementation at IntelliMed Health, a three-location hospital network currently operating patient records, billing, HR, and inventory as four disconnected systems. It is intended to give leadership a single, traceable reference for what the organization needs from an ERP platform, and why, before any vendor is evaluated.</p>
+<h2>BRD Section 2: Business Need and Problem Statement</h2>
+<p>IntelliMed Health operates four core business systems that do not communicate with one another. This fragmentation forces staff to transfer data manually between systems, which delays financial reporting, obscures real-time inventory visibility, complicates regulatory compliance across HIPAA, GDPR, and NHS Digital, and prevents leadership from making decisions based on a single, trusted view of hospital operations.</p>
+<p>The problem is not a lack of data. IntelliMed generates more than enough data across its departments to run effectively. The problem is that none of it is structured to be shared, trusted, or acted on quickly.</p>
+<h2>BRD Section 2.5: Business Objectives</h2>
+<p>The ERP implementation seeks to:</p>
+<ul>
+<li>Integrate patient records, billing, HR, and inventory data onto a single integrated platform</li>
+<li>Reduce the financial reporting cycle from manual, multi-system reconciliation to a real-time consolidated view</li>
+<li>Provide real-time inventory visibility sufficient to prevent critical stockouts before they occur</li>
+<li>Generate audit-ready compliance reporting across HIPAA, GDPR, and NHS Digital without manual assembly</li>
+<li>Give leadership a single, trusted operational view across all three hospital locations</li>
+</ul>
+<p>These objectives carry forward directly from the Business Goals established in Section 02. No new objective is introduced here that wasn't already stated there.</p>
+<h2>BRD Section 3: Project Scope and Boundaries</h2>
+<p><strong>In scope:</strong>
+- Consolidation of patient records, billing, HR, and inventory data onto a single platform
+- Real-time financial and inventory reporting
+- Automated compliance reporting across HIPAA, GDPR, and NHS Digital
+- Unified role-based access control</p>
+<p><strong>Out of scope:</strong>
+- Selection of a specific ERP vendor (addressed in Section 08 of this case study, not this document)
+- Infrastructure procurement
+- Detailed technical architecture design
+- Clinical protocol changes unrelated to data access</p>
+<h2>BRD Section 4: Stakeholders</h2>
+<p>The stakeholders listed below represent the primary business owners responsible for defining, validating, approving, or being directly impacted by the ERP solution. Detailed stakeholder analysis, including Power-Interest classification, is documented in Section 01 of this case study.</p>
+<table>
+<thead>
+<tr>
+<th>Stakeholder</th>
+<th>Role</th>
+<th>Business Objective</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CEO / Hospital Administrator</td>
+<td>Executive Sponsor</td>
+<td>Strategic alignment and return on investment</td>
+</tr>
+<tr>
+<td>CFO</td>
+<td>Financial Owner</td>
+<td>Financial visibility and budget control</td>
+</tr>
+<tr>
+<td>Head Nurse / CNO</td>
+<td>Clinical Operations Lead</td>
+<td>Clinical workflow efficiency</td>
+</tr>
+<tr>
+<td>IT Director</td>
+<td>Technical Delivery Lead</td>
+<td>Systems integration and security</td>
+</tr>
+<tr>
+<td>Compliance Officer</td>
+<td>Regulatory Oversight</td>
+<td>Regulatory compliance across HIPAA, GDPR, NHS Digital</td>
+</tr>
+<tr>
+<td>HR Manager</td>
+<td>Workforce and Scheduling Owner</td>
+<td>Staff adoption and training</td>
+</tr>
+<tr>
+<td>Procurement Lead</td>
+<td>Inventory and Vendor Management</td>
+<td>Accurate supply and medication tracking</td>
+</tr>
+</tbody>
+</table>
+<h2>BRD Section 5: Functional Requirements</h2>
+<p>The following functional requirements were elicited, validated, and prioritized during the discovery phase. They define the minimum business capabilities the selected ERP solution must provide.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Module</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-01</td>
+<td>Consolidate patient records across all three locations into a single accessible record</td>
+<td>Patient Management</td>
+<td>Head Nurse</td>
+</tr>
+<tr>
+<td>FR-02</td>
+<td>Provide real-time financial reporting across all hospital locations</td>
+<td>Billing and Finance</td>
+<td>CFO</td>
+</tr>
+<tr>
+<td>FR-03</td>
+<td>Provide real-time inventory tracking with automated low-stock alerts</td>
+<td>Inventory</td>
+<td>Procurement Lead</td>
+</tr>
+<tr>
+<td>FR-04</td>
+<td>Generate audit-ready compliance reports across HIPAA, GDPR, and NHS Digital without manual assembly</td>
+<td>Audit and Compliance</td>
+<td>Compliance Officer</td>
+</tr>
+<tr>
+<td>FR-05</td>
+<td>Integrate HR scheduling data with clinical and administrative demand</td>
+<td>HR</td>
+<td>HR Manager</td>
+</tr>
+<tr>
+<td>FR-06</td>
+<td>Provide role-based access control across all four core modules</td>
+<td>System-wide</td>
+<td>IT Director</td>
+</tr>
+</tbody>
+</table>
+<h2>BRD Section 6: Non-Functional Requirements</h2>
+<p>These requirements define how the ERP solution must perform rather than what it must do.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Category</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NFR-01</td>
+<td>System uptime of 99.5% or higher during operating hours</td>
+<td>Reliability</td>
+</tr>
+<tr>
+<td>NFR-02</td>
+<td>Patient data encrypted at rest and in transit</td>
+<td>Security</td>
+</tr>
+<tr>
+<td>NFR-03</td>
+<td>Role-based access must be auditable and independently verifiable</td>
+<td>Compliance</td>
+</tr>
+<tr>
+<td>NFR-04</td>
+<td>Core workflows must complete in under 3 seconds</td>
+<td>Performance</td>
+</tr>
+<tr>
+<td>NFR-05</td>
+<td>Interface must be usable by clinical staff with minimal additional training</td>
+<td>Usability</td>
+</tr>
+</tbody>
+</table>
+<h2>BRD Section 7: Business Rules</h2>
+<p>The following business rules govern how the solution must operate regardless of the ERP platform selected.</p>
+<ul>
+<li><strong>BR-01:</strong> Patient data may only be accessed by staff with an active clinical or administrative assignment to that patient</li>
+<li><strong>BR-02:</strong> Financial reports must reconcile automatically against source billing data before publication to leadership</li>
+<li><strong>BR-03:</strong> Inventory reorder thresholds must be configurable per supply category, not fixed system-wide</li>
+</ul>
+<h2>BRD Section 8: Assumptions and Constraints</h2>
+<p>The following assumptions and constraints define the boundaries within which these requirements were developed, and should be revisited if any of them change materially before implementation.</p>
+<p><strong>Assumptions:</strong> stakeholder personas represent the actual operational priorities of their respective roles; existing hospital infrastructure can support a modern ERP platform without a separate infrastructure upgrade project; staff will receive adequate training and change management support during rollout.</p>
+<p><strong>Constraints:</strong> implementation must comply with HIPAA, GDPR, and NHS Digital simultaneously, not sequentially; the solution must integrate with, or replace, four existing legacy systems without a full service interruption; budget and timeline are to be defined during the business case phase, not assumed at the requirements stage.</p>
+<h2>BRD Section 9: Approval and Sign-off</h2>
+<p>This is a draft, presented for stakeholder review. No formal approval has been recorded against this document. Sign-off authority sits with the CEO, CFO, and Compliance Officer jointly, consistent with their designation as high-power, high-interest stakeholders in Section 01.</p>
+<h2>BRD Section 10: Acceptance and Success Criteria</h2>
+<p>This BRD will be considered complete and actionable when:</p>
+<ul>
+<li>Stakeholder requirements are fully documented (complete, see Section 03)</li>
+<li>Requirements are formally approved by the sign-off authority named in Section 9 (pending)</li>
+<li>Traceability is established from requirement to gap to business objective (complete, see Section 06)</li>
+<li>ERP platform evaluation is completed against these requirements (pending, see Section 08)</li>
+<li>Leadership approval is obtained to proceed with implementation (pending)</li>
+</ul>
+<hr />
+<h2>Executive Close</h2>
+<p><em>What should leadership remember before moving on?</em></p>
+<div class="consultant-observation">
+<strong>Consultant's Observation:</strong> I did not write a single new requirement into this document. Every line traces to a stakeholder identified in Section 01, a problem defined in Section 02, or a requirement elicited in Section 03. A BRD built this way survives scrutiny in a way one written fresh at the compilation stage does not, there is nothing in it that cannot be traced back to where it actually came from.
+</div>
+
+<div class="executive-takeaway">
+<strong>Executive Takeaway</strong>
+
+<p>A Business Requirements Document is not where analysis happens.</p>
+
+<p><strong>It is where analysis already done gets formalized into something an organization can act on and be held to.</strong></p>
+</div>
+
+<p>I built this BRD to formalize the outputs of IntelliMed's discovery phase into a single decision-ready document. Every requirement, business rule, assumption, and constraint in it traces back to analysis already completed earlier in this engagement.</p>
+<p>The next section evaluates ERP platforms against these documented requirements, so vendor selection is driven by business need, not software capability alone.</p>
+<hr />
+<p><em>IntelliMed Health: ERP Implementation in the Health Sector</em>
+<em>Section 07: Draft Business Requirements Document</em></p></div></body></html>

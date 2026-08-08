@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Risk and Opportunity Register | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f4f2ee; --card: #ffffff; --ink: #1f2430; --ink-soft: #4a5060;
+    --muted: #8a8578; --cyan: #01b9ee; --cyan-deep: #017a9e; --cyan-pale: #e3f7fd;
+    --line: #e2ded4;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'Space Grotesk',sans-serif; font-weight:600; color: var(--ink); }
+  .mono { font-family:'JetBrains Mono', monospace; }
+  a { color: var(--cyan-deep); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background:#faf9f6; border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:860px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: var(--cyan-deep); text-decoration:none; font-size:14px; border:1px solid var(--line); padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--cyan); background: var(--cyan-pale); }
+  .masthead span.doclabel { font-family:'JetBrains Mono', monospace; font-size:13px; color: var(--muted); }
+  h1 { font-size: 30px; margin-top: 0; }
+  h3 { color: var(--cyan-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14.5px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--ink); color:#fff; font-size: 13px; }
+  tr:nth-child(even) td { background: #faf9f6; }
+  blockquote { background: var(--cyan-pale); border-left: 3px solid var(--cyan-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0; }
+  blockquote p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'JetBrains Mono', monospace; background: var(--cyan-pale); color: var(--cyan-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="ZediMart.html" class="back">← Back to case study</a>
+<span class="doclabel">ZediMart / register.md</span>
+</div></header>
+<div class="wrap">
+<h1>ZediMart: Executive Risk and Opportunity Register</h1>
+<h3>Applied Business Intelligence Case Study — Independently Developed</h3>
+<hr />
+<h2>OPPORTUNITY REGISTER</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Opportunity</th>
+<th>Evidence</th>
+<th>Source Query</th>
+<th>Priority</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O1</td>
+<td>Restore confidence in executive revenue reporting by reporting Sales and Orders separately until their time periods can be reconciled</td>
+<td>Sales spans Nov 2024 to Apr 2025. Orders spans all of 2026. Zero overlapping days between the two revenue-bearing tables</td>
+<td>Query 7, Query 12</td>
+<td>HIGH</td>
+<td>Data/BI Team</td>
+</tr>
+<tr>
+<td>O2</td>
+<td>Build a tiered engagement strategy around the High-value order segment</td>
+<td>216 orders (21.6% of volume) generate N3,863,184, 37.0% of total order revenue. This segment is already disproportionately valuable without any targeted strategy in place</td>
+<td>Query 6</td>
+<td>HIGH</td>
+<td>Marketing</td>
+</tr>
+<tr>
+<td>O3</td>
+<td>Prioritize restocking at the five stores carrying the heaviest reorder breach load, rather than treating all 154 breaches as equal priority</td>
+<td>ZediMart Branch 9 (Kano) carries 21 breaches, the highest of any store, followed by Branch 8 and Branch 2 (Lagos, 18 each), then Branch 6 (Port Harcourt) and Branch 10 (Lagos) at 15 each</td>
+<td>Query 10</td>
+<td>MEDIUM</td>
+<td>Inventory / Store Ops</td>
+</tr>
+<tr>
+<td>O4</td>
+<td>Use the customer base as a reliable foundation for marketing and segmentation work without further cleanup cost</td>
+<td>500 of 500 customer records are complete and unique, zero duplicate IDs, zero duplicate emails, zero duplicate phone numbers, zero missing fields, confirmed rather than assumed</td>
+<td>Query 1, Query 2</td>
+<td>MEDIUM</td>
+<td>Marketing</td>
+</tr>
+<tr>
+<td>O5</td>
+<td>Close the product lifecycle gap by adding a status field to the Products schema</td>
+<td>No field currently distinguishes active from discontinued products. The only available proxy (zero stock across every store) returns no candidates, meaning the business currently cannot tell whether it has no discontinued products or simply cannot see them</td>
+<td>Query 9</td>
+<td>MEDIUM</td>
+<td>Data/BI Team</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>RISK REGISTER</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Risk</th>
+<th>Description</th>
+<th>Impact</th>
+<th>Probability</th>
+<th>Risk Level</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>Executive revenue figures misrepresent two disconnected reporting periods as one continuous stream</td>
+<td>Combining Sales (N7,447,707) and Orders (N10,447,947) into a single N17,895,654 figure, the natural first move for a dashboard, implies one continuous revenue timeline that the underlying data does not support</td>
+<td>HIGH: any dashboard built on the naive combined figure misleads leadership about actual current-period performance</td>
+<td>HIGH: this is the default behavior of most reporting tools unless explicitly prevented</td>
+<td>CRITICAL</td>
+<td>Report Sales and Orders as separate, clearly labeled figures until the source systems generating each table are reconciled or reconfirmed as genuinely separate data streams</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>41.3% of all orders are dated after the date this analysis was performed</td>
+<td>413 of 1,000 orders carry a date later than 2026-07-30. This raises a direct question about data entry integrity, system clock configuration, or the presence of forward-dated placeholder records</td>
+<td>HIGH: current order volume and revenue cannot be taken at face value until this is explained</td>
+<td>HIGH: affects nearly half of the entire Orders table</td>
+<td>CRITICAL</td>
+<td>Confirm with the source system owner whether future-dated orders reflect scheduled/recurring orders, a system clock issue, or test data before these records are used in any current-period report</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>Six store-product combinations are at zero stock right now, inside a broader pattern of 154 combinations below reorder level</td>
+<td>Immediate stockouts risk lost sales and customer dissatisfaction at the point of sale. The broader 154-combination pattern (15.4% of all inventory records) signals a restocking cadence that is not keeping pace with demand</td>
+<td>HIGH for the 6 immediate stockouts, MEDIUM for the broader pattern</td>
+<td>HIGH: already occurring, not a projection</td>
+<td>HIGH</td>
+<td>Immediate restock at the 6 zero-stock combinations. Structural review of restocking cadence at the five highest-breach stores, led by Branch 9 in Kano</td>
+</tr>
+<tr>
+<td>R4</td>
+<td>The data model cannot confirm which products are discontinued</td>
+<td>The stakeholder request to flag discontinued products cannot be fulfilled with certainty, since no lifecycle or status field exists. The only proxy available (zero stock everywhere) currently shows no candidates</td>
+<td>MEDIUM: the business cannot distinguish "no discontinued products" from "discontinued products we cannot see"</td>
+<td>MEDIUM: becomes more likely to matter as the product catalogue grows or ages</td>
+<td>MEDIUM</td>
+<td>Add a product status field to the schema. Until then, do not report on discontinued products as a confirmed category, only as an unanswerable question</td>
+</tr>
+<tr>
+<td>R5</td>
+<td>The data model cannot confirm which orders remain unpaid</td>
+<td>Every order in this dataset already carries a completed payment method (POS, Transfer, or Cash). No pending or unpaid status exists anywhere in the Orders table, meaning Finance's request for a payment-completeness view cannot be answered from this data</td>
+<td>MEDIUM: Finance may be operating without visibility into incomplete transactions if they exist upstream and are not being captured here</td>
+<td>MEDIUM: depends on whether pending payments genuinely do not occur, or simply are not recorded</td>
+<td>MEDIUM</td>
+<td>Confirm with the source system whether an unpaid/pending order state exists upstream and, if so, ensure it flows into this dataset</td>
+</tr>
+<tr>
+<td>R6</td>
+<td>Customer records contain full name, phone number, and email address that are not documented in the published data description</td>
+<td>Three fields present in the actual Customers table (FullName, Phone, Email) do not appear in the official data dictionary. Anyone relying on the published description would not know these fields exist</td>
+<td>LOW to MEDIUM: a documentation and governance gap, independent of whether the underlying data is fictional or real</td>
+<td>MEDIUM: likely to recur if the data dictionary is not updated alongside the schema</td>
+<td>LOW-MEDIUM</td>
+<td>Update the data dictionary to reflect all fields actually present in each table before this dataset or its structure is reused</td>
+</tr>
+<tr>
+<td>R7</td>
+<td>Source files were supplied without header rows</td>
+<td>All six CSVs begin directly with data, no column titles. Any tool or person loading these files without knowing this convention silently loses the first record of every table</td>
+<td>LOW: a one-time data loss risk during onboarding, not an ongoing one once documented</td>
+<td>LOW: only affects first-time handling of the raw files</td>
+<td>LOW</td>
+<td>Document this explicitly wherever the raw files are distributed, and confirm all downstream loads account for it</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>SUMMARY MATRIX</h2>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Count</th>
+<th>Opportunities</th>
+<th>Risks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Critical</td>
+<td>1</td>
+<td>None</td>
+<td>R1: Naive revenue combination</td>
+</tr>
+<tr>
+<td>High</td>
+<td>3</td>
+<td>O1, O2</td>
+<td>R2, R3</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>4</td>
+<td>O3, O4, O5</td>
+<td>R4, R5</td>
+</tr>
+<tr>
+<td>Low to Medium</td>
+<td>1</td>
+<td>None</td>
+<td>R6</td>
+</tr>
+<tr>
+<td>Low</td>
+<td>1</td>
+<td>None</td>
+<td>R7</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Revenue concentration confirmed:</strong> 216 orders (21.6% of volume) account for 37.0% of total order revenue (N3,863,184 of N10,447,947).</p>
+<p><strong>Reporting integrity confirmed:</strong> zero overlapping days exist between Sales and Orders, the two tables most likely to be combined into a single executive revenue figure.</p>
+<p><strong>Data completeness confirmed:</strong> 500 of 500 customer records pass full duplication and completeness checks, and 1,000 of 1,000 orders reference valid customers, with zero orphaned records anywhere in the dataset.</p>
+<p>Every figure in this register traces directly to a query in the ZediMart SQL Query Library, executed and verified against a live PostgreSQL database. Nothing here is estimated or assumed.</p>
+<hr />
+<p><em>ZediMart Executive Risk and Opportunity Register</em>
+<em>Applied Business Intelligence Case Study — Independently Developed</em></p>
+<h3>Document Relationships</h3>
+<ul>
+<li><strong>Evidence Source:</strong> ZediMart SQL Query Library</li>
+<li><strong>Feeds Into:</strong> Executive Prioritization Matrix, Business Recommendations</li>
+</ul></div></body></html>

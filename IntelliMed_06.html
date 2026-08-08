@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Section 06: RTM | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f7f9f9; --card: #ffffff; --ink: #00325D; --ink-soft: #3d4a52;
+    --muted: #7a8a90; --navy: #00325D; --navy-deep: #001e38; --teal: #8BC5C9;
+    --teal-deep: #4d9297; --teal-pale: #eaf4f4; --line: #dbe6e6; --amber: #c76b1e;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'IBM Plex Sans',sans-serif; font-weight:600; color: var(--navy); }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  a { color: var(--teal-deep); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background: var(--navy); border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:900px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: #cfe3e6; text-decoration:none; font-size:14px; border:1px solid #2a4a5c; padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--teal); color: var(--teal); }
+  .masthead span.doclabel { font-family:'IBM Plex Mono', monospace; font-size:13px; color:#9fc0c4; }
+  h2 { font-size: 26px; margin-top: 0; }
+  h3 { color: var(--teal-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--navy); color:#fff; font-size: 12.5px; }
+  tr:nth-child(even) td { background: #fafcfc; }
+  blockquote, div.executive-takeaway, div.consultant-observation {
+    background: var(--teal-pale); border-left: 3px solid var(--teal-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0;
+  }
+  div.executive-takeaway p, div.consultant-observation p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'IBM Plex Mono', monospace; background: var(--teal-pale); color: var(--teal-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="IntelliMed.html" class="back">&larr; Back to case study</a>
+<span class="doclabel">IntelliMed / section-06</span>
+</div></header>
+<div class="wrap">
+<h2>06. End-to-End Requirements Traceability Matrix</h2>
+<hr />
+<h2>Executive Overview</h2>
+<p><em>Can every requirement in this engagement be traced back to why it exists, and forward to what resolves it?</em></p>
+<p>A requirement that cannot be traced back to a business objective is an assumption wearing a requirement's clothing. A requirement that cannot be traced forward to a gap, a formal document, and a real evaluation is a record, not a decision tool. This section builds that chain in both directions, back to Section 01's stakeholder register, forward through Section 05's gap analysis, Section 07's BRD, and Section 08's ERP evaluation, for every requirement, rule, and non-functional condition captured in Section 03.</p>
+<p>I did not create a new prioritization or capability judgment here. Every column in this matrix pulls directly from a section already built. Where a gap in that earlier work surfaced during this exercise, I am stating it directly rather than filling it in silently.</p>
+<hr />
+<h2>Functional Requirements Traceability</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Stakeholder</th>
+<th>Business Objective</th>
+<th>Workflow Reference (Section 04)</th>
+<th>Primary Gap (Section 05)</th>
+<th>Priority</th>
+<th>BRD Section</th>
+<th>ERP Evaluation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-01</td>
+<td>Unified patient records across all locations</td>
+<td>Head Nurse</td>
+<td>Clinical workflow efficiency</td>
+<td>Patient Record Access</td>
+<td>Integration</td>
+<td>Must Have</td>
+<td>BRD Section 5</td>
+<td>Assessed in Section 08 as part of overall functional requirement alignment; no platform-specific patient-record feature comparison was scoped</td>
+</tr>
+<tr>
+<td>FR-02</td>
+<td>Real-time financial reporting across locations</td>
+<td>CFO</td>
+<td>Financial visibility and budget control</td>
+<td>Billing and Financial Reporting</td>
+<td>Integration</td>
+<td>Must Have</td>
+<td>BRD Section 5</td>
+<td>Assessed in Section 08 as part of overall functional requirement alignment</td>
+</tr>
+<tr>
+<td>FR-03</td>
+<td>Real-time inventory tracking with automated alerts</td>
+<td>Procurement Lead</td>
+<td>Accurate supply and medication tracking</td>
+<td>Inventory and Supply Management</td>
+<td>Functional</td>
+<td>Should Have</td>
+<td>BRD Section 5</td>
+<td>Assessed in Section 08 as part of overall functional requirement alignment</td>
+</tr>
+<tr>
+<td>FR-04</td>
+<td>Automated, audit-ready compliance reporting</td>
+<td>Compliance Officer</td>
+<td>Regulatory compliance across HIPAA, GDPR, NHS Digital</td>
+<td>Compliance Reporting</td>
+<td>Compliance</td>
+<td>Must Have</td>
+<td>BRD Section 5</td>
+<td>Directly assessed in Section 08's Compliance Support criterion; Infor CloudSuite Healthcare rated strongest, Microsoft Dynamics 365 rated as requiring deliberate configuration</td>
+</tr>
+<tr>
+<td>FR-05</td>
+<td>HR scheduling integrated with clinical and administrative demand</td>
+<td>HR Manager</td>
+<td>Staff adoption and training</td>
+<td>No corresponding workflow was mapped in Section 04, worth adding in a future workflow mapping pass</td>
+<td>Integration</td>
+<td>Should Have</td>
+<td>BRD Section 5</td>
+<td>Assessed in Section 08 as part of overall functional requirement alignment</td>
+</tr>
+<tr>
+<td>FR-06</td>
+<td>Role-based access control across all core modules</td>
+<td>IT Director</td>
+<td>Systems integration and security</td>
+<td>Touches all four Section 04 workflows, not one specific process</td>
+<td>Compliance</td>
+<td>Must Have</td>
+<td>BRD Section 5</td>
+<td>Assessed in Section 08 as part of overall functional requirement alignment; directly relevant to the Compliance Support criterion given its audit and access-control function</td>
+</tr>
+</tbody>
+</table>
+<p>I traced every functional requirement across three dimensions: back to the stakeholder and business objective that originated it, across to the workflow it changes, and forward to the gap it resolves. This is the complete chain the brief asks for, elicitation through to the gap it resolves.</p>
+<hr />
+<h2>Non-Functional Requirements Traceability</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Related Module</th>
+<th>Priority</th>
+<th>Validation Method</th>
+<th>Evaluated In</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NFR-01</td>
+<td>System uptime of 99.5% or higher</td>
+<td>System-wide</td>
+<td>Must Have</td>
+<td>Vendor SLA documentation</td>
+<td>Section 08</td>
+</tr>
+<tr>
+<td>NFR-02</td>
+<td>Patient data encrypted at rest and in transit</td>
+<td>System-wide</td>
+<td>Must Have</td>
+<td>Vendor security documentation review</td>
+<td>Section 08</td>
+</tr>
+<tr>
+<td>NFR-03</td>
+<td>Role-based access auditable and independently verifiable</td>
+<td>Audit and Compliance</td>
+<td>Must Have</td>
+<td>Access control review</td>
+<td>Section 08</td>
+</tr>
+<tr>
+<td>NFR-04</td>
+<td>Core workflows complete in under 3 seconds</td>
+<td>System-wide</td>
+<td>Should Have</td>
+<td>Performance benchmark</td>
+<td>Section 08</td>
+</tr>
+<tr>
+<td>NFR-05</td>
+<td>Interface usable with minimal additional training</td>
+<td>System-wide</td>
+<td>Could Have</td>
+<td>Demonstration and usability assessment</td>
+<td>Section 08</td>
+</tr>
+</tbody>
+</table>
+<div class="consultant-observation">
+<strong>Consultant's Observation:</strong> NFR-01, NFR-02, and NFR-03, uptime, encryption, and access auditability, had never been assigned a MoSCoW priority in Section 03. I traced this gap while building this matrix and corrected it directly, all three are now rated Must Have, since each concerns patient data reliability or security in a healthcare setting.
+</div>
+
+<hr />
+<h2>Business Rules Traceability</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Rule</th>
+<th>Stakeholder</th>
+<th>Business Objective</th>
+<th>Supports Requirement</th>
+<th>Referenced In</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BR-01</td>
+<td>Patient data accessible only to staff with an active clinical or administrative assignment</td>
+<td>Compliance Officer, Head Nurse</td>
+<td>Regulatory compliance and clinical workflow integrity</td>
+<td>FR-01, FR-06</td>
+<td>BRD Section 7</td>
+</tr>
+<tr>
+<td>BR-02</td>
+<td>Financial reports reconcile automatically against source billing data before publication</td>
+<td>CFO</td>
+<td>Financial visibility and budget control</td>
+<td>FR-02</td>
+<td>BRD Section 7</td>
+</tr>
+<tr>
+<td>BR-03</td>
+<td>Inventory reorder thresholds configurable per supply category</td>
+<td>Procurement Lead</td>
+<td>Accurate supply and medication tracking</td>
+<td>FR-03</td>
+<td>BRD Section 7</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Traceability Coverage Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Total</th>
+<th>Traceability Achieved</th>
+<th>Remaining Validation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Functional Requirements</td>
+<td>6</td>
+<td>6</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Non-Functional Requirements</td>
+<td>5</td>
+<td>5 (to stakeholder intent, and comparatively assessed across four platforms in Section 08)</td>
+<td>5 (final technical validation against a specific vendor's documentation awaits vendor selection and procurement, beyond this case study's scope)</td>
+</tr>
+<tr>
+<td>Business Rules</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<h3>Requirements Lifecycle</h3>
+<p>This matrix formalizes traceability through Gap Analysis. I built it as one stage in a longer lifecycle. Both stages ahead of it, the BRD and the ERP evaluation, are now complete, and the BRD Section and ERP Evaluation columns above reflect their actual content, not a placeholder:</p>
+<p><code>Business Problem (Section 02)
+        |
+        v
+Stakeholder Need (Section 01)
+        |
+        v
+Functional Requirement (Section 03)
+        |
+        v
+Workflow Impact (Section 04)
+        |
+        v
+Gap Analysis (Section 05)
+        |
+        v
+End-to-End Requirements Traceability Matrix (Section 06, this section)
+        |
+        v
+Business Requirements Document (Section 07, complete)
+        |
+        v
+ERP Evaluation (Section 08, complete)</code></p>
+<div class="executive-takeaway">
+<strong>Executive Takeaway</strong>
+
+<p>Fourteen requirements, rules, and conditions. Every one traces back to a named stakeholder and forward to either a gap or an explicit note on what remains unresolved.</p>
+
+<p><strong>Nothing in this engagement exists without a reason attached to it, and nothing is marked complete before it actually is.</strong></p>
+</div>
+
+<hr />
+<h2>Executive Close</h2>
+<p><em>What should leadership remember before moving on?</em></p>
+<p>I established full traceability on all six functional requirements and all three business rules.</p>
+<p>All five non-functional requirements now carry a MoSCoW priority, three of them newly prioritized after this exercise exposed a gap in Section 03. All five were comparatively assessed across four platforms in Section 08, though final technical validation against a specific vendor's actual documentation still awaits real procurement, not this case study.</p>
+<p>This matrix now completes the traceability chain I built across the IntelliMed engagement. Every requirement can be followed from the business problem that created it, through workflow analysis and gap assessment, into the Business Requirements Document, and finally into ERP platform evaluation. No requirement stands alone, and none exists without a documented business rationale.</p>
+<hr />
+<p><em>IntelliMed Health: ERP Implementation in the Health Sector</em>
+<em>Section 06: End-to-End Requirements Traceability Matrix</em></p></div></body></html>

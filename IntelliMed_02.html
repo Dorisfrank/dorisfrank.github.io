@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Section 02: Needs Assessment | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f7f9f9; --card: #ffffff; --ink: #00325D; --ink-soft: #3d4a52;
+    --muted: #7a8a90; --navy: #00325D; --navy-deep: #001e38; --teal: #8BC5C9;
+    --teal-deep: #4d9297; --teal-pale: #eaf4f4; --line: #dbe6e6; --amber: #c76b1e;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'IBM Plex Sans',sans-serif; font-weight:600; color: var(--navy); }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  a { color: var(--teal-deep); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background: var(--navy); border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:900px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: #cfe3e6; text-decoration:none; font-size:14px; border:1px solid #2a4a5c; padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--teal); color: var(--teal); }
+  .masthead span.doclabel { font-family:'IBM Plex Mono', monospace; font-size:13px; color:#9fc0c4; }
+  h2 { font-size: 26px; margin-top: 0; }
+  h3 { color: var(--teal-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--navy); color:#fff; font-size: 12.5px; }
+  tr:nth-child(even) td { background: #fafcfc; }
+  blockquote, div.executive-takeaway, div.consultant-observation {
+    background: var(--teal-pale); border-left: 3px solid var(--teal-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0;
+  }
+  div.executive-takeaway p, div.consultant-observation p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'IBM Plex Mono', monospace; background: var(--teal-pale); color: var(--teal-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="IntelliMed.html" class="back">&larr; Back to case study</a>
+<span class="doclabel">IntelliMed / section-02</span>
+</div></header>
+<div class="wrap">
+<h2>02. Needs Assessment and Problem Definition</h2>
+<hr />
+<h2>Executive Overview</h2>
+<p><em>What is actually going wrong, department by department?</em></p>
+<h3>Departmental Pain Points</h3>
+<p>Section 01 established who holds a stake in this engagement. Here, I asked a narrower question of each of them: what, specifically, is broken in the way they work today.</p>
+<p><strong>Finance.</strong> Financial reporting is consolidated manually across three disconnected billing and accounting systems. Month-end close depends on staff exporting data from each system and reconciling it by hand, which delays financial visibility and increases the risk of reporting errors reaching leadership uncorrected.</p>
+<p><strong>Clinical Operations.</strong> Patient records are not unified across the three hospital locations. A patient treated at more than one site does not have a single continuous record, which slows clinical decision-making and increases the risk of incomplete information at the point of care.</p>
+<p><strong>IT.</strong> No integration layer connects the four core systems, patient records, billing, HR, and inventory. Every cross-system data movement is a manual export and import, which multiplies the points where data can be lost, duplicated, or entered incorrectly.</p>
+<p><strong>Compliance.</strong> Generating a unified, audit-ready report across HIPAA, GDPR, and NHS Digital requirements currently means pulling data from four separate systems and manually assembling it into a single audit trail. This is slow, and it is difficult to prove the assembled report is complete.</p>
+<p><strong>Procurement and Supply Chain.</strong> Inventory is tracked separately from purchasing and usage data, with no real-time visibility into stock levels. This has produced stockouts of critical supplies, discovered only after the shortage has already affected operations.</p>
+<p><strong>Human Resources.</strong> Staff scheduling is managed independently of the other systems, with no shared view of workforce availability against clinical or administrative demand.</p>
+<div class="consultant-observation">
+<strong>Consultant's Observation:</strong> I found that every one of these pain points traces back to the same root cause, four systems that were never designed to share data. Finance's reporting delay, Clinical's fragmented records, and Compliance's audit burden are not six separate problems requiring six separate fixes. They are one structural problem, system fragmentation, surfacing six different ways depending on which department feels it.
+</div>
+
+<hr />
+<h2>Problem Statement</h2>
+<p>IntelliMed Health operates four core business systems, patient records, billing, HR, and inventory, that do not communicate with one another. This fragmentation forces staff to transfer data manually between systems, which delays financial reporting, obscures real-time inventory visibility, complicates regulatory compliance across HIPAA, GDPR, and NHS Digital, and prevents leadership from making decisions based on a single, trusted view of hospital operations.</p>
+<p>The problem is not a lack of data. IntelliMed generates more than enough data across its departments to run effectively. The problem is that none of it is structured to be shared, trusted, or acted on quickly.</p>
+<hr />
+<h2>Business Goals</h2>
+<p>An ERP implementation at IntelliMed is expected to:</p>
+<ul>
+<li>Consolidate patient records, billing, HR, and inventory data onto a single integrated platform</li>
+<li>Reduce the financial reporting cycle from a manual, multi-system reconciliation to a real-time consolidated view</li>
+<li>Provide real-time inventory visibility sufficient to prevent critical stockouts before they occur</li>
+<li>Generate audit-ready compliance reporting across HIPAA, GDPR, and NHS Digital without manual assembly</li>
+<li>Give leadership a single, trusted operational view across all three hospital locations</li>
+</ul>
+<div class="executive-takeaway">
+<strong>Executive Takeaway</strong>
+
+<p>IntelliMed does not have six departmental problems.</p>
+
+<p><strong>It has one structural problem, system fragmentation, that six departments are each absorbing the cost of separately.</strong></p>
+</div>
+
+<hr />
+<h2>Executive Close</h2>
+<p><em>What should leadership remember before moving on?</em></p>
+<p>Six departments, six visible symptoms, one underlying cause. That distinction matters for what comes next: the requirements this engagement gathers in the following section need to solve the structural problem, not just patch each department's individual symptom.</p>
+<p>A fix that unifies Finance's reporting without addressing the same root cause in Clinical or Compliance would leave IntelliMed exactly where it started, managing five remaining fragmented systems instead of six.</p>
+<hr />
+<p><em>IntelliMed Health: ERP Implementation in the Health Sector</em>
+<em>Section 02: Needs Assessment and Problem Definition</em></p></div></body></html>

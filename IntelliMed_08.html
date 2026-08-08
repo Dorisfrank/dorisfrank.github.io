@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Section 08: ERP Evaluation | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f7f9f9; --card: #ffffff; --ink: #00325D; --ink-soft: #3d4a52;
+    --muted: #7a8a90; --navy: #00325D; --navy-deep: #001e38; --teal: #8BC5C9;
+    --teal-deep: #4d9297; --teal-pale: #eaf4f4; --line: #dbe6e6; --amber: #c76b1e;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'IBM Plex Sans',sans-serif; font-weight:600; color: var(--navy); }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  a { color: var(--teal-deep); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background: var(--navy); border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:900px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: #cfe3e6; text-decoration:none; font-size:14px; border:1px solid #2a4a5c; padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--teal); color: var(--teal); }
+  .masthead span.doclabel { font-family:'IBM Plex Mono', monospace; font-size:13px; color:#9fc0c4; }
+  h2 { font-size: 26px; margin-top: 0; }
+  h3 { color: var(--teal-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--navy); color:#fff; font-size: 12.5px; }
+  tr:nth-child(even) td { background: #fafcfc; }
+  blockquote, div.executive-takeaway, div.consultant-observation {
+    background: var(--teal-pale); border-left: 3px solid var(--teal-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0;
+  }
+  div.executive-takeaway p, div.consultant-observation p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'IBM Plex Mono', monospace; background: var(--teal-pale); color: var(--teal-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="IntelliMed.html" class="back">&larr; Back to case study</a>
+<span class="doclabel">IntelliMed / section-08</span>
+</div></header>
+<div class="wrap">
+<h2>08. ERP Market Research and Evaluation</h2>
+<hr />
+<h2>Executive Overview</h2>
+<p><em>Given what Sections 01 through 07 established IntelliMed actually needs, which ERP platforms genuinely fit?</em></p>
+<p>Everything before this section was discovery. This one is where that discovery gets tested against what the market actually offers. I researched four ERP platforms with a genuine, active presence in hospital and health system deployments, not a generic enterprise ERP list, and evaluated each against the five criteria the brief specifies: cost, compliance support, scalability, usability, and implementation timeline.</p>
+<p>I did not evaluate these platforms against generic ERP criteria. I evaluated them against IntelliMed's own requirements, three Must Have compliance requirements, an integration gap as the dominant finding across Section 05, and a mid-sized three-location network rather than a large multinational health system.</p>
+<hr />
+<h2>Platforms Evaluated</h2>
+<p>Four platforms with an established presence in hospital ERP deployments, drawn from current market research on healthcare-specific ERP adoption:</p>
+<ul>
+<li><strong>SAP S/4HANA for Healthcare</strong></li>
+<li><strong>Oracle Fusion Cloud ERP</strong></li>
+<li><strong>Infor CloudSuite Healthcare</strong></li>
+<li><strong>Microsoft Dynamics 365</strong></li>
+</ul>
+<hr />
+<h2>Evaluation Methodology</h2>
+<p>Each platform was evaluated against the criteria defined in the project brief, and validated against IntelliMed's own business priorities established during discovery. Assessment focused on:</p>
+<ul>
+<li>Alignment with functional requirements documented in Section 03</li>
+<li>Support for non-functional requirements, particularly security and compliance</li>
+<li>Ability to address the integration gaps identified as dominant in Section 05</li>
+<li>Suitability for a three-location hospital network specifically, not enterprise scale generally</li>
+<li>Estimated implementation effort, scalability, and total cost of ownership</li>
+</ul>
+<h2>ERP Comparison Matrix</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>SAP S/4HANA</th>
+<th>Oracle Fusion Cloud ERP</th>
+<th>Infor CloudSuite Healthcare</th>
+<th>Microsoft Dynamics 365</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estimated Total Cost of Ownership (Implementation + Licensing)</td>
+<td>$500K to $5M+</td>
+<td>$400K to $3M+</td>
+<td>$300K to $2M+</td>
+<td>$150K to $1M+</td>
+</tr>
+<tr>
+<td>Compliance Support</td>
+<td>Strong compliance frameworks, configurable to HIPAA, GDPR, NHS Digital; verify native certification per module during vendor demos</td>
+<td>Native compliance features across HIPAA, GDPR, and healthcare-specific regulation</td>
+<td>Native HIPAA and HITECH-focused features, purpose-built for the healthcare vertical</td>
+<td>Built on HIPAA-compliant Azure infrastructure; compliance requires deliberate configuration at the implementation layer, not enabled by default</td>
+</tr>
+<tr>
+<td>Scalability</td>
+<td>Very high, designed for large multi-entity enterprises</td>
+<td>Very high, cloud-native, strong at large enterprise scale</td>
+<td>High, purpose-built for mid to large hospital networks</td>
+<td>Moderate to high, strongest for organizations already on the Microsoft and Azure stack</td>
+</tr>
+<tr>
+<td>Usability</td>
+<td>Highly configurable, which extends configuration workshops and training time</td>
+<td>More standardized than SAP, less configuration overhead</td>
+<td>Role-based dashboards designed around healthcare workflows</td>
+<td>Familiar Microsoft interface, generally rated easier for staff to adopt</td>
+</tr>
+<tr>
+<td>Implementation Timeline</td>
+<td>6 to 18 months, extending to 24 months for large deployments</td>
+<td>9 to 18 months</td>
+<td>9 to 30 months, healthcare-specific deployments trending toward the longer end</td>
+<td>6 to 14 months</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Evaluation Summary</h2>
+<p>Two findings stood out to me against IntelliMed's specific profile, not just the general market.</p>
+<p><strong>Compliance depth and implementation timeline trade against each other.</strong> Infor CloudSuite Healthcare offers the strongest native, healthcare-specific compliance functionality of the four, directly relevant given NFR-01, NFR-02, and NFR-03 are all rated Must Have. But its implementation timeline, up to 30 months at the healthcare-specific end, is the longest of any platform evaluated, a real cost against a three-location network that needs the fragmentation problem solved, not managed for another two and a half years.</p>
+<p><strong>Scale fit matters more than platform reputation.</strong> SAP S/4HANA and Oracle Fusion Cloud ERP are widely adopted enterprise ERP platforms with strong capabilities for large, complex organizations, but both are built for, and priced for, large multi-entity organizations. IntelliMed is a three-location network. Unless significant expansion is already planned, both platforms likely represent more cost and complexity than IntelliMed's actual scale requires, this is a case where the most recognized vendor name is not automatically the best fit.</p>
+<p>Microsoft Dynamics 365 is the fastest and least expensive of the four, but its compliance support is explicitly described as requiring deliberate configuration rather than being native out of the box, meaning IntelliMed's Compliance Officer would need direct involvement from day one of implementation, not just at go-live, to avoid the exact audit-trail gap identified in Section 05.</p>
+<h3>Recommendation Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Overall Fit</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Infor CloudSuite Healthcare</td>
+<td>Very High</td>
+<td>Strong healthcare-specific functionality and native compliance alignment; longest implementation timeline of the four</td>
+</tr>
+<tr>
+<td>Microsoft Dynamics 365</td>
+<td>High</td>
+<td>Good fit for a mid-sized network; fastest and least expensive; compliance depends on deliberate configuration, not native depth</td>
+</tr>
+<tr>
+<td>Oracle Fusion Cloud ERP</td>
+<td>Moderate</td>
+<td>Strong enterprise capabilities, but built for a scale beyond IntelliMed's current three locations</td>
+</tr>
+<tr>
+<td>SAP S/4HANA</td>
+<td>Moderate</td>
+<td>Excellent enterprise platform, but higher complexity and cost than IntelliMed's current scale requires</td>
+</tr>
+</tbody>
+</table>
+<div class="consultant-observation">
+<strong>Consultant's Observation:</strong> I am not recommending a single platform. The evidence does not support one, each of the four carries a genuine trade-off against IntelliMed's specific priorities, and picking a winner without a real budget and timeline constraint, which Section 07 explicitly deferred to the business case phase, would be recommending a number I don't have the authority to set. What I can say with confidence: Infor CloudSuite Healthcare and Microsoft Dynamics 365 both merit a closer, vendor-led evaluation given IntelliMed's mid-sized scale, while SAP S/4HANA and Oracle Fusion Cloud ERP should only advance if IntelliMed's expansion plans extend meaningfully beyond three locations.
+</div>
+
+<hr />
+<h2>Executive Close</h2>
+<p><em>What should leadership remember before moving on?</em></p>
+<div class="executive-takeaway">
+<strong>Executive Takeaway</strong>
+
+<p>The objective of ERP evaluation is not to identify the most powerful platform.</p>
+
+<p><strong>It is to identify the platform whose capabilities, implementation effort, and long-term operating model best align with IntelliMed's actual business objectives.</strong></p>
+</div>
+
+<p>I researched four platforms and compared them against IntelliMed's own requirements, not generic ERP criteria. This evaluation narrows the market to the solutions most aligned with IntelliMed's documented business requirements, Infor CloudSuite Healthcare and Microsoft Dynamics 365 merit direct vendor evaluation given IntelliMed's current scale.</p>
+<p>Final vendor selection should proceed through demonstrations, proof-of-concept workshops, commercial negotiations, and reference checks before contract award. The next and final section compiles every deliverable from this engagement into the submission leadership actually reviews.</p>
+<hr />
+<h2>Sources Consulted</h2>
+<ul>
+<li>Alpha Apex Group, "Top 9 Healthcare ERP Systems for 2026"</li>
+<li>ERP Research, "SAP S/4HANA Private Cloud vs Workday for Healthcare"</li>
+<li>ERP Research, "Oracle ERP Cloud vs SAP S/4HANA (2026)"</li>
+<li>ERP Research, "Infor CloudSuite for Healthcare: Features, Benefits &amp; Costs"</li>
+<li>ERP Research, "Microsoft Dynamics 365 vs Infor CloudSuite for Healthcare (2026)"</li>
+<li>ERP Research, "Microsoft Dynamics 365 vs Oracle ERP Cloud for Healthcare"</li>
+<li>ERP Research, "Dynamics 365 for Healthcare: Features, Benefits &amp; Costs"</li>
+<li>CloudyWave, "Best ERP vs SAP vs Oracle: 2026 Complete Guide"</li>
+<li>MedSoftwares, "Hospital ERP Software: Complete Guide 2026"</li>
+</ul>
+<hr />
+<p><em>IntelliMed Health: ERP Implementation in the Health Sector</em>
+<em>Section 08: ERP Market Research and Evaluation</em></p></div></body></html>

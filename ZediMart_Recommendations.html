@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Business Recommendations | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f4f2ee; --card: #ffffff; --ink: #1f2430; --ink-soft: #4a5060;
+    --muted: #8a8578; --cyan: #01b9ee; --cyan-deep: #017a9e; --cyan-pale: #e3f7fd;
+    --line: #e2ded4;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'Space Grotesk',sans-serif; font-weight:600; color: var(--ink); }
+  .mono { font-family:'JetBrains Mono', monospace; }
+  a { color: var(--cyan-deep); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background:#faf9f6; border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:860px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: var(--cyan-deep); text-decoration:none; font-size:14px; border:1px solid var(--line); padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--cyan); background: var(--cyan-pale); }
+  .masthead span.doclabel { font-family:'JetBrains Mono', monospace; font-size:13px; color: var(--muted); }
+  h1 { font-size: 30px; margin-top: 0; }
+  h3 { color: var(--cyan-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14.5px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--ink); color:#fff; font-size: 13px; }
+  tr:nth-child(even) td { background: #faf9f6; }
+  blockquote { background: var(--cyan-pale); border-left: 3px solid var(--cyan-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0; }
+  blockquote p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'JetBrains Mono', monospace; background: var(--cyan-pale); color: var(--cyan-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="ZediMart.html" class="back">← Back to case study</a>
+<span class="doclabel">ZediMart / recommendations.md</span>
+</div></header>
+<div class="wrap">
+<h1>ZediMart: Business Recommendations</h1>
+<h3>Applied Business Intelligence Case Study — Independently Developed</h3>
+<hr />
+<p>Seven recommendations follow, one or two for each stakeholder question. Each recommendation traces directly to a specific entry in the Risk and Opportunity Register and a corresponding priority in the Executive Prioritization Matrix. Rather than applying predefined retail best practices, each recommendation is derived from evidence confirmed during this analysis.</p>
+<hr />
+<h2>Part 1: Customer Intelligence</h2>
+<h3>Recommendation 1: Formalize the validated customer list as the single source of truth for cross-departmental use</h3>
+<p><em>Traces to: O4, Query 1, Query 2</em></p>
+<p><strong>What I analysed:</strong> all 500 customer records, checked for duplicate IDs, duplicate emails, duplicate phone numbers, and missing values across every field.</p>
+<p><strong>What I found:</strong> zero duplication, zero missing values. The customer base is already clean.</p>
+<blockquote>
+<p><strong>Business Insight</strong></p>
+<p>The brief assumed this data needed deduplication before it could be trusted. It did not. The more valuable outcome here is not a cleanup, it is confirmation that Marketing, Finance, and Store Operations can already work from one shared customer list without separate, department-specific versions drifting apart over time.</p>
+</blockquote>
+<p><strong>Recommendation:</strong> adopt this validated list as the single reference customer table across departments, rather than each team maintaining its own extract.</p>
+<p><strong>Expected impact:</strong> removes the risk of departments reporting different customer counts or contact details because they are working from different, unsynced copies of the same underlying data.</p>
+<p><strong>Success metric:</strong> zero variance between the customer count or contact details used in Marketing's next campaign and the count used in this analysis.</p>
+<hr />
+<h2>Part 2: Revenue Interpretation</h2>
+<h3>Recommendation 2: Report Sales and Orders as two separate, clearly labeled figures, not one combined total</h3>
+<p><em>Traces to: R1, O1, Query 7, Query 12</em></p>
+<p><strong>What I analysed:</strong> the full date range and revenue total of both the Sales table and the Orders table.</p>
+<p><strong>What I found:</strong> Sales spans November 2024 to April 2025. Orders spans all of 2026. The two tables share zero overlapping days. Combining them produces a figure of N17,895,654 that represents two periods that never coexisted.</p>
+<blockquote>
+<p><strong>Business Insight</strong></p>
+<p>The natural instinct on any executive dashboard is to sum every revenue-bearing table into one headline number. Here, that instinct produces a figure that is technically additive but not meaningfully true.</p>
+</blockquote>
+<p><strong>Recommendation:</strong> until the relationship between these two tables is confirmed with the source systems, report them as two distinct figures with their date ranges clearly labeled, never as one combined total.</p>
+<p><strong>Expected impact:</strong> prevents leadership from making a decision based on a revenue figure that overstates or misrepresents current performance.</p>
+<p><strong>Success metric:</strong> the next executive dashboard iteration shows Sales and Orders as separate, dated figures, with no single blended revenue KPI combining both.</p>
+<hr />
+<h3>Recommendation 3: Escalate the future-dated orders pattern before treating 2026 order volume as current performance</h3>
+<p><em>Traces to: R2, Query 7 (date range finding)</em></p>
+<p><strong>What I analysed:</strong> every order date against the date this analysis was performed.</p>
+<p><strong>What I found:</strong> 413 of 1,000 orders, 41.3%, carry a date later than the analysis date itself.</p>
+<blockquote>
+<p><strong>Business Insight</strong></p>
+<p>This is not a rounding error or a handful of stray records. It affects nearly half the Orders table, which means "current order volume" as a phrase cannot be answered confidently from this data until the cause is understood, a system clock issue, scheduled or recurring orders, or placeholder records.</p>
+</blockquote>
+<p><strong>Recommendation:</strong> raise this directly with whoever owns the Orders source system before any current-period order metric is presented to leadership.</p>
+<p><strong>Expected impact:</strong> avoids reporting an order volume or revenue trend that is inflated or distorted by records that have not actually occurred yet.</p>
+<p><strong>Success metric:</strong> a documented explanation for the future-dated orders, and, if needed, a corrected Orders dataset with the cause resolved.</p>
+<hr />
+<h2>Part 3: Inventory Evidence</h2>
+<h3>Recommendation 4: Restock the six zero-stock combinations immediately, then review restocking cadence at the five highest-breach stores</h3>
+<p><em>Traces to: O3, R3, Query 10</em></p>
+<p><strong>What I analysed:</strong> current stock levels for all 1,000 store-product combinations against each product's defined reorder level.</p>
+<p><strong>What I found:</strong> 6 combinations are at zero stock right now. A further 154 of 1,000 combinations, 15.4%, sit below their reorder level. ZediMart Branch 9 in Kano carries the heaviest load at 21 breaches, followed by Branch 8 and Branch 2 in Lagos at 18 each.</p>
+<blockquote>
+<p><strong>Business Insight</strong></p>
+<p>The 6 zero-stock items are an immediate, isolated fix. The broader 154-combination pattern, concentrated in five specific stores, is a process problem, not six unrelated stockouts.</p>
+</blockquote>
+<p><strong>Recommendation:</strong> action the 6 zero-stock restocks this week. Separately, commission a structural review of restocking cadence at the five highest-breach stores, starting with Branch 9 in Kano.</p>
+<p><strong>Expected impact:</strong> reduces lost sales from immediate stockouts, and addresses the underlying cadence issue before it produces the next set of zero-stock items.</p>
+<p><strong>Success metric:</strong> zero store-product combinations at zero stock within one week. A measurable reduction in the 154-combination reorder breach count within one quarter.</p>
+<hr />
+<h3>Recommendation 5: Add a product lifecycle status field to the Products schema</h3>
+<p><em>Traces to: O5, R4, Query 9</em></p>
+<p><strong>What I analysed:</strong> whether any field in the Products table could confirm which products are discontinued, as the original business question asked.</p>
+<p><strong>What I found:</strong> no such field exists. The only available proxy, zero stock across every store, currently returns no candidates, which could mean there are no discontinued products, or that discontinued products are not being tracked at all.</p>
+<blockquote>
+<p><strong>Business Insight</strong></p>
+<p>This is a genuine data model gap, not a data quality issue. No amount of further querying against the current schema will answer the original question with certainty.</p>
+</blockquote>
+<p><strong>Recommendation:</strong> add a status field (active, discontinued, seasonal, or similar) to the Products table before this question is asked again.</p>
+<p><strong>Expected impact:</strong> enables accurate discontinued-product reporting going forward, and closes a gap that currently leaves the business unable to distinguish "no problem" from "no visibility."</p>
+<p><strong>Success metric:</strong> the next inventory reconciliation query can answer the discontinued-product question directly, without relying on a proxy.</p>
+<hr />
+<h2>Part 4: Executive Reporting</h2>
+<h3>Recommendation 6: Build a tiered engagement strategy around the High-value order segment</h3>
+<p><em>Traces to: O2, Query 6</em></p>
+<p><strong>What I analysed:</strong> the distribution of order value across all 1,000 orders, classified into High, Medium, and Low bands relative to the dataset average.</p>
+<p><strong>What I found:</strong> 216 orders, 21.6% of total volume, generate N3,863,184, 37.0% of total order revenue. This segment already carries disproportionate value without any targeted strategy in place.</p>
+<blockquote>
+<p><strong>Business Insight</strong></p>
+<p>The highest-value fifth of orders is producing more than a third of revenue on its own. That concentration is worth protecting and growing deliberately rather than treating every order the same.</p>
+</blockquote>
+<p><strong>Recommendation:</strong> identify the customers behind this High-value segment and build a retention and growth strategy specifically around them, before this concentration is left to chance.</p>
+<p><strong>Expected impact:</strong> protects and potentially grows the revenue share already coming from ZediMart's most valuable customers.</p>
+<p><strong>Success metric:</strong> an identified, named High-value customer segment with its own engagement plan, tracked separately from general order volume.</p>
+<hr />
+<h3>Recommendation 7: Confirm whether an unpaid or pending payment status exists upstream before Finance treats payment data as complete</h3>
+<p><em>Traces to: R5, Query 5</em></p>
+<p><strong>What I analysed:</strong> the payment_method field across all 1,000 orders.</p>
+<p><strong>What I found:</strong> every order carries a completed payment method, POS, Transfer, or Cash. No pending or unpaid status exists anywhere in this table, despite the original request specifically asking for orders "including those not yet paid."</p>
+<blockquote>
+<p><strong>Business Insight</strong></p>
+<p>Either ZediMart genuinely has no incomplete transactions, which would be unusual for a retail operation of this size, or incomplete transactions exist upstream and are simply not flowing into this dataset.</p>
+</blockquote>
+<p><strong>Recommendation:</strong> confirm directly with the source payment system whether a pending or unpaid state exists before Finance relies on this table as a complete view of payment status.</p>
+<p><strong>Expected impact:</strong> prevents Finance from underestimating outstanding or at-risk revenue that may exist but is currently invisible in this data.</p>
+<p><strong>Success metric:</strong> a confirmed answer, either the pending state does not exist in ZediMart's operations, or it exists and a path is defined to include it in future reporting.</p>
+<hr />
+<h2>Documentation and Governance Notes</h2>
+<p>Two smaller items surfaced during this analysis that do not warrant full recommendation treatment but should not be lost:</p>
+<ul>
+<li><strong>Customer records contain full name, phone number, and email address that are not listed in the published data description.</strong> The data dictionary should be updated to reflect every field actually present in each table.</li>
+<li><strong>All six source files were supplied without header rows.</strong> This should be documented explicitly wherever these files are shared, so the first record of each table is not silently lost during future loads.</li>
+</ul>
+<hr />
+<h2>Section Summary</h2>
+<p>Every recommendation above traces to a specific, executed query in the ZediMart SQL Query Library, not to assumption or pre-written guidance. Three can be acted on immediately using evidence already available. Three depend on coordination with source-system owners before they can be resolved with confidence. One addresses a structural gap in the data model itself. Collectively, these recommendations are evidence-led responses to the findings in this analysis, rather than predetermined actions inherited from the original case study brief.</p>
+<hr />
+<p><em>ZediMart Business Recommendations</em>
+<em>Applied Business Intelligence Case Study — Independently Developed</em></p>
+<h3>Document Relationships</h3>
+<ul>
+<li><strong>Evidence Source:</strong> Executive Risk and Opportunity Register and Executive Prioritization Matrix (jointly, not either alone)</li>
+<li><strong>Feeds Into:</strong> Implementation Roadmap</li>
+</ul></div></body></html>

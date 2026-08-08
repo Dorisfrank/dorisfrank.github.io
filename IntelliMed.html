@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>IntelliMed Health: ERP Implementation in the Health Sector | Doris Frank</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f9f9;
+    --card: #ffffff;
+    --ink: #00325D;
+    --ink-soft: #3d4a52;
+    --muted: #7a8a90;
+    --navy: #00325D;
+    --navy-deep: #001e38;
+    --teal: #8BC5C9;
+    --teal-deep: #4d9297;
+    --teal-pale: #eaf4f4;
+    --line: #dbe6e6;
+    --amber: #c76b1e;
+    --amber-pale: #fdf0e2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.25;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  a { color: var(--teal-deep); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .hero-img { width: 100%; max-height: 480px; object-fit: cover; display: block; }
+
+  header.masthead { background: var(--navy); padding: 30px 0; }
+  .masthead .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+  .masthead img.logo { height: 140px; }
+  .masthead a.back { color: #cfe3e6; text-decoration: none; font-size: 14px; border: 1px solid #2a4a5c; padding: 8px 16px; border-radius: 6px; }
+  .masthead a.back:hover { border-color: var(--teal); color: var(--teal); }
+
+  .title-block { padding: 40px 0 30px; }
+  .title-block .subtitle { font-size: 24px; font-family: 'IBM Plex Sans', sans-serif; font-weight: 600; color: var(--navy); margin: 0 0 20px; }
+  .disclosure { display: inline-block; background: var(--teal-pale); border-left: 3px solid var(--teal-deep); padding: 10px 16px; font-size: 14px; color: var(--teal-deep); border-radius: 4px; margin-bottom: 8px; }
+  .byline { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+  .badge { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font-size: 13px; }
+  .badge strong { color: var(--ink); }
+  .badge span { color: var(--muted); }
+
+  .glance { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 28px; margin: 32px 0; }
+  .glance h3 { margin: 0 0 18px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-family: 'Inter'; font-weight: 600; }
+  .glance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+  .stat .num { font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600; color: var(--teal-deep); display: block; }
+  .stat .label { font-size: 13px; color: var(--muted); }
+
+  nav.toc { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px; margin: 24px 0 40px; }
+  nav.toc strong { display: block; margin-bottom: 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  nav.toc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  nav.toc a { text-decoration: none; font-size: 14px; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section { margin: 56px 0; }
+  section h2 { font-size: 25px; border-bottom: 2px solid var(--line); padding-bottom: 12px; margin-bottom: 20px; }
+  section h2 .step { color: var(--teal-deep); font-family: 'IBM Plex Mono', monospace; font-size: 16px; margin-right: 10px; }
+
+  .takeaway, div.executive-takeaway, div.consultant-observation {
+    background: var(--teal-pale);
+    border-left: 3px solid var(--teal-deep);
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin: 18px 0;
+    font-size: 15px;
+  }
+  div.executive-takeaway strong:first-child, div.consultant-observation strong:first-child {
+    display: block; color: var(--teal-deep); font-family: 'IBM Plex Sans'; text-transform: uppercase; font-size: 13px; letter-spacing: 0.04em; margin-bottom: 8px;
+  }
+  div.executive-takeaway p, div.consultant-observation p { margin: 6px 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--navy); color: #fff; font-family: 'Inter'; font-weight: 600; font-size: 12.5px; }
+  tr:nth-child(even) td { background: #fafcfc; }
+  .tag { font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: var(--teal-pale); color: var(--teal-deep); padding: 2px 6px; border-radius: 4px; }
+
+  .diagram-img { width: 100%; border: 1px solid var(--line); border-radius: 8px; margin: 16px 0; }
+
+  .doc-link { margin: 16px 0; }
+
+  footer { background: var(--navy); color: #cfe3e6; padding: 40px 0; margin-top: 80px; }
+  footer a { color: #fff; }
+  footer .wrap { font-size: 14px; }
+
+  @media (max-width: 600px) {
+    .title-block .subtitle { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <img src="IntelliMed-logo-final.png" alt="IntelliMed Health" class="logo" />
+    <a href="index.html" class="back">&larr; Back to portfolio</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="title-block">
+    <p class="subtitle">ERP Implementation in the Health Sector</p>
+    <div class="disclosure">Applied Business Analysis Case Study &mdash; Independently Developed</div>
+    <p class="byline">Prepared by Doris Frank, Business Systems Analyst</p>
+
+    <div class="badges">
+      <div class="badge"><strong>Domain:</strong> <span>Healthcare, three-location hospital network</span></div>
+      <div class="badge"><strong>Methodology:</strong> <span>Requirements Engineering, Gap Analysis, RTM, ERP Evaluation</span></div>
+      <div class="badge"><strong>Compliance Scope:</strong> <span>HIPAA, GDPR, NHS Digital</span></div>
+    </div>
+  </div>
+
+  <div class="glance">
+    <h3>At a glance</h3>
+    <div class="glance-grid">
+      <div class="stat"><span class="num">12</span><span class="label">Stakeholders identified, 5 defined personas</span></div>
+      <div class="stat"><span class="num">6</span><span class="label">Functional requirements, fully traced</span></div>
+      <div class="stat"><span class="num">4</span><span class="label">Current-state workflows mapped</span></div>
+      <div class="stat"><span class="num">6</span><span class="label">Gaps identified, most involving integration</span></div>
+      <div class="stat"><span class="num">4</span><span class="label">ERP platforms researched and compared</span></div>
+    </div>
+    <p style="margin-top:18px; font-size:14px; color:var(--muted);"><strong>The throughline:</strong> six departmental symptoms trace back to one structural problem, systems that were never designed to share data. Every finding in this engagement, from stakeholder mapping through ERP evaluation, traces back to that one root cause.</p>
+  </div>
+
+  <nav class="toc">
+    <strong>On this page</strong>
+    <ul>
+      <li><a href="#s01">01. Stakeholder Mapping</a></li>
+      <li><a href="#s02">02. Needs Assessment</a></li>
+      <li><a href="#s03">03. Requirements Elicitation</a></li>
+      <li><a href="#s04">04. Workflow Mapping</a></li>
+      <li><a href="#s05">05. Gap Analysis</a></li>
+      <li><a href="#s06">06. Traceability Matrix</a></li>
+      <li><a href="#s07">07. Draft BRD</a></li>
+      <li><a href="#s08">08. ERP Evaluation</a></li>
+      <li><a href="#s09">09. Final Submission</a></li>
+    </ul>
+  </nav>
+
+  <section id="s01">
+    <h2><span class="step">01</span>Stakeholder mapping</h2>
+    <p>Twelve stakeholders identified across the engagement, five of them defined personas, CFO, Head Nurse, IT Director, Compliance Officer, and the executive sponsor, structuring the elicitation that follows in Section 03.</p>
+    <table>
+      <tr><th>Quadrant</th><th>Stakeholders</th></tr>
+      <tr><td>High power, high interest</td><td>CEO, CFO, Head Nurse, IT Director, Compliance Officer</td></tr>
+      <tr><td>High power, low interest</td><td>Regulatory Authorities</td></tr>
+      <tr><td>Low power, high interest</td><td>HR Manager, Procurement Lead, Clinicians, Billing Staff, ERP Vendor</td></tr>
+      <tr><td>Low power, low interest</td><td>Patient Representative</td></tr>
+    </table>
+    <div class="consultant-observation">
+      <strong>Consultant's Observation</strong>
+      I placed Compliance in the high-power quadrant despite holding no budget authority. HIPAA, GDPR, and NHS Digital obligations mean the Compliance Officer cannot approve the investment, but can stop an implementation that fails to meet regulatory requirements. In a healthcare ERP engagement, that is real power, not influence in name only.
+    </div>
+    <p class="doc-link"><a href="IntelliMed_01.html">View the full Stakeholder Register and Power-Interest Matrix &rarr;</a></p>
+    <p class="doc-link"><a href="IntelliMed_Stakeholder_Power_Interest_Chart.xlsx">Download the live Excel Power-Interest chart &rarr;</a></p>
+  </section>
+
+  <section id="s02">
+    <h2><span class="step">02</span>Needs assessment</h2>
+    <p>Six departments each experience the same underlying problem differently, delayed finance reporting, fragmented patient records, unverifiable compliance, inconsistent inventory, disconnected HR scheduling, and duplicated administrative effort. All six trace back to one structural cause: four core systems that were never designed to share data.</p>
+    <div class="consultant-observation">
+      <strong>Consultant's Observation</strong>
+      I found that every one of these pain points traces back to the same root cause, four systems that were never designed to share data. Finance's reporting delay, Clinical's fragmented records, and Compliance's audit burden are not six separate problems requiring six separate fixes. They are one structural problem, surfacing six different ways depending on which department feels it.
+    </div>
+    <p class="doc-link"><a href="IntelliMed_02.html">View the full Needs Assessment and Problem Statement &rarr;</a></p>
+  </section>
+
+  <section id="s03">
+    <h2><span class="step">03</span>Requirements elicitation</h2>
+    <p>Six functional requirements, five non-functional requirements, and three business rules, elicited through structured elicitation against the four defined personas and cross-referenced against the full stakeholder register.</p>
+    <table>
+      <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+      <tr><td class="tag">FR-01</td><td>Unified patient records across all locations</td><td>Must Have</td></tr>
+      <tr><td class="tag">FR-02</td><td>Real-time financial reporting across locations</td><td>Must Have</td></tr>
+      <tr><td class="tag">FR-04</td><td>Automated, audit-ready compliance reporting</td><td>Must Have</td></tr>
+      <tr><td class="tag">FR-06</td><td>Role-based access control across all core modules</td><td>Must Have</td></tr>
+      <tr><td class="tag">FR-03</td><td>Real-time inventory tracking with automated alerts</td><td>Should Have</td></tr>
+      <tr><td class="tag">FR-05</td><td>HR scheduling integrated with clinical demand</td><td>Should Have</td></tr>
+    </table>
+    <div class="consultant-observation">
+      <strong>Consultant's Observation</strong>
+      I noticed three of the four personas independently described the same underlying need in different language, a single, consolidated, real-time source of truth. The CFO calls it financial visibility. The Head Nurse calls it a unified patient record. The Compliance Officer calls it an auditable data source. These are not four different requirements. They are one requirement, viewed through four departmental lenses.
+    </div>
+    <p class="doc-link"><a href="IntelliMed_03.html">View the full Requirements Catalogue, MoSCoW matrix, and appendices &rarr;</a></p>
+  </section>
+
+  <section id="s04">
+    <h2><span class="step">04</span>Workflow mapping</h2>
+    <p>Four current-state workflows mapped, each showing the same structural weakness: correct only if every manual step executes without error, every time.</p>
+
+    <h3 style="font-size:15px; color:var(--teal-deep); text-transform:uppercase; letter-spacing:0.04em; margin-top:32px;">Patient record access</h3>
+    <img src="workflow-patient-records.jpg" alt="Patient record access workflow diagram" class="diagram-img" />
+
+    <h3 style="font-size:15px; color:var(--teal-deep); text-transform:uppercase; letter-spacing:0.04em; margin-top:32px;">Billing and financial reporting</h3>
+    <img src="workflow-billing.jpg" alt="Billing and financial reporting workflow diagram" class="diagram-img" />
+
+    <h3 style="font-size:15px; color:var(--teal-deep); text-transform:uppercase; letter-spacing:0.04em; margin-top:32px;">Inventory and supply management</h3>
+    <img src="workflow-inventory.jpg" alt="Inventory and supply management workflow diagram" class="diagram-img" />
+
+    <h3 style="font-size:15px; color:var(--teal-deep); text-transform:uppercase; letter-spacing:0.04em; margin-top:32px;">Compliance reporting</h3>
+    <img src="workflow-compliance.jpg" alt="Compliance reporting workflow diagram" class="diagram-img" />
+
+    <div class="consultant-observation">
+      <strong>Consultant's Observation</strong>
+      Mapping all four workflows, I found they share the same structural weakness, they are correct only if every manual step is executed without error, every time. None of them fail because staff are careless. They fail because the process itself depends on manual coordination between systems that were never designed to coordinate.
+    </div>
+    <p class="doc-link"><a href="IntelliMed_04.html">View the full Workflow Mapping, bottlenecks, and Business Impact &rarr;</a></p>
+  </section>
+
+  <section id="s05">
+    <h2><span class="step">05</span>Gap analysis</h2>
+    <p>Six gaps identified against the requirements catalogue, classified by primary type rather than treated as one undifferentiated problem.</p>
+    <table>
+      <tr><th>Primary Gap</th><th>Count</th><th>High Severity</th></tr>
+      <tr><td>Integration</td><td>3</td><td>2</td></tr>
+      <tr><td>Compliance</td><td>2</td><td>2</td></tr>
+      <tr><td>Functional</td><td>1</td><td>0</td></tr>
+    </table>
+    <div class="consultant-observation">
+      <strong>Consultant's Observation</strong>
+      I found that four of the six gaps are not purely functional, they are integration gaps wearing a functional label. IntelliMed does not lack the ability to track inventory, report finances, or manage patient records. It lacks the ability to do any of those things once, in one place, and trust the result everywhere else.
+    </div>
+    <p class="doc-link"><a href="IntelliMed_05.html">View the full Gap Analysis and Capability Assessment &rarr;</a></p>
+  </section>
+
+  <section id="s06">
+    <h2><span class="step">06</span>End-to-end requirements traceability matrix</h2>
+    <p>Every requirement traced from the business problem that created it, through workflow analysis and gap assessment, into the Business Requirements Document, and finally into ERP platform evaluation.</p>
+    <div class="consultant-observation">
+      <strong>Consultant's Observation</strong>
+      NFR-01, NFR-02, and NFR-03, uptime, encryption, and access auditability, had never been assigned a MoSCoW priority in Section 03. I traced this gap while building this matrix and corrected it directly, all three are now rated Must Have, since each concerns patient data reliability or security in a healthcare setting.
+    </div>
+    <p class="doc-link"><a href="IntelliMed_06.html">View the full Traceability Matrix &rarr;</a></p>
+  </section>
+
+  <section id="s07">
+    <h2><span class="step">07</span>Draft business requirements document</h2>
+    <p>A ten-section formal BRD, compiled from Sections 01 through 03, introducing no new requirement, stakeholder, or priority not already established and traced.</p>
+    <div class="consultant-observation">
+      <strong>Consultant's Observation</strong>
+      I did not write a single new requirement into this document. Every line traces to a stakeholder identified in Section 01, a problem defined in Section 02, or a requirement elicited in Section 03.
+    </div>
+    <p class="doc-link"><a href="IntelliMed_07.html">View the full Business Requirements Document &rarr;</a></p>
+  </section>
+
+  <section id="s08">
+    <h2><span class="step">08</span>ERP market research and evaluation</h2>
+    <p>Four platforms researched against IntelliMed's own requirements, not generic ERP criteria: SAP S/4HANA, Oracle Fusion Cloud ERP, Infor CloudSuite Healthcare, and Microsoft Dynamics 365.</p>
+    <table>
+      <tr><th>Platform</th><th>Overall Fit</th></tr>
+      <tr><td>Infor CloudSuite Healthcare</td><td>Very High</td></tr>
+      <tr><td>Microsoft Dynamics 365</td><td>High</td></tr>
+      <tr><td>Oracle Fusion Cloud ERP</td><td>Moderate</td></tr>
+      <tr><td>SAP S/4HANA</td><td>Moderate</td></tr>
+    </table>
+    <div class="consultant-observation">
+      <strong>Consultant's Observation</strong>
+      I am not recommending a single platform. Picking a winner without a real budget and timeline, which Section 07 explicitly deferred to the business case phase, would be recommending a number I don't have the authority to set.
+    </div>
+    <p class="doc-link"><a href="IntelliMed_08.html">View the full ERP Comparison Matrix and Evaluation Summary &rarr;</a></p>
+  </section>
+
+  <section id="s09">
+    <h2><span class="step">09</span>Final submission and presentation</h2>
+    <table>
+      <tr><th>Topic</th><th>Key Message</th></tr>
+      <tr><td>Business Problem</td><td>Fragmented systems are creating operational inefficiencies, compliance risk, and limited visibility</td></tr>
+      <tr><td>Root Cause</td><td>Four disconnected core systems with no integrated source of truth</td></tr>
+      <tr><td>Discovery Outcome</td><td>Requirements, workflows, gaps, governance, and business rules documented, prioritized, and traced end to end</td></tr>
+      <tr><td>Recommended Next Step</td><td>Approve the BRD, then proceed to structured vendor evaluation with Infor CloudSuite Healthcare and Microsoft Dynamics 365</td></tr>
+      <tr><td>Expected Business Value</td><td>Improved operational efficiency, stronger regulatory compliance, and a single trusted source of data visibility</td></tr>
+    </table>
+    <div class="executive-takeaway">
+      <strong>Executive Takeaway</strong>
+      <p>This engagement did not conclude that IntelliMed needs an ERP system.</p>
+      <p><strong>It concluded that IntelliMed needs one trustworthy source of truth, and an ERP is the mechanism, not the goal.</strong></p>
+    </div>
+    <p class="doc-link"><a href="IntelliMed_09.html">View the full Findings Summary and Recommendation to Leadership &rarr;</a></p>
+
+    <ul class="actions" style="list-style:none; padding:0; margin-top:24px;">
+      <li><a href="index.html" style="display:inline-block; background:var(--teal-deep); color:#fff; padding:12px 22px; border-radius:6px; text-decoration:none; font-weight:500;">Back to projects</a></li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Doris Frank &middot; Business Systems Analyst &middot; <a href="https://www.linkedin.com/in/uduakdoris/">LinkedIn</a> &middot; <a href="https://github.com/Dorisfrank">GitHub</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Section 03: Requirements Elicitation | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f7f9f9; --card: #ffffff; --ink: #00325D; --ink-soft: #3d4a52;
+    --muted: #7a8a90; --navy: #00325D; --navy-deep: #001e38; --teal: #8BC5C9;
+    --teal-deep: #4d9297; --teal-pale: #eaf4f4; --line: #dbe6e6; --amber: #c76b1e;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'IBM Plex Sans',sans-serif; font-weight:600; color: var(--navy); }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  a { color: var(--teal-deep); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background: var(--navy); border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:900px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: #cfe3e6; text-decoration:none; font-size:14px; border:1px solid #2a4a5c; padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--teal); color: var(--teal); }
+  .masthead span.doclabel { font-family:'IBM Plex Mono', monospace; font-size:13px; color:#9fc0c4; }
+  h2 { font-size: 26px; margin-top: 0; }
+  h3 { color: var(--teal-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--navy); color:#fff; font-size: 12.5px; }
+  tr:nth-child(even) td { background: #fafcfc; }
+  blockquote, div.executive-takeaway, div.consultant-observation {
+    background: var(--teal-pale); border-left: 3px solid var(--teal-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0;
+  }
+  div.executive-takeaway p, div.consultant-observation p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'IBM Plex Mono', monospace; background: var(--teal-pale); color: var(--teal-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="IntelliMed.html" class="back">&larr; Back to case study</a>
+<span class="doclabel">IntelliMed / section-03</span>
+</div></header>
+<div class="wrap">
+<h2>03. Requirements Elicitation</h2>
+<hr />
+<h2>Executive Overview</h2>
+<p><em>What does the business actually need, and how was that captured?</em></p>
+<p>Section 02 established that IntelliMed's six departmental symptoms trace back to one structural problem, systems that cannot share data. This section turns that problem into requirements a solution can actually be built against.</p>
+<h3>Elicitation Approach</h3>
+<p>I captured requirements through structured elicitation against four defined stakeholder personas, CFO, Head Nurse, IT Director, and Compliance Officer, representing the roles with the highest combined power and interest identified in Section 01.</p>
+<p>I drew on four inputs:</p>
+<ul>
+<li><strong>Structured elicitation against stakeholder personas</strong>, using a consistent four-part format for each role</li>
+<li><strong>Document review</strong> of the original project brief, business challenge, and rationale</li>
+<li><strong>Domain research</strong> into ERP adoption patterns in healthcare, including the NHS, Kaiser Permanente, Charité, and Apollo Hospitals examples cited in the project rationale</li>
+<li><strong>Cross-reference against Section 01's stakeholder register</strong>, so each requirement ties back to a documented business objective rather than being captured in isolation</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Why It Was Used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structured elicitation against stakeholder personas</td>
+<td>Capture business need directly from the role that owns it</td>
+</tr>
+<tr>
+<td>Document review</td>
+<td>Validate findings against the original project brief and rationale</td>
+</tr>
+<tr>
+<td>Domain research</td>
+<td>Benchmark against real healthcare ERP adoption patterns</td>
+</tr>
+<tr>
+<td>Cross-reference to stakeholder register</td>
+<td>Ensure every requirement traces to a documented business objective, not an isolated request</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Stakeholder Perspectives</h2>
+<p><em>How each stakeholder's role shaped the requirements that follow.</em></p>
+<h3>CFO</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Business Objective</td>
+<td>Financial visibility and budget control</td>
+</tr>
+<tr>
+<td>Current Challenge</td>
+<td>Month-end close requires manual reconciliation across three disconnected billing and accounting systems</td>
+</tr>
+<tr>
+<td>Key Requirement</td>
+<td>Real-time, consolidated financial reporting across all three hospital locations</td>
+</tr>
+<tr>
+<td>Business Rationale</td>
+<td>Reduces reporting cycle time and removes manual reconciliation as a source of error before figures reach leadership</td>
+</tr>
+</tbody>
+</table>
+<h3>Head Nurse</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Business Objective</td>
+<td>Clinical workflow efficiency</td>
+</tr>
+<tr>
+<td>Current Challenge</td>
+<td>Patient records are not unified across locations, so a patient treated at more than one site does not have a single continuous record</td>
+</tr>
+<tr>
+<td>Key Requirement</td>
+<td>A unified patient record accessible in real time across all three hospital locations</td>
+</tr>
+<tr>
+<td>Business Rationale</td>
+<td>Reduces the risk of clinical decisions being made on incomplete information</td>
+</tr>
+</tbody>
+</table>
+<h3>IT Director</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Business Objective</td>
+<td>Systems integration and security</td>
+</tr>
+<tr>
+<td>Current Challenge</td>
+<td>No integration layer exists between patient records, billing, HR, and inventory systems</td>
+</tr>
+<tr>
+<td>Key Requirement</td>
+<td>A single ERP platform with secure, role-based access across all four core functions</td>
+</tr>
+<tr>
+<td>Business Rationale</td>
+<td>Removes manual data transfer as a source of error and creates one point of security control instead of four</td>
+</tr>
+</tbody>
+</table>
+<h3>Compliance Officer</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Business Objective</td>
+<td>Regulatory compliance across HIPAA, GDPR, NHS Digital</td>
+</tr>
+<tr>
+<td>Current Challenge</td>
+<td>Audit-ready reporting must be manually assembled from four separate systems, and completeness cannot be easily proven</td>
+</tr>
+<tr>
+<td>Key Requirement</td>
+<td>Automated, auditable reporting that draws from a single consolidated data source</td>
+</tr>
+<tr>
+<td>Business Rationale</td>
+<td>Converts compliance reporting from a manual assembly exercise into a repeatable, defensible process</td>
+</tr>
+</tbody>
+</table>
+<div class="consultant-observation">
+<strong>Consultant's Observation:</strong> I noticed three of the four personas independently described the same underlying need in different language, a single, consolidated, real-time source of truth. The CFO calls it financial visibility. The Head Nurse calls it a unified patient record. The Compliance Officer calls it an auditable data source. These are not four different requirements. They are one requirement, viewed through four departmental lenses.
+</div>
+
+<hr />
+<h2>Requirements Catalogue</h2>
+<p><em>What the ERP system must actually do, and under what conditions.</em></p>
+<h3>Functional Requirements</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Module</th>
+<th>Source Stakeholder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-01</td>
+<td>Consolidate patient records across all three locations into a single accessible record</td>
+<td>Patient Management</td>
+<td>Head Nurse</td>
+</tr>
+<tr>
+<td>FR-02</td>
+<td>Provide real-time financial reporting across all hospital locations</td>
+<td>Billing and Finance</td>
+<td>CFO</td>
+</tr>
+<tr>
+<td>FR-03</td>
+<td>Provide real-time inventory tracking with automated low-stock alerts</td>
+<td>Inventory</td>
+<td>Procurement Lead</td>
+</tr>
+<tr>
+<td>FR-04</td>
+<td>Generate audit-ready compliance reports across HIPAA, GDPR, and NHS Digital without manual assembly</td>
+<td>Audit and Compliance</td>
+<td>Compliance Officer</td>
+</tr>
+<tr>
+<td>FR-05</td>
+<td>Integrate HR scheduling data with clinical and administrative demand</td>
+<td>HR</td>
+<td>HR Manager</td>
+</tr>
+<tr>
+<td>FR-06</td>
+<td>Provide role-based access control across all four core modules</td>
+<td>System-wide</td>
+<td>IT Director</td>
+</tr>
+</tbody>
+</table>
+<p><em>FR-03 and FR-05 trace to Procurement Lead and HR Manager, stakeholders outside the four core personas. Both are captured through the cross-reference to Section 01's stakeholder register described above, not through direct elicitation, consistent with how this section's methodology is scoped.</em></p>
+<h3>Non-Functional Requirements</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Category</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NFR-01</td>
+<td>System uptime of 99.5% or higher during operating hours</td>
+<td>Reliability</td>
+</tr>
+<tr>
+<td>NFR-02</td>
+<td>Patient data encrypted at rest and in transit</td>
+<td>Security</td>
+</tr>
+<tr>
+<td>NFR-03</td>
+<td>Role-based access must be auditable and independently verifiable</td>
+<td>Compliance</td>
+</tr>
+<tr>
+<td>NFR-04</td>
+<td>Core workflows (patient lookup, billing entry) must complete in under 3 seconds</td>
+<td>Performance</td>
+</tr>
+<tr>
+<td>NFR-05</td>
+<td>Interface must be usable by clinical staff with minimal additional training</td>
+<td>Usability</td>
+</tr>
+</tbody>
+</table>
+<h3>Business Rules</h3>
+<ul>
+<li><strong>BR-01:</strong> Patient data may only be accessed by staff with an active clinical or administrative assignment to that patient</li>
+<li><strong>BR-02:</strong> Financial reports must reconcile automatically against source billing data before publication to leadership</li>
+<li><strong>BR-03:</strong> Inventory reorder thresholds must be configurable per supply category, not fixed system-wide</li>
+</ul>
+<h3>Assumptions</h3>
+<ul>
+<li>Stakeholder personas represent the actual operational priorities of their respective roles</li>
+<li>Existing hospital infrastructure can support a modern ERP platform without a separate infrastructure upgrade project</li>
+<li>Staff will receive adequate training and change management support during rollout</li>
+</ul>
+<h3>Constraints</h3>
+<ul>
+<li>Implementation must comply with HIPAA, GDPR, and NHS Digital simultaneously, not sequentially</li>
+<li>The solution must integrate with, or replace, four existing legacy systems without a full service interruption</li>
+<li>Budget and timeline are to be defined during the business case phase, not assumed at the requirements stage</li>
+</ul>
+<hr />
+<h2>Prioritization</h2>
+<p><em>Which requirements matter most, and why.</em></p>
+<h3>MoSCoW Prioritization Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Priority</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-01: Unified patient records</td>
+<td>Must Have</td>
+<td>Directly addresses the clinical safety risk identified by the Head Nurse persona</td>
+</tr>
+<tr>
+<td>FR-02: Real-time financial reporting</td>
+<td>Must Have</td>
+<td>Addresses the CFO's core objective and a named business goal from Section 02</td>
+</tr>
+<tr>
+<td>FR-04: Automated compliance reporting</td>
+<td>Must Have</td>
+<td>Regulatory exposure carries the highest downside risk of any requirement in this catalogue</td>
+</tr>
+<tr>
+<td>FR-06: Role-based access control</td>
+<td>Must Have</td>
+<td>A prerequisite for FR-01 and FR-04, not an optional layer on top of them</td>
+</tr>
+<tr>
+<td>NFR-01: System uptime of 99.5% or higher</td>
+<td>Must Have</td>
+<td>Added during Section 06's traceability review. Availability failure directly disrupts patient care</td>
+</tr>
+<tr>
+<td>NFR-02: Data encrypted at rest and in transit</td>
+<td>Must Have</td>
+<td>Added during Section 06's traceability review. Baseline requirement under HIPAA, GDPR, and NHS Digital</td>
+</tr>
+<tr>
+<td>NFR-03: Access auditable and independently verifiable</td>
+<td>Must Have</td>
+<td>Added during Section 06's traceability review. A prerequisite for FR-04's compliance reporting to be defensible</td>
+</tr>
+<tr>
+<td>FR-03: Real-time inventory tracking</td>
+<td>Should Have</td>
+<td>Addresses a real operational risk, but with lower downside severity than the Must Have items</td>
+</tr>
+<tr>
+<td>FR-05: HR scheduling integration</td>
+<td>Should Have</td>
+<td>Improves efficiency but does not carry direct compliance or patient-safety risk</td>
+</tr>
+<tr>
+<td>NFR-04: Sub-3-second workflow performance</td>
+<td>Should Have</td>
+<td>Affects adoption and usability, not core function</td>
+</tr>
+<tr>
+<td>NFR-05: Minimal-training usability</td>
+<td>Could Have</td>
+<td>Desirable, but staff training can partially offset this requirement if needed</td>
+</tr>
+</tbody>
+</table>
+<div class="executive-takeaway">
+<strong>Executive Takeaway</strong>
+
+<p>Four stakeholder perspectives highlighted different business priorities.</p>
+
+<p><strong>Underneath the language, they were asking for the same thing: one trustworthy source of truth the whole hospital can act on.</strong></p>
+</div>
+
+<hr />
+<h2>Executive Close</h2>
+<p><em>What should leadership remember before moving on?</em></p>
+<p>Six requirements, five non-functional conditions, three business rules, and a MoSCoW ranking that puts patient safety and regulatory exposure ahead of operational convenience. Nothing here stands alone.</p>
+<p>Each requirement carries its stakeholder and business objective forward into the Requirements Traceability Matrix. The prioritized catalogue becomes the basis for the Gap Analysis. The BRD that closes this engagement will formalize what has already been discovered, validated, and prioritized here, not invent it fresh. The next section maps how IntelliMed's current workflows actually operate today, the step that determines whether these requirements are a redesign of existing process or a genuine departure from it.</p>
+<hr />
+<h2>Appendix A: Stakeholder Personas</h2>
+<p>Elicitation in this section was structured around four defined personas, representing the roles identified in Section 01 with the highest combined power and interest.</p>
+<table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Business Area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CFO</td>
+<td>Finance</td>
+</tr>
+<tr>
+<td>Head Nurse</td>
+<td>Clinical</td>
+</tr>
+<tr>
+<td>IT Director</td>
+<td>Technology</td>
+</tr>
+<tr>
+<td>Compliance Officer</td>
+<td>Governance and Compliance</td>
+</tr>
+</tbody>
+</table>
+<p>These personas informed the structured elicitation approach throughout this section. No live interviews were conducted.</p>
+<h2>Appendix B: Elicitation Question Guide</h2>
+<p>The following questions represent the guide used to structure elicitation against each persona. They are the questions asked of the discovery process, not transcribed responses.</p>
+<p><strong>CFO:</strong> How is financial reporting currently consolidated across locations? Where do delays or reconciliation errors most often originate? What financial visibility is missing today that leadership needs?</p>
+<p><strong>Head Nurse:</strong> How are patient records currently accessed across the three hospital locations? Where does incomplete information create clinical risk? What would a unified record need to support at the point of care?</p>
+<p><strong>IT Director:</strong> Where do the current systems fail to integrate? What security and access-control gaps exist today? What technical constraints would shape an ERP rollout?</p>
+<p><strong>Compliance Officer:</strong> How is audit-ready reporting currently assembled? Where is compliance across HIPAA, GDPR, and NHS Digital hardest to demonstrate? What would make an audit trail defensible without manual assembly?</p>
+<h2>Appendix C: Requirements Coding Convention</h2>
+<table>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Meaning</th>
+<th>Traced Through RTM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR</td>
+<td>Functional Requirement</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>NFR</td>
+<td>Non-Functional Requirement</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>BR</td>
+<td>Business Rule</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Assumptions and Constraints are documented but not individually coded, since they inform scope and risk rather than being traced feature-by-feature through the Requirements Traceability Matrix.</p>
+<h2>Appendix D: Traceability Reference</h2>
+<p>This appendix was deliberately left unbuilt until Sections 05, 06, and 07 existed to reference. It is a quick-reference index only, the authoritative detail for each row lives in the section named, not here.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Gap Analysis (Section 05)</th>
+<th>RTM (Section 06)</th>
+<th>BRD (Section 07)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-01</td>
+<td>Primary Gap: Integration. Severity: High</td>
+<td>Traced with Workflow Reference, ERP Evaluation</td>
+<td>BRD Section 5</td>
+</tr>
+<tr>
+<td>FR-02</td>
+<td>Primary Gap: Integration. Severity: High</td>
+<td>Traced with Workflow Reference, ERP Evaluation</td>
+<td>BRD Section 5</td>
+</tr>
+<tr>
+<td>FR-03</td>
+<td>Primary Gap: Functional. Severity: Medium</td>
+<td>Traced with Workflow Reference, ERP Evaluation</td>
+<td>BRD Section 5</td>
+</tr>
+<tr>
+<td>FR-04</td>
+<td>Primary Gap: Compliance. Severity: High</td>
+<td>Traced with Workflow Reference, and the only FR individually assessed in Section 08's ERP evaluation, not just collectively</td>
+<td>BRD Section 5</td>
+</tr>
+<tr>
+<td>FR-05</td>
+<td>Primary Gap: Integration. Severity: Medium</td>
+<td>Traced; no Section 04 workflow exists for this requirement, a gap noted rather than hidden</td>
+<td>BRD Section 5</td>
+</tr>
+<tr>
+<td>FR-06</td>
+<td>Primary Gap: Compliance. Severity: High</td>
+<td>Traced with Workflow Reference, ERP Evaluation</td>
+<td>BRD Section 5</td>
+</tr>
+<tr>
+<td>NFR-01 to NFR-03</td>
+<td>Not gap-assessed in Section 05; infrastructure gaps require vendor documentation this discovery phase did not have</td>
+<td>Comparatively assessed across four platforms in Section 08; final validation awaits real procurement</td>
+<td>Not individually referenced in the BRD; carried in BRD Section 6 as a set</td>
+</tr>
+<tr>
+<td>NFR-04, NFR-05</td>
+<td>Same as above</td>
+<td>Same as above</td>
+<td>BRD Section 6</td>
+</tr>
+<tr>
+<td>BR-01 to BR-03</td>
+<td>Not gap-assessed, business rules govern operation rather than address a discovery-phase gap</td>
+<td>Traced to supporting requirement</td>
+<td>BRD Section 7</td>
+</tr>
+</tbody>
+</table>
+<p>If this case study is extended beyond Section 09, this table is the first place to update, before any other document, since every other section's cross-references were built to stay consistent with what is stated here.</p>
+<hr />
+<p><em>IntelliMed Health: ERP Implementation in the Health Sector</em>
+<em>Section 03: Requirements Elicitation</em></p></div></body></html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Section 05: Gap Analysis | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f7f9f9; --card: #ffffff; --ink: #00325D; --ink-soft: #3d4a52;
+    --muted: #7a8a90; --navy: #00325D; --navy-deep: #001e38; --teal: #8BC5C9;
+    --teal-deep: #4d9297; --teal-pale: #eaf4f4; --line: #dbe6e6; --amber: #c76b1e;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'IBM Plex Sans',sans-serif; font-weight:600; color: var(--navy); }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  a { color: var(--teal-deep); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background: var(--navy); border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:900px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: #cfe3e6; text-decoration:none; font-size:14px; border:1px solid #2a4a5c; padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--teal); color: var(--teal); }
+  .masthead span.doclabel { font-family:'IBM Plex Mono', monospace; font-size:13px; color:#9fc0c4; }
+  h2 { font-size: 26px; margin-top: 0; }
+  h3 { color: var(--teal-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--navy); color:#fff; font-size: 12.5px; }
+  tr:nth-child(even) td { background: #fafcfc; }
+  blockquote, div.executive-takeaway, div.consultant-observation {
+    background: var(--teal-pale); border-left: 3px solid var(--teal-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0;
+  }
+  div.executive-takeaway p, div.consultant-observation p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'IBM Plex Mono', monospace; background: var(--teal-pale); color: var(--teal-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="IntelliMed.html" class="back">&larr; Back to case study</a>
+<span class="doclabel">IntelliMed / section-05</span>
+</div></header>
+<div class="wrap">
+<h2>05. Gap Analysis</h2>
+<hr />
+<h2>Executive Overview</h2>
+<p><em>Where does IntelliMed's current state fall short of what it actually needs?</em></p>
+<p>Section 03 established what IntelliMed requires. Section 04 established how IntelliMed currently operates. This section holds the two against each other, requirement by requirement, to identify exactly where the gap sits, and what kind of gap it is.</p>
+<p>I assessed each functional requirement against three questions: what can IntelliMed's current systems do today, what does the requirement actually demand, and does the shortfall come from missing functionality, missing integration between systems, or missing compliance capability. Those three gap types require different fixes, and treating them as one undifferentiated problem risks solving the wrong one.</p>
+<hr />
+<h2>Functional and Integration Gaps</h2>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Current State</th>
+<th>Required Capability</th>
+<th>Primary Gap</th>
+<th>Supporting Gap</th>
+<th>Severity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-01: Unified patient records</td>
+<td>Records exist per location, no cross-site visibility</td>
+<td>Single record accessible in real time across all three sites</td>
+<td>Integration</td>
+<td>Functional</td>
+<td>High</td>
+</tr>
+<tr>
+<td>FR-02: Real-time financial reporting</td>
+<td>Manual export and consolidation at month-end</td>
+<td>Continuous, consolidated reporting across locations</td>
+<td>Integration</td>
+<td>Functional</td>
+<td>High</td>
+</tr>
+<tr>
+<td>FR-03: Real-time inventory tracking</td>
+<td>Periodic manual stock review</td>
+<td>Real-time tracking with automated low-stock alerts</td>
+<td>Functional</td>
+<td>None</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>FR-04: Automated compliance reporting</td>
+<td>Manual assembly from four separate systems</td>
+<td>Automated, audit-ready reporting from one data source</td>
+<td>Compliance</td>
+<td>Integration</td>
+<td>High</td>
+</tr>
+<tr>
+<td>FR-05: HR scheduling integration</td>
+<td>Scheduling managed independently of clinical demand</td>
+<td>Scheduling data integrated with clinical and administrative need</td>
+<td>Integration</td>
+<td>None</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>FR-06: Role-based access control</td>
+<td>Access rules set independently per system</td>
+<td>Unified role-based access across all core modules</td>
+<td>Compliance</td>
+<td>Functional</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+<p>I set severity directly from Section 03's MoSCoW ranking rather than assigning a new scale: every Must Have requirement with an unaddressed gap is rated High, every Should Have is rated Medium. A gap that duplicates a priority already established is not a new judgment, it is the same judgment applied consistently.</p>
+<hr />
+<h2>Compliance Gap Assessment</h2>
+<p>Compliance carries its own category because the cost of getting it wrong is different in kind, not just degree, from an operational inconvenience.</p>
+<p>IntelliMed's current compliance reporting process, mapped in Section 04, can produce an audit response, but it cannot prove that response is complete. Each of the four source systems is reformatted and cross-checked by hand, which means the audit trail documents what staff assembled, not what actually exists across the organization. Under HIPAA, GDPR, and NHS Digital simultaneously, that distinction is the gap: IntelliMed does not currently have a compliance problem in the sense of failing an audit. It has a compliance risk in the sense of being unable to demonstrate, with confidence, that it would pass one.</p>
+<p>FR-06's access control gap compounds this. Compliance reporting depends on knowing exactly who accessed what patient or financial data, and when. Four independently managed access systems make that a reconciliation exercise rather than a lookup.</p>
+<hr />
+<h2>Non-Functional Gap Considerations</h2>
+<p>The non-functional requirements set in Section 03, uptime, encryption, response time, auditability, usability, describe qualities of a target system, not qualities I can currently assess against IntelliMed's infrastructure. Section 04's discovery mapped business process, not technical architecture, and I do not have current system specifications to compare against NFR targets with any real basis.</p>
+<p>Rather than estimate infrastructure gaps I cannot verify, I am flagging this directly: technical fit against the non-functional requirements needs to be assessed during ERP vendor evaluation in Section 08, against each platform's actual documented specifications, not assumed here.</p>
+<hr />
+<h2>Capability Assessment</h2>
+<p>Mapping the six requirement gaps back to the module structure established in Section 03 gives a clear picture of where platform capability matters most:</p>
+<ul>
+<li><strong>Patient Management:</strong> must resolve FR-01, the highest-severity gap in this analysis</li>
+<li><strong>Billing and Finance:</strong> must resolve FR-02</li>
+<li><strong>Inventory:</strong> must resolve FR-03</li>
+<li><strong>Audit and Compliance:</strong> must resolve FR-04, and depends on System-wide access control being resolved first</li>
+<li><strong>HR:</strong> must resolve FR-05</li>
+<li><strong>System-wide:</strong> must resolve FR-06, which several other modules depend on functioning correctly</li>
+</ul>
+<h3>Gap Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Primary Gap</th>
+<th>Count</th>
+<th>High</th>
+<th>Medium</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integration</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Compliance</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Functional</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<div class="consultant-observation">
+<strong>Consultant's Observation:</strong> I found that four of the six gaps are not purely functional, they are integration gaps wearing a functional label. IntelliMed does not lack the ability to track inventory, report finances, or manage patient records. It lacks the ability to do any of those things once, in one place, and trust the result everywhere else. A platform that adds features without solving integration would leave the actual gap untouched.
+</div>
+
+<hr />
+<h2>Executive Close</h2>
+<p><em>What should leadership remember before moving on?</em></p>
+<div class="executive-takeaway">
+<strong>Executive Takeaway</strong>
+
+<p>IntelliMed is not choosing an ERP to gain capabilities it doesn't have.</p>
+
+<p><strong>It is choosing an ERP to make the capabilities it already has trustworthy in one place instead of scattered across four.</strong></p>
+</div>
+
+<p>Six gaps identified, four of them integration-driven rather than purely functional, and one compliance risk that exists independent of whether any individual audit has ever failed. The next section builds the Requirements Traceability Matrix, formally linking each requirement through this gap analysis to the business objective it ultimately serves, closing the loop this engagement opened in Section 01.</p>
+<hr />
+<p><em>IntelliMed Health: ERP Implementation in the Health Sector</em>
+<em>Section 05: Gap Analysis</em></p></div></body></html>

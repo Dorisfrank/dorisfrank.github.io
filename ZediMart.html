@@ -1,0 +1,481 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>ZediMart — Customer Intelligence and Executive Decision Support | Doris Frank</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f2ee;
+    --card: #ffffff;
+    --ink: #1f2430;
+    --ink-soft: #4a5060;
+    --muted: #8a8578;
+    --cyan: #01b9ee;
+    --cyan-deep: #017a9e;
+    --cyan-pale: #e3f7fd;
+    --tan: #d9c9a3;
+    --terra: #d3a58d;
+    --sage: #a8c4a2;
+    --line: #e2ded4;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  a { color: var(--cyan-deep); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  /* Header / hero */
+  .hero-img {
+    width: 100%;
+    max-height: 460px;
+    object-fit: cover;
+    display: block;
+  }
+  header.masthead {
+    background: var(--ink);
+    padding: 20px 0 10px;
+  }
+  .masthead .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .masthead img.logo { height: 130px; }
+  .masthead a.back {
+    align-self: flex-start;
+    color: #cfe9f2;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid #3a4150;
+    padding: 6px 14px;
+    border-radius: 6px;
+  }
+  .masthead a.back:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .title-block { padding: 48px 0 32px; }
+  .title-block h1 { font-size: 40px; margin: 0 0 6px; }
+  .title-block .subtitle { font-size: 24px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: var(--ink); margin: 8px 0 20px; }
+  .disclosure {
+    display: inline-block;
+    background: var(--cyan-pale);
+    border-left: 3px solid var(--cyan-deep);
+    padding: 10px 16px;
+    font-size: 14px;
+    color: var(--cyan-deep);
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  .byline { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+  .badge {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  .badge strong { color: var(--ink); }
+  .badge span { color: var(--muted); }
+
+  /* At a glance */
+  .glance {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px;
+    margin: 32px 0;
+  }
+  .glance h3 { margin: 0 0 18px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-family: 'Inter'; font-weight: 600; }
+  .glance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+  .stat .num { font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 600; color: var(--cyan-deep); display: block; }
+  .stat .label { font-size: 13px; color: var(--muted); }
+  .verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--cyan-deep);
+    background: var(--cyan-pale);
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin-left: 6px;
+    font-family: 'Inter';
+    font-weight: 500;
+  }
+
+  /* TOC */
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 24px 0 40px;
+  }
+  nav.toc strong { display: block; margin-bottom: 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  nav.toc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  nav.toc a { text-decoration: none; font-size: 14px; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section { margin: 56px 0; }
+  section h2 { font-size: 26px; border-bottom: 2px solid var(--line); padding-bottom: 12px; margin-bottom: 20px; }
+  section h2 .step { color: var(--cyan-deep); font-family: 'JetBrains Mono', monospace; font-size: 16px; margin-right: 10px; }
+
+  .takeaway {
+    background: var(--cyan-pale);
+    border-left: 3px solid var(--cyan-deep);
+    padding: 14px 18px;
+    border-radius: 4px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  .takeaway strong { color: var(--cyan-deep); }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--ink); color: #fff; font-family: 'Inter'; font-weight: 600; font-size: 13px; }
+  tr:nth-child(even) td { background: #faf9f6; }
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--cyan-pale); color: var(--cyan-deep); padding: 2px 6px; border-radius: 4px; }
+  .risk-crit { color: #b3453a; font-weight: 600; }
+  .risk-high { color: #c07a1e; font-weight: 600; }
+  .risk-med { color: var(--cyan-deep); font-weight: 600; }
+  .risk-low { color: var(--muted); font-weight: 600; }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0; }
+  .quad-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+  .quad-card h4 { margin: 0 0 4px; font-size: 15px; }
+  .quad-card .quad-tag { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+
+  .rec-block { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 24px; margin: 24px 0; }
+  .rec-block h3 { font-size: 18px; margin: 0 0 6px; }
+  .rec-trace { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+  .rec-field { margin: 10px 0; font-size: 15px; }
+  .rec-field strong { color: var(--ink); }
+  .rec-insight {
+    background: var(--cyan-pale);
+    border-left: 3px solid var(--cyan-deep);
+    padding: 14px 18px;
+    border-radius: 4px;
+    margin: 16px 0;
+  }
+  .rec-insight .rec-insight-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: var(--cyan-deep);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .phase-block { border-left: 3px solid var(--line); padding-left: 20px; margin: 28px 0; }
+  .phase-block.active { border-left-color: var(--cyan-deep); }
+  .phase-block h3 { font-size: 18px; margin: 0 0 4px; }
+  .phase-meta { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+
+  .audit-pass { color: var(--cyan-deep); font-weight: 600; }
+
+  footer { background: var(--ink); color: #cfe9f2; padding: 40px 0; margin-top: 80px; }
+  footer a { color: #fff; }
+  footer .wrap { font-size: 14px; }
+
+  @media (max-width: 600px) {
+    .title-block h1 { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <a href="index.html" class="back">← Back to portfolio</a>
+    <img src="zedimart-logo-icon-transparent.png" alt="ZediMart" class="logo" />
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="title-block">
+    <p class="subtitle">Customer Intelligence &amp; Executive Decision Support Case Study – ZediMart</p>
+    <div class="disclosure">Applied Business Intelligence Case Study — Independently Developed</div>
+    <p class="byline">Prepared by Doris Frank, Business Intelligence Consultant</p>
+
+    <div class="badges">
+      <div class="badge"><strong>Domain:</strong> <span>Retail and Distribution, Nigeria</span></div>
+      <div class="badge"><strong>Methodology:</strong> <span>Evidence Validation, Risk Prioritization, Executive Reporting</span></div>
+      <div class="badge"><strong>Tool:</strong> <span>PostgreSQL 16</span></div>
+    </div>
+  </div>
+
+  <div class="glance">
+    <h3>At a glance</h3>
+    <div class="glance-grid">
+      <div class="stat"><span class="num">500</span><span class="label">Customers validated, zero duplicates<span class="verified">✓ verified</span></span></div>
+      <div class="stat"><span class="num">41.3%</span><span class="label">Orders dated after the analysis date<span class="verified">✓ verified</span></span></div>
+      <div class="stat"><span class="num">0</span><span class="label">Overlapping days between Sales and Orders<span class="verified">✓ verified</span></span></div>
+      <div class="stat"><span class="num">37%</span><span class="label">Of revenue from the High-value segment<span class="verified">✓ verified</span></span></div>
+      <div class="stat"><span class="num">154</span><span class="label">Store-product combinations below reorder level<span class="verified">✓ verified</span></span></div>
+    </div>
+    <p style="margin-top:18px; font-size:14px; color:var(--muted);"><strong>The throughline:</strong> reliable decisions begin with validated evidence. Every figure on this page traces to a query executed against a live PostgreSQL database, not to assumption.</p>
+  </div>
+
+  <nav class="toc">
+    <strong>On this page</strong>
+    <ul>
+      <li><a href="#overview">Project overview</a></li>
+      <li><a href="#sql">SQL insight library</a></li>
+      <li><a href="#register">Risk and opportunity register</a></li>
+      <li><a href="#matrix">Prioritization matrix</a></li>
+      <li><a href="#recommendations">Business recommendations</a></li>
+      <li><a href="#roadmap">Implementation roadmap</a></li>
+      <li><a href="#audit">Validation and audit log</a></li>
+      <li><a href="#conclusion">Executive conclusion</a></li>
+      <li><a href="#deliverables">Deliverables &amp; skills</a></li>
+    </ul>
+  </nav>
+
+  <section id="overview">
+    <h2><span class="step">01</span>Project overview</h2>
+    <p>ZediMart is a fast-growing retail and distribution business operating ten stores across five Nigerian cities, Lagos, Port Harcourt, Abuja, Ibadan, and Kano. Leadership needed a consolidated, trustworthy view of customer behavior, order validity, and inventory health to support operational, financial, and marketing decisions, but the underlying data was spread across six disconnected tables with no confirmed relationship between them.</p>
+    <p>I was asked to answer four specific stakeholder questions: build a unified customer list for Marketing, validate order and payment data for Finance, reconcile inventory against the product catalogue for Operations, and produce a clean, executive-ready revenue report. Rather than answering each question at face value, I tested the evidence behind every answer before reporting it.</p>
+    <img src="zedimart-flow.jpg" alt="Manufacturer to retailer to customer flow" style="width:100%; border-radius:10px; margin:20px 0;" />
+    <div class="takeaway"><strong>Guiding principle:</strong> reliable decisions begin with validated evidence. Each section below is either a direct confirmation of data integrity, or an honest statement of what the data cannot yet confirm.</div>
+  </section>
+
+  <section id="sql">
+    <h2><span class="step">02</span>SQL insight library</h2>
+    <p>Twelve queries, run against a live PostgreSQL 16 database loaded from the actual ZediMart dataset, organized into four parts, one per stakeholder question. The full annotated library, including every query and its confirmed result, is available as a standalone file.</p>
+    <p><a href="ZediMart_SQL_Library.sql" class="mono">View ZediMart_SQL_Library.sql →</a></p>
+
+    <h3>Part 1: Customer data validated</h3>
+    <p>500 customer records checked for duplication and completeness before being treated as reliable. <span class="mono">0</span> duplicate IDs, <span class="mono">0</span> duplicate emails, <span class="mono">0</span> duplicate phone numbers, <span class="mono">0</span> missing fields.</p>
+
+    <h3>Part 2: Revenue interpretation validated</h3>
+    <p>1,000 orders confirmed against valid customers, zero orphaned. Payment methods: POS 351, Transfer 330, Cash 319, no unpaid status present in the data. Order value brackets: Low 477, Medium 307, High 216. And the headline finding: Sales (Nov 2024 to Apr 2025, <span class="mono">₦7,447,707</span>) and Orders (all of 2026, <span class="mono">₦10,447,947</span>) share zero overlapping days. A naive combined total of <span class="mono">₦17,895,654</span> would misrepresent two periods that never coexisted.</p>
+
+    <h3>Part 3: Inventory evidence qualified by schema limitations</h3>
+    <p>No field in the Products table confirms discontinued status. The only honest proxy, zero stock across every store, returns zero candidates. What the data can confirm instead: <span class="mono">154</span> of 1,000 store-product combinations sit below their defined reorder level, six of them at zero stock right now.</p>
+
+    <h3>Part 4: Executive reporting built on established meaning</h3>
+    <p><span class="mono">523</span> of 1,000 orders fall above the dataset average, cleanly cast and free of NULLs. And the capstone query makes the Sales/Orders risk visible directly inside the reporting layer, rather than letting it happen silently inside a dashboard visual.</p>
+  </section>
+
+  <section id="register">
+    <h2><span class="step">03</span>Risk and opportunity register</h2>
+    <p>Five opportunities, seven risks, every entry traced to the exact query it came from.</p>
+
+    <h3>Opportunity register</h3>
+    <table>
+      <tr><th>ID</th><th>Opportunity</th><th>Evidence</th><th>Priority</th></tr>
+      <tr><td class="tag">O1</td><td>Restore confidence in executive revenue reporting by reporting Sales and Orders separately</td><td>Zero overlapping days between the two tables</td><td class="risk-high">HIGH</td></tr>
+      <tr><td class="tag">O2</td><td>Build a tiered engagement strategy around the High-value order segment</td><td>216 orders, 21.6% of volume, generate 37.0% of revenue</td><td class="risk-high">HIGH</td></tr>
+      <tr><td class="tag">O3</td><td>Prioritize restocking at the five highest-breach stores</td><td>Branch 9 (Kano) carries 21 breaches, the highest of any store</td><td class="risk-med">MEDIUM</td></tr>
+      <tr><td class="tag">O4</td><td>Use the customer base as a reliable marketing foundation without further cleanup</td><td>500 of 500 records complete and unique, confirmed not assumed</td><td class="risk-med">MEDIUM</td></tr>
+      <tr><td class="tag">O5</td><td>Add a product lifecycle status field to the schema</td><td>No field currently distinguishes active from discontinued products</td><td class="risk-med">MEDIUM</td></tr>
+    </table>
+
+    <h3>Risk register</h3>
+    <table>
+      <tr><th>ID</th><th>Risk</th><th>Impact</th><th>Level</th></tr>
+      <tr><td class="tag">R1</td><td>Executive revenue figures misrepresent two disconnected periods as one continuous stream</td><td>Any dashboard summing Sales and Orders misleads leadership</td><td class="risk-crit">CRITICAL</td></tr>
+      <tr><td class="tag">R2</td><td>41.3% of orders are dated after the analysis date</td><td>Current order volume cannot be trusted until explained</td><td class="risk-crit">CRITICAL</td></tr>
+      <tr><td class="tag">R3</td><td>Six store-product combinations at zero stock, 154 below reorder level</td><td>Lost sales and customer dissatisfaction, already occurring</td><td class="risk-high">HIGH</td></tr>
+      <tr><td class="tag">R4</td><td>The data model cannot confirm which products are discontinued</td><td>Cannot distinguish "no problem" from "no visibility"</td><td class="risk-med">MEDIUM</td></tr>
+      <tr><td class="tag">R5</td><td>The data model cannot confirm which orders remain unpaid</td><td>Finance may lack visibility into incomplete transactions</td><td class="risk-med">MEDIUM</td></tr>
+      <tr><td class="tag">R6</td><td>Customer PII fields undocumented in the published data description</td><td>A governance and access-control gap</td><td class="risk-low">LOW-MEDIUM</td></tr>
+      <tr><td class="tag">R7</td><td>Source files supplied without header rows</td><td>Silent data loss risk during onboarding</td><td class="risk-low">LOW</td></tr>
+    </table>
+    <p><a href="ZediMart_Register.html" class="mono">View full Risk and Opportunity Register →</a></p>
+  </section>
+
+  <section id="matrix">
+    <h2><span class="step">04</span>Prioritization matrix</h2>
+    <p>Every register entry plotted by impact and effort. Nothing padded, if a category has fewer entries, that's the accurate picture.</p>
+    <div class="card-grid">
+      <div class="quad-card">
+        <div class="quad-tag">Quick wins</div>
+        <h4>Act on these first</h4>
+        <p>Separate Sales/Orders reporting · Restock 6 zero-stock items · Launch High-value engagement</p>
+      </div>
+      <div class="quad-card">
+        <div class="quad-tag">Major projects</div>
+        <h4>Plan and resource</h4>
+        <p>Investigate future-dated orders · Restocking cadence review · Add product status field</p>
+      </div>
+      <div class="quad-card">
+        <div class="quad-tag">Supporting actions</div>
+        <h4>Alongside the above</h4>
+        <p>Update data dictionary · Document header-row convention · Formalize customer list handoff</p>
+      </div>
+      <div class="quad-card">
+        <div class="quad-tag">Monitor</div>
+        <h4>Depends on more information</h4>
+        <p>Confirm whether an unpaid order status exists upstream (R5)</p>
+      </div>
+    </div>
+    <p><a href="ZediMart_Matrix.html" class="mono">View full Prioritization Matrix →</a></p>
+  </section>
+
+  <section id="recommendations">
+    <h2><span class="step">05</span>Business recommendations</h2>
+    <p>Seven recommendations, each derived from evidence confirmed during this analysis, rather than predetermined actions inherited from the original case study brief.</p>
+
+    <div class="rec-block">
+      <h3>1. Formalize the validated customer list as the single source of truth</h3>
+      <div class="rec-trace">Traces to: O4, Query 1, Query 2</div>
+      <div class="rec-field"><strong>What I analysed:</strong> all 500 customer records for duplication and completeness.</div>
+      <div class="rec-field"><strong>What I found:</strong> zero duplication, zero missing values.</div>
+      <div class="rec-insight"><span class="rec-insight-label">Business insight</span>The brief assumed this data needed deduplication. It did not. The more valuable outcome is confirmation that every department can already work from one shared list without drift over time.</div>
+      <div class="rec-field"><strong>Recommendation:</strong> adopt this list as the single reference customer table across departments.</div>
+      <div class="rec-field"><strong>Success metric:</strong> zero variance between departmental customer counts.</div>
+    </div>
+
+    <div class="rec-block">
+      <h3>2. Report Sales and Orders as two separate, clearly labeled figures</h3>
+      <div class="rec-trace">Traces to: R1, O1, Query 7, Query 12</div>
+      <div class="rec-field"><strong>What I found:</strong> zero overlapping days between the two revenue-bearing tables.</div>
+      <div class="rec-insight"><span class="rec-insight-label">Business insight</span>The natural instinct on any dashboard is to sum every revenue table into one headline number. Here, that instinct produces a figure that is technically additive but not meaningfully true.</div>
+      <div class="rec-field"><strong>Recommendation:</strong> report the two figures separately until the relationship is confirmed with source systems.</div>
+    </div>
+
+    <div class="rec-block">
+      <h3>3. Escalate the future-dated orders pattern</h3>
+      <div class="rec-trace">Traces to: R2, Query 7 (date range finding)</div>
+      <div class="rec-field"><strong>What I found:</strong> 413 of 1,000 orders, 41.3%, carry a date later than the analysis date.</div>
+      <div class="rec-insight"><span class="rec-insight-label">Business insight</span>This affects nearly half the Orders table. "Current order volume" cannot be answered confidently until the cause is understood.</div>
+      <div class="rec-field"><strong>Recommendation:</strong> raise directly with the Orders source system owner before reporting current-period metrics.</div>
+    </div>
+
+    <div class="rec-block">
+      <h3>4. Restock immediately, then review restocking cadence</h3>
+      <div class="rec-trace">Traces to: O3, R3, Query 10</div>
+      <div class="rec-field"><strong>What I found:</strong> 6 combinations at zero stock, 154 below reorder level, concentrated at 5 stores led by Branch 9 in Kano.</div>
+      <div class="rec-insight"><span class="rec-insight-label">Business insight</span>The 6 zero-stock items are an isolated fix. The broader pattern, concentrated in five specific stores, is a process problem, not six unrelated stockouts.</div>
+      <div class="rec-field"><strong>Recommendation:</strong> restock immediately, then commission a structural cadence review at the five highest-breach stores.</div>
+    </div>
+
+    <div class="rec-block">
+      <h3>5. Add a product lifecycle status field to the schema</h3>
+      <div class="rec-trace">Traces to: O5, R4, Query 9</div>
+      <div class="rec-field"><strong>What I found:</strong> no field distinguishes active from discontinued products. The zero-stock proxy returns no candidates.</div>
+      <div class="rec-insight"><span class="rec-insight-label">Business insight</span>This is a genuine data model gap, not a data quality issue. No amount of further querying answers this with certainty.</div>
+      <div class="rec-field"><strong>Recommendation:</strong> add a status field before this question is asked again.</div>
+    </div>
+
+    <div class="rec-block">
+      <h3>6. Build a tiered engagement strategy around the High-value segment</h3>
+      <div class="rec-trace">Traces to: O2, Query 6</div>
+      <div class="rec-field"><strong>What I found:</strong> 216 orders, 21.6% of volume, generate 37.0% of total order revenue.</div>
+      <div class="rec-insight"><span class="rec-insight-label">Business insight</span>The highest-value fifth of orders produces more than a third of revenue on its own, worth protecting deliberately rather than leaving to chance.</div>
+      <div class="rec-field"><strong>Recommendation:</strong> identify these customers and build a retention strategy specifically around them.</div>
+    </div>
+
+    <div class="rec-block">
+      <h3>7. Confirm whether an unpaid payment status exists upstream</h3>
+      <div class="rec-trace">Traces to: R5, Query 5</div>
+      <div class="rec-field"><strong>What I found:</strong> every order carries a completed payment method. No pending status exists anywhere in this table.</div>
+      <div class="rec-insight"><span class="rec-insight-label">Business insight</span>Either ZediMart genuinely has no incomplete transactions, unusual for a retailer this size, or they exist upstream and simply aren't flowing into this data.</div>
+      <div class="rec-field"><strong>Recommendation:</strong> confirm directly with the source payment system before Finance treats this data as complete.</div>
+    </div>
+
+    <p><a href="ZediMart_Recommendations.html" class="mono">View full Business Recommendations →</a></p>
+  </section>
+
+  <section id="roadmap">
+    <h2><span class="step">06</span>Implementation roadmap</h2>
+    <p>Four phases, sequenced by actual dependency, not convenience.</p>
+
+    <div class="phase-block active">
+      <h3>Phase 1: Immediate fixes</h3>
+      <div class="phase-meta">Week 1 · Depends on nothing already verified</div>
+      <p>Restock 6 zero-stock items. Separate Sales/Orders reporting. Hand the High-value segment to Marketing. Update the data dictionary and header-row documentation.</p>
+    </div>
+    <div class="phase-block">
+      <h3>Phase 2: Investigation and escalation</h3>
+      <div class="phase-meta">Weeks 2–6 · Depends on response time from other teams</div>
+      <p>Escalate the future-dated orders pattern. Confirm the unpaid-status question with the payment system. Begin data gathering for the restocking cadence review.</p>
+    </div>
+    <div class="phase-block">
+      <h3>Phase 3: Structural change</h3>
+      <div class="phase-meta">Months 2–4 · Content deliberately conditional on Phase 2's findings</div>
+      <p>Add the product status field. Implement restocking changes based on what Phase 2 uncovers. Resolve the Sales/Orders relationship permanently, formalize separation or build corrected join logic, whichever the evidence supports.</p>
+    </div>
+    <div class="phase-block">
+      <h3>Phase 4: Validation and monitoring</h3>
+      <div class="phase-meta">Month 3 onward, ongoing</div>
+      <p>Quarterly customer audits. Track the High-value segment's revenue share over time. Monitor reorder breaches monthly across all ten stores. Re-verify no combined revenue figure has quietly reappeared.</p>
+    </div>
+    <p><a href="ZediMart_Roadmap.html" class="mono">View full Implementation Roadmap →</a></p>
+  </section>
+
+  <section id="audit">
+    <h2><span class="step">07</span>Validation and audit log</h2>
+    <p>Every number on this page was tested against a live, loaded PostgreSQL database, not assumed from the source brief or a single exploratory pass. This section documents how.</p>
+
+    <table>
+      <tr><th>Table</th><th>Source rows</th><th>Loaded rows</th><th>Result</th></tr>
+      <tr><td>stores</td><td class="mono">10</td><td class="mono">10</td><td class="audit-pass">Confirmed</td></tr>
+      <tr><td>products</td><td class="mono">100</td><td class="mono">100</td><td class="audit-pass">Confirmed</td></tr>
+      <tr><td>inventory</td><td class="mono">1,000</td><td class="mono">1,000</td><td class="audit-pass">Confirmed</td></tr>
+      <tr><td>sales</td><td class="mono">3,000</td><td class="mono">3,000</td><td class="audit-pass">Confirmed</td></tr>
+      <tr><td>customers</td><td class="mono">500</td><td class="mono">500</td><td class="audit-pass">Confirmed</td></tr>
+      <tr><td>orders</td><td class="mono">1,000</td><td class="mono">1,000</td><td class="audit-pass">Confirmed</td></tr>
+    </table>
+
+    <p><strong>Two real issues were caught and corrected during the build</strong>, not discovered later by a reader: an inconsistent value-bracket definition between an exploratory pass and the final library, and a stray formatting character in an early draft of the Prioritization Matrix. Neither reached a final document. Both are recorded because a validation log that only reports successes isn't a credible one.</p>
+
+    <div class="takeaway"><strong>What this log does not cover:</strong> this validation confirms every number accurately reflects the supplied dataset. It does not confirm the dataset reflects ZediMart's real-world operations, since the source files were provided as a structured case scenario, not a live operational system. The numbers are verifiably correct against the data given. Whether that data represents reality is a separate question.</div>
+
+    <p><a href="ZediMart_AuditLog.html" class="mono">View full Validation and Audit Log →</a></p>
+  </section>
+
+  <section id="conclusion">
+    <h2><span class="step">08</span>Executive conclusion</h2>
+    <p>This engagement began with four stakeholder questions. The analysis uncovered something more consequential than direct answers to them.</p>
+    <p>Several assumptions in the original brief did not survive contact with the data. The customer base did not need the deduplication it was assumed to need. Whether products were discontinued could not be confirmed at all, not because the answer was hidden, but because the data model was never built to answer that question. Whether every order was truly paid could not be confirmed either, for the same reason.</p>
+    <p>None of these were failures of analysis. They were the analysis working correctly, testing an assumption rather than accepting it, and reporting the honest answer even when the honest answer was that the data cannot say.</p>
+    <p>What changed as a result: leadership now has a revenue reporting structure that will not silently misstate two disconnected periods as one continuous figure. Five stores know exactly where their restocking gaps are concentrated, led by Kano's Branch 9. A ₦3.86M revenue segment has a name and a strategy instead of disappearing into an average. And two real gaps in the data model itself are now documented decisions rather than invisible blind spots.</p>
+    <div class="takeaway"><strong>Reliable decisions begin with validated evidence.</strong> That principle shaped every finding, every recommendation, and every honest limitation stated on this page.</div>
+  </section>
+
+  <section id="deliverables">
+    <h2><span class="step">09</span>Deliverables &amp; skills</h2>
+    <p>This engagement produced six connected deliverables, each building on the one before it: a verified SQL query library, an executive risk and opportunity register, a prioritization matrix, evidence-led business recommendations, a dependency-sequenced implementation roadmap, and a validation and audit log documenting the verification process itself.</p>
+    <h3>Skills used</h3>
+    <p>SQL &middot; PostgreSQL &middot; Data Validation &middot; Business Intelligence &middot; Risk Assessment &middot; Executive Reporting &middot; Stakeholder Translation &middot; Data Governance &middot; Process Prioritization</p>
+
+    <ul class="actions" style="list-style:none; padding:0; margin-top:24px;">
+      <li><a href="index.html" style="display:inline-block; background:var(--cyan-deep); color:#fff; padding:12px 22px; border-radius:6px; text-decoration:none; font-weight:500;">Back to projects</a></li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Doris Frank &middot; Business Intelligence Consultant &middot; <a href="https://www.linkedin.com/in/uduakdoris/">LinkedIn</a> &middot; <a href="https://github.com/Dorisfrank">GitHub</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

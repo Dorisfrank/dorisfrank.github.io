@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Section 01: Stakeholder Mapping | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f7f9f9; --card: #ffffff; --ink: #00325D; --ink-soft: #3d4a52;
+    --muted: #7a8a90; --navy: #00325D; --navy-deep: #001e38; --teal: #8BC5C9;
+    --teal-deep: #4d9297; --teal-pale: #eaf4f4; --line: #dbe6e6; --amber: #c76b1e;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'IBM Plex Sans',sans-serif; font-weight:600; color: var(--navy); }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  a { color: var(--teal-deep); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background: var(--navy); border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:900px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: #cfe3e6; text-decoration:none; font-size:14px; border:1px solid #2a4a5c; padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--teal); color: var(--teal); }
+  .masthead span.doclabel { font-family:'IBM Plex Mono', monospace; font-size:13px; color:#9fc0c4; }
+  h2 { font-size: 26px; margin-top: 0; }
+  h3 { color: var(--teal-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--navy); color:#fff; font-size: 12.5px; }
+  tr:nth-child(even) td { background: #fafcfc; }
+  blockquote, div.executive-takeaway, div.consultant-observation {
+    background: var(--teal-pale); border-left: 3px solid var(--teal-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0;
+  }
+  div.executive-takeaway p, div.consultant-observation p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'IBM Plex Mono', monospace; background: var(--teal-pale); color: var(--teal-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="IntelliMed.html" class="back">&larr; Back to case study</a>
+<span class="doclabel">IntelliMed / section-01</span>
+</div></header>
+<div class="wrap">
+<h2>01. Project Initiation and Stakeholder Mapping</h2>
+<hr />
+<h2>Executive Overview</h2>
+<p><em>Why are we doing this project?</em></p>
+<h3>Initial Project Understanding</h3>
+<p>Healthcare organizations rarely struggle because they lack systems. They struggle because critical business processes span multiple systems that were never designed to work together. IntelliMed Health is no exception.</p>
+<p>Across its three hospital locations, patient records, billing, HR, and inventory each run on disconnected platforms. Staff manually transfer information between these systems, increasing the likelihood of data inconsistency, delaying financial reporting, contributing to inventory stockouts, and making compliance audits difficult to complete efficiently.</p>
+<p>As regulatory expectations have increased, this fragmentation has become more than an operational inconvenience. Operating across UK, US, and EU contexts, IntelliMed must produce accurate, auditable information under HIPAA, GDPR, and NHS Digital simultaneously. Fragmented systems make that difficult to sustain, which turns an IT problem into a compliance risk. A unified ERP system becomes the enabling response to that risk, not the objective in itself.</p>
+<p>My role in this engagement is to lead the discovery and documentation phase, before implementation begins. This engagement is structured around defined stakeholder personas representing key roles, CFO, Head Nurse, IT Director, and Compliance Officer. Every stakeholder insight in this case study comes from structured elicitation against those personas, documented and analysed the same way a live engagement would require.</p>
+<h3>Engagement Objectives</h3>
+<p>This discovery engagement seeks to:</p>
+<ul>
+<li>Understand IntelliMed's current operating model across clinical, financial, and administrative functions</li>
+<li>Identify the business problems preventing efficient service delivery</li>
+<li>Capture stakeholder needs across clinical, financial, compliance, and operational roles</li>
+<li>Assess the gap between current capabilities and ERP functionality</li>
+<li>Establish traceability from business need to proposed solution</li>
+<li>Build the business case for ERP adoption</li>
+</ul>
+<div class="executive-takeaway">
+<strong>Executive Takeaway</strong>
+
+<p>Selecting an ERP is not the challenge.</p>
+
+<p><strong>Ensuring the selected ERP solves the right business problems for the people who use it is.</strong></p>
+</div>
+
+<hr />
+<h2>Stakeholder Analysis</h2>
+<p><em>Who matters, and why?</em></p>
+<h3>Stakeholder Register</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Stakeholder</th>
+<th>Role</th>
+<th>Business Objective</th>
+<th>Interest</th>
+<th>Influence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Chief Executive Officer / Hospital Administrator</td>
+<td>Executive Sponsor</td>
+<td>Strategic alignment and return on investment</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Chief Financial Officer</td>
+<td>Financial Owner</td>
+<td>Financial visibility and budget control</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Head Nurse / Chief Nursing Officer</td>
+<td>Clinical Operations Lead</td>
+<td>Clinical workflow efficiency</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td>4</td>
+<td>IT Director</td>
+<td>Technical Delivery Lead</td>
+<td>Systems integration and security</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Compliance Officer</td>
+<td>Regulatory Oversight</td>
+<td>Regulatory compliance across HIPAA, GDPR, NHS Digital</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td>6</td>
+<td>HR Manager</td>
+<td>Workforce and Scheduling Owner</td>
+<td>Staff adoption and training</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Procurement / Supply Chain Lead</td>
+<td>Inventory and Vendor Management</td>
+<td>Accurate supply and medication tracking</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Department Physicians and Clinicians</td>
+<td>Frontline End Users</td>
+<td>Minimal disruption to patient care</td>
+<td>Medium</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Billing and Registration Staff</td>
+<td>Frontline End Users</td>
+<td>Accurate, timely financial processing</td>
+<td>Medium</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>10</td>
+<td>ERP Vendor(s)</td>
+<td>Solution Provider</td>
+<td>Successful, on-scope implementation</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Regulatory Authorities</td>
+<td>External Compliance Body</td>
+<td>Auditable, compliant operations</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Patient Representative</td>
+<td>Patient Advocacy</td>
+<td>Continuity and quality of care</td>
+<td>Low</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<p><strong style="color: #1b5e3f;"><em>Rows 1 through 5 represent the defined stakeholder personas this engagement was structured around. The remaining rows represent stakeholder categories identified during discovery but not directly elicited through simulated interview.</em></strong></p>
+<h3>Stakeholder Power-Interest Matrix</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Low Interest</th>
+<th>High Interest</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>High Power</strong></td>
+<td>Regulatory Authorities</td>
+<td>CEO, CFO, Head Nurse, IT Director, Compliance Officer</td>
+</tr>
+<tr>
+<td><strong>Low Power</strong></td>
+<td>Patient Representative</td>
+<td>HR Manager, Procurement Lead, Clinicians, Billing Staff, ERP Vendor</td>
+</tr>
+</tbody>
+</table>
+<p><em>A companion Excel workbook builds this same matrix as a live, formula-driven scatter chart: <a href="IntelliMed_Stakeholder_Power_Interest_Chart.xlsx">IntelliMed_Stakeholder_Power_Interest_Chart.xlsx</a>.</em></p>
+<div class="consultant-observation">
+<strong>Consultant's Observation:</strong> I placed Compliance in the high-power quadrant despite holding no budget authority. HIPAA, GDPR, and NHS Digital obligations mean the Compliance Officer cannot approve the investment, but can stop an implementation that fails to meet regulatory requirements. In a healthcare ERP engagement, that is real power, not influence in name only.
+</div>
+
+<h3>Engagement Strategy by Stakeholder Group</h3>
+<p><strong>Manage closely</strong> (CEO, CFO, Head Nurse, IT Director, Compliance Officer): direct, decision-focused engagement through structured elicitation sessions.
+Output: requirements, decisions, and formal approval.</p>
+<p><strong>Keep satisfied</strong> (Regulatory Authorities): informational engagement, escalated only where a specific requirement carries compliance risk.
+Output: compliance confirmation on regulated requirements.</p>
+<p><strong>Keep informed</strong> (HR Manager, Procurement Lead, Clinicians, Billing Staff, ERP Vendor): structured requirements sessions and workflow validation rather than executive-level interviews.
+Output: workflow validation and process review.</p>
+<p><strong>Monitor</strong> (Patient Representative): patient impact tracked as a success measure in the business case rather than gathered through direct consultation.
+Output: patient-impact criteria embedded in the business case.</p>
+<hr />
+<h2>Governance</h2>
+<p><em>How will engagement and progress be managed?</em></p>
+<h3>Stakeholder Communication Plan</h3>
+<table>
+<thead>
+<tr>
+<th>Stakeholder</th>
+<th>Method</th>
+<th>Frequency</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CEO / Hospital Administrator</td>
+<td>Executive status briefing</td>
+<td>Weekly</td>
+<td>Decision making</td>
+</tr>
+<tr>
+<td>CFO</td>
+<td>Financial reporting update</td>
+<td>Weekly</td>
+<td>Budget alignment</td>
+</tr>
+<tr>
+<td>IT Director</td>
+<td>Technical working session</td>
+<td>Weekly</td>
+<td>Technical validation</td>
+</tr>
+<tr>
+<td>Head Nurse</td>
+<td>Clinical workflow workshop</td>
+<td>Weekly</td>
+<td>Workflow validation</td>
+</tr>
+<tr>
+<td>Compliance Officer</td>
+<td>Compliance review meeting</td>
+<td>Bi-weekly</td>
+<td>Risk assessment</td>
+</tr>
+<tr>
+<td>ERP Vendor(s)</td>
+<td>Implementation coordination meeting</td>
+<td>Weekly</td>
+<td>Delivery tracking</td>
+</tr>
+<tr>
+<td>HR, Procurement, Clinicians, Billing Staff</td>
+<td>Workshop and validation sessions</td>
+<td>As needed, per phase</td>
+<td>Requirements validation</td>
+</tr>
+</tbody>
+</table>
+<h3>Discovery Phase Deliverables</h3>
+<p>This phase produces the following artefacts:</p>
+<ul>
+<li>Stakeholder Register</li>
+<li>Stakeholder Power-Interest Matrix</li>
+<li>Stakeholder Engagement Strategy</li>
+<li>Communication Plan</li>
+<li>Needs Assessment</li>
+<li>Requirements Catalogue</li>
+<li>Workflow Maps</li>
+<li>Gap Analysis</li>
+<li>Requirements Traceability Matrix</li>
+<li>Business Requirements Document</li>
+<li>ERP Business Case</li>
+</ul>
+<h3>Success Criteria</h3>
+<p><em>How do we know discovery is complete?</em></p>
+<p>This discovery phase will be considered complete when:</p>
+<ul>
+<li>Stakeholder requirements are fully documented</li>
+<li>Current-state workflows are validated</li>
+<li>Business problems are agreed across departments</li>
+<li>Requirements are prioritized</li>
+<li>Traceability is established from requirement to ERP feature to business objective</li>
+<li>Leadership has sufficient evidence to approve ERP investment</li>
+</ul>
+<hr />
+<h2>Executive Close</h2>
+<p><em>What should leadership remember before moving on?</em></p>
+<p>I identified twelve stakeholder categories, five of them the defined personas this engagement structures its elicitation around.</p>
+<p>The power-interest mapping surfaces a tension worth carrying forward deliberately: the highest-power group includes financial, clinical, technical, and regulatory owners whose requirements will not always agree. That tension becomes the central question of the next phase, understanding where business priorities align, where they conflict, and which needs must take precedence before requirements can be defined.</p>
+<hr />
+<p><em>IntelliMed Health: ERP Implementation in the Health Sector</em>
+<em>Section 01: Project Initiation and Stakeholder Mapping</em></p></div></body></html>

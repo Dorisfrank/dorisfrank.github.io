@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Implementation Roadmap | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f4f2ee; --card: #ffffff; --ink: #1f2430; --ink-soft: #4a5060;
+    --muted: #8a8578; --cyan: #01b9ee; --cyan-deep: #017a9e; --cyan-pale: #e3f7fd;
+    --line: #e2ded4;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'Space Grotesk',sans-serif; font-weight:600; color: var(--ink); }
+  .mono { font-family:'JetBrains Mono', monospace; }
+  a { color: var(--cyan-deep); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background:#faf9f6; border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:860px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: var(--cyan-deep); text-decoration:none; font-size:14px; border:1px solid var(--line); padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--cyan); background: var(--cyan-pale); }
+  .masthead span.doclabel { font-family:'JetBrains Mono', monospace; font-size:13px; color: var(--muted); }
+  h1 { font-size: 30px; margin-top: 0; }
+  h3 { color: var(--cyan-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14.5px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--ink); color:#fff; font-size: 13px; }
+  tr:nth-child(even) td { background: #faf9f6; }
+  blockquote { background: var(--cyan-pale); border-left: 3px solid var(--cyan-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0; }
+  blockquote p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'JetBrains Mono', monospace; background: var(--cyan-pale); color: var(--cyan-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="ZediMart.html" class="back">← Back to case study</a>
+<span class="doclabel">ZediMart / roadmap.md</span>
+</div></header>
+<div class="wrap">
+<h1>ZediMart: Implementation Roadmap</h1>
+<h3>Applied Business Intelligence Case Study — Independently Developed</h3>
+<hr />
+<p>Four phases, sequenced by what each action actually depends on, not by convenience. Phase 1 needs nothing from anyone outside the data team. Phase 2 depends on other teams responding. Phase 3 depends on what Phase 2 uncovers. Phase 4 only exists once the first three have something to monitor.</p>
+<hr />
+<h2>Phase 1: Immediate Fixes</h2>
+<p><strong>Duration:</strong> Week 1
+<strong>Depends on:</strong> nothing. Every action here uses data already verified in this analysis.</p>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th>Traces To</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Restock the 6 zero-stock store-product combinations</td>
+<td>Recommendation 4</td>
+<td>Store Operations</td>
+</tr>
+<tr>
+<td>Update the executive dashboard to show Sales and Orders as two separate, labeled figures instead of one combined total</td>
+<td>Recommendation 2</td>
+<td>Data/BI Team</td>
+</tr>
+<tr>
+<td>Identify the customers behind the High-value order segment and hand the list to Marketing</td>
+<td>Recommendation 6</td>
+<td>Data/BI Team, Marketing</td>
+</tr>
+<tr>
+<td>Update the data dictionary to document the FullName, Phone, and Email fields</td>
+<td>Governance Note 1</td>
+<td>Data/BI Team</td>
+</tr>
+<tr>
+<td>Document the missing-header-row convention for future data handoffs</td>
+<td>Governance Note 2</td>
+<td>Data/BI Team</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exit criteria:</strong> zero store-product combinations at zero stock. Dashboard no longer displays a single blended revenue figure. High-value segment list delivered to Marketing.</p>
+<hr />
+<h2>Phase 2: Investigation and Escalation</h2>
+<p><strong>Duration:</strong> Weeks 2 to 6
+<strong>Depends on:</strong> response time from teams outside the data function. This phase cannot be accelerated by the data team alone.</p>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th>Traces To</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Escalate the future-dated orders pattern (41.3% of all orders) to the Orders source system owner and request an explanation</td>
+<td>Recommendation 3</td>
+<td>Data/BI Team, IT/Systems</td>
+</tr>
+<tr>
+<td>Confirm with the source payment system whether an unpaid or pending order status exists upstream</td>
+<td>Recommendation 7</td>
+<td>Data/BI Team, Finance</td>
+</tr>
+<tr>
+<td>Begin data gathering for the restocking cadence review at the five highest-breach stores, starting with Branch 9 in Kano</td>
+<td>Recommendation 4</td>
+<td>Inventory / Store Ops</td>
+</tr>
+<tr>
+<td>Launch the tiered engagement strategy for the High-value segment identified in Phase 1</td>
+<td>Recommendation 6</td>
+<td>Marketing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exit criteria:</strong> a documented explanation for the future-dated orders, confirmed either as a system issue, scheduled orders, or data error. A confirmed answer on whether a pending payment state exists upstream. Restocking cadence data collected across the five target stores.</p>
+<hr />
+<h2>Phase 3: Structural Change</h2>
+<p><strong>Duration:</strong> Months 2 to 4
+<strong>Depends on:</strong> findings from Phase 2. What gets built here is defined by what Phase 2 uncovers, not decided in advance.</p>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th>Traces To</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add a product lifecycle status field to the Products schema</td>
+<td>Recommendation 5</td>
+<td>Data/BI Team</td>
+</tr>
+<tr>
+<td>Implement restocking cadence changes at the five highest-breach stores, based on what Phase 2's investigation found</td>
+<td>Recommendation 4</td>
+<td>Inventory / Store Ops</td>
+</tr>
+<tr>
+<td>If Phase 2 confirms Sales and Orders describe genuinely separate systems, formalize permanent separate reporting. If Phase 2 finds they should reconcile, build the corrected join logic</td>
+<td>Recommendation 2, Recommendation 3</td>
+<td>Data/BI Team</td>
+</tr>
+<tr>
+<td>If Phase 2 confirms a pending payment state exists upstream, build it into the Orders data model</td>
+<td>Recommendation 7</td>
+<td>Data/BI Team</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exit criteria:</strong> schema updated with a working product status field. Measurable reduction in the 154-combination reorder breach count. Sales and Orders reporting relationship formally resolved, not left as an open question.</p>
+<hr />
+<h2>Phase 4: Validation and Monitoring</h2>
+<p><strong>Duration:</strong> Month 3 onward, ongoing
+<strong>Depends on:</strong> Phases 1 through 3 having something in place to monitor.</p>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th>Traces To</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Re-run the customer duplication and completeness audit quarterly as new customers are added</td>
+<td>Recommendation 1</td>
+<td>Data/BI Team</td>
+</tr>
+<tr>
+<td>Track the High-value segment's revenue share over time to confirm the engagement strategy is working, not just launched</td>
+<td>Recommendation 6</td>
+<td>Marketing, Data/BI Team</td>
+</tr>
+<tr>
+<td>Monitor the reorder breach count monthly across all ten stores, not only the original five</td>
+<td>Recommendation 4</td>
+<td>Inventory / Store Ops</td>
+</tr>
+<tr>
+<td>Re-verify that no single combined revenue figure has quietly reappeared on any dashboard</td>
+<td>Recommendation 2</td>
+<td>Data/BI Team</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exit criteria:</strong> this phase has no end date. It is the ongoing discipline that keeps Phases 1 through 3 from silently reverting.</p>
+<hr />
+<h2>Section Summary</h2>
+<p>Every action in this roadmap is either already actionable from data in hand, or explicitly waiting on a named team's response before it can move. Nothing is scheduled to start before its actual dependency is resolved. Phase 3's content is deliberately left conditional on Phase 2's findings rather than pre-decided, because committing to a fix before the investigation concludes would repeat the same mistake this entire analysis was built to catch: treating an assumption as a confirmed fact.</p>
+<hr />
+<p><em>ZediMart Implementation Roadmap</em>
+<em>Applied Business Intelligence Case Study — Independently Developed</em></p>
+<h3>Document Relationships</h3>
+<ul>
+<li><strong>Evidence Source:</strong> Business Recommendations</li>
+<li><strong>Note:</strong> Phase 3 of this roadmap is deliberately left conditional on Phase 2's findings rather than pre-decided, so this document's own internal sequencing carries the same evidence-before-conclusion standard as its source documents</li>
+</ul></div></body></html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Validation and Audit Log | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f4f2ee; --card: #ffffff; --ink: #1f2430; --ink-soft: #4a5060;
+    --muted: #8a8578; --cyan: #01b9ee; --cyan-deep: #017a9e; --cyan-pale: #e3f7fd;
+    --line: #e2ded4;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'Space Grotesk',sans-serif; font-weight:600; color: var(--ink); }
+  .mono { font-family:'JetBrains Mono', monospace; }
+  a { color: var(--cyan-deep); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background:#faf9f6; border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:860px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: var(--cyan-deep); text-decoration:none; font-size:14px; border:1px solid var(--line); padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--cyan); background: var(--cyan-pale); }
+  .masthead span.doclabel { font-family:'JetBrains Mono', monospace; font-size:13px; color: var(--muted); }
+  h1 { font-size: 30px; margin-top: 0; }
+  h3 { color: var(--cyan-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14.5px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--ink); color:#fff; font-size: 13px; }
+  tr:nth-child(even) td { background: #faf9f6; }
+  blockquote { background: var(--cyan-pale); border-left: 3px solid var(--cyan-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0; }
+  blockquote p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'JetBrains Mono', monospace; background: var(--cyan-pale); color: var(--cyan-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="ZediMart.html" class="back">← Back to case study</a>
+<span class="doclabel">ZediMart / audit-log.md</span>
+</div></header>
+<div class="wrap">
+<h1>ZediMart: Validation and Audit Log</h1>
+<h3>Applied Business Intelligence Case Study — Independently Developed</h3>
+<hr />
+<p>This document exists for one reason: every number used anywhere in this case study, the SQL library, the risk register, the recommendations, was tested against a live, loaded database, not assumed from the source deck or from a single exploratory pass. This log records how that testing was done, so the claim of verification is itself checkable rather than taken on faith.</p>
+<hr />
+<h2>1. Environment Setup</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Installed PostgreSQL 16</td>
+<td>Confirmed running</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Created zedimart_db</td>
+<td>Confirmed created</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Ran full schema (Section 1 of the SQL Query Library)</td>
+<td>Six tables created: stores, products, inventory, sales, customers, orders</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Data Loading Verification</h2>
+<p>The six source CSVs were supplied without header rows. Before loading, this was confirmed directly by reading the raw file contents, not assumed from a preview.</p>
+<p>Dates were converted from US format (M/D/YYYY) to ISO format (YYYY-MM-DD) to load reliably. Phone numbers were loaded as text, not numeric, after confirming the source data contains numbers with a leading zero (for example, 08043321819), which a numeric column type would silently strip.</p>
+<p>Each table's row count after loading was checked directly against the row count of its source CSV:</p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Source File Row Count</th>
+<th>Loaded Row Count</th>
+<th>Match</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stores</td>
+<td>10</td>
+<td>10</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>products</td>
+<td>100</td>
+<td>100</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>inventory</td>
+<td>1,000</td>
+<td>1,000</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>sales</td>
+<td>3,000</td>
+<td>3,000</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>customers</td>
+<td>500</td>
+<td>500</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>orders</td>
+<td>1,000</td>
+<td>1,000</td>
+<td>Confirmed</td>
+</tr>
+</tbody>
+</table>
+<p>No rows were lost, duplicated, or altered during loading.</p>
+<hr />
+<h2>3. Query-Level Verification</h2>
+<p>Every query in the SQL Query Library was executed against the live database. The result of each execution was compared directly against the figure documented in that query's comment block. This table shows that comparison, re-run once more, independently, specifically to produce this log, not copied from the original build.</p>
+<table>
+<thead>
+<tr>
+<th>Query</th>
+<th>Claimed Result</th>
+<th>Verified Result</th>
+<th>Match</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Query 1: Customer duplicate audit</td>
+<td>500 customers, 0 duplicate IDs, 0 duplicate emails, 0 duplicate phones</td>
+<td>500, 0, 0, 0</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>Query 4: Order-to-customer referential check</td>
+<td>1,000 orders, 0 orphaned</td>
+<td>1,000, 0</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>Query 5: Payment method distribution</td>
+<td>POS 351, Transfer 330, Cash 319</td>
+<td>POS 351, Transfer 330, Cash 319</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>Query 6: Value bracket classification</td>
+<td>Low 477, Medium 307, High 216</td>
+<td>Low 477, Medium 307, High 216</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>Query 7/12: Sales and Orders date ranges and totals</td>
+<td>Sales Nov 2024 to Apr 2025, N7,447,707. Orders 2026, N10,447,947</td>
+<td>Sales 2024-11-01 to 2025-04-30, N7,447,707.00. Orders 2026-01-01 to 2026-12-31, N10,447,947.00</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>Query 9: Discontinued-product proxy</td>
+<td>0 products at zero stock across all stores</td>
+<td>0</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>Query 10: Reorder level breaches</td>
+<td>154 of 1,000 combinations</td>
+<td>154</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>Query 11: Above-average orders</td>
+<td>523 of 1,000 orders</td>
+<td>523</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>Future-dated orders check</td>
+<td>413 of 1,000 orders (41.3%)</td>
+<td>413</td>
+<td>Confirmed</td>
+</tr>
+</tbody>
+</table>
+<p>Every figure carried into the Risk and Opportunity Register, the Prioritization Matrix, and the Business Recommendations traces back to a row in this table.</p>
+<hr />
+<h2>4. Issues Found and Corrected During Verification, Not After</h2>
+<p>Two errors were caught during the build of this case study's supporting documents and corrected before anything was presented, rather than discovered later by a reader:</p>
+<ul>
+<li><strong>A bracket calculation inconsistency.</strong> An early exploratory pass used a looser definition for the Medium value band than the one ultimately documented in the SQL library. This was caught by comparing two runs against each other, and the library was written using the single, consistent definition (Low: below average, Medium: average up to 1.5x average, High: 1.5x average or above) shown in this log.</li>
+<li><strong>Stray formatting characters.</strong> A rendering artifact appeared in the Prioritization Matrix during drafting. This was caught by a direct character-level scan of the file before it was shared, not by visual proofreading alone.</li>
+</ul>
+<p>Neither issue reached a final, shared document. Both are recorded here because a validation log that only reports successes is not a credible validation log.</p>
+<hr />
+<h2>5. What This Log Does Not Cover</h2>
+<p>This validation confirms that every number in this case study accurately reflects the supplied dataset. It does not confirm that the dataset itself reflects ZediMart's real-world operations, since the source files were provided as a structured case scenario, not connected to a live operational system. The distinction matters: the numbers are verifiably correct against the data given. Whether that data represents reality is a separate question, outside what any SQL query can answer.</p>
+<hr />
+<h2>Section Summary</h2>
+<p>Six tables loaded with zero row loss. Eight independent figures re-verified against a live database specifically to produce this log, not carried forward from memory of an earlier run. Two real issues caught and corrected during the build process itself. This is the standard every number in this case study was held to before it appeared in any other document.</p>
+<hr />
+<p><em>ZediMart Validation and Audit Log</em>
+<em>Applied Business Intelligence Case Study — Independently Developed</em></p>
+<h3>Document Relationships</h3>
+<ul>
+<li><strong>Evidence Source:</strong> ZediMart SQL Query Library, checked directly against a live database</li>
+<li><strong>Validates:</strong> every figure used in the Risk and Opportunity Register, the Prioritization Matrix, the Business Recommendations, and the Implementation Roadmap</li>
+</ul></div></body></html>

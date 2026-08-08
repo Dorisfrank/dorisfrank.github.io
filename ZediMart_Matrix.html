@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Prioritization Matrix | Doris Frank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f4f2ee; --card: #ffffff; --ink: #1f2430; --ink-soft: #4a5060;
+    --muted: #8a8578; --cyan: #01b9ee; --cyan-deep: #017a9e; --cyan-pale: #e3f7fd;
+    --line: #e2ded4;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family:'Inter',sans-serif; line-height:1.65; font-size:16px; }
+  h1,h2,h3,h4 { font-family:'Space Grotesk',sans-serif; font-weight:600; color: var(--ink); }
+  .mono { font-family:'JetBrains Mono', monospace; }
+  a { color: var(--cyan-deep); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.masthead { background:#faf9f6; border-bottom:1px solid var(--line); padding: 18px 0; }
+  .masthead .wrap { max-width:860px; display:flex; justify-content:space-between; align-items:center; padding: 0 24px; flex-wrap:wrap; gap:10px;}
+  .masthead a.back { color: var(--cyan-deep); text-decoration:none; font-size:14px; border:1px solid var(--line); padding:6px 14px; border-radius:6px; }
+  .masthead a.back:hover { border-color: var(--cyan); background: var(--cyan-pale); }
+  .masthead span.doclabel { font-family:'JetBrains Mono', monospace; font-size:13px; color: var(--muted); }
+  h1 { font-size: 30px; margin-top: 0; }
+  h3 { color: var(--cyan-deep); font-size: 15px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom: 24px;}
+  table { width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14.5px; }
+  th, td { text-align:left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--ink); color:#fff; font-size: 13px; }
+  tr:nth-child(even) td { background: #faf9f6; }
+  blockquote { background: var(--cyan-pale); border-left: 3px solid var(--cyan-deep); padding: 14px 18px; border-radius:4px; margin: 18px 0; }
+  blockquote p { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+  code { font-family:'JetBrains Mono', monospace; background: var(--cyan-pale); color: var(--cyan-deep); padding: 2px 6px; border-radius:4px; font-size: 0.9em; }
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+<a href="ZediMart.html" class="back">← Back to case study</a>
+<span class="doclabel">ZediMart / matrix.md</span>
+</div></header>
+<div class="wrap">
+<h1>ZediMart: Executive Prioritization Matrix</h1>
+<h3>Applied Business Intelligence Case Study — Independently Developed</h3>
+<hr />
+<h2>How This Matrix Works</h2>
+<p>Every opportunity and risk from the Risk and Opportunity Register is plotted here by two questions only: how much it matters, and how much it costs to act on. That produces four honest categories. Nothing is placed here to pad the page, if a category has fewer entries than the others, that is the accurate picture, not a gap to fill.</p>
+<hr />
+<h2>QUICK WINS</h2>
+<h3>High Impact, Low Effort. Act on these first</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Traces To</th>
+<th>Why It's Fast</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Report Sales and Orders as two separate, clearly labeled figures instead of one combined total</td>
+<td>R1, O1</td>
+<td>A reporting and labeling change, not a data or system fix. Can be implemented in the next dashboard refresh</td>
+</tr>
+<tr>
+<td>Restock the 6 store-product combinations currently at zero stock</td>
+<td>R3</td>
+<td>The exact products and stores are already identified. This is a procurement action, not further analysis</td>
+</tr>
+<tr>
+<td>Launch a tiered engagement strategy around the High-value order segment</td>
+<td>O2</td>
+<td>The segment is already defined: 216 orders, 21.6% of volume, 37.0% of revenue. Marketing can act on this immediately</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>MAJOR PROJECTS</h2>
+<h3>High Impact, High Effort. Plan and resource these deliberately</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Traces To</th>
+<th>Why It Takes Longer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Investigate the 41.3% of orders dated after the analysis date with the source system owner</td>
+<td>R2</td>
+<td>Requires cross-team escalation and likely a system-level explanation before any fix can be trusted</td>
+</tr>
+<tr>
+<td>Conduct a structural review of restocking cadence at the five highest-breach stores, led by Branch 9 in Kano</td>
+<td>O3, R3</td>
+<td>154 store-product combinations across 10 stores. This is a process redesign, not a single restock order</td>
+</tr>
+<tr>
+<td>Add a product lifecycle or status field to the Products schema</td>
+<td>O5, R4</td>
+<td>A schema change with downstream effects on every query and report that touches product status going forward</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>SUPPORTING ACTIONS</h2>
+<h3>Lower Impact, Low Effort. Worth doing, not worth delaying anything else for</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Traces To</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Update the data dictionary to document FullName, Phone, and Email fields</td>
+<td>R6</td>
+<td>A documentation fix. Low effort, closes a real governance gap</td>
+</tr>
+<tr>
+<td>Document the missing-header-row convention for anyone handling these files going forward</td>
+<td>R7</td>
+<td>Prevents the exact data loss this analysis had to work around</td>
+</tr>
+<tr>
+<td>Formalize the validated customer base as a ready-to-use asset for Marketing</td>
+<td>O4</td>
+<td>The validation work is already done. This is a handoff, not new analysis</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>MONITOR</h2>
+<h3>Depends on further information before it can be sized</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Traces To</th>
+<th>What's Needed First</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Confirm with the source system whether an unpaid or pending order status exists upstream</td>
+<td>R5</td>
+<td>Cannot size the effort or impact of this until it's known whether the gap is in the data model or the business process itself</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Sequencing Recommendation</h2>
+<p><strong>Now:</strong> all three Quick Wins. None of them require new data collection or system access, they use findings already sitting in the SQL library.</p>
+<p><strong>Next:</strong> open the three Major Projects in parallel, since each depends on a different team (source system owner, store operations, data/BI). Sequencing them one after another would waste the time each one spends waiting on another team's response.</p>
+<p><strong>Alongside:</strong> the three Supporting Actions can be completed by whoever has spare capacity during the Major Projects, they do not block or depend on anything else on this list.</p>
+<p><strong>Watch:</strong> R5 stays open until the source system question is answered. It may turn out to belong in Quick Wins, Major Projects, or nowhere at all, that answer determines which.</p>
+<hr />
+<p><em>ZediMart Executive Prioritization Matrix</em>
+<em>Applied Business Intelligence Case Study — Independently Developed</em></p>
+<h3>Document Relationships</h3>
+<ul>
+<li><strong>Evidence Source:</strong> Executive Risk and Opportunity Register</li>
+<li><strong>Feeds Into:</strong> Business Recommendations, Implementation Roadmap</li>
+</ul></div></body></html>
