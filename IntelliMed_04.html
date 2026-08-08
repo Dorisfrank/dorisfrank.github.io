@@ -49,6 +49,7 @@
 <hr />
 <h2>Current-State Process Analysis</h2>
 <p><em>Where does each process start, where does it stall, and where does it end.</em></p>
+<p><strong>A note on scope:</strong> alongside each current-state diagram below, I have added a target-state view, showing the workflow once the requirement already established in Section 03 is met. These are conceptual, not vendor-specific, they show what the process looks like once the bottleneck is resolved, not how any particular platform's screens or integration layer would deliver it. That second, more technical diagram genuinely does require a selected vendor, Section 08 shortlisted two and declined to force a single choice without a real budget and timeline, so it is not drawn here. The conceptual target state is honest to build now because it restates a requirement already locked and traced. The vendor-specific implementation view becomes buildable once vendor selection is complete.</p>
 <h3>Patient Record Access</h3>
 <p>Patient arrives or is referred → staff check the local system for an existing record → if the patient was previously treated at a different IntelliMed location, no record is visible → staff either request records manually from the other site or proceed with incomplete information → treatment continues, potentially without full history → record is updated only in the local system, not shared back across locations.</p>
 <p><strong>Bottleneck:</strong> the workflow has no reconciliation step. A record created at one site never automatically reaches another, so the gap identified in Section 02 recurs every time a patient is treated at more than one location.</p>
@@ -57,6 +58,9 @@
 - Fragmented patient history across sites
 - Increased clinical risk from incomplete information
 - Duplicate administrative effort re-collecting known information</p>
+<img src="workflow-patient-records.jpg" alt="Patient record access current-state workflow diagram" style="width:100%; border:1px solid var(--line); border-radius:8px; margin:16px 0;" />
+<p style="font-size:13px; color:#1b7a4a; text-transform:uppercase; letter-spacing:0.04em; font-weight:600;">Target state</p>
+<img src="workflow-patient-records-target.jpg" alt="Patient record access target-state workflow diagram" style="width:100%; border:1px solid var(--line); border-radius:8px; margin:16px 0;" />
 <h3>Billing and Financial Reporting</h3>
 <p>Service is delivered → billing staff enter charges into the local billing system → at month-end, each of the three locations exports its billing data separately → finance staff manually consolidate three exports into one report → discrepancies between exports are investigated and corrected by hand → consolidated report is finalized for leadership.</p>
 <p><strong>Bottleneck:</strong> consolidation is a manual, end-of-cycle event rather than a continuous process. Errors are caught only after they have already delayed the reporting cycle, not before.</p>
@@ -65,6 +69,9 @@
 - Reduced financial visibility for leadership
 - Increased reconciliation effort
 - Higher risk of uncorrected reporting errors</p>
+<img src="workflow-billing.jpg" alt="Billing and financial reporting current-state workflow diagram" style="width:100%; border:1px solid var(--line); border-radius:8px; margin:16px 0;" />
+<p style="font-size:13px; color:#1b7a4a; text-transform:uppercase; letter-spacing:0.04em; font-weight:600;">Target state</p>
+<img src="workflow-billing-target.jpg" alt="Billing and financial reporting target-state workflow diagram" style="width:100%; border:1px solid var(--line); border-radius:8px; margin:16px 0;" />
 <h3>Inventory and Supply Management</h3>
 <p>Supplies are used in clinical or administrative activity → usage is logged in the local inventory system → stock levels are reviewed periodically, not continuously → when stock falls below a workable threshold, staff place a manual reorder → lead time between the threshold being crossed and the reorder being placed is inconsistent across locations.</p>
 <p><strong>Bottleneck:</strong> the review step is periodic rather than real-time, which is the direct mechanical cause of the stockouts identified in Section 02.</p>
@@ -73,6 +80,9 @@
 - Emergency procurement at higher cost
 - Risk of service interruption
 - Inconsistent supply availability across locations</p>
+<img src="workflow-inventory.jpg" alt="Inventory and supply management current-state workflow diagram" style="width:100%; border:1px solid var(--line); border-radius:8px; margin:16px 0;" />
+<p style="font-size:13px; color:#1b7a4a; text-transform:uppercase; letter-spacing:0.04em; font-weight:600;">Target state</p>
+<img src="workflow-inventory-target.jpg" alt="Inventory and supply management target-state workflow diagram" style="width:100%; border:1px solid var(--line); border-radius:8px; margin:16px 0;" />
 <h3>Compliance Reporting</h3>
 <p>A regulatory reporting deadline approaches → compliance staff request data extracts from patient records, billing, HR, and inventory separately → each system exports data in a different format → staff manually reformat and cross-check the four extracts against each other → a single audit-ready report is assembled → completeness of the report depends on whether every manual step was executed correctly.</p>
 <p><strong>Bottleneck:</strong> the workflow has four separate points of manual handoff, and the audit trail can only demonstrate what was assembled, not confirm that nothing was missed.</p>
@@ -81,6 +91,9 @@
 - Higher compliance staff effort per reporting cycle
 - Reduced confidence in report completeness
 - Increased regulatory exposure if a gap goes undetected</p>
+<img src="workflow-compliance.jpg" alt="Compliance reporting current-state workflow diagram" style="width:100%; border:1px solid var(--line); border-radius:8px; margin:16px 0;" />
+<p style="font-size:13px; color:#1b7a4a; text-transform:uppercase; letter-spacing:0.04em; font-weight:600;">Target state</p>
+<img src="workflow-compliance-target.jpg" alt="Compliance reporting target-state workflow diagram" style="width:100%; border:1px solid var(--line); border-radius:8px; margin:16px 0;" />
 <div class="consultant-observation">
 <strong>Consultant's Observation:</strong> mapping all four workflows, I found they share the same structural weakness, they are correct only if every manual step is executed without error, every time. None of them fail because staff are careless. They fail because the process itself depends on manual coordination between systems that were never designed to coordinate. This is the same root cause identified in Section 02, now visible at the process level rather than the department level.
 </div>
