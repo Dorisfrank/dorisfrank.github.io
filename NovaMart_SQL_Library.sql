@@ -30,6 +30,12 @@
 -- Query numbering below matches the order queries were run
 -- and captured in the SQL Insight Library screenshots (Q01
 -- through Q11, plus the reconciliation verification query).
+--
+-- A supplementary query (Q12) was added after the original
+-- 11-query engagement was completed, to support ongoing
+-- LinkedIn content development. It is not counted toward the
+-- formal 11-query engagement and does not appear in the
+-- published case study page.
 -- ============================================================
 
 
@@ -422,6 +428,38 @@ WHERE p.is_successful = TRUE
   AND s.order_date <= '2025-05-31'
 GROUP BY TO_CHAR(s.order_date, 'YYYY-MM')
 ORDER BY month;
+
+
+-- ============================================================
+-- SUPPLEMENTARY QUERY (not part of the formal 11-query
+-- engagement, does not appear in the published
+-- NovaMart case study page)
+-- ============================================================
+
+-- QUERY 12 (SUPPLEMENTARY): Average rating by resolution status
+-- Theme: Support and Customer Experience
+-- Added: for LinkedIn series Post 9, after the original 11 were built
+-- Business context: I wanted to test whether resolution outcome
+-- tracks with customer satisfaction. It doesn't track the way I
+-- expected. Escalated tickets score higher on average than tickets I marked
+-- resolved, which suggests the rating reflects whether a customer
+-- felt heard rather than whether their ticket was formally closed.
+-- I applied the same reporting window filter I used across every
+-- other query in this library, so the comparison stays consistent.
+-- Confirmed results (Aug 2024 to May 2025):
+--   Escalated: 146 tickets  avg 3.73
+--   Pending:   311 tickets  avg 3.61
+--   Resolved: 1,044 tickets avg 3.57
+
+SELECT
+    t.resolution_status,
+    COUNT(t.ticket_id)                             AS ticket_count,
+    ROUND(AVG(t.rating), 2)                        AS avg_rating
+FROM support_tickets t
+WHERE t.submission_date >= '2024-08-01'
+  AND t.submission_date <= '2025-05-31'
+GROUP BY t.resolution_status
+ORDER BY avg_rating DESC;
 
 
 -- ============================================================
