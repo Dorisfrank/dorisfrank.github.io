@@ -1,0 +1,353 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>NovaMart: SQL Insight Library</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="main.css" />
+<noscript><link rel="stylesheet" href="noscript.css" /></noscript>
+<style>
+:root {
+  --nova-teal:   #00b4c6;
+  --nova-amber:  #f5a623;
+  --nova-coral:  #e85d75;
+  --nova-dark:   #0d1b2a;
+  --nova-mid:    #1a2f45;
+  --nova-card:   #162030;
+  --nova-border: rgba(0,180,198,0.18);
+  --nova-text:   #d4e1ec;
+  --nova-muted:  #8aa6bf;
+}
+body { background: var(--nova-dark); color: var(--nova-text); }
+.sq-body { max-width: 900px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+.sq-header {
+  background: linear-gradient(135deg, #0d1b2a 0%, #0a2540 60%, #0d3355 100%);
+  padding: 4rem 2rem 3rem;
+  margin-bottom: 3rem;
+}
+.sq-header-inner { max-width: 900px; margin: 0 auto; }
+.sq-eyebrow { color: var(--nova-teal); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; margin: 0 0 0.8rem; }
+.sq-header h1 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; margin: 0 0 0.6rem; }
+.sq-header p { color: var(--nova-muted); font-size: 0.95rem; margin: 0; }
+.sq-back { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; border-radius: 6px; font-size: 0.82rem; border: 1px solid var(--nova-border); color: var(--nova-teal); text-decoration: none; margin-top: 1.6rem; }
+.sq-back:hover { background: rgba(0,180,198,0.1); }
+.sq-note { background: var(--nova-card); border: 1px solid var(--nova-border); border-radius: 10px; padding: 1.2rem 1.6rem; margin-bottom: 2.5rem; font-size: 0.88rem; color: var(--nova-muted); }
+.sq-note strong { color: var(--nova-text); }
+.sq-query { margin-bottom: 2.6rem; }
+.sq-query-head { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 0.4rem; flex-wrap: wrap; }
+.sq-query-num { color: var(--nova-teal); font-weight: 800; font-size: 1.05rem; font-family: monospace; }
+.sq-query-title { font-weight: 700; font-size: 1.05rem; color: var(--nova-text); }
+.sq-theme { display: inline-block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nova-muted); background: var(--nova-mid); padding: 0.2rem 0.6rem; border-radius: 4px; margin-left: auto; }
+.sq-context { font-size: 0.86rem; color: var(--nova-muted); margin: 0.4rem 0 0.9rem; line-height: 1.6; }
+.sq-results { font-size: 0.82rem; color: var(--nova-text); margin: 0 0 0.9rem; }
+.sq-results-label { color: var(--nova-teal); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 0.3rem; }
+.sq-code {
+  background: #0a1520;
+  border-radius: 8px;
+  padding: 1rem 1.4rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: var(--nova-teal);
+  white-space: pre-wrap;
+  overflow-x: auto;
+  border: 1px solid var(--nova-border);
+}
+.sq-supplementary { border: 1px solid var(--nova-amber); border-radius: 10px; padding: 1.5rem; margin-top: 3rem; background: rgba(245,166,35,0.05); }
+.sq-supplementary-label { color: var(--nova-amber); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin: 0 0 1rem; }
+@media (max-width: 768px) { .sq-body { padding: 3rem 1.2rem 4rem; } .sq-header { padding: 3rem 1.2rem 2rem; } .sq-theme { margin-left: 0; } }
+</style>
+</head>
+<body>
+
+<div class="sq-header">
+  <div class="sq-header-inner">
+    <p class="sq-eyebrow">NovaMart Case Study / Supporting Deliverable</p>
+    <h1>SQL Insight Library</h1>
+    <p>PostgreSQL. Reporting period August 2024 to May 2025. All queries apply the confirmed revenue filter, the reporting window, and Bundle G separation, matching the Power BI DAX measures exactly.</p>
+    <a class="sq-back" href="NovaMart.html">&larr; Back to case study</a>
+  </div>
+</div>
+
+<div class="sq-body">
+
+  <div class="sq-note">
+    <strong>One source of truth.</strong> All 11 queries below reconcile with the Power BI dashboard and the Executive BI Report: Confirmed Revenue N161,463,248, Pending Revenue N18,564,696, Failed Revenue N9,109,526, Total Orders 12,482.
+  </div>
+
+  <div class="sq-query">
+    <div class="sq-query-head"><span class="sq-query-num">Q1</span><span class="sq-query-title">Top 3 bundles by subscription volume</span><span class="sq-theme">Bundle and Product Performance</span></div>
+    <p class="sq-context">Identifies which products NovaMart customers order most frequently within the reporting period.</p>
+    <p class="sq-results"><span class="sq-results-label">Confirmed result</span>Bundle J: 1,864 orders (14.9%) &middot; Bundle I: 1,764 orders (14.1%) &middot; Bundle H: 1,571 orders (12.6%)</p>
+    <div class="sq-code">SELECT
+    b.bundle_name,
+    b.category,
+    b.bundle_size,
+    b.is_active,
+    COUNT(s.subscription_id)                       AS subscription_count,
+    ROUND(
+        COUNT(s.subscription_id) * 100.0 /
+        SUM(COUNT(s.subscription_id)) OVER (), 1
+    )                                              AS pct_of_total
+FROM subscriptions s
+JOIN bundles b ON s.bundle_id = b.bundle_id
+WHERE s.order_date &gt;= '2024-08-01'
+  AND s.order_date &lt;= '2025-05-31'
+GROUP BY b.bundle_name, b.category, b.bundle_size, b.is_active
+ORDER BY subscription_count DESC
+LIMIT 3;</div>
+  </div>
+
+  <div class="sq-query">
+    <div class="sq-query-head"><span class="sq-query-num">Q2</span><span class="sq-query-title">Confirmed revenue by active bundle category</span><span class="sq-theme">Bundle and Product Performance</span></div>
+    <p class="sq-context">Reveals which product categories generate real confirmed revenue within the reporting period. Excludes inactive bundles (Bundle G) and unconfirmed payments.</p>
+    <p class="sq-results"><span class="sq-results-label">Confirmed result</span>Wellness N62,589,140 (44.1%) &middot; Essentials N50,171,928 (35.4%) &middot; Snacks N17,360,363 (12.2%) &middot; Tech N11,691,010 (8.2%)</p>
+    <div class="sq-code">SELECT
+    b.category,
+    COUNT(s.subscription_id)                       AS confirmed_orders,
+    SUM(s.total_value)                             AS confirmed_revenue,
+    ROUND(AVG(s.total_value), 0)                   AS avg_order_value,
+    ROUND(
+        SUM(s.total_value) * 100.0 /
+        SUM(SUM(s.total_value)) OVER (), 1
+    )                                              AS revenue_share_pct
+FROM subscriptions s
+JOIN bundles b  ON s.bundle_id = b.bundle_id
+JOIN payments p ON s.subscription_id = p.subscription_id
+WHERE p.is_successful = TRUE
+  AND b.is_active = TRUE
+  AND s.order_date &gt;= '2024-08-01'
+  AND s.order_date &lt;= '2025-05-31'
+GROUP BY b.category
+ORDER BY confirmed_revenue DESC;</div>
+  </div>
+
+  <div class="sq-query">
+    <div class="sq-query-head"><span class="sq-query-num">Q3</span><span class="sq-query-title">Bundle G anomaly, inactive bundle revenue audit</span><span class="sq-theme">Bundle and Product Performance</span></div>
+    <p class="sq-context">Bundle G is marked inactive but generated N19.7M in confirmed revenue during the reporting period. Surfaces a product catalogue integrity issue requiring immediate business review.</p>
+    <p class="sq-results"><span class="sq-results-label">Confirmed result</span>Bundle G: N19,650,808 confirmed revenue</p>
+    <div class="sq-code">SELECT
+    b.bundle_name,
+    b.category,
+    b.bundle_size,
+    b.is_active,
+    COUNT(s.subscription_id)                       AS total_orders,
+    SUM(CASE WHEN p.is_successful = TRUE
+             THEN s.total_value ELSE 0 END)        AS confirmed_revenue,
+    SUM(CASE WHEN p.payment_status = 'Pending'
+             THEN s.total_value ELSE 0 END)        AS pending_revenue,
+    SUM(CASE WHEN p.payment_status = 'Failed'
+             THEN s.total_value ELSE 0 END)        AS failed_revenue
+FROM subscriptions s
+JOIN bundles b  ON s.bundle_id = b.bundle_id
+JOIN payments p ON s.subscription_id = p.subscription_id
+WHERE b.is_active = FALSE
+  AND s.order_date &gt;= '2024-08-01'
+  AND s.order_date &lt;= '2025-05-31'
+GROUP BY b.bundle_name, b.category, b.bundle_size, b.is_active
+ORDER BY confirmed_revenue DESC;</div>
+  </div>
+
+  <div class="sq-query">
+    <div class="sq-query-head"><span class="sq-query-num">Q4</span><span class="sq-query-title">Average spend per loyalty tier</span><span class="sq-theme">Customer Intelligence and Loyalty</span></div>
+    <p class="sq-context">Determines whether higher-tier customers spend more per order. The near-identical average order value across all three tiers indicates the loyalty programme does not reflect customer spending behaviour.</p>
+    <p class="sq-results"><span class="sq-results-label">Confirmed result</span>Gold avg N15,352 &middot; Platinum avg N15,114 &middot; Silver avg N15,094</p>
+    <div class="sq-code">SELECT
+    c.loyalty_tier,
+    COUNT(s.subscription_id)                       AS confirmed_orders,
+    COUNT(DISTINCT s.customer_id)                  AS unique_customers,
+    SUM(s.total_value)                             AS confirmed_revenue,
+    ROUND(AVG(s.total_value), 0)                   AS avg_order_value,
+    ROUND(
+        SUM(s.total_value) /
+        COUNT(DISTINCT s.customer_id), 0
+    )                                              AS avg_revenue_per_customer
+FROM subscriptions s
+JOIN customers c ON s.customer_id = c.customer_id
+JOIN payments p  ON s.subscription_id = p.subscription_id
+WHERE p.is_successful = TRUE
+  AND s.order_date &gt;= '2024-08-01'
+  AND s.order_date &lt;= '2025-05-31'
+GROUP BY c.loyalty_tier
+ORDER BY avg_order_value DESC;</div>
+  </div>
+
+  <div class="sq-query">
+    <div class="sq-query-head"><span class="sq-query-num">Q5</span><span class="sq-query-title">Issue types by average rating and escalation rate</span><span class="sq-theme">Support and Customer Experience</span></div>
+    <p class="sq-context">Surfaces which complaint categories generate the worst customer experience and are most likely to escalate. No issue type achieves above 3.71 on a 5-point scale. Product Quality has the lowest rating and highest escalation rate.</p>
+    <p class="sq-results"><span class="sq-results-label">Confirmed result, all tickets</span>Other 442 tickets avg 3.54 &middot; Product Quality 460 tickets avg 3.55 &middot; Billing Issue 439 tickets avg 3.61 &middot; Late Delivery 459 tickets avg 3.71</p>
+    <div class="sq-code">SELECT
+    t.issue_type,
+    COUNT(t.ticket_id)                             AS total_tickets,
+    ROUND(AVG(t.rating), 2)                        AS avg_rating,
+    MIN(t.rating)                                  AS min_rating,
+    SUM(CASE WHEN t.resolution_status = 'Escalated'
+             THEN 1 ELSE 0 END)                    AS escalated_count,
+    ROUND(
+        SUM(CASE WHEN t.resolution_status = 'Escalated'
+                 THEN 1 ELSE 0 END) * 100.0 /
+        COUNT(t.ticket_id), 1
+    )                                              AS escalation_rate_pct,
+    SUM(CASE WHEN t.resolution_status = 'Resolved'
+             THEN 1 ELSE 0 END)                    AS resolved_count,
+    SUM(CASE WHEN t.resolution_status = 'Pending'
+             THEN 1 ELSE 0 END)                    AS pending_count
+FROM support_tickets t
+GROUP BY t.issue_type
+ORDER BY avg_rating ASC;</div>
+  </div>
+
+  <div class="sq-query">
+    <div class="sq-query-head"><span class="sq-query-num">Q6</span><span class="sq-query-title">Recurring vs one-time revenue split</span><span class="sq-theme">Customer Intelligence and Loyalty</span></div>
+    <p class="sq-context">Determines NovaMart's revenue stability. A high one-time share signals retention risk and revenue volatility that must be re-earned every month.</p>
+    <p class="sq-results"><span class="sq-results-label">Confirmed result</span>Recurring N112,915,393 (69.9%) &middot; One-time N48,547,855 (30.1%)</p>
+    <div class="sq-code">SELECT
+    s.subscription_type,
+    COUNT(s.subscription_id)                       AS confirmed_orders,
+    SUM(s.total_value)                             AS confirmed_revenue,
+    ROUND(AVG(s.total_value), 0)                   AS avg_order_value,
+    ROUND(
+        SUM(s.total_value) * 100.0 /
+        SUM(SUM(s.total_value)) OVER (), 1
+    )                                              AS revenue_share_pct
+FROM subscriptions s
+JOIN payments p ON s.subscription_id = p.subscription_id
+WHERE p.is_successful = TRUE
+  AND s.order_date &gt;= '2024-08-01'
+  AND s.order_date &lt;= '2025-05-31'
+GROUP BY s.subscription_type
+ORDER BY confirmed_revenue DESC;</div>
+  </div>
+
+  <div class="sq-query">
+    <div class="sq-query-head"><span class="sq-query-num">Q7</span><span class="sq-query-title">Confirmed revenue and order volume by city</span><span class="sq-theme">Customer Intelligence and Loyalty</span></div>
+    <p class="sq-context">Identifies NovaMart's strongest geographic markets and surfaces the Abuja performance gap.</p>
+    <p class="sq-results"><span class="sq-results-label">Confirmed result</span>Port Harcourt N30,229,346 (18.7%), leading city &middot; Abuja N23,349,818 (14.5%), weakest market</p>
+    <div class="sq-code">SELECT
+    c.city,
+    COUNT(s.subscription_id)                       AS confirmed_orders,
+    SUM(s.total_value)                             AS confirmed_revenue,
+    ROUND(AVG(s.total_value), 0)                   AS avg_order_value,
+    ROUND(
+        SUM(s.total_value) * 100.0 /
+        SUM(SUM(s.total_value)) OVER (), 1
+    )                                              AS city_revenue_share_pct
+FROM subscriptions s
+JOIN customers c ON s.customer_id = c.customer_id
+JOIN payments p  ON s.subscription_id = p.subscription_id
+WHERE p.is_successful = TRUE
+  AND s.order_date &gt;= '2024-08-01'
+  AND s.order_date &lt;= '2025-05-31'
+GROUP BY c.city
+ORDER BY confirmed_revenue DESC;</div>
+  </div>
+
+  <div class="sq-query">
+    <div class="sq-query-head"><span class="sq-query-num">Q8</span><span class="sq-query-title">Failed payments by method, revenue loss breakdown</span><span class="sq-theme">Payment and Revenue Risk</span></div>
+    <p class="sq-context">Identifies which payment methods carry the highest failure risk, enabling targeted recovery and mitigation. All failure rates exceed the 2% to 3% industry benchmark.</p>
+    <p class="sq-results"><span class="sq-results-label">Confirmed result</span>Bank Transfer 202 failed (5.5%) N2,964,372 lost &middot; Wallet 122 failed (4.9%) N1,905,668 lost &middot; Card 293 failed (4.6%) N4,239,487 lost</p>
+    <div class="sq-code">SELECT
+    p.payment_method,
+    COUNT(p.payment_id)                            AS total_transactions,
+    SUM(CASE WHEN p.payment_status = 'Failed'
+             THEN 1 ELSE 0 END)                    AS failed_count,
+    SUM(CASE WHEN p.is_successful = TRUE
+             THEN 1 ELSE 0 END)                    AS confirmed_count,
+    ROUND(
+        SUM(CASE WHEN p.payment_status = 'Failed'
+                 THEN 1 ELSE 0 END) * 100.0 /
+        COUNT(p.payment_id), 1
+    )                                              AS failure_rate_pct,
+    SUM(CASE WHEN p.payment_status = 'Failed'
+             THEN s.total_value ELSE 0 END)        AS revenue_lost
+FROM payments p
+JOIN subscriptions s ON p.subscription_id = s.subscription_id
+WHERE s.order_date &gt;= '2024-08-01'
+  AND s.order_date &lt;= '2025-05-31'
+GROUP BY p.payment_method
+ORDER BY failure_rate_pct DESC;</div>
+  </div>
+
+  <div class="sq-query">
+    <div class="sq-query-head"><span class="sq-query-num">Q9</span><span class="sq-query-title">Pending payment recovery opportunity by method</span><span class="sq-theme">Payment and Revenue Risk</span></div>
+    <p class="sq-context">N18.6M sits in pending status and is recoverable through payment retry infrastructure. Card carries the largest single recovery opportunity.</p>
+    <p class="sq-results"><span class="sq-results-label">Confirmed result</span>Card 622 pending N9,604,767 &middot; Bank Transfer 354 pending N5,178,594 &middot; Wallet 250 pending N3,781,334 &middot; Total 1,226 pending N18,564,695</p>
+    <div class="sq-code">SELECT
+    p.payment_method,
+    COUNT(p.payment_id)                            AS pending_count,
+    SUM(s.total_value)                             AS recoverable_revenue,
+    ROUND(AVG(s.total_value), 0)                   AS avg_pending_order_value
+FROM payments p
+JOIN subscriptions s ON p.subscription_id = s.subscription_id
+WHERE p.payment_status = 'Pending'
+  AND s.order_date &gt;= '2024-08-01'
+  AND s.order_date &lt;= '2025-05-31'
+GROUP BY p.payment_method
+ORDER BY recoverable_revenue DESC;</div>
+  </div>
+
+  <div class="sq-query">
+    <div class="sq-query-head"><span class="sq-query-num">Q10</span><span class="sq-query-title">Discount bands and effect on average order value</span><span class="sq-theme">Discount Impact Analysis</span></div>
+    <p class="sq-context">Determines whether NovaMart's discounts are reducing revenue without proportional volume gain. Orders above 20% discount generate N13,630 avg order value, N3,029 (18.2%) lower than non-discounted orders.</p>
+    <p class="sq-results"><span class="sq-results-label">Confirmed result</span>No Discount 208 orders avg N16,659 &middot; 1-10% 4,284 orders avg N16,317 &middot; 11-20% 4,268 orders avg N14,641 &middot; Above 20% 1,879 orders avg N13,630</p>
+    <div class="sq-code">SELECT
+    CASE
+        WHEN s.discount = 0    THEN 'No Discount'
+        WHEN s.discount &lt;= 0.10 THEN '1% to 10%'
+        WHEN s.discount &lt;= 0.20 THEN '11% to 20%'
+        ELSE                        'Above 20%'
+    END                                            AS discount_band,
+    COUNT(s.subscription_id)                       AS confirmed_orders,
+    ROUND(AVG(s.discount * 100), 1)                AS avg_discount_pct,
+    ROUND(AVG(s.total_value), 0)                   AS avg_order_value,
+    SUM(s.total_value)                             AS total_revenue
+FROM subscriptions s
+JOIN payments p ON s.subscription_id = p.subscription_id
+WHERE p.is_successful = TRUE
+  AND s.order_date &gt;= '2024-08-01'
+  AND s.order_date &lt;= '2025-05-31'
+GROUP BY discount_band
+ORDER BY avg_order_value DESC;</div>
+  </div>
+
+  <div class="sq-query">
+    <div class="sq-query-head"><span class="sq-query-num">Q11</span><span class="sq-query-title">Monthly confirmed revenue trend</span><span class="sq-theme">Monthly Revenue Trends</span></div>
+    <p class="sq-context">Tracks NovaMart's revenue performance over the full reporting period to identify growth, seasonality, or plateau patterns.</p>
+    <p class="sq-results"><span class="sq-results-label">Confirmed result</span>Revenue stable at N15.3M to N17.4M per month. October 2024 is the single strongest month at N17,396,931.</p>
+    <div class="sq-code">SELECT
+    TO_CHAR(s.order_date, 'YYYY-MM')               AS month,
+    COUNT(s.subscription_id)                       AS confirmed_orders,
+    SUM(s.total_value)                             AS confirmed_revenue,
+    ROUND(AVG(s.total_value), 0)                   AS avg_order_value
+FROM subscriptions s
+JOIN payments p ON s.subscription_id = p.subscription_id
+WHERE p.is_successful = TRUE
+  AND s.order_date &gt;= '2024-08-01'
+  AND s.order_date &lt;= '2025-05-31'
+GROUP BY TO_CHAR(s.order_date, 'YYYY-MM')
+ORDER BY month;</div>
+  </div>
+
+  <div class="sq-supplementary">
+    <p class="sq-supplementary-label">Supplementary, not part of the original 11-query engagement</p>
+    <div class="sq-query" style="margin-bottom:0;">
+      <div class="sq-query-head"><span class="sq-query-num">Q12</span><span class="sq-query-title">Average rating by resolution status</span><span class="sq-theme">Support and Customer Experience</span></div>
+      <p class="sq-context">I wanted to test whether resolution outcome tracks with customer satisfaction. It doesn't track the way I expected. Escalated tickets score higher on average than tickets I marked resolved, which suggests the rating reflects whether a customer felt heard rather than whether their ticket was formally closed. I applied the same reporting window filter I used across every other query in this library, so the comparison stays consistent. Added after the original 11 were built, to support LinkedIn series Post 9.</p>
+      <p class="sq-results"><span class="sq-results-label">Confirmed result</span>Escalated 146 tickets avg 3.73 &middot; Pending 311 tickets avg 3.61 &middot; Resolved 1,044 tickets avg 3.57</p>
+      <div class="sq-code">SELECT
+    t.resolution_status,
+    COUNT(t.ticket_id)                             AS ticket_count,
+    ROUND(AVG(t.rating), 2)                        AS avg_rating
+FROM support_tickets t
+WHERE t.submission_date &gt;= '2024-08-01'
+  AND t.submission_date &lt;= '2025-05-31'
+GROUP BY t.resolution_status
+ORDER BY avg_rating DESC;</div>
+    </div>
+  </div>
+
+  <a class="sq-back" href="NovaMart.html">&larr; Back to case study</a>
+
+</div>
+
+</body>
+</html>

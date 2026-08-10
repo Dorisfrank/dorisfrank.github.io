@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>NovaMart: Opportunity and Risk Register</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="main.css" />
+<noscript><link rel="stylesheet" href="noscript.css" /></noscript>
+<style>
+:root {
+  --nova-teal:   #00b4c6;
+  --nova-amber:  #f5a623;
+  --nova-coral:  #e85d75;
+  --nova-dark:   #0d1b2a;
+  --nova-mid:    #1a2f45;
+  --nova-card:   #162030;
+  --nova-border: rgba(0,180,198,0.18);
+  --nova-text:   #d4e1ec;
+  --nova-muted:  #8aa6bf;
+}
+body { background: var(--nova-dark); color: var(--nova-text); }
+.nr-body { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+.nr-header {
+  background: linear-gradient(135deg, #0d1b2a 0%, #0a2540 60%, #0d3355 100%);
+  padding: 4rem 2rem 3rem;
+  margin-bottom: 3rem;
+}
+.nr-header-inner { max-width: 1100px; margin: 0 auto; }
+.nr-eyebrow { color: var(--nova-teal); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; margin: 0 0 0.8rem; }
+.nr-header h1 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; margin: 0 0 0.6rem; }
+.nr-header p { color: var(--nova-muted); font-size: 0.95rem; margin: 0; }
+.nr-back { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; border-radius: 6px; font-size: 0.82rem; border: 1px solid var(--nova-border); color: var(--nova-teal); text-decoration: none; margin-top: 1.6rem; }
+.nr-back:hover { background: rgba(0,180,198,0.1); }
+.nr-section { margin-bottom: 3rem; }
+.nr-section h2 { font-size: 1.5rem; font-weight: 700; color: var(--nova-text); margin: 0 0 1.2rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--nova-border); }
+.nr-table-wrap { overflow-x: auto; background: var(--nova-card); border: 1px solid var(--nova-border); border-radius: 10px; padding: 0.5rem; }
+.nr-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.nr-table th { background: var(--nova-mid); color: var(--nova-teal); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 0.8rem; text-align: left; white-space: nowrap; }
+.nr-table td { padding: 0.7rem 0.8rem; border-top: 1px solid var(--nova-border); vertical-align: top; color: var(--nova-text); }
+.nr-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.nr-id { color: var(--nova-teal); font-weight: 700; font-family: monospace; }
+.nr-level-critical { color: var(--nova-coral); font-weight: 700; }
+.nr-level-high { color: var(--nova-amber); font-weight: 700; }
+.nr-level-medium { color: var(--nova-muted); font-weight: 700; }
+.nr-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.nr-summary-card { background: var(--nova-card); border: 1px solid var(--nova-border); border-radius: 10px; padding: 1.2rem 1.4rem; }
+.nr-summary-card .val { font-size: 1.4rem; font-weight: 800; color: var(--nova-teal); margin: 0 0 0.3rem; }
+.nr-summary-card .lbl { font-size: 0.78rem; color: var(--nova-muted); margin: 0; }
+@media (max-width: 768px) { .nr-body { padding: 3rem 1.2rem 4rem; } .nr-header { padding: 3rem 1.2rem 2rem; } }
+</style>
+</head>
+<body>
+
+<div class="nr-header">
+  <div class="nr-header-inner">
+    <p class="nr-eyebrow">NovaMart Case Study / Supporting Deliverable</p>
+    <h1>Opportunity and Risk Register</h1>
+    <p>Data period: August 2024 to May 2025. All figures reconcile with the Power BI dashboard and SQL Insight Library.</p>
+    <a class="nr-back" href="NovaMart.html">&larr; Back to case study</a>
+  </div>
+</div>
+
+<div class="nr-body">
+
+  <div class="nr-section">
+    <h2>Opportunity register</h2>
+    <div class="nr-table-wrap">
+    <table class="nr-table">
+      <tr><th>#</th><th>Opportunity</th><th>Evidence</th><th>Estimated value</th><th>Priority</th><th>Timeline</th><th>Owner</th></tr>
+      <tr><td class="nr-id">O1</td><td>Recover pending payments</td><td>1,226 pending orders totalling N18.6M; revenue already earned at order stage</td><td>N7.4M (40% recovery estimate)</td><td class="nr-level-high">HIGH</td><td>30 days</td><td>Finance / Operations</td></tr>
+      <tr><td class="nr-id">O2</td><td>Convert one-time buyers to recurring subscribers</td><td>3,218 one-time orders represent 30.1% of confirmed revenue; volatile and must be re-earned monthly</td><td>N4.9M annualised recurring revenue (10% conversion)</td><td class="nr-level-high">HIGH</td><td>60 days</td><td>Marketing</td></tr>
+      <tr><td class="nr-id">O3</td><td>Reduce payment failure revenue loss</td><td>All three payment methods exceed 2% to 3% industry benchmark; 617 failed orders equal N9.1M lost over the 10-month reporting window</td><td>N3.4M to N4.2M annually at current transaction volumes</td><td class="nr-level-high">HIGH</td><td>60 days</td><td>Operations / Finance</td></tr>
+      <tr><td class="nr-id">O4</td><td>Reinstate or resolve Bundle G</td><td>Bundle G generated N19.7M in confirmed revenue despite inactive status; 777 unique paid customers affected across 1,283 orders</td><td>Revenue protection and customer trust</td><td class="nr-level-high">HIGH, Immediate</td><td>7 days</td><td>Product Manager</td></tr>
+      <tr><td class="nr-id">O5</td><td>Grow Abuja market</td><td>Abuja trails Port Harcourt by N6.9M and 400 orders; lowest avg order value (N14,806) of all cities</td><td>~N1.8M annually (50% gap closure vs Kano, annualised)</td><td class="nr-level-medium">MEDIUM</td><td>90 days</td><td>Marketing / Ops</td></tr>
+      <tr><td class="nr-id">O6</td><td>Redesign loyalty programme to reflect spend</td><td>Avg order value differs by only N258 across Silver, Gold, Platinum; tiers do not identify high-value customers</td><td>Improved retention and targeted reward investment</td><td class="nr-level-medium">MEDIUM</td><td>90 days</td><td>Marketing</td></tr>
+      <tr><td class="nr-id">O7</td><td>Review deep discount strategy</td><td>Orders above 20% discount generate N3,029 (18.2%) lower avg value than non-discounted orders</td><td>N2M to N3M annually (reduce deep discount share from 17.7% to below 15%)</td><td class="nr-level-medium">MEDIUM</td><td>60 days</td><td>Marketing / Finance</td></tr>
+      <tr><td class="nr-id">O8</td><td>Grow Tech bundle category</td><td>Tech has the highest avg order value (N15,444) but lowest order volume (757 orders); underutilised commercial asset</td><td>Revenue upside dependent on marketing investment</td><td class="nr-level-medium">LOW to MEDIUM</td><td>90 days</td><td>Marketing / Product</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="nr-section">
+    <h2>Risk register</h2>
+    <div class="nr-table-wrap">
+    <table class="nr-table">
+      <tr><th>#</th><th>Risk</th><th>Description</th><th>Impact</th><th>Probability</th><th>Level</th><th>Mitigation</th></tr>
+      <tr><td class="nr-id">R1</td><td>Pending revenue ageing into uncollectable status</td><td>N18.6M in pending payments. Without a retry mechanism, pending orders age and become progressively harder to collect</td><td>HIGH: N18.6M cash flow exposure</td><td>HIGH: no current retry process in place</td><td class="nr-level-critical">CRITICAL</td><td>Implement automated payment retry at 24h / 48h / 72h intervals within 30 days</td></tr>
+      <tr><td class="nr-id">R2</td><td>Bundle G customer trust damage</td><td>777 customers paid for a product officially listed as inactive, across 1,283 orders. If the deactivation was intentional and customers are not informed, this creates a customer trust and potential refund risk</td><td>MEDIUM: brand and retention</td><td>MEDIUM: currently unresolved</td><td class="nr-level-high">HIGH</td><td>Audit and resolve Bundle G status within 7 days; communicate with affected customers</td></tr>
+      <tr><td class="nr-id">R3</td><td>Revenue plateau without intervention</td><td>Monthly confirmed revenue has stabilised between N15.3M and N17.4M with no growth trend over 10 months. Without conversion or acquisition activity, NovaMart's revenue will not grow</td><td>HIGH: long-term growth risk</td><td>HIGH: trend already visible</td><td class="nr-level-high">HIGH</td><td>Implement one-time to recurring conversion campaign; review bundle expansion strategy</td></tr>
+      <tr><td class="nr-id">R4</td><td>Payment failure rate above industry benchmark</td><td>All three payment methods exceed the 2% to 3% digital commerce benchmark. At current failure rates, NovaMart loses approximately N10.9M per year in payment failures (annualised from the confirmed 10-month window total of N9.1M)</td><td>HIGH: N10.9M annual revenue loss</td><td>HIGH: systemic across all methods</td><td class="nr-level-high">HIGH</td><td>Engage payment processor for failure log review; focus on Bank Transfer (5.5% rate) first</td></tr>
+      <tr><td class="nr-id">R5</td><td>Loyalty programme misalignment</td><td>Loyalty tiers do not reflect customer spending behaviour. Platinum customers spend within N258 per order of Silver customers. Without redesign, the programme cannot be used to identify or protect high-value relationships</td><td>MEDIUM: retention effectiveness</td><td>MEDIUM: ongoing by design</td><td class="nr-level-medium">MEDIUM</td><td>Redesign tier criteria with spend-based thresholds within 90 days</td></tr>
+      <tr><td class="nr-id">R6</td><td>Discount erosion without volume offset</td><td>Orders above 20% discount generate 18.2% lower avg value. If volume does not compensate, these discounts are eroding margin without commercial justification. Note: full margin impact requires cost data</td><td>MEDIUM: revenue per order</td><td>MEDIUM: pattern visible in data</td><td class="nr-level-medium">MEDIUM</td><td>A/B test discount levels; set evidence-based ceiling based on conversion data</td></tr>
+      <tr><td class="nr-id">R7</td><td>Abuja market underperformance</td><td>Abuja trails every other city on revenue, volume, and avg order value. Without investigation, the root cause remains unknown and the gap persists</td><td>MEDIUM: geographic revenue concentration</td><td>LOW to MEDIUM: slow drift</td><td class="nr-level-medium">MEDIUM</td><td>Commission a structured market investigation in Month 3 of the roadmap</td></tr>
+      <tr><td class="nr-id">R8</td><td>Systemic support quality failure</td><td>No issue type achieves an avg rating above 3.71. Escalation rates of ~10% are elevated. Within the reporting window, Gold-tier customers, not Platinum, show the lowest average satisfaction (3.55), the opposite of what the loyalty hierarchy would suggest</td><td>HIGH: churn and brand risk</td><td>HIGH: systemic across all categories</td><td class="nr-level-high">HIGH</td><td>Implement 4.0 avg rating target with monthly tracking; conduct escalation root cause review, with a specific look at the Gold-tier experience</td></tr>
+      <tr><td class="nr-id">R9</td><td>Product Quality complaints driving escalations</td><td>Product Quality has the lowest rating (3.55) and the highest escalation rate (10.2%) across all-time ticket data. If not addressed at the supplier level, this will continue to generate the most serious customer complaints</td><td>MEDIUM: product and brand risk</td><td>HIGH: already the top escalation type</td><td class="nr-level-high">HIGH</td><td>Supplier quality review and bundle curation audit within 60 days</td></tr>
+      <tr><td class="nr-id">R10</td><td>Data model integrity (Bundle G)</td><td>The presence of active orders against an inactive bundle indicates a gap between the product catalogue and the ordering system. If this can happen for Bundle G, it may be possible for other products</td><td>MEDIUM: data reliability</td><td>LOW: currently one instance</td><td class="nr-level-medium">MEDIUM</td><td>Conduct full product catalogue integrity audit; implement system validation preventing orders against inactive bundles</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="nr-section">
+    <h2>Summary matrix</h2>
+    <div class="nr-table-wrap">
+    <table class="nr-table">
+      <tr><th>Priority</th><th>Count</th><th>Opportunities</th><th>Risks</th></tr>
+      <tr><td class="nr-level-critical">Critical / Immediate</td><td>1</td><td>None</td><td>R1</td></tr>
+      <tr><td class="nr-level-high">High</td><td>3</td><td>O1, O2, O3</td><td>R3, R4, R8, R9</td></tr>
+      <tr><td class="nr-level-high">High, Immediate</td><td>1</td><td>O4</td><td>R2</td></tr>
+      <tr><td class="nr-level-medium">Medium</td><td>4</td><td>O5, O6, O7, O8</td><td>R5, R6, R7, R10</td></tr>
+    </table>
+    </div>
+    <div class="nr-summary-grid">
+      <div class="nr-summary-card"><p class="val">~N20.4M</p><p class="lbl">Total quantified opportunity value (O1 + O2 + O3 midpoint + O5 + O7 midpoint)</p></div>
+      <div class="nr-summary-card"><p class="val">~N29.5M</p><p class="lbl">Total quantified risk exposure (R1 pending + R4 annualised failure rate)</p></div>
+    </div>
+  </div>
+
+  <a class="nr-back" href="NovaMart.html">&larr; Back to case study</a>
+
+</div>
+
+</body>
+</html>
