@@ -35,7 +35,7 @@
 -- 11-query engagement was completed, to support ongoing
 -- LinkedIn content development. It is not counted toward the
 -- formal 11-query engagement and does not appear in the
--- published case study page.
+-- published report page.
 -- ============================================================
 
 
@@ -433,7 +433,7 @@ ORDER BY month;
 -- ============================================================
 -- SUPPLEMENTARY QUERY (not part of the formal 11-query
 -- engagement, does not appear in the published
--- NovaMart case study page)
+-- NovaMart report page)
 -- ============================================================
 
 -- QUERY 12 (SUPPLEMENTARY): Average rating by resolution status
