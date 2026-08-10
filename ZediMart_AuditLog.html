@@ -38,10 +38,7 @@
 <span class="doclabel">ZediMart / audit-log.md</span>
 </div></header>
 <div class="wrap">
-<h1>ZediMart: Validation and Audit Log</h1>
-<h3>Applied Business Intelligence Case Study — Independently Developed</h3>
-<hr />
-<p>This document exists for one reason: every number used anywhere in this case study, the SQL library, the risk register, the recommendations, was tested against a live, loaded database, not assumed from the source deck or from a single exploratory pass. This log records how that testing was done, so the claim of verification is itself checkable rather than taken on faith.</p>
+<p>I built this document for one reason: every number used anywhere in this case study, the SQL library, the risk register, the recommendations, was tested against a live, loaded database, not assumed from the source deck or from a single exploratory pass. This log records how that testing was done, so the claim of verification is itself checkable rather than taken on faith.</p>
 <hr />
 <h2>1. Environment Setup</h2>
 <table>
@@ -72,7 +69,7 @@
 </table>
 <hr />
 <h2>2. Data Loading Verification</h2>
-<p>The six source CSVs were supplied without header rows. Before loading, this was confirmed directly by reading the raw file contents, not assumed from a preview.</p>
+<p>The six source CSVs were supplied without header rows. Before loading, I confirmed this directly by reading the raw file contents, not assumed from a preview.</p>
 <p>Dates were converted from US format (M/D/YYYY) to ISO format (YYYY-MM-DD) to load reliably. Phone numbers were loaded as text, not numeric, after confirming the source data contains numbers with a leading zero (for example, 08043321819), which a numeric column type would silently strip.</p>
 <p>Each table's row count after loading was checked directly against the row count of its source CSV:</p>
 <table>

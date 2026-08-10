@@ -1,5 +1,3 @@
--- ============================================================
--- ZEDIMART: CUSTOMER INTELLIGENCE AND EXECUTIVE DECISION SUPPORT
 -- SQL Query Library
 -- Tool: PostgreSQL
 -- Version: 1.0
