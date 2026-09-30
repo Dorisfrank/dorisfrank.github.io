@@ -1,0 +1,318 @@
+﻿Summary,Issue key,Issue id,Issue Type,Status,Project key,Project name,Project type,Project lead,Project lead id,Project description,Priority,Resolution,Assignee,Assignee Id,Reporter,Reporter Id,Creator,Creator Id,Created,Updated,Last Viewed,Resolved,Fix versions,Due date,Votes,Labels,Description,Environment,Watchers,Watchers Id,Original estimate,Remaining Estimate,Time Spent,Work Ratio,Σ Original Estimate,Σ Remaining Estimate,Σ Time Spent,Security Level,Inward issue link (Blocks),Inward issue link (Blocks),Inward issue link (Blocks),Outward issue link (Blocks),Outward issue link (Blocks),Outward issue link (Blocks),Outward issue link (Blocks),Attachment,Attachment,Attachment,Attachment,Custom field (Development),Custom field (Issue color),Custom field (Rank),Sprint,Sprint,Custom field (Start date),Custom field (Story point estimate),Custom field (Team),Comment,Comment,Comment,Comment,Comment,Comment,Parent,Parent key,Parent summary,Status Category,Status Category Changed
+Plant Library,ECO-1,10000,Epic,To Do,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,17/Aug/26 9:18 PM,18/Aug/26 5:03 PM,27/Aug/26 10:59 PM,,,,0,FR-01,"*Business Objective:* BO-01 — Establish EcoGrow as a trusted source of plant-care information.
+
+This Epic covers the Plant Library capability, including plant search and access to vetted plant-care information.",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,,,,,,,,,,,,,green,0|hzzzzz:,,,,,,,,,,,,,,,To Do,17/Aug/26 9:18 PM
+Harvest Tracker,ECO-2,10001,Epic,To Do,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,17/Aug/26 9:57 PM,17/Aug/26 9:57 PM,27/Aug/26 9:21 PM,,,,0,,"*Business Objective:* BO-03 — Give gardeners a simple way to track progress and recognise achievement.
+
+This Epic covers the Harvest Tracker capability, including planting and harvest logging.",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,,,,,,,,,,,,,grey,0|i00007:,,,,,,,,,,,,,,,To Do,17/Aug/26 9:57 PM
+Community Forum,ECO-3,10002,Epic,To Do,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,17/Aug/26 10:04 PM,18/Aug/26 1:14 AM,27/Aug/26 9:20 PM,,,,0,,"*Business Objective:* BO-02 — structured community.
+
+This Epic covers the Community Forum capability, with MVP scope limited to forum posting. Forum response is deferred to Phase 2.",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,,,,,,,,,,,,,dark_green,0|i0000f:,,,,,,,,,,,,,,,To Do,17/Aug/26 10:04 PM
+Usage Analytics Capture,ECO-4,10003,Epic,To Do,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,17/Aug/26 10:09 PM,27/Aug/26 12:24 PM,27/Aug/26 12:22 PM,,,,0,,"*Business Objective:* BO-04 — usage data capture for future decisions.
+
+This Epic covers usage event capture across the three core capabilities, including the post-harvest satisfaction prompt.",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,,,,,,,,,,,,,dark_teal,0|i0000n:,,,,,,,,,,,,,,,To Do,17/Aug/26 10:09 PM
+"As a gardener, I want to search the Plant Library by name or type, so that I can quickly find care information",ECO-5,10036,Story,In Review,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,18/Aug/26 1:37 AM,27/Aug/26 10:59 PM,27/Aug/26 10:54 PM,,EcoGrow MVP,,0,FR-01,"*Feature:* FEAT-01 — Plant search and browse
+*Epic:* EPIC-01 — Plant Library
+*Requirement:* FR-01
+*Business Objective:* BO-01
+
+*Acceptance Criteria:*
+Given a gardener is using the Plant Library, when they search by plant name or type, then matching plant entries are returned for selection.",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,,,,ECO-10,,,,27/Aug/26 10:37 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-5_FR-01_Plant_Library_Search_Evidence_Screenshot_2026-08-27.png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10218,27/Aug/26 10:37 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-5_FR-01_Plant_Library_Search_Prototype_Evidence_Video_2026-08-27.mp4;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10217,,,,,0|i0000v:,EcoGrow Sprint 1,,,,,19/Aug/26 2:00 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*Sprint 1 Review checkpoint:* US-01 / FR-01 is ready for acceptance-criteria review. Validation remains pending until the search functionality is demonstrated and tested against the original acceptance criterion.,"27/Aug/26 10:38 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-5 / US-01 / FR-01 Acceptance Testing  PASS*
+
+I revalidated the Plant Library search against the original FR-01 acceptance criterion using the ECO-5 portfolio test prototype.
+
+*Result: PASS.* A plant-name search for “Tomato” returned a matching Plant Library entry.
+
+Supporting screenshot and video evidence are attached.
+
+This records newly captured acceptance evidence; it does not imply that the evidence existed when the story was originally moved to Done.","27/Aug/26 10:55 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;ECO-5 / US-01 / FR-01 Product Owner Persona Review
+
+I reviewed the completed acceptance-testing evidence against the original FR-01 business requirement.
+
+The demonstrated Plant Library search flow aligns with the current requirement and the tested acceptance criterion.
+
+*Product Owner Persona Outcome: Accepted with follow-up review.*
+
+Final Sprint Review/business validation, RTM validation, and remaining Definition-of-Done gates are still outstanding.",,,,10000,ECO-1,Plant Library,In Progress,27/Aug/26 10:33 PM
+"As a gardener, I want to see a content-verified badge on library entries, so that I trust the information I'm reading",ECO-6,10069,Story,In Review,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,18/Aug/26 5:17 PM,27/Aug/26 11:01 PM,27/Aug/26 11:01 PM,,EcoGrow MVP,,0,FR-02,"*Feature:* FEAT-02 — Vetted content display
+*Epic:* EPIC-01 — Plant Library
+*Requirement:* FR-02
+*Business Objective:* BO-01
+
+*Acceptance Criteria:*
+Given a Plant Library entry exists, when a gardener views it, then the entry displays a content-verified badge and a last-reviewed date.",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,,,,,,,,27/Aug/26 10:43 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-6_FR-02_Vetted_Content_Evidence_Screenshot_2026-08-27.png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10220,,,,,,0|i00013:,EcoGrow Sprint 1,,,,,19/Aug/26 2:03 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*Sprint 1 Review checkpoint:* US-02 / FR-02 is ready for acceptance-criteria review. Validation remains pending until the vetted-content display is demonstrated and tested against the original acceptance criterion.,"27/Aug/26 10:43 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-6 / US-02 / FR-02 Acceptance Testing  PASS*
+
+I revalidated the Plant Library vetted-content display against the original FR-02 acceptance criterion using the ECO-6 portfolio test prototype.
+
+*Result: PASS.* The plant entry displayed the Content-verified badge and the last-reviewed date.
+
+Supporting screenshot evidence is attached.
+
+This records newly captured acceptance evidence; it does not imply that the evidence existed when the story was originally moved to Done.","27/Aug/26 11:01 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-6 / US-02 / FR-02 Product Owner Persona Review*
+
+I reviewed the completed acceptance-testing evidence against the original FR-02 business requirement.
+
+The demonstrated vetted-content display aligns with the current requirement and the tested acceptance criterion.
+
+*Product Owner Persona Outcome: Accepted with follow-up review.*
+
+Final Sprint Review/business validation, RTM validation, and remaining Definition-of-Done gates are still outstanding.",,,,10000,ECO-1,Plant Library,In Progress,27/Aug/26 10:43 PM
+"As the product team, we want every user action across the three capabilities to generate a usage event, so that BO-04 has reliable data from launch",ECO-10,10073,Story,In Review,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,18/Aug/26 6:06 PM,26/Aug/26 4:40 PM,01/Sep/26 12:40 PM,,EcoGrow MVP,,0,FR-08,"*Feature:* FEAT-07  Usage event capture
+*Epic:* EPIC-04  Usage Analytics Capture
+*Requirement:* FR-08
+*Business Objective:* BO-04
+
+*Requirement:* The system captures anonymised usage events across all three capabilities for reporting.
+
+*Acceptance Criteria:*
+Given any user action across the three capabilities, when that action completes, then a corresponding usage event is recorded with a timestamp and capability tag, without requiring the gardener to opt in separately.",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,ECO-5,ECO-7,ECO-9,,,,,26/Aug/26 3:48 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-10_FR-08_Usage_Event_Evidence2_Community_Forum_2026-08-26.png .png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10141,26/Aug/26 3:48 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-10_FR-08_Usage_Event_Evidence_Community_Forum_2026-08-26.mp4;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10142,26/Aug/26 3:47 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-10_FR-08_Usage_Event_Evidence_Community_Forum_2026-08-26.png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10140,25/Aug/26 7:54 AM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-10_FR-08_Usage_Event_Evidence_Video_2026-08-25.mp4.mp4;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10072,,,0|i00017:,EcoGrow Sprint 1,EcoGrow Sprint 2,,,,"25/Aug/26 7:56 AM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;The ECO-10 Usage Analytics Capture portfolio prototype has been tested against the defined FR-08 requirement using the attached video evidence.
+
+*Planting Log: PASS.* Completion of the planting action generated a timestamped usage event with the capability tag “Planting Log” and Recorded status. No separate opt-in was required.
+
+*Harvest Log: PASS.* Completion of the harvest action generated a timestamped usage event with the capability tag “Harvest Log” and Recorded status. No separate opt-in was required.
+
+*Plant Library: PASS.* Completion of the plant-library action generated a timestamped usage event with the capability tag “Plant Library” and Recorded status. No separate opt-in was required.
+
+*Overall test result:* The demonstrated usage-event capture flow passed the current FR-08 acceptance requirement across the three EcoGrow capabilities. Supporting video evidence is attached to this story.",25/Aug/26 9:32 AM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*Product Owner Persona Review:* The demonstrated prototype satisfies the current FR-08 acceptance requirement. *Outcome: Accepted with follow-up review.*,"26/Aug/26 3:55 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-10 / FR-08 Community Forum Usage-Event Validation*
+
+I completed an additional FR-08 usage-event test for the Community Forum action following the completion and testing of ECO-9 / FR-03.
+
+The completed Community Forum action generated a usage event with the capability tag *“Community Forum”*, a timestamp, and *Recorded* status. The prototype also confirmed that no separate opt-in was required.
+
+*Additional test result: PASS.*
+
+This completes the demonstrated usage-event coverage across the Planting Log, Harvest Log, Plant Library, and Community Forum actions.
+
+Final reporting-layer confirmation, Sprint Review business validation, and RTM validation remain outstanding.","26/Aug/26 4:40 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-10 / FR-08 Product Owner Persona Follow-up Review  Sprint 3*
+
+I reviewed the additional Community Forum usage event evidence together with the previously demonstrated Planting Log, Harvest Log, and Plant Library usage-event evidence.
+
+The demonstrated usage-capture flow now covers the completed actions across the Planting Log, Harvest Log, Plant Library, and Community Forum, with timestamped events, capability tags, and no separate opt-in.
+
+*Product Owner Persona Outcome: Accepted with follow-up review.*
+
+Final reporting-layer confirmation, complete RTM validation, and the remaining Definition-of-Done governance gates are still outstanding.
+
+This records the portfolio Product Owner persona follow-up outcome; it does not represent an independently evidenced formal all-persona Sprint Review meeting.",,,10003,ECO-4,Usage Analytics Capture,In Progress,25/Aug/26 7:57 AM
+"As a gardener, I want to log a planting with plant type and date, so that I can start tracking its progress",ECO-7,10070,Story,In Review,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,18/Aug/26 5:35 PM,27/Aug/26 2:12 PM,26/Aug/26 4:15 PM,,EcoGrow MVP,,0,FR-05,"*Feature:* FEAT-03  Planting log
+*Epic:* EPIC-02  Harvest Tracker
+*Requirement:* FR-05
+*Business Objective:* BO-03
+
+*Requirement:* A gardener can log a planting event, including plant type and date.
+
+*AC1  Plant type*
+
+{quote}Given a gardener is logging a planting event, when the gardener provides a plant type and submits the planting, then the planting event records the selected plant type.{quote}
+
+*AC2  Planting date*
+
+{quote}Given a gardener is logging a planting event, when the gardener provides a planting date and submits the planting, then the planting event records the planting date.{quote}
+
+*AC3  Planting event*
+
+{quote}Given the required planting information has been provided, when the gardener submits the planting event, then the planting event is successfully logged.
+{quote}
+
+AC1 tested: PASS. The selected plant type “Tomato” was recorded in the planting record.
+
+AC2 tested: PASS. The planting date 2026-08-23 was recorded against the planting event.
+
+AC3 tested: PASS. After the required planting information was supplied, the prototype displayed “Planting successfully logged” and created a recorded planting entry.
+
+*AC1  Plant Type: PASS.* The selected plant type “Tomato” was recorded in the planting record.
+
+*AC2  Planting Date: PASS.* The planting date 2026-08-23 was recorded against the planting event.
+
+*AC3  Planting Event: PASS.* The planting information was submitted successfully and a recorded planting entry was created.
+
+*Product Owner Persona Review:* The demonstrated prototype satisfies the current FR-05 acceptance criteria. *Outcome: Accepted with follow-up review.*",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,,,,ECO-8,ECO-10,ECO-11,ECO-12,23/Aug/26 5:11 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-7_FR-05_Prototype_Evidence2_2026-08-23 .png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10001,23/Aug/26 5:11 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-7_FR-05_Prototype_Evidence_2026-08-23 (279328c5-089a-4182-b72e-4ec0c3759152).png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10002,,,,,0|i0001b:,EcoGrow Sprint 2,,,,,19/Aug/26 3:29 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*Sprint 2 execution checkpoint:* US-03 / FR-05 is in active development. Acceptance-criteria validation remains pending until the planting-log functionality is demonstrated and tested against the original requirement.,"22/Aug/26 6:11 AM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;I reviewed the EcoGrow Requirements Engineering baseline, RTM, Jira Build Specification, and current ECO-7 Jira evidence.
+
+The FR-05 requirement is confirmed as: *“A gardener can log a planting event, including plant type and date.”*
+
+The RTM maps *BO-03 → REQ-03 / BR-03 → EPIC-02 → FEAT-03 → US-03 → FR-05* and currently records the validation status as *Not started*. The RTM identifies *FR-05* in the Acceptance Criteria Reference field, but the detailed FR-05 acceptance-criteria wording is not present in the RTM row.
+
+The current ECO-7 Jira story contains the requirement and traceability information, but the detailed FR-05 acceptance criteria are not currently evidenced in the story.
+
+*Acceptance validation therefore remains pending. Detailed FR-05 acceptance criteria must be confirmed and recorded in Jira before acceptance testing and Sprint Review validation.*",22/Aug/26 8:04 AM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;FR-05 acceptance criteria have now been added to ECO-7 following DEC-03 and the corresponding updates to the Requirements Engineering baseline and RTM. Acceptance validation remains pending and requires acceptance testing and Sprint Review demonstration before FR-05 can be considered validated.,"23/Aug/26 5:34 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-7 acceptance-testing update:* FR-05 acceptance criteria AC1–AC3 have now been tested against the ECO-7 portfolio prototype. All three criteria passed, with supporting evidence attached to this story. ECO-7 has been moved to In Review for QA/review. Sprint Review demonstration and Product Owner outcome remain outstanding; therefore, FR-05 is not yet considered fully validated.","23/Aug/26 6:06 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*Sprint 2 Review  ECO-7 / FR-05*
+
+The planting-log prototype was demonstrated against AC1–AC3 using the attached test evidence.
+
+*AC1:* Passed: selected plant type was recorded.
+*AC2:* Passed; planting date was recorded.
+*AC3:* Passed; planting event was successfully logged and a recorded planting entry was created.
+
+*Product Owner Persona outcome:* Accepted with follow-up review.
+
+The demonstrated prototype satisfies the current FR-05 acceptance criteria. However, ECO-7 remains in Review pending final QA/review closure and the corresponding RTM validation update.",25/Aug/26 9:44 AM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*Product Owner Persona Review:* The demonstrated prototype satisfies the current FR-05 acceptance criteria. *Outcome: Accepted with follow-up review.*,10001,ECO-2,Harvest Tracker,In Progress,19/Aug/26 1:38 PM
+"As a gardener, I want to record a harvest against a planting I logged, so that I can close the loop on that plant's progress",ECO-8,10071,Story,In Review,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,18/Aug/26 5:44 PM,27/Aug/26 2:11 PM,26/Aug/26 4:15 PM,,EcoGrow MVP,,0,FR-06,"*Feature:* FEAT-04  Harvest log
+*Epic:* EPIC-02  Harvest Tracker
+*Requirement:* FR-06
+*Business Objective:* BO-03
+
+*Requirement:* A gardener can record a harvest against a previously logged planting.
+
+*AC1  Planting selection*
+
+{quote}Given a gardener has one or more previously logged plantings, when the gardener begins recording a harvest, then the gardener can select an existing planting to record the harvest against.{quote}
+
+*AC2  Harvest recording*
+
+{quote}Given a gardener has selected an existing planting, when the gardener submits harvest details, then the harvest is recorded against that planting.{quote}
+
+*AC3  Planting-to-harvest linkage*
+
+{quote}Given a harvest has been recorded against a planting, when the harvest is saved, then the planting and its harvest remain linked and traceable to each other.{quote}
+
+*Product Owner Persona Review:* The demonstrated prototype satisfies the current FR-06 acceptance criteria. *Outcome: Accepted with follow-up review.*",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,ECO-7,,,ECO-11,ECO-12,,,26/Aug/26 4:10 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-8_FR-06_Prototype_Evidence2_2026-08-23 .png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10146,26/Aug/26 4:10 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-8_FR-06_Prototype_Evidence3_2026-08-23  .png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10144,26/Aug/26 4:10 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-8_FR-06_Prototype_Evidence4_2026-08-23  .png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10143,26/Aug/26 4:10 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-8_FR-06_Prototype_Evidence_2026-08-23  .png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10145,,,0|i0001j:,EcoGrow Sprint 2,,,,,19/Aug/26 3:29 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*Sprint 2 execution checkpoint:* US-04 / FR-06 is in active development. Acceptance-criteria validation remains pending until the harvest-log functionality is demonstrated and tested against the original requirement.,"25/Aug/26 3:59 AM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-8 / FR-06 Acceptance Testing Update*
+
+The ECO-8 Harvest Log portfolio prototype has been tested against the defined FR-06 acceptance criteria using the attached evidence.
+
+*AC1  Planting Selection: PASS.* An existing planting, P-001  Tomato  2026-08-23, was selected from the planting dropdown and the corresponding planting details were displayed.
+
+*AC2  Harvest Recording: PASS.* Harvest details were entered and submitted successfully, including harvest date 2026-10-15, quantity of 2.50 kg, quality grade A - Excellent, and harvest notes. The prototype confirmed that harvest H-6082 was successfully recorded.
+
+*AC3  Planting-to-Harvest Linkage: PASS.* The recorded harvest H-6082 was linked to planting P-001  Tomato, with the linkage confirmed in the prototype and retained in the Harvests list and Harvest Summary.
+
+*Overall test result:* AC1–AC3 passed against the current FR-06 acceptance criteria. Supporting prototype evidence is attached to this story.
+
+ECO-8 can now proceed to *In Review* for QA/review and Sprint Review demonstration. Formal Product Owner outcome and the corresponding RTM validation decision remain outstanding.","25/Aug/26 5:28 AM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;The ECO-8 Harvest Log portfolio prototype was demonstrated against the FR-06 requirement and its defined acceptance criteria.
+
+*AC1  Planting Selection: PASS.* An existing planting, P-001 Tomato   2026-08-23, was selected before recording the harvest.
+
+*AC2  Harvest Recording: PASS.* Harvest details were successfully submitted and recorded, including harvest date 2026-10-15, quantity of 2.50 kg, quality grade A  Excellent, and harvest notes.
+
+*AC3  Planting-to-Harvest Linkage: PASS.* Harvest H-6082 remained linked and traceable to planting P-001  Tomato after the harvest was saved.",25/Aug/26 9:47 AM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*Product Owner Persona Review:* The demonstrated prototype satisfies the current FR-06 acceptance criteria. *Outcome: Accepted with follow-up review.*,,,10001,ECO-2,Harvest Tracker,In Progress,19/Aug/26 1:38 PM
+"As a gardener, I want to post a question or piece of knowledge to the forum, tagged by plant type, season, or region, so that other gardeners can find and use it",ECO-9,10072,Story,In Review,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,18/Aug/26 5:59 PM,26/Aug/26 4:31 PM,26/Aug/26 4:30 PM,,EcoGrow MVP,,0,FR-03,"*Feature:* FEAT-05  Forum posting
+*Epic:* EPIC-03  Community Forum
+*Requirement:* FR-03
+*Business Objective:* BO-02
+
+*Requirement:* A gardener can post a question or piece of knowledge to the Community Forum, tagged by plant type, season, or region.
+
+
+*Acceptance Criteria*
+
+*AC1 — Post creation*
+Given a gardener is creating a forum contribution, when the gardener provides a question or piece of knowledge and submits it, then the post is successfully created.
+
+*AC2 — Forum tagging*
+Given a gardener is creating a forum contribution, when the gardener provides the applicable plant type, season, or region tag information and submits the post, then the selected tag information is stored with the post.
+
+*AC3 — Forum visibility*
+Given a forum post has been successfully submitted, when gardeners access the Community Forum, then the post is displayed with its associated tagging information so it can be found and used by other gardeners.",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,,,,ECO-10,,,,26/Aug/26 2:19 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-9_FR-03_Prototype_Evidence_AC1_2026-08-26.mp4.mp4;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10106,26/Aug/26 2:19 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-9_FR-03_Prototype_Evidence_AC2_2026-08-26.mp4.mp4;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10107,26/Aug/26 2:03 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-9_FR-03_Prototype_Evidence_AC3_2026-08-26.png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10105,,,,0|i0001r:,EcoGrow Sprint 3,,,,,"25/Aug/26 9:28 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-9 / FR-03 Refinement Update*
+
+I drafted AC1–AC3 from the current FR-03 requirement to provide concrete, testable criteria for Sprint 3 refinement.
+
+The criteria cover forum post creation, tagging by plant type, season, or region, and visibility of the submitted post.
+
+*Refinement status:* Draft acceptance criteria; Product Owner persona confirmation pending.
+
+NFR-02 moderation/flagging remains a separate non-functional requirement and has not been converted into an additional FR-03 acceptance criterion at this stage.","25/Aug/26 10:01 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-9 / FR-03 Refinement Checkpoint*
+
+The draft AC1–AC3 have been added to the story to make FR-03 testable for Sprint 3.
+
+*Current refinement status:* Pending Product Owner persona confirmation before the story can meet the Ready gate.
+
+No development or acceptance testing has started.","26/Aug/26 11:10 AM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-9 / FR-03 Product Owner Persona Refinement Decision*
+
+I reviewed the refined AC1–AC3 against the current FR-03 requirement, Sprint 3 scope, and the documented Community Forum constraints.
+
+*Product Owner Persona Outcome: Accepted for Sprint 3 refinement.*
+
+The refined criteria provide a concrete and testable interpretation of FR-03 covering forum post creation, tagging by plant type, season, or region, and visibility of the submitted post.
+
+NFR-02 moderation/flagging remains a separate non-functional requirement and is not being treated as an additional FR-03 acceptance criterion at this stage.
+
+*Refinement decision:* I approve ECO-9 to progress through the Ready gate, subject to completion of the remaining Definition of Ready checks.","26/Aug/26 1:33 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-9 / FR-03 Acceptance Testing Update*
+
+I tested the ECO-9 Community Forum portfolio prototype against the refined FR-03 acceptance criteria using the attached evidence.
+
+*AC1  Post Creation: PASS.* I entered a forum question and submitted it successfully. The prototype displayed a successful-post confirmation, and the submitted post appeared in the Community Forum.
+
+*AC2  Forum Tagging: PASS.* I submitted a forum knowledge post with the selected plant type, season, and region. The prototype retained and displayed the associated tags with the submitted post.
+
+*AC3  Forum Visibility: PASS.* I verified that the submitted post was displayed in the Community Forum under Recent Community Posts with its associated tagging information.
+
+*Overall test result:* AC1–AC3 passed against the current refined FR-03 acceptance criteria. Supporting prototype evidence is attached to this story.
+
+ECO-9 can now proceed to *In Review* for QA/review and Sprint Review demonstration. Final business validation, applicable usage-event confirmation, and RTM validation remain outstanding.","26/Aug/26 4:31 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-9 / FR-03 Product Owner Persona Review  Sprint 3*
+
+I reviewed the completed ECO-9 / FR-03 portfolio prototype against the original business requirement and the demonstrated acceptance-testing results.
+
+*AC1–AC3:* Passed. The prototype demonstrated forum post creation, tagging by plant type, season, or region, and visibility of the submitted post in the Community Forum.
+
+*Product Owner Persona Outcome: Accepted with follow-up review.*
+
+The demonstrated functionality is aligned with the current FR-03 business requirement and the refined acceptance criteria.
+
+Final MVP/product acceptance, complete RTM validation, and the remaining Definition-of-Done governance gates are still outstanding.
+
+This records the portfolio Product Owner persona review outcome; it does not represent an independently evidenced formal all-persona Sprint Review meeting.",,10002,ECO-3,Community Forum,In Progress,26/Aug/26 11:30 AM
+"As the product team, we want a single-tap satisfaction prompt after a harvest is logged, so that BO-04's data baseline includes satisfaction signal alongside usage events",ECO-11,10074,Story,To Do,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,18/Aug/26 6:22 PM,26/Aug/26 11:12 AM,26/Aug/26 2:09 PM,,EcoGrow MVP,,0,FR-09,"*Feature:* FEAT-08  Post-harvest satisfaction prompt
+*Epic:* EPIC-04  Usage Analytics Capture
+*Requirement:* FR-09
+*Business Objective:* BO-04
+
+*Requirement:* The system captures lightweight satisfaction feedback at natural completion points, starting with a single-tap rating after a harvest is logged.",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,ECO-7,ECO-8,,,,,,,,,,,,0|i00027:,EcoGrow Sprint 3,,,,,,,,,,,10003,ECO-4,Usage Analytics Capture,To Do,18/Aug/26 6:22 PM
+"As the product team, I want a single-tap satisfaction prompt after a harvest is logged, so that BO-04's data baseline includes satisfaction signal alongside usage events",ECO-12,10107,Task,In Review,ECO,EcoGrow Digital Product Delivery,software,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,Medium,,,,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,27/Aug/26 12:06 PM,27/Aug/26 2:12 PM,27/Aug/26 9:18 PM,,EcoGrow MVP,,0,FR-09,"*Feature:* FEAT-08  Customer Satisfaction Feedback
+*Epic:* EPIC-04  Usage Analytics Capture
+*Requirement:* FR-09
+*Business Objective:* BO-04
+
+*Requirement:* The system captures lightweight satisfaction feedback at natural completion points, starting with a single-tap rating after a harvest is logged.
+
+*Scope:* MVP covers the post-harvest satisfaction prompt only. A Plant Library satisfaction variant is deferred.
+
+*Dependency:* The prompt depends on a harvest being successfully logged through the Harvest Tracker flow.
+
+*Draft Acceptance Criteria  Pending Product Owner Persona Refinement*
+
+*AC1 — Post-harvest prompt*
+Given a harvest has been successfully logged, when the harvest action reaches its completion point, then a satisfaction prompt is presented to the user.
+
+*AC2 — Single-tap rating*
+Given the satisfaction prompt is displayed after a completed harvest, when the user selects a satisfaction rating with a single tap, then the rating is captured successfully.
+
+*AC3 — Satisfaction signal capture*
+Given a satisfaction rating has been submitted after a completed harvest, when the submission completes, then the satisfaction signal is recorded alongside the usage-event flow for the post-harvest action.",,Doris Frank,712020:4801a6f4-b6df-46b3-b473-219ded0745b2,,,,,,,,,ECO-8,ECO-7,,,,,,27/Aug/26 1:32 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-12_FR-09_Prototype_Evidence2_Screenshot_2026-08-27.png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10183,27/Aug/26 1:25 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-12_FR-09_Prototype_Evidence_Screenshot_2026-08-27.png;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10179,27/Aug/26 1:32 PM;a6f66b38-8778-47a0-8c49-68ff4416210b;ECO-12_FR-09_Prototype_Evidence_Video_2026-08-27 (3c4dd5fc-c49a-48a6-b965-eceb49f405c5).mp4;https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/rest/api/3/attachment/content/10184,,,,0|i0002f:,EcoGrow Sprint 3,,,,,"27/Aug/26 12:28 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-12 / FR-09 Refinement Checkpoint*
+
+I created US-07 from the current FR-09 requirement and mapped it to FEAT-08 / EPIC-04 / BO-04.
+
+I drafted AC1–AC3 to make the requirement concrete and testable for Sprint 3 refinement, based on the defined post-harvest single-tap satisfaction requirement.
+
+The acceptance criteria are currently *draft refinements pending Product Owner Persona confirmation* and are not being treated as final acceptance criteria yet.
+
+No acceptance testing or business validation has started.","27/Aug/26 12:31 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-12 / FR-09 Product Owner Persona Refinement Decision*
+
+I reviewed the drafted AC1–AC3 against the current FR-09 requirement, Sprint 3 scope, and the defined EcoGrow validation approach.
+
+The drafted criteria provide a concrete and testable interpretation of FR-09 covering the post-harvest satisfaction prompt, single-tap rating capture, and recording of the resulting satisfaction signal alongside the post-harvest usage-event flow.
+
+*Product Owner Persona Outcome: Accepted for Sprint 3 refinement.*
+
+The acceptance criteria are now suitable to proceed to implementation/prototype and subsequent acceptance testing.
+
+Final acceptance remains subject to demonstrated acceptance criteria, applicable Sprint Review/business validation, RTM validation, and the remaining Definition-of-Done gates.","27/Aug/26 1:39 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;*ECO-12 / FR-09 Acceptance Testing*
+
+I tested the portfolio prototype against AC1–AC3.
+
+*AC1  PASS:* After I completed the harvest action, the post-harvest satisfaction prompt was presented.
+
+*AC2  PASS:* I selected a single satisfaction rating, and the rating was captured successfully.
+
+*AC3  PASS:* The submitted satisfaction signal was recorded with a timestamp and displayed in the prototype event view for test-session traceability.
+
+*Overall test result: PASS.*
+
+Supporting video and screenshot evidence are attached.","27/Aug/26 1:41 PM;712020:4801a6f4-b6df-46b3-b473-219ded0745b2;Product Owner Persona Review
+
+I reviewed the completed prototype and acceptance-testing results against the current FR-09 requirement and drafted acceptance criteria.
+
+AC1–AC3 passed, demonstrating the post-harvest satisfaction prompt, single-tap rating capture, and recording of the submitted satisfaction signal.
+
+*Product Owner Persona Outcome: Accepted with follow-up review.*
+
+The demonstrated functionality is aligned with the current FR-09 requirement and Sprint 3 scope.
+
+Final business validation, formal Sprint Review, and RTM validation remain outstanding.",,,10003,ECO-4,Usage Analytics Capture,In Progress,27/Aug/26 1:45 PM

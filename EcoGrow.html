@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoGrow, Business Analysis Engagement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#0F2018;
+  --panel:#15301F;
+  --panel2:#1B3A26;
+  --accent:#6FBE8C;
+  --accent-dim:rgba(111,190,140,0.16);
+  --amber:#D9A441;
+  --amber-dim:rgba(217,164,65,0.14);
+  --text:#E9EEE7;
+  --muted:#93A99C;
+  --border:rgba(111,190,140,0.18);
+  --serif:'Fraunces',serif;
+  --sans:'IBM Plex Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dark);color:var(--text);font-family:var(--sans);line-height:1.65;}
+a{color:var(--accent);}
+.wrap{max-width:980px;margin:0 auto;padding:0 2rem;}
+
+/* nav */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(15,32,24,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+.topnav-inner{max-width:980px;margin:0 auto;padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.6rem;}
+.topnav-brand{font-family:var(--serif);font-weight:600;font-size:1.1rem;display:flex;align-items:center}
+.topnav-links{display:flex;gap:1.4rem;flex-wrap:wrap;}
+.topnav-links a{color:var(--muted);text-decoration:none;font-size:0.82rem;letter-spacing:0.02em;margin-right:1.4rem;}
+.topnav-links a:last-child{margin-right:0;}
+.topnav-links a:hover{color:var(--accent);}
+
+/* hero */
+.hero{padding:5rem 0 3.5rem;background:linear-gradient(180deg,#0F2018 0%,#122A1C 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.hero::after{content:"";position:absolute;right:-120px;top:-80px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,var(--accent-dim) 0%,transparent 70%);pointer-events:none;}
+.eyebrow{color:var(--accent);font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;font-family:var(--mono);margin-bottom:1rem;}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.4rem,5vw,3.6rem);line-height:1.05;margin-bottom:0.7rem;max-width:680px;}
+.hero .sub{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.25rem;color:var(--muted);margin-bottom:2.2rem;}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.4rem;max-width:760px;padding-top:1.6rem;border-top:1px solid var(--border);}
+.meta-item label{display:block;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;font-family:var(--mono);}
+.meta-item span{font-size:0.95rem;font-weight:500;}
+
+/* stage tracker */
+.stage-tracker{display:flex;align-items:center;gap:0.4rem;margin-top:2.2rem;flex-wrap:wrap;}
+.stage-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+.stage-dot.pending{background:transparent;border:1.5px solid var(--muted);}
+.stage-dot.partial{background:var(--amber);}
+.stage-line{width:22px;height:1px;background:var(--border);flex-shrink:0;}
+.stage-label{font-size:0.72rem;color:var(--muted);font-family:var(--mono);margin-left:0.6rem;}
+
+/* sections */
+.section{padding:3.4rem 0;border-bottom:1px solid var(--border);}
+.section-head{display:flex;align-items:baseline;gap:0.9rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+.section-num{font-family:var(--mono);color:var(--amber);font-size:0.85rem;}
+.section h2{font-family:var(--serif);font-weight:600;font-size:1.7rem;}
+.status-badge{display:inline-block;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.25rem 0.65rem;border-radius:20px;font-family:var(--mono);margin-left:auto;}
+.status-complete{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(111,190,140,0.35);}
+.status-pending{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(217,164,65,0.35);}
+.section p{color:var(--text);max-width:680px;margin-bottom:1rem;}
+.section p.muted{color:var(--muted);font-size:0.92rem;}
+
+.pending-note{background:var(--amber-dim);border-left:2px solid var(--amber);border-radius:0 8px 8px 0;padding:0.9rem 1.2rem;font-size:0.88rem;color:var(--muted);margin:1rem 0;max-width:680px;}
+
+table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:0.86rem;}
+th{background:var(--panel2);color:var(--accent);text-align:left;padding:0.6rem 0.8rem;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-family:var(--mono);}
+td{padding:0.6rem 0.8rem;border-top:1px solid var(--border);color:var(--text);}
+tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+
+.tag{display:inline-block;background:var(--panel2);color:var(--muted);font-family:var(--mono);font-size:0.72rem;padding:0.15rem 0.5rem;border-radius:4px;margin-right:0.3rem;}
+
+/* deliverables */
+.deliv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0.9rem;margin-top:1.4rem;}
+.deliv-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.3rem;}
+.deliv-card .kind{font-family:var(--mono);font-size:0.68rem;color:var(--amber);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.4rem;}
+.deliv-card a{font-weight:500;text-decoration:none;font-size:0.94rem;}
+.deliv-card a:hover{text-decoration:underline;}
+.deliv-card p{font-size:0.82rem;color:var(--muted);margin-top:0.3rem;}
+
+footer{padding:3rem 0 4rem;text-align:center;color:var(--muted);font-size:0.82rem;}
+footer a{color:var(--accent);}
+
+@media(max-width:640px){
+  .wrap{padding:0 1.2rem;}
+  .topnav-inner{padding:0.8rem 1.2rem;}
+  .hero{padding:3.5rem 0 2.5rem;}
+}
+.appendix-toc{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1.4rem 0 1.8rem;}
+.appendix-toc a{font-family:var(--mono);font-size:0.78rem;color:var(--amber);text-decoration:none;border:1px solid var(--border);padding:0.4rem 0.8rem;border-radius:20px;}
+.appendix-toc a:hover{background:var(--amber-dim);}
+.appendix-toc a.sub{color:var(--muted);font-size:0.73rem;padding:0.35rem 0.7rem 0.35rem 1.2rem;}
+details.phase-group{border:1px solid var(--border);border-radius:10px;margin-bottom:0.9rem;background:var(--panel);overflow:hidden;}
+details.phase-group summary{cursor:pointer;padding:1rem 1.3rem;font-family:var(--serif);font-size:1.05rem;list-style:none;display:flex;align-items:center;gap:0.6rem;}
+details.phase-group summary::-webkit-details-marker{display:none;}
+details.phase-group summary::before{content:'+';font-family:var(--mono);color:var(--amber);font-size:1rem;width:1rem;}
+details.phase-group[open] summary::before{content:'\2212';}
+details.phase-group .phase-body{padding:0 1.3rem 1.3rem;}
+details.epic-group{border:1px solid var(--border);border-radius:8px;margin:0.7rem 0;background:var(--panel2);overflow:hidden;}
+details.epic-group summary{cursor:pointer;padding:0.75rem 1.1rem;font-family:var(--mono);font-size:0.82rem;color:var(--text);list-style:none;display:flex;align-items:center;gap:0.5rem;}
+details.epic-group summary::-webkit-details-marker{display:none;}
+details.epic-group summary::before{content:'+';color:var(--amber);width:0.8rem;}
+details.epic-group[open] summary::before{content:'\2212';}
+details.epic-group .epic-body{padding:0 1.1rem 1rem;}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand"><img src="EcoGrow_logo.png" alt="EcoGrow" style="height:22px;width:auto;margin-right:8px;border-radius:4px;flex-shrink:0;">EcoGrow</div>
+    <div class="topnav-links">
+      <a href="#overview">Overview</a>
+      <a href="#problem">Problem</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#deliverables">Deliverables</a>
+      <a href="#appendix">Appendix</a>
+    </div>
+  </div>
+</nav>
+
+<div style="background:var(--panel);border-bottom:1px solid var(--border);padding:14px 0;">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+    <span style="font-size:14px;color:var(--muted);">Want the five-minute version first?</span>
+    <a href="https://claude.ai/artifact/YKJs2jyFGvpzCLYoYTKtKP" style="font-size:13px;font-family:var(--mono);color:var(--accent);text-decoration:none;border:1px solid var(--border);padding:7px 14px;border-radius:20px;">Read the Executive Case Study &rarr;</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Business Analysis Engagement</p>
+    <h1>Turning a scattered gardening habit into one connected product</h1>
+    <p class="sub">GreenSphere Innovations, Plant Library, Harvest Tracker, Community Forum</p>
+
+    <div class="meta-grid">
+      <div class="meta-item"><label>Client</label><span>GreenSphere Innovations</span></div>
+      <div class="meta-item"><label>Delivered by</label><span>Doris Frank, Business Analyst</span></div>
+      <div class="meta-item"><label>Type</label><span>Applied Business Analysis</span></div>
+      <div class="meta-item"><label>Tools</label><span>Jira, Confluence, Miro, Lucidchart, Excel, Power BI</span></div>
+    </div>
+
+    <div class="stage-tracker">
+      <div class="stage-dot"></div><div class="stage-line"></div>
+      <div class="stage-dot"></div><div class="stage-line"></div>
+      <div class="stage-dot"></div><div class="stage-line"></div>
+      <div class="stage-dot"></div><div class="stage-line"></div>
+      <div class="stage-dot"></div><div class="stage-line"></div>
+      <div class="stage-dot"></div><div class="stage-line"></div>
+      <div class="stage-dot"></div><div class="stage-line"></div>
+      <div class="stage-dot"></div><div class="stage-line"></div>
+      <div class="stage-dot"></div>
+      <span class="stage-label">All 9 sections documented with real evidence; formal Sprint Review, RTM validation, and MVP acceptance remain open governance gates</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="section" id="overview">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>Project initiation & discovery</h2>
+        <span class="status-badge status-complete">Complete</span>
+      </div>
+      <p>GreenSphere's brief specified delivery mechanics, Jira, three two-week sprints, but not delivery governance. Before any backlog or sprint work began, I established who the engagement answers to, how decisions get made, and what problem is actually being solved. Given confidentiality on this live engagement, stakeholder engagement throughout this report is represented through structured personas built against defined roles, not named individuals.</p>
+      <table>
+        <tr><th>Persona</th><th>Role</th><th>Power / Interest</th></tr>
+        <tr><td>Product Sponsor</td><td>Budget authority, Go/No-Go decisions</td><td>High / High</td></tr>
+        <tr><td>Product Owner</td><td>Backlog priority, business voice</td><td>High / High</td></tr>
+        <tr><td>Engineering, UX, QA Leads</td><td>Delivery execution</td><td>Medium / High</td></tr>
+        <tr><td>Scrum Master</td><td>Ceremony facilitation, cadence</td><td>Medium / Medium</td></tr>
+      </table>
+      <p class="muted">Full Stakeholder Register, Power-Interest analysis, RACI, and Communication Plan in Section 1 and the Excel Governance Pack.</p>
+    </div>
+  </section>
+
+  <section class="section" id="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Business analysis & problem definition</h2>
+        <span class="status-badge status-complete">Complete</span>
+      </div>
+      <p>I root-caused GreenSphere's three stated problems, scattered information, lack of community, ineffective tracking, independently using a 5 Whys technique rather than taking them at face value. Each traces to a distinct business objective.</p>
+      <table>
+        <tr><th>ID</th><th>Objective</th><th>Root cause addressed</th></tr>
+        <tr><td class="tag">BO-01</td><td>Trusted, horticulture-specific information source</td><td>No platform has positioned itself as community-vetted</td></tr>
+        <tr><td class="tag">BO-02</td><td>Structured space to connect and exchange knowledge</td><td>Community exists but lacks domain-specific structure</td></tr>
+        <tr><td class="tag">BO-03</td><td>Simple way to track progress and recognise achievement</td><td>No tool matches the actual gardening lifecycle</td></tr>
+        <tr><td class="tag">BO-04</td><td>Capture usage data for future decisions</td><td>Business rationale stated in the original brief</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="requirements">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>Requirements engineering</h2>
+        <span class="status-badge status-complete">Complete</span>
+      </div>
+      <p>I traced nine functional and four non-functional requirements directly to the four business objectives above, each prioritised using MoSCoW and mapped for dependencies before any backlog work began. I added FR-09 mid-build after Power BI planning surfaced a real gap, Customer Satisfaction had no defined collection mechanism anywhere upstream.</p>
+      <p class="muted">Full requirements catalogue, acceptance criteria, and traceability in Section 3 and the RTM tab of the Excel Governance Pack.</p>
+    </div>
+  </section>
+
+  <section class="section" id="strategy">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Product strategy & delivery planning</h2>
+        <span class="status-badge status-complete">Complete</span>
+      </div>
+      <p>I scoped the MVP to address all three of GreenSphere's stated problems within the brief's three-sprint constraint, deliberately sequencing Community Forum response into Phase 2 rather than compressing full community functionality into the MVP.</p>
+      <table>
+        <tr><th>Epic</th><th>MVP scope</th></tr>
+        <tr><td>Plant Library</td><td>Full, search and vetted content</td></tr>
+        <tr><td>Harvest Tracker</td><td>Full, planting and harvest logging</td></tr>
+        <tr><td>Community Forum</td><td>Posting only, response deferred to Phase 2</td></tr>
+        <tr><td>Usage Analytics Capture</td><td>Full, extended to include satisfaction capture (FR-09)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="backlog">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2>Backlog engineering</h2>
+        <span class="status-badge status-complete">Complete</span>
+      </div>
+      <p>I sequenced seven user stories by the gardener's actual journey, find, plant, share, rather than by epic in isolation, with dependencies explicitly mapped so Sprint 1 planning doesn't stall on a blocked story.</p>
+      <p class="muted">Full story list, dependency matrix, and story mapping in Section 5, ready to load directly into Jira per the Jira Build Specification.</p>
+    </div>
+  </section>
+
+  <section class="section" id="delivery">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">06</span>
+        <h2>Sprint planning & agile delivery</h2>
+        <span class="status-badge status-complete">Real evidence, Sprint 1 through Sprint 3</span>
+      </div>
+      <p>I closed Sprint 1 against available Jira evidence. Sprint 2 evidence was captured for ECO-7, ECO-8, and ECO-10, and Sprint 3 evidence was captured for ECO-9, the ECO-10 follow-up, and ECO-12. No scope changes, no work completed outside a sprint. Velocity and story points remain genuine gaps in the Jira data, not withheld numbers.</p>
+      <p class="muted">Full Sprint 1 evidence table, risk log, and Sprint 2/3 status in Section 6.</p>
+    </div>
+  </section>
+
+  <section class="section" id="validation">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">07&ndash;08</span>
+        <h2>Business validation & release</h2>
+        <span class="status-badge status-complete">Complete, governance gates open</span>
+      </div>
+      <div class="pending-note">
+        I kept Section 7's story-level acceptance evidence for all seven MVP stories explicitly distinct from formal MVP acceptance. Section 8 defines the release readiness checklist and KPI framework. Formal all-persona Sprint Review, final RTM validation, and Go/No-Go approval remain the genuinely open governance gates, I'm naming them here rather than closing them for a tidier page.
+      </div>
+      <p class="muted">Full frameworks in Sections 7 and 8.</p>
+    </div>
+  </section>
+
+  <section class="section" id="summary">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">09</span>
+        <h2>Executive delivery summary & next steps</h2>
+        <span class="status-badge status-complete">Complete</span>
+      </div>
+      <p>I built the full report to run end to end, from GreenSphere's three originally stated problems through requirements, backlog, real sprint delivery evidence, business validation, and release readiness. Formal Sprint Review, RTM validation, and MVP acceptance remain the outstanding governance gates before go-live.</p>
+    </div>
+  </section>
+
+  <section class="section" id="deliverables" style="border-bottom:none;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">&mdash;</span>
+        <h2>Full deliverables</h2>
+      </div>
+      <p class="muted">This page is the executive summary. Every figure, table, and decision above traces to one of the documents below.</p>
+      <div class="deliv-grid">
+        <div class="deliv-card"><div class="kind">Report</div><a href="01_EcoGrow_Project_Initiation_and_Discovery.docx">Section 1, Initiation & Discovery</a><p>Stakeholder Register, RACI, governance</p></div>
+        <div class="deliv-card"><div class="kind">Report</div><a href="02_EcoGrow_Business_Analysis_and_Problem_Definition.docx">Section 2, Problem Definition</a><p>Root-cause analysis, business objectives</p></div>
+        <div class="deliv-card"><div class="kind">Report</div><a href="03_EcoGrow_Requirements_Engineering.docx">Section 3, Requirements Engineering</a><p>Full requirements catalogue</p></div>
+        <div class="deliv-card"><div class="kind">Report</div><a href="04_EcoGrow_Product_Strategy_and_Delivery_Planning.docx">Section 4, Product Strategy</a><p>MVP definition, Epic Catalogue</p></div>
+        <div class="deliv-card"><div class="kind">Report</div><a href="05_EcoGrow_Backlog_Engineering.docx">Section 5, Backlog Engineering</a><p>Story-level backlog, dependencies</p></div>
+        <div class="deliv-card"><div class="kind">Report</div><a href="06_EcoGrow_Sprint_Planning_and_Agile_Delivery.docx">Section 6, Sprint Planning</a><p>Real Jira evidence across Sprint 1 through Sprint 3</p></div>
+        <div class="deliv-card"><div class="kind">Report</div><a href="07_EcoGrow_Business_Validation_and_Product_Acceptance.docx">Section 7, Business Validation</a><p>Story-level acceptance evidence for all 7 stories</p></div>
+        <div class="deliv-card"><div class="kind">Report</div><a href="08_EcoGrow_Release_Readiness_Deployment_and_Benefits.docx">Section 8, Release Readiness</a><p>Release readiness checklist, KPI framework</p></div>
+        <div class="deliv-card"><div class="kind">Report</div><a href="09_EcoGrow_Executive_Delivery_Summary_and_Next_Steps.docx">Section 9, Executive Summary</a><p>Deliverables status, recommendations</p></div>
+        <div class="deliv-card"><div class="kind">Spec</div><a href="EcoGrow_Jira_Build_Specification.docx">Jira Build Specification</a><p>Epics, stories, sprint structure</p></div>
+        <div class="deliv-card"><div class="kind">Spec</div><a href="EcoGrow_Confluence_Miro_Lucidchart_PowerBI_Spec.docx">Confluence, Miro, Lucidchart & Power BI Spec</a><p>Full workspace configuration guide</p></div>
+        <div class="deliv-card"><div class="kind">Workbook</div><a href="EcoGrow_Governance_Pack.xlsx">Excel Governance Pack</a><p>Live RTM, RACI, RAID, Benefits Register</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="appendix" style="border-bottom:none;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">&mdash;</span>
+        <h2>Appendix, full delivery archive</h2>
+      </div>
+      <p class="muted">Phase 2 discovery and Phase 3A investment analysis, organized for reference. Nothing here was built, approved, or committed to Jira, this is analysis and requirements-engineering work only.</p>
+      <div class="appendix-toc">
+  <a href="#appendix-phase2">Phase 2, Future-State Discovery</a>
+  <a class="sub" href="#appendix-f01">F01</a>
+  <a class="sub" href="#appendix-f02">F02</a>
+  <a class="sub" href="#appendix-f03">F03</a>
+  <a class="sub" href="#appendix-f04">F04</a>
+  <a class="sub" href="#appendix-f05">F05</a>
+  <a class="sub" href="#appendix-f06">F06</a>
+  <a href="#appendix-phase3a">Phase 3A, Investment &amp; ROI</a>
+</div>
+
+      <details class="phase-group" id="appendix-phase2">
+        <summary>Phase 2, Future-State Discovery, 27 files</summary>
+        <div class="phase-body">
+        <details class="epic-group" id="appendix-f01">
+  <summary>F01, Smart Plant Care, Content authority, shared with the MVP's own FR-02 open question</summary>
+  <div class="epic-body"><div class="deliv-grid">
+    <div class="deliv-card"><div class="kind">Pass 2</div><a href="EcoGrow_EPIC-F01_Deep_Discovery_Pass2.docx">Deep Discovery</a><p>F01 pass 2</p></div>
+    <div class="deliv-card"><div class="kind">Pass 3</div><a href="EcoGrow_EPIC-F01_Delivery_Translation_Pass3.docx">Delivery Translation</a><p>F01 pass 3</p></div>
+    <div class="deliv-card"><div class="kind">Pass 4</div><a href="EcoGrow_EPIC-F01_Cross_Artifact_QA_Pass4.docx">Cross-Artifact QA</a><p>F01 pass 4</p></div>
+    <div class="deliv-card"><div class="kind">Pass 5</div><a href="EcoGrow_EPIC-F01_Portfolio_Packaging_Pass5_FIXED.docx">Portfolio Packaging</a><p>F01 pass 5</p></div>
+  </div></div>
+</details>
+<details class="epic-group" id="appendix-f02">
+  <summary>F02, Weather-Aware Gardening, 7 gates, weather and climate reliability, alert safety</summary>
+  <div class="epic-body"><div class="deliv-grid">
+    <div class="deliv-card"><div class="kind">Pass 2</div><a href="EcoGrow_EPIC-F02_Deep_Discovery_Pass2.docx">Deep Discovery</a><p>F02 pass 2</p></div>
+    <div class="deliv-card"><div class="kind">Pass 3</div><a href="EcoGrow_EPIC-F02_Delivery_Translation_Pass3.docx">Delivery Translation</a><p>F02 pass 3</p></div>
+    <div class="deliv-card"><div class="kind">Pass 4</div><a href="EcoGrow_EPIC-F02_Cross_Artifact_QA_Pass4_DOWNLOAD.docx">Cross-Artifact QA</a><p>F02 pass 4</p></div>
+    <div class="deliv-card"><div class="kind">Pass 5</div><a href="EcoGrow_EPIC-F02_Portfolio_Packaging_Pass5_DOWNLOAD.docx">Portfolio Packaging</a><p>F02 pass 5</p></div>
+  </div></div>
+</details>
+<details class="epic-group" id="appendix-f03">
+  <summary>F03, Plant Health &amp; Protection, 10 gates, safety, specialist expertise, hard treatment boundary</summary>
+  <div class="epic-body"><div class="deliv-grid">
+    <div class="deliv-card"><div class="kind">Pass 2</div><a href="EcoGrow_EPIC-F03_Deep_Discovery_Pass2.docx">Deep Discovery</a><p>F03 pass 2</p></div>
+    <div class="deliv-card"><div class="kind">Pass 3</div><a href="EcoGrow_EPIC-F03_Delivery_Translation_Pass3_FIXED.docx">Delivery Translation</a><p>F03 pass 3</p></div>
+    <div class="deliv-card"><div class="kind">Pass 4</div><a href="EcoGrow_EPIC-F03_Cross_Artifact_QA_Pass4_CORRECTED.docx">Cross-Artifact QA</a><p>F03 pass 4</p></div>
+    <div class="deliv-card"><div class="kind">Pass 5</div><a href="EcoGrow_EPIC-F03_Portfolio_Packaging_Pass5.docx">Portfolio Packaging</a><p>F03 pass 5</p></div>
+  </div></div>
+</details>
+<details class="epic-group" id="appendix-f04">
+  <summary>F04, Global Plant Intelligence, 9 gates, regional scope and regulatory readiness</summary>
+  <div class="epic-body"><div class="deliv-grid">
+    <div class="deliv-card"><div class="kind">Pass 2</div><a href="EcoGrow_EPIC-F04_Deep_Discovery_Pass2.docx">Deep Discovery</a><p>F04 pass 2</p></div>
+    <div class="deliv-card"><div class="kind">Pass 3</div><a href="EcoGrow_EPIC-F04_Delivery_Translation_Pass3.docx">Delivery Translation</a><p>F04 pass 3</p></div>
+    <div class="deliv-card"><div class="kind">Pass 4</div><a href="EcoGrow_EPIC-F04_Cross_Artifact_QA_Pass4.docx">Cross-Artifact QA</a><p>F04 pass 4</p></div>
+    <div class="deliv-card"><div class="kind">Pass 5</div><a href="EcoGrow_EPIC-F04_Portfolio_Packaging_Pass5.docx">Portfolio Packaging</a><p>F04 pass 5</p></div>
+  </div></div>
+</details>
+<details class="epic-group" id="appendix-f05">
+  <summary>F05, Personalised Garden Experience, 9 gates, consent, privacy, data minimisation</summary>
+  <div class="epic-body"><div class="deliv-grid">
+    <div class="deliv-card"><div class="kind">Pass 2</div><a href="EcoGrow_EPIC-F05_Deep_Discovery_Pass2.docx">Deep Discovery</a><p>F05 pass 2</p></div>
+    <div class="deliv-card"><div class="kind">Pass 3</div><a href="EcoGrow_EPIC-F05_Delivery_Translation_Pass3.docx">Delivery Translation</a><p>F05 pass 3</p></div>
+    <div class="deliv-card"><div class="kind">Pass 4</div><a href="EcoGrow_EPIC-F05_Cross_Artifact_QA_Pass4.docx">Cross-Artifact QA</a><p>F05 pass 4</p></div>
+    <div class="deliv-card"><div class="kind">Pass 5</div><a href="EcoGrow_EPIC-F05_Portfolio_Packaging_Pass5.docx">Portfolio Packaging</a><p>F05 pass 5</p></div>
+  </div></div>
+</details>
+<details class="epic-group" id="appendix-f06">
+  <summary>F06, Platform Scalability, 10 gates, scale evidence, upstream capability maturity</summary>
+  <div class="epic-body"><div class="deliv-grid">
+    <div class="deliv-card"><div class="kind">Pass 2</div><a href="EcoGrow_EPIC-F06_Deep_Discovery_Pass2.docx">Deep Discovery</a><p>F06 pass 2</p></div>
+    <div class="deliv-card"><div class="kind">Pass 3</div><a href="EcoGrow_EPIC-F06_Delivery_Translation_Pass3.docx">Delivery Translation</a><p>F06 pass 3</p></div>
+    <div class="deliv-card"><div class="kind">Pass 4</div><a href="EcoGrow_EPIC-F06_Cross_Artifact_QA_Pass4.docx">Cross-Artifact QA</a><p>F06 pass 4</p></div>
+    <div class="deliv-card"><div class="kind">Pass 5</div><a href="EcoGrow_EPIC-F06_Portfolio_Packaging_Pass5.docx">Portfolio Packaging</a><p>F06 pass 5</p></div>
+  </div></div>
+</details>
+
+        <div class="deliv-grid">
+  <div class="deliv-card"><div class="kind">Spec</div><a href="00_Product_Vision_and_Capability_Map_REVALIDATED_FINAL.docx">Product Vision &amp; Capability Map</a><p>Full future-epic boundary source</p></div>
+  <div class="deliv-card"><div class="kind">Report</div><a href="EcoGrow_Future_State_Portfolio_Integration_Final_Assurance.docx">Future-State Portfolio Integration, Final Assurance</a><p>Cross-epic boundary integrity, QA learning record</p></div>
+  <div class="deliv-card"><div class="kind">Index</div><a href="EcoGrow_Portfolio_Master_Index.md">Portfolio Master Index</a><p>Navigation across every Phase 2 artifact</p></div>
+</div>
+
+        </div>
+      </details>
+      <details class="phase-group" id="appendix-phase3a">
+        <summary>Phase 3A, Investment &amp; ROI Discovery, 2 files</summary>
+        <div class="phase-body">
+        <div class="deliv-grid">
+  <div class="deliv-card"><div class="kind">Report</div><a href="EcoGrow_Phase3A_Investment_ROI_Business_Case_Engagement_FINAL_REVALIDATED.docx">Investment &amp; ROI Business Case Engagement</a><p>Business question, cost and benefit model boundaries, decision gates</p></div>
+  <div class="deliv-card"><div class="kind">Workbook</div><a href="EcoGrow_Phase3A_Investment_ROI_Model_FINAL_REVALIDATED.xlsx">Investment &amp; ROI Model</a><p>Guarded formulas, zero invented figures, payback and sensitivity structure</p></div>
+</div>
+
+        </div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>EcoGrow &middot; Prepared by <a href="https://www.linkedin.com/in/uduakdoris" target="_blank" rel="noopener">Doris Frank</a>, Business Analyst</p>
+  </div>
+</footer>
+
+</body>
+</html>

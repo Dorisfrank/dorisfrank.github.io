@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoGrow: Business Analysis Engagement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#0F2018;
+  --panel:#15301F;
+  --panel2:#1B3A26;
+  --accent:#6FBE8C;
+  --accent-dim:rgba(111,190,140,0.14);
+  --amber:#D9A441;
+  --amber-dim:rgba(217,164,65,0.12);
+  --text:#E9EEE7;
+  --muted:#93A99C;
+  --border:rgba(111,190,140,0.18);
+  --border-amber:rgba(217,164,65,0.28);
+  --serif:'Fraunces',serif;
+  --sans:'IBM Plex Sans',-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--dark);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:920px;margin:0 auto;padding:0 28px}
+section{padding:88px 0}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:20;background:rgba(15,32,24,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:18px;padding-bottom:18px}
+.brand{font-family:var(--serif);font-size:19px;font-weight:600;letter-spacing:0.01em;display:flex;align-items:center}
+.brand span{color:var(--accent)}
+.navlinks{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+.navlinks a{text-decoration:none;transition:color .15s;margin-left:28px}
+.navlinks a:first-child{margin-left:0}
+.navlinks a:hover{color:var(--text)}
+@media(max-width:640px){.navlinks{display:none}}
+
+/* ---------- HERO ---------- */
+.hero{padding:96px 0 60px}
+.hero-kicker{font-size:14px;color:var(--muted);margin-bottom:18px;font-family:var(--mono)}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,5vw,54px);line-height:1.12;max-width:15ch;letter-spacing:-0.01em}
+.hero p.lede{margin-top:22px;font-size:18px;color:var(--muted);max-width:56ch}
+.hero-meta{display:flex;gap:32px;margin-top:40px;flex-wrap:wrap}
+.hero-meta div{font-size:14px;color:var(--muted);margin-right:32px;max-width:220px}
+.hero-meta div:last-child{margin-right:0}
+.hero-meta strong{display:block;color:var(--text);font-family:var(--serif);font-size:20px;font-weight:500;margin-bottom:2px}
+
+/* growth-line diagram */
+.thread{margin-top:56px;overflow-x:auto;padding-bottom:8px}
+.thread svg{display:block;min-width:640px}
+.thread-caption{font-size:13px;color:var(--muted);margin-top:14px;max-width:60ch}
+
+/* ---------- SECTION HEADERS ---------- */
+.section-head{margin-bottom:44px}
+.section-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3.4vw,34px);max-width:20ch}
+.section-head p{color:var(--muted);margin-top:12px;max-width:58ch;font-size:16px}
+
+/* ---------- CONTEXT / BRIEF ---------- */
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:2px;overflow:hidden;margin-top:8px}
+.problem-grid div{background:var(--dark);padding:26px 22px}
+.problem-grid h3{font-family:var(--serif);font-weight:500;font-size:17px;margin-bottom:8px}
+.problem-grid p{font-size:14px;color:var(--muted)}
+@media(max-width:760px){.problem-grid{grid-template-columns:1fr}}
+
+/* ---------- PHASE BANDS ---------- */
+.phase{border-top:1px solid var(--border)}
+.phase.amber{border-top-color:var(--border-amber);background:linear-gradient(180deg,rgba(217,164,65,0.05),transparent 40%)}
+.phase-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;color:var(--accent);border:1px solid var(--border);padding:6px 12px;border-radius:20px;margin-bottom:24px}
+.phase.amber .phase-label{color:var(--amber);border-color:var(--border-amber)}
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* capability cards */
+.cap-list{display:flex;flex-direction:column;gap:0;margin-top:32px;border-top:1px solid var(--border)}
+.cap-row{display:grid;grid-template-columns:180px 1fr auto;gap:24px;padding:22px 0;border-bottom:1px solid var(--border);align-items:baseline}
+.cap-row .cap-name{font-family:var(--serif);font-size:18px;font-weight:500}
+.cap-row .cap-desc{color:var(--muted);font-size:14.5px}
+.cap-row .cap-status{font-family:var(--mono);font-size:12.5px;color:var(--accent);white-space:nowrap;text-align:right}
+@media(max-width:640px){.cap-row{grid-template-columns:1fr;gap:6px}.cap-row .cap-status{text-align:left}}
+
+/* callout */
+.callout{margin-top:44px;border:1px solid var(--border);border-left:3px solid var(--accent);padding:26px 28px;background:var(--panel);border-radius:2px}
+.phase.amber .callout{border-left-color:var(--amber);background:var(--panel)}
+.callout h4{font-family:var(--serif);font-weight:500;font-size:17px;margin-bottom:10px}
+.callout p{font-size:14.5px;color:var(--muted)}
+
+/* evidence links */
+.linkbar{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.linkbtn{font-size:13.5px;font-family:var(--mono);border:1px solid var(--border);padding:10px 16px;border-radius:20px;text-decoration:none;color:var(--text);transition:border-color .15s, background .15s}
+.linkbtn:hover{border-color:var(--accent);background:var(--accent-dim)}
+.phase.amber .linkbtn:hover{border-color:var(--amber);background:var(--amber-dim)}
+
+/* governance gate note */
+.gatenote{margin-top:36px;font-size:14px;color:var(--muted);max-width:62ch}
+.gatenote strong{color:var(--text)}
+
+/* epic table */
+.epic-table{margin-top:36px;border:1px solid var(--border-amber);border-radius:2px;overflow:hidden}
+.epic-row{display:grid;grid-template-columns:1.4fr 1.8fr 0.7fr;gap:16px;padding:18px 22px;border-bottom:1px solid var(--border-amber);align-items:center}
+.epic-row:last-child{border-bottom:none}
+.epic-row.head{background:var(--panel2);font-family:var(--mono);font-size:11.5px;color:var(--muted);text-transform:none}
+.epic-row .epic-id{font-family:var(--mono);font-size:12.5px;color:var(--amber)}
+.epic-row .epic-name{font-family:var(--serif);font-size:15.5px;margin-top:2px}
+.epic-row .epic-signal{font-size:13.5px;color:var(--muted)}
+.epic-row .epic-gates{font-family:var(--mono);font-size:13px;text-align:right}
+@media(max-width:640px){.epic-row{grid-template-columns:1fr;gap:4px;text-align:left}.epic-row .epic-gates{text-align:left}}
+
+/* discipline statement */
+.discipline p{font-size:19px;font-family:var(--serif);font-weight:500;line-height:1.5;color:var(--text);max-width:58ch}
+.discipline .sub{font-family:var(--sans);font-size:15px;color:var(--muted);margin-top:18px;font-weight:400;max-width:58ch}
+
+/* impact list */
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;margin-top:32px}
+.impact-item{padding:18px 0;border-bottom:1px solid var(--border)}
+.impact-item h4{font-family:var(--serif);font-weight:500;font-size:16px;margin-bottom:6px}
+.impact-item p{font-size:13.5px;color:var(--muted)}
+@media(max-width:640px){.impact-grid{grid-template-columns:1fr}}
+
+/* footer */
+footer{border-top:1px solid var(--border);padding:64px 0 48px}
+footer .foot-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px}
+footer h3{font-family:var(--serif);font-weight:500;font-size:24px;max-width:20ch}
+footer .foot-links{display:flex;gap:20px;font-size:14px}
+footer .foot-links a{text-decoration:none;color:var(--muted);border-bottom:1px solid transparent;transition:color .15s,border-color .15s;margin-left:20px}
+footer .foot-links a:first-child{margin-left:0}
+footer .foot-links a:hover{color:var(--accent);border-color:var(--accent)}
+footer .foot-note{margin-top:48px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--border);padding-top:24px}
+
+::selection{background:var(--accent-dim);color:var(--text)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><img src="EcoGrow_logo.png" alt="EcoGrow" style="height:22px;width:auto;margin-right:8px;border-radius:4px;flex-shrink:0;">Eco<span>Grow</span></div>
+    <div class="navlinks">
+      <a href="#mvp">MVP Delivery</a>
+      <a href="#future-state">Future-State Discovery</a>
+      <a href="#impact">Impact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="hero-kicker">Business Analysis &amp; Delivery Engagement, GreenSphere Innovations</div>
+  <h1>Building the golden thread from a gardener's problem to a governed product.</h1>
+  <p class="lede">I was engaged as Business Analyst to take EcoGrow from three loosely stated problems to a traceable, evidenced delivery, then to structure six future capabilities with the same discipline before a line of code is committed.</p>
+
+  <div class="hero-meta">
+    <div><strong>9</strong>requirements traced end to end</div>
+    <div><strong>7</strong>MVP stories with retained evidence</div>
+    <div><strong>6</strong>future capabilities scoped, none built</div>
+  </div>
+
+  <div class="thread">
+    <svg viewBox="0 0 900 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Traceability chain from problem to evidence, with future-state work continuing as an unbuilt bud">
+      <line x1="40" y1="65" x2="860" y2="65" stroke="#2A4736" stroke-width="2"/>
+      <line x1="40" y1="65" x2="620" y2="65" stroke="#6FBE8C" stroke-width="2"/>
+      <line x1="620" y1="65" x2="860" y2="65" stroke="#D9A441" stroke-width="2" stroke-dasharray="5 6"/>
+
+      <g font-family="IBM Plex Mono" font-size="11" fill="#93A99C">
+        <circle cx="40" cy="65" r="6" fill="#6FBE8C"/>
+        <text x="40" y="98" text-anchor="middle">Problem</text>
+
+        <circle cx="200" cy="65" r="6" fill="#6FBE8C"/>
+        <text x="200" y="98" text-anchor="middle">Objective</text>
+
+        <circle cx="360" cy="65" r="6" fill="#6FBE8C"/>
+        <text x="360" y="98" text-anchor="middle">Requirement</text>
+
+        <circle cx="500" cy="65" r="6" fill="#6FBE8C"/>
+        <text x="500" y="98" text-anchor="middle">Story</text>
+
+        <circle cx="620" cy="65" r="7" fill="#6FBE8C"/>
+        <text x="620" y="98" text-anchor="middle" fill="#E9EEE7">Evidence</text>
+
+        <circle cx="740" cy="65" r="6" fill="none" stroke="#D9A441" stroke-width="2"/>
+        <text x="740" y="98" text-anchor="middle">Discovery</text>
+
+        <circle cx="860" cy="65" r="6" fill="none" stroke="#D9A441" stroke-width="2" stroke-dasharray="2 2"/>
+        <text x="860" y="98" text-anchor="middle">Not yet built</text>
+      </g>
+    </svg>
+  </div>
+  <p class="thread-caption">Solid green marks what carries real evidence today. The dashed amber segment is the future-state work below, deliberately scoped, gated, and left unbuilt.</p>
+</header>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2>The brief GreenSphere gave, and what it actually needed</h2>
+    <p>The brief named delivery mechanics, Jira, three two-week sprints, but not delivery governance. Establishing who the engagement answers to and how decisions get made was the first output, not an input.</p>
+  </div>
+  <div class="problem-grid">
+    <div>
+      <h3>Scattered information</h3>
+      <p>Gardeners had no single, trusted source for plant-care guidance, just fragmented forums and inconsistent advice.</p>
+    </div>
+    <div>
+      <h3>No real community</h3>
+      <p>Gardening communities existed on generic platforms with no structure around plant type, season, or region.</p>
+    </div>
+    <div>
+      <h3>Invisible progress</h3>
+      <p>Nothing captured the actual rhythm of a gardening lifecycle, so there was no way to track or celebrate it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="phase" id="mvp">
+<section class="wrap">
+  <span class="phase-label"><span class="dot"></span>Phase 1, MVP Delivery: real and evidenced</span>
+  <div class="section-head">
+    <h2>What actually got built, and what I can prove</h2>
+    <p>Plant Library, Harvest Tracker, and Community Forum posting, tracked in Jira, governed by a full stakeholder register and RACI, and validated against retained prototype evidence for every story, not asserted from a sprint board.</p>
+  </div>
+
+  <div class="cap-list">
+    <div class="cap-row">
+      <div class="cap-name">Plant Library</div>
+      <div class="cap-desc">Search by name, type, or condition, with vetted, content-verified care entries.</div>
+      <div class="cap-status">Evidenced</div>
+    </div>
+    <div class="cap-row">
+      <div class="cap-name">Harvest Tracker</div>
+      <div class="cap-desc">Log a planting, then close the loop by recording the harvest against it.</div>
+      <div class="cap-status">Evidenced</div>
+    </div>
+    <div class="cap-row">
+      <div class="cap-name">Community Forum</div>
+      <div class="cap-desc">Post knowledge tagged by plant type, season, or region. Response deferred to Phase 2 by design.</div>
+      <div class="cap-status">Evidenced, posting only</div>
+    </div>
+    <div class="cap-row">
+      <div class="cap-name">Usage Analytics</div>
+      <div class="cap-desc">Automatic, no-opt-in usage-event capture across all three capabilities, the data backbone for every KPI above it.</div>
+      <div class="cap-status">Evidenced</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h4>The gap nobody had scoped: Customer Satisfaction</h4>
+    <p>Power BI planning surfaced a real hole, satisfaction was a stated reporting metric with no collection mechanism anywhere upstream. Rather than bolt on a separate survey, I extended the existing usage-event infrastructure with a single-tap, post-harvest rating, scoped narrowly so it didn't expand MVP surface area this late in planning.</p>
+  </div>
+
+  <p class="gatenote"><strong>Stated plainly, not rounded up:</strong> Sprint 1 closed with two stories reaching Done and one carried forward. Evidence has since been captured across Sprint 2 and Sprint 3 for the remaining MVP stories, not just Sprint 1. Formal Sprint Review, final RTM validation, and full MVP acceptance remain open governance gates.</p>
+  <p class="gatenote">Every prototype carries an explicit disclaimer distinguishing a portfolio test build from production evidence, and none of it is represented as more than what it demonstrates.</p>
+
+  <div class="linkbar">
+    <a class="linkbtn" href="EcoGrow_Jira_Confluence_Evidence.html">View EcoGrow Jira &amp; Confluence Evidence</a>
+    <a class="linkbtn" href="https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/jira/software/projects/ECO/boards/1/backlog" target="_blank" rel="noopener" style="opacity:0.65;">Open Live Jira Project &rarr;</a>
+  </div>
+</section>
+</div>
+
+<div class="phase amber" id="future-state">
+<section class="wrap">
+  <span class="phase-label"><span class="dot"></span>Phase 2, Future-State Discovery: not built, not approved</span>
+  <div class="section-head">
+    <h2>Six capabilities, scoped before a decision to build one exists</h2>
+    <p>Each candidate epic went through the same four-stage discipline, deep discovery, delivery translation, independent cross-artifact QA, then portfolio packaging, with no requirement IDs, no Jira commitments, and no Story Points created beyond what discovery itself justified.</p>
+  </div>
+
+  <div class="epic-table">
+    <div class="epic-row head">
+      <div>Epic</div><div>Governance signal</div><div>Gates</div>
+    </div>
+    <div class="epic-row">
+      <div><span class="epic-id">F01</span><div class="epic-name">Smart Plant Care</div></div>
+      <div class="epic-signal">Content authority, shared with the MVP's own FR-02 open question</div>
+      <div class="epic-gates">Shared</div>
+    </div>
+    <div class="epic-row">
+      <div><span class="epic-id">F02</span><div class="epic-name">Weather-Aware Gardening</div></div>
+      <div class="epic-signal">Weather and climate reliability, alert safety</div>
+      <div class="epic-gates">7</div>
+    </div>
+    <div class="epic-row">
+      <div><span class="epic-id">F03</span><div class="epic-name">Plant Health &amp; Protection</div></div>
+      <div class="epic-signal">Safety, specialist expertise, hard treatment boundary</div>
+      <div class="epic-gates">10</div>
+    </div>
+    <div class="epic-row">
+      <div><span class="epic-id">F04</span><div class="epic-name">Global Plant Intelligence</div></div>
+      <div class="epic-signal">Regional scope and regulatory readiness</div>
+      <div class="epic-gates">9</div>
+    </div>
+    <div class="epic-row">
+      <div><span class="epic-id">F05</span><div class="epic-name">Personalised Garden Experience</div></div>
+      <div class="epic-signal">Consent, privacy, data minimisation</div>
+      <div class="epic-gates">9</div>
+    </div>
+    <div class="epic-row">
+      <div><span class="epic-id">F06</span><div class="epic-name">Platform Scalability</div></div>
+      <div class="epic-signal">Scale evidence, upstream capability maturity</div>
+      <div class="epic-gates">10</div>
+    </div>
+  </div>
+
+  <p class="gatenote"><strong>The gate count reflects real risk, not a generic checklist applied uniformly.</strong> I set F03 and F06 to the heaviest bar because a wrong answer there could mean bad advice on a living plant or a scale commitment made on evidence that was never gathered.</p>
+  <p class="gatenote">F05's gates are entirely about consent and data minimisation, because personalisation earns nothing if it's not trusted first. I built none of the six from a generic checklist, each gate structure came from what that specific capability actually risks.</p>
+</section>
+</div>
+
+<section class="wrap discipline">
+  <div class="section-head">
+    <h2>How I held the line between real and planned</h2>
+  </div>
+  <p>Every deliverable across both phases, MVP and future-state alike, went through independent cross-artifact verification against the underlying source data before I called anything final.</p>
+  <p class="sub">That meant checking claims against the real Jira export, the governance registers, and each other, not accepting a status because it read well. Where something didn't hold up, it got corrected and re-verified before moving forward, and where a governance question genuinely had no answer yet, it stayed open rather than being quietly resolved for the sake of a tidier report.</p>
+</section>
+
+<section class="wrap discipline">
+  <div class="section-head">
+    <h2>The investment framework, built and still empty by design</h2>
+  </div>
+  <p>I built the Investment and ROI Business Case framework as the next decision layer for EcoGrow's future-state roadmap, a full cost model, benefit model, adoption scenarios, and ROI and payback methodology.</p>
+  <p class="sub">Every input across the model remains genuinely open. F06's own discovery named cost drivers, adoption scenarios, and business-case evidence as unresolved questions, and explicitly ruled out an ROI claim the evidence doesn't support. The formulas are built and guarded against blank and invalid inputs, but no investment amount, cost figure, or ROI percentage has been entered, because none of that evidence exists yet.</p>
+  <p class="sub">Payback is shown as not recoverable when the investment would take longer than the defined analysis window to break even.</p>
+  <p class="sub">The model traces back to the same four business objectives already measured in the MVP, rather than treating investment analysis as a separate financial exercise. One benefit, Community Forum response, has no route into the financial model yet, because that capability itself remains deferred to Phase 2.</p>
+</section>
+
+<section class="wrap discipline">
+  <div class="section-head">
+    <h2>Model integrity, not just model existence</h2>
+  </div>
+  <p>Building a formula isn't the same as building a correct one, and I treated them as separate checks.</p>
+  <p class="sub">A payback formula that references the right assumption cell but the wrong column still produces an error the moment real numbers land in it. A net benefit formula that quietly mixes a one-time cost with a monthly rate is wrong even when every guard clause looks right.</p>
+  <p class="sub">I checked the actual arithmetic behind each formula against what the model claims to calculate, not just whether it ran without error, before calling any of it final.</p>
+</section>
+
+<section class="wrap" id="impact">
+  <div class="section-head">
+    <h2>What this engagement demonstrates</h2>
+  </div>
+  <div class="impact-grid">
+    <div class="impact-item">
+      <h4>Requirements traceability</h4>
+      <p>Every requirement, epic, feature, and story carries an ID that traces backward to a business objective and forward into delivery evidence.</p>
+    </div>
+    <div class="impact-item">
+      <h4>Stakeholder governance</h4>
+      <p>A confidentiality-safe, persona-based Stakeholder Register and RACI, built from a genuine gap analysis, not a template.</p>
+    </div>
+    <div class="impact-item">
+      <h4>Risk-proportionate scoping</h4>
+      <p>Governance bar scaled to actual risk across six future capabilities, not a single checklist applied uniformly.</p>
+    </div>
+    <div class="impact-item">
+      <h4>Evidence-based validation</h4>
+      <p>Story-level acceptance evidence kept explicitly distinct from formal MVP acceptance, with open gates named rather than hidden.</p>
+    </div>
+    <div class="impact-item">
+      <h4>Root-cause analysis</h4>
+      <p>Each stated problem run through 5 Whys before being turned into scope, surfacing distinctions a surface read would have missed.</p>
+    </div>
+    <div class="impact-item">
+      <h4>BI reporting design</h4>
+      <p>A Power BI framework that reports the measurement structure honestly pre-launch, and only shows results once real data exists.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap discipline">
+  <div class="section-head">
+    <h2>Want the full technical detail</h2>
+  </div>
+  <p>This page is the five-minute version. The complete delivery portfolio, requirements catalogue, RACI, RTM, sprint-by-sprint evidence, and full release-readiness reporting, lives on the detailed EcoGrow project page.</p>
+  <div class="linkbar">
+    <a class="linkbtn" href="EcoGrow.html">See the full technical portfolio page</a>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="foot-top">
+    <h3>Doris Frank<br>Business Intelligence Consultant &amp; Business Systems Analyst</h3>
+    <div class="foot-links">
+      <a href="https://www.linkedin.com/in/uduakdoris" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/Dorisfrank" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://dorisfrank.github.io" target="_blank" rel="noopener">Portfolio</a>
+    </div>
+  </div>
+  <p class="foot-note">GreenSphere Innovations is a fictional client name used to preserve confidentiality; EcoGrow is a real, four-month engagement delivered under AMDARI. Figures and statuses above reflect the delivery record at time of writing.</p>
+</footer>
+
+</body>
+</html>

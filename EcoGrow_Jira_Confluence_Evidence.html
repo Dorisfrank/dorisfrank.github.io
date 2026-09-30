@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoGrow: Jira &amp; Confluence Evidence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#0F2018;
+  --panel:#15301F;
+  --panel2:#1B3A26;
+  --accent:#6FBE8C;
+  --accent-dim:rgba(111,190,140,0.14);
+  --amber:#D9A441;
+  --amber-dim:rgba(217,164,65,0.12);
+  --text:#E9EEE7;
+  --muted:#93A99C;
+  --border:rgba(111,190,140,0.18);
+  --serif:'Fraunces',serif;
+  --sans:'IBM Plex Sans',-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--dark);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit}
+.wrap{max-width:920px;margin:0 auto;padding:0 28px}
+section{padding:56px 0}
+nav{position:sticky;top:0;z-index:20;background:rgba(15,32,24,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:18px;padding-bottom:18px}
+.brand{font-family:var(--serif);font-size:19px;font-weight:600;display:flex;align-items:center}
+.brand span{color:var(--accent)}
+.navlinks a{text-decoration:none;color:var(--muted);font-size:14px;margin-left:24px}
+.hero{padding:64px 0 20px}
+.hero-kicker{font-size:14px;color:var(--muted);margin-bottom:16px;font-family:var(--mono)}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,4vw,42px);line-height:1.15;max-width:18ch}
+.lede{margin-top:18px;font-size:16.5px;color:var(--muted);max-width:60ch}
+.notice{margin-top:28px;border:1px solid var(--border);border-left:3px solid var(--accent);padding:18px 22px;background:var(--panel);border-radius:2px;font-size:14.5px;color:var(--muted);max-width:64ch}
+.notice strong{color:var(--text)}
+.section-head h2{font-family:var(--serif);font-weight:500;font-size:24px}
+.section-head p{color:var(--muted);margin-top:10px;font-size:15px;max-width:60ch}
+table{width:100%;border-collapse:collapse;margin-top:24px;font-size:14px}
+th{font-family:var(--mono);font-size:11.5px;text-transform:none;color:var(--muted);text-align:left;padding:10px 12px;background:var(--panel2);border-bottom:1px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+td.id{font-family:var(--mono);color:var(--accent);white-space:nowrap}
+.status{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.status.out{color:var(--muted)}
+.gate-list{margin-top:20px;border-top:1px solid var(--border)}
+.gate-item{padding:16px 0;border-bottom:1px solid var(--border);font-size:14.5px;color:var(--muted)}
+.gate-item strong{color:var(--text);display:block;margin-bottom:4px;font-size:15px}
+.linkbar{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap}
+.linkbtn{font-size:13.5px;font-family:var(--mono);border:1px solid var(--border);padding:10px 16px;border-radius:20px;text-decoration:none;color:var(--text)}
+.linkbtn:hover{border-color:var(--accent);background:var(--accent-dim)}
+.linkbtn.secondary{color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:48px 0;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><img src="EcoGrow_logo.png" alt="EcoGrow" style="height:22px;width:auto;margin-right:8px;border-radius:4px;flex-shrink:0;">Eco<span>Grow</span> Evidence</div>
+    <div class="navlinks">
+      <a href="EcoGrow_Executive_Case_Study.html">Case Study</a>
+      <a href="EcoGrow.html">Full Portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="hero-kicker">Delivery Evidence Summary</div>
+  <h1>The real Jira and Confluence record, without the sign-in wall</h1>
+  <p class="lede">I built this page to summarize the actual delivery evidence from EcoGrow's Jira project and Confluence space, so it's readable without an Atlassian account. The live workspaces remain the system of record, linked at the bottom of this page for anyone with access.</p>
+  <div class="notice"><strong>I changed nothing on the live Jira or Confluence workspace to build this page.</strong> Every figure below is copied from the real project record, not simplified or rounded up.</div>
+</header>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2>Story-to-evidence map</h2>
+    <p>Every MVP user story, its linked Jira issue, and its current review status.</p>
+  </div>
+  <table>
+    <tr><th>Story</th><th>Requirement</th><th>Jira issue</th><th>Status</th></tr>
+    <tr><td>US-01</td><td>FR-01, Plant Library search</td><td class="id">ECO-5</td><td class="status">In Review</td></tr>
+    <tr><td>US-02</td><td>FR-02, vetted content</td><td class="id">ECO-6</td><td class="status">In Review</td></tr>
+    <tr><td>US-03</td><td>FR-05, planting log</td><td class="id">ECO-7</td><td class="status">In Review</td></tr>
+    <tr><td>US-04</td><td>FR-06, harvest log</td><td class="id">ECO-8</td><td class="status">In Review</td></tr>
+    <tr><td>US-05</td><td>FR-03, forum posting</td><td class="id">ECO-9</td><td class="status">In Review</td></tr>
+    <tr><td>US-06</td><td>FR-08, usage analytics</td><td class="id">ECO-10</td><td class="status">In Review</td></tr>
+    <tr><td>US-07</td><td>FR-09, satisfaction prompt</td><td class="id">ECO-12</td><td class="status">In Review</td></tr>
+  </table>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2>MVP scope position</h2>
+    <p>What's in the MVP, what's deferred, and what's explicitly out of scope, taken directly from the governed project plan.</p>
+  </div>
+  <table>
+    <tr><th>Requirement</th><th>Priority</th><th>MVP position</th></tr>
+    <tr><td>FR-01</td><td>Must</td><td class="status">In, Plant Library search</td></tr>
+    <tr><td>FR-02</td><td>Must</td><td class="status">In, vetted content display</td></tr>
+    <tr><td>FR-03</td><td>Should</td><td class="status">In, Community Forum posting</td></tr>
+    <tr><td>FR-04</td><td>Should</td><td class="status out">Out of MVP, forum response</td></tr>
+    <tr><td>FR-05</td><td>Must</td><td class="status">In, planting log</td></tr>
+    <tr><td>FR-06</td><td>Must</td><td class="status">In, harvest log</td></tr>
+    <tr><td>FR-07</td><td>Could</td><td class="status out">Out of MVP, visual progress timeline</td></tr>
+    <tr><td>FR-08</td><td>Must</td><td class="status">In, usage event capture</td></tr>
+    <tr><td>FR-09</td><td>Should</td><td class="status">In, post-harvest satisfaction prompt</td></tr>
+  </table>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2>Sprint delivery structure</h2>
+  </div>
+  <table>
+    <tr><th>Area</th><th>Position</th></tr>
+    <tr><td>Sprint 1</td><td>Closed against available Jira evidence</td></tr>
+    <tr><td>Sprint 2</td><td>Evidence captured for ECO-7, ECO-8, and ECO-10</td></tr>
+    <tr><td>Sprint 3</td><td>Evidence captured for ECO-9, the ECO-10 follow-up, and ECO-12</td></tr>
+  </table>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2>Governance controls in place</h2>
+  </div>
+  <div class="gate-list">
+    <div class="gate-item"><strong>Stakeholder Register and RACI</strong>Populated, persona-based, confidentiality-safe.</div>
+    <div class="gate-item"><strong>Communication Plan</strong>Populated.</div>
+    <div class="gate-item"><strong>Requirements Traceability Matrix</strong>Populated to story level, release and validation gates remain visible.</div>
+    <div class="gate-item"><strong>Decision Register</strong>Maintained for real engagement decisions.</div>
+    <div class="gate-item"><strong>RAID Log</strong>Risks recorded, evidence-driven.</div>
+    <div class="gate-item"><strong>Benefits Register</strong>Measurement framework established, actuals pending live data.</div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2>What's still genuinely open</h2>
+    <p>Stated plainly, not closed for the sake of a tidier page.</p>
+  </div>
+  <div class="gate-list">
+    <div class="gate-item"><strong>Formal all-persona Sprint Review</strong>Not yet evidenced for any story.</div>
+    <div class="gate-item"><strong>Final RTM validation</strong>Outstanding.</div>
+    <div class="gate-item"><strong>Formal MVP or product acceptance</strong>Outstanding.</div>
+    <div class="gate-item"><strong>Go/No-Go approval</strong>Outstanding.</div>
+    <div class="gate-item"><strong>Operational benefits actuals</strong>Pending live post-launch data.</div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p style="margin-bottom:16px;">Live workspaces, Atlassian sign-in required for anyone without project access:</p>
+  <div class="linkbar">
+    <a class="linkbtn secondary" href="https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/jira/software/projects/ECO/boards/1/backlog" target="_blank" rel="noopener">Open Live Jira Project &rarr;</a>
+    <a class="linkbtn secondary" href="https://dorisfrankbusinessanalysisgrowthprojects-44399117.atlassian.net/wiki/x/AwAI" target="_blank" rel="noopener">Open Live Confluence &rarr;</a>
+  </div>
+</footer>
+
+</body>
+</html>
