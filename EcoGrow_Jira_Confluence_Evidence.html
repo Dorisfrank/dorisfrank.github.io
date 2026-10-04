@@ -54,6 +54,14 @@ td.id{font-family:var(--mono);color:var(--accent);white-space:nowrap}
 .linkbtn:hover{border-color:var(--accent);background:var(--accent-dim)}
 .linkbtn.secondary{color:var(--muted)}
 footer{border-top:1px solid var(--border);padding:48px 0;font-size:13px;color:var(--muted)}
+.evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+.evidence-grid.two{grid-template-columns:repeat(2,1fr)}
+@media (max-width:760px){.evidence-grid,.evidence-grid.two{grid-template-columns:1fr}}
+figure{margin:0;border:1px solid var(--border);border-radius:3px;overflow:hidden;background:var(--panel2)}
+figure img{width:100%;display:block}
+figcaption{padding:12px 14px;font-size:13px;color:var(--muted);line-height:1.5}
+figure.single{max-width:640px;margin-top:24px}
+.evidence-tag{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--amber);background:var(--amber-dim);border-radius:3px;padding:3px 8px;margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -121,6 +129,41 @@ footer{border-top:1px solid var(--border);padding:48px 0;font-size:13px;color:va
     <tr><td>Sprint 2</td><td>Evidence captured for ECO-7, ECO-8, and ECO-10</td></tr>
     <tr><td>Sprint 3</td><td>Evidence captured for ECO-9, the ECO-10 follow-up, and ECO-12</td></tr>
   </table>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2>Evidence captures</h2>
+    <p>Screenshots from the live workspaces, supplementing the tables above. I captured these directly from the real Jira project and Power BI report, nothing staged or recreated for this page.</p>
+  </div>
+  <div class="evidence-grid two">
+    <figure>
+      <img src="EcoGrow_Jira_Live_Backlog_Screenshot.png" alt="EcoGrow Jira backlog showing Sprint 2 and Sprint 3 work items">
+      <figcaption><span class="evidence-tag">Real capture</span>The live Jira backlog, Sprint 2 (ECO-10, ECO-7, ECO-8) and Sprint 3 (ECO-9, ECO-11, ECO-12), all In Review at the time of capture.</figcaption>
+    </figure>
+    <figure>
+      <img src="EcoGrow_PowerBI_Page3_Delivery_Reporting.png" alt="EcoGrow Power BI delivery reporting page sourced from Jira sprint data">
+      <figcaption><span class="evidence-tag">Real capture</span>Delivery reporting in Power BI, sourced from the Jira board. Velocity is marked not yet meaningful because story points are not estimated, and the burndown reports sprint scope only.</figcaption>
+    </figure>
+    <figure>
+      <img src="EcoGrow_PowerBI_Page1_Success_Measures_Overview.png" alt="EcoGrow Power BI success measures overview, pre-operational">
+      <figcaption><span class="evidence-tag">Real capture</span>The pre-operational success measures page. EcoGrow has not launched, so this shows the measurement framework for BO-01 through BO-04, not live results.</figcaption>
+    </figure>
+    <figure>
+      <img src="EcoGrow_PowerBI_Page2_Benefits_Tracking_Framework.png" alt="EcoGrow Power BI benefits tracking framework, actuals pending">
+      <figcaption><span class="evidence-tag">Real capture</span>The benefits tracking framework, each measure marked Pending with a Framework only readiness state until real usage data exists.</figcaption>
+    </figure>
+  </div>
+  <div class="evidence-grid two" style="margin-top:18px;">
+    <figure>
+      <img src="EcoGrow_Jira_SignIn_Wall_Screenshot.png" alt="Jira sign-in wall seen by an unauthenticated visitor">
+      <figcaption><span class="evidence-tag">Sign-in wall</span>What an unauthenticated visitor sees on the live Jira project, captured in an incognito window. This is why I built this page.</figcaption>
+    </figure>
+    <figure>
+      <img src="EcoGrow_Confluence_SignIn_Wall_Screenshot.png" alt="Confluence sign-in wall seen by an unauthenticated visitor">
+      <figcaption><span class="evidence-tag">Sign-in wall</span>The same sign-in wall on the live Confluence space, also captured in an incognito window.</figcaption>
+    </figure>
+  </div>
 </section>
 
 <section class="wrap">
